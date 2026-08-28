@@ -19,372 +19,291 @@
       padding: 0;
     }
 
-    :root {
-      --kurd-red: #e41e26;
-      --kurd-green: #10b981;
-      --kurd-gold: #fbbf24;
-      --bg-gradient: linear-gradient(180deg, #0f172a 0%, #020617 100%);
-      --card-bg: rgba(30, 41, 59, 0.7);
-      --card-border: rgba(255, 255, 255, 0.08);
-    }
-
     body {
-      background: #020617;
-      background-image: var(--bg-gradient);
-      color: #f8fafc;
+      color: #ffffff;
       font-family: 'Rabar', sans-serif;
       font-weight: 700;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
 
-    /* Top Kurdish Flag Ambient Bar */
-    .top-flag-line {
-      height: 4px;
-      width: 100%;
-      background: linear-gradient(90deg, #e41e26 0%, #ffffff 35%, #fbbf24 50%, #ffffff 65%, #10b981 100%);
-      box-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+    /* --- FULL KURDISTAN FLAG BACKGROUND --- */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      /* Full Kurdistan Flag: Red, White + Sun, Green */
+      background: linear-gradient(
+        to bottom,
+        #e41e26 0%, #e41e26 33.3%,
+        #ffffff 33.3%, #ffffff 66.6%,
+        #278e43 66.6%, #278e43 100%
+      );
     }
 
-    /* Floating Glass Header */
+    /* Golden Sun Overlay in the center of the background */
+    body::after {
+      content: "☀️";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 22vw;
+      z-index: -2;
+      opacity: 0.85;
+      text-shadow: 0 0 40px rgba(254, 189, 17, 0.8);
+      pointer-events: none;
+    }
+
+    /* Dark Overlay for Readability */
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: -1;
+    }
+
+    /* Header */
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      background: rgba(15, 15, 15, 0.85);
+      backdrop-filter: blur(10px);
       padding: 14px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--card-border);
+      border-bottom: 2px solid #febd11;
     }
 
-    .brand-logo {
-      font-size: 22px;
-      font-weight: 900;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      letter-spacing: -0.5px;
-    }
-
-    .brand-logo .sun-badge {
-      background: radial-gradient(circle, #fbbf24 30%, transparent 70%);
-      width: 24px;
-      height: 24px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      font-size: 14px;
-    }
-
-    .brand-logo span {
-      color: var(--kurd-red);
-    }
-
-    /* Rounded Pill Search Container */
-    .search-box {
-      flex-grow: 1;
-      max-width: 340px;
-      margin: 0 14px;
-      position: relative;
-    }
-
-    .search-box input {
-      width: 100%;
-      background: rgba(30, 41, 59, 0.8);
-      border: 1px solid var(--card-border);
-      padding: 10px 42px 10px 16px;
-      border-radius: 99px;
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
       color: #fff;
-      font-family: inherit;
-      font-size: 13px;
+    }
+
+    .logo span {
+      color: #e41e26;
+    }
+
+    .search-container {
+      display: flex;
+      flex-grow: 1;
+      max-width: 320px;
+      margin: 0 12px;
+    }
+
+    .search-container input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 0 20px 20px 0;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-left: none;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: #fff;
       outline: none;
-      transition: all 0.3s ease;
+      font-family: inherit;
       text-align: right;
     }
 
-    .search-box input:focus {
-      border-color: var(--kurd-gold);
-      box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
-      background: rgba(30, 41, 59, 1);
-    }
-
-    .search-box input::placeholder {
-      color: #94a3b8;
-    }
-
-    .search-box .icon {
-      position: absolute;
-      right: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 14px;
-      opacity: 0.6;
-      pointer-events: none;
-    }
-
-    .cart-chip {
-      background: rgba(30, 41, 59, 0.8);
-      border: 1px solid var(--card-border);
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
+    .search-container button {
+      padding: 8px 14px;
+      border-radius: 20px 0 0 20px;
+      border: 1px solid #e41e26;
+      background-color: #e41e26;
+      color: #fff;
       cursor: pointer;
-      transition: transform 0.2s ease;
     }
 
-    .cart-chip:hover {
-      transform: scale(1.05);
-      border-color: var(--kurd-gold);
+    .cart {
+      font-size: 24px;
     }
 
-    /* Category Navigation */
-    .category-scroll {
+    /* Categories Scrollbar */
+    .categories {
       display: flex;
       gap: 10px;
       overflow-x: auto;
-      padding: 16px 20px;
-      background: rgba(15, 23, 42, 0.6);
-      border-bottom: 1px solid var(--card-border);
+      padding: 14px 18px;
+      background: rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .category-scroll::-webkit-scrollbar {
+    .categories::-webkit-scrollbar {
       display: none;
     }
 
-    .cat-pill {
-      background: rgba(30, 41, 59, 0.6);
-      color: #94a3b8;
-      border: 1px solid var(--card-border);
-      padding: 8px 18px;
-      border-radius: 99px;
+    .category {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 8px 16px;
+      border-radius: 20px;
       white-space: nowrap;
       cursor: pointer;
       font-family: inherit;
-      font-size: 13px;
-      transition: all 0.25s ease;
+      transition: background 0.2s;
     }
 
-    .cat-pill:hover, .cat-pill.active {
-      background: linear-gradient(135deg, var(--kurd-red) 0%, #b91c1c 100%);
-      border-color: var(--kurd-red);
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(228, 30, 38, 0.3);
+    .category:hover, .category.active {
+      background: #278e43;
+      border-color: #278e43;
     }
 
-    /* Banner Card */
-    .hero-card {
-      margin: 20px 20px 10px;
-      padding: 32px 20px;
-      background: radial-gradient(circle at top right, rgba(251, 191, 36, 0.15), transparent 60%),
-                  linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
+    /* Hero Banner */
+    .hero {
+      padding: 30px 20px;
       text-align: center;
-      position: relative;
-      overflow: hidden;
+      background: rgba(0, 0, 0, 0.4);
+      margin: 15px;
+      border-radius: 16px;
+      border: 1px solid rgba(254, 189, 17, 0.3);
     }
 
-    .hero-card h1 {
+    .hero h1 {
       font-size: 28px;
       margin-bottom: 6px;
-      background: linear-gradient(90deg, #ffffff 0%, #f1f5f9 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
     }
 
-    .hero-card p {
-      color: var(--kurd-gold);
+    .hero p {
+      color: #febd11;
       font-size: 14px;
     }
 
-    /* Products Grid */
-    .product-grid {
+    /* Product Grid */
+    .products {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      padding: 16px 20px 30px;
+      gap: 12px;
+      padding: 15px;
     }
 
-    .product-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 18px;
+    .product {
+      background: rgba(18, 18, 18, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: all 0.3s ease;
+      backdrop-filter: blur(5px);
     }
 
-    .product-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(251, 191, 36, 0.4);
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-    }
-
-    .img-container {
+    .product img {
       width: 100%;
-      height: 210px;
-      overflow: hidden;
-      background: #0f172a;
-    }
-
-    .product-card img {
-      width: 100%;
-      height: 100%;
+      height: 200px;
       object-fit: cover;
-      transition: transform 0.4s ease;
+      background: #222;
     }
 
-    .product-card:hover img {
-      transform: scale(1.05);
+    .product-info {
+      padding: 12px;
     }
 
-    .details {
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .title {
+    .product-name {
       font-size: 14px;
-      color: #f1f5f9;
-      line-height: 1.4;
+      margin-bottom: 6px;
     }
 
-    .price-tag {
+    .price {
+      font-weight: bold;
       font-size: 16px;
-      color: var(--kurd-green);
-      font-weight: 800;
+      color: #febd11;
     }
 
-    .stock-info {
+    .stock {
+      color: #aaa;
       font-size: 11px;
-      color: #64748b;
+      margin-top: 4px;
     }
 
-    /* Premium Footer */
+    /* Footer */
     footer {
-      margin-top: auto;
-      padding: 35px 20px;
-      background: rgba(15, 23, 42, 0.9);
-      border-top: 1px solid var(--card-border);
       text-align: center;
-      color: #64748b;
+      padding: 30px 20px;
+      color: #aaa;
+      background: rgba(0, 0, 0, 0.7);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      margin-top: auto;
       font-size: 13px;
-    }
-
-    .footer-sun {
-      font-size: 24px;
-      margin-bottom: 8px;
-      display: inline-block;
-      animation: pulse 3s infinite alternate;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.8; }
-      100% { transform: scale(1.1); opacity: 1; }
-    }
-
-    @media (max-width: 500px) {
-      header {
-        padding: 12px 14px;
-      }
-      .brand-logo {
-        font-size: 18px;
-      }
-      .search-box {
-        margin: 0 8px;
-      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Top Kurdish Flag Accent Bar -->
-  <div class="top-flag-line"></div>
+  <!-- Dark glass layer so text is readable over the flag background -->
+  <div class="bg-overlay"></div>
 
-  <!-- Header Container -->
+  <!-- Header -->
   <header>
-    <div class="brand-logo">
-      <div class="sun-badge">☀️</div>
-      Kurd<span>Shein</span>
+    <div class="logo">Kurd<span>Shein</span></div>
+
+    <div class="search-container">
+      <input type="text" id="search-input" placeholder="گەڕان...">
+      <button type="button">🔍</button>
     </div>
 
-    <!-- Real-time Search Input Bar -->
-    <div class="search-box">
-      <span class="icon">🔍</span>
-      <input type="text" id="search-input" placeholder="گەڕان بکه...">
-    </div>
-
-    <div class="cart-chip">🛒</div>
+    <div class="cart">🛒</div>
   </header>
 
-  <!-- Horizontal Scrollable Categories -->
-  <div class="category-scroll">
-    <button class="cat-pill active" data-category="all">هەمووی 🛍️</button>
-    <button class="cat-pill" data-category="new">بابەتی نوێ🔥</button>
-    <button class="cat-pill">گشتی📦</button>
-    <button class="cat-pill">ئەکسسوارات💍</button>
-    <button class="cat-pill">پیاوان🤵🏻‍♂️</button>
-    <button class="cat-pill">ئافرەتان💁🏼‍♀️</button>
-    <button class="cat-pill">ئەلکترۆنیات🪫</button>
+  <!-- Categories -->
+  <div class="categories">
+    <button class="category active" data-category="all">هەمووی 🛍️</button>
+    <button class="category" data-category="new">بابەتی نوێ🔥</button>
+    <button class="category">گشتی📦</button>
+    <button class="category">ئەکسسوارات💍</button>
+    <button class="category">پیاوان🤵🏻‍♂️</button>
+    <button class="category">ئافرەتان💁🏼‍♀️</button>
+    <button class="category">ئەلکترۆنیات🪫</button>
   </div>
 
-  <!-- Hero Section Banner -->
-  <div class="hero-card">
+  <!-- Hero Section -->
+  <section class="hero">
     <h1>Shop KurdShein</h1>
-    <p>باشترین و نوێترین بەرهەمەکان لێرە دەستبکەوە</p>
-  </div>
+    <p>نوێترین بەرهەمەکان لێرە دەستبکەوە</p>
+  </section>
 
-  <!-- Product Listing Grid -->
-  <section class="product-grid">
+  <!-- Products Grid -->
+  <section class="products">
 
-    <div class="product-card" data-category="new">
-      <div class="img-container">
-        <img src="./IMG_1707.jpeg" alt="چاویلەی دژە رۆژ">
-      </div>
-      <div class="details">
-        <div class="title">چاویلەی دژە رۆژ</div>
-        <div class="price-tag">3000 IQD</div>
+    <div class="product" data-category="new">
+      <img src="./IMG_1707.jpeg" alt="چاویلەی دژە رۆژ">
+      <div class="product-info">
+        <div class="product-name">چاویلەی دژە رۆژ</div>
+        <div class="price">3000 IQD</div>
       </div>
     </div>
 
-    <div class="product-card">
-      <div class="img-container">
-        <img src="https://placehold.co/600x800/222/fff?text=Product+2" alt="Product 2">
-      </div>
-      <div class="details">
-        <div class="title">Product Name</div>
-        <div class="price-tag">$15.00</div>
-        <div class="stock-info">Stock: 5</div>
+    <div class="product">
+      <img src="https://placehold.co/600x800/222/fff?text=Product+2" alt="Product 2">
+      <div class="product-info">
+        <div class="product-name">Product Name</div>
+        <div class="price">$15.00</div>
+        <div class="stock">Stock: 5</div>
       </div>
     </div>
 
   </section>
 
-  <!-- Footer Area -->
+  <!-- Footer -->
   <footer>
-    <div class="footer-sun">☀️</div>
-    <p>© 2026 KurdShein - سەرجەم مافەکانی پارێزراوە</p>
+    © 2026 KurdShein - سەرجەم مافەکانی پارێزراوە
   </footer>
 
 <script>
-// Category Filter Handler
-const categoryButtons = document.querySelectorAll('.cat-pill');
-const products = document.querySelectorAll('.product-card');
+// Category Filter Logic
+const categoryButtons = document.querySelectorAll('.category');
+const products = document.querySelectorAll('.product');
 
 categoryButtons.forEach(button => {
   button.addEventListener('click', () => {
@@ -403,16 +322,16 @@ categoryButtons.forEach(button => {
   });
 });
 
-// Real-time Search Filter Handler
+// Live Search Bar Logic
 const searchInput = document.getElementById('search-input');
 
 searchInput.addEventListener('input', () => {
   const query = searchInput.value.toLowerCase().trim();
 
   products.forEach(product => {
-    const title = product.querySelector('.title').textContent.toLowerCase();
+    const productName = product.querySelector('.product-name').textContent.toLowerCase();
     
-    if (title.includes(query)) {
+    if (productName.includes(query)) {
       product.style.display = '';
     } else {
       product.style.display = 'none';

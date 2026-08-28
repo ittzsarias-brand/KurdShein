@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kurd Shein | کورد شین</title>
     <style>
-        /* CSS Variables & Dark Theme */
         :root {
             --bg-color: #121212;
             --surface-color: #1e1e1e;
@@ -31,7 +30,6 @@
             color: var(--text-color);
         }
 
-        /* Top Announcement Bar */
         .top-bar {
             background: linear-gradient(90deg, var(--kurd-red) 0%, var(--kurd-white) 50%, var(--kurd-green) 100%);
             color: #000;
@@ -41,7 +39,6 @@
             font-weight: bold;
         }
 
-        /* Header & Navigation */
         header {
             background-color: var(--surface-color);
             border-bottom: 2px solid var(--border-color);
@@ -115,7 +112,6 @@
             text-decoration: none;
         }
 
-        /* Navigation Links */
         nav {
             background-color: #181818;
             border-top: 1px solid var(--border-color);
@@ -140,7 +136,6 @@
             color: var(--kurd-yellow);
         }
 
-        /* Hero Banner */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://via.placeholder.com/1200x400/222/fff?text=Kurd+Shein+Fashion') center/cover;
             height: 300px;
@@ -178,7 +173,6 @@
             background-color: #b30022;
         }
 
-        /* Products Grid */
         .container {
             max-width: 1200px;
             margin: 40px auto;
@@ -235,7 +229,6 @@
             color: var(--kurd-yellow);
         }
 
-        /* Footer */
         footer {
             background-color: var(--surface-color);
             border-top: 2px solid var(--kurd-green);
@@ -265,4 +258,118 @@
 
         .footer-column a {
             color: var(--text-secondary);
-            text-decoration
+            text-decoration: none;
+        }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        داشکاندنی تایبەت ٪٥٠ بۆ هەموو پۆشاکەکان | گەیاندنی خۆڕایی
+    </div>
+
+    <header>
+        <div class="header-main">
+            <div class="logo-container">
+                <span class="sun-icon">☀️</span>
+                <div class="logo-text">Kurd Shein</div>
+            </div>
+
+            <div class="search-bar">
+                <button>گەڕان</button>
+                <input type="text" placeholder="گەڕان بۆ پۆشاک، پێڵاو، یان پێداویستی...">
+            </div>
+
+            <div class="user-actions">
+                <a href="#">چوونەژوورەوە 👤</a>
+                <a href="#">سەبەتە 🛒</a>
+            </div>
+        </div>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">سەرەکی</a></li>
+                <li><a href="#">پۆشاکی ژنانە</a></li>
+                <li><a href="#">پۆشاکی پیاوانە</a></li>
+                <li><a href="#">منداڵان</a></li>
+                <li><a href="#">داشکاندنەکان</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>کورد شین - شێوازی نوێی بەردەوام</h1>
+        <p>جوانترین مۆدێلەکان بە باشترین نرخ</p>
+        <a href="#" class="shop-btn">ئێستا بکڕە</a>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title">نوێترین بەرهەمەکان</h2>
+
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x400/333/fff?text=Dress" class="product-image" alt="Product">
+                <div class="product-info">
+                    <div class="product-title">فستانی هاوینە - کژووال</div>
+                    <div class="product-price">25,000 د.ع</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x400/333/fff?text=Jacket" class="product-image" alt="Product">
+                <div class="product-info">
+                    <div class="product-title">پەتۆی پیاوانەی هاوچەرخ</div>
+                    <div class="product-price">35,000 د.ع</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x400/333/fff?text=Shoes" class="product-image" alt="Product">
+                <div class="product-info">
+                    <div class="product-title">پێڵاوی وەرزشی</div>
+                    <div class="product-price">18,000 د.ع</div>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x400/333/fff?text=Bag" class="product-image" alt="Product">
+                <div class="product-info">
+                    <div class="product-title">جانتای دەستی ژنانە</div>
+                    <div class="product-price">15,000 د.ع</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>دەربارەی کورد شین</h3>
+                <ul>
+                    <li><a href="#">دەربارەی ئێمە</a></li>
+                    <li><a href="#">پەیوەندی</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>خزمەتگوزاری بەکارهێنەران</h3>
+                <ul>
+                    <li><a href="#">یارمەتی & FAQ</a></li>
+                    <li><a href="#">شێوازی گەیاندن</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Kurd Shein. هەموو مافەکان پارێزراون.
+        </div>
+    </footer>
+
+</body>
+</html>

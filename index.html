@@ -20,17 +20,18 @@
     }
 
     :root {
-      --kurdish-red: #e41e26;
-      --kurdish-green: #278e43;
-      --kurdish-sun: #febd11;
-      --bg-dark: #0a0a0c;
-      --card-bg: #141418;
-      --border-color: #22222a;
+      --kurd-red: #e41e26;
+      --kurd-green: #10b981;
+      --kurd-gold: #fbbf24;
+      --bg-gradient: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
     }
 
     body {
-      background: var(--bg-dark);
-      color: #ffffff;
+      background: #020617;
+      background-image: var(--bg-gradient);
+      color: #f8fafc;
       font-family: 'Rabar', sans-serif;
       font-weight: 700;
       min-height: 100vh;
@@ -38,294 +39,351 @@
       flex-direction: column;
     }
 
-    /* Top Kurdish Flag Ribbon */
-    .flag-header {
-      display: flex;
+    /* Top Kurdish Flag Ambient Bar */
+    .top-flag-line {
       height: 4px;
       width: 100%;
+      background: linear-gradient(90deg, #e41e26 0%, #ffffff 35%, #fbbf24 50%, #ffffff 65%, #10b981 100%);
+      box-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
     }
-    .flag-red { background: var(--kurdish-red); flex: 1; }
-    .flag-white { background: #ffffff; flex: 1; }
-    .flag-green { background: var(--kurdish-green); flex: 1; }
 
-    /* Sticky Navigation Header */
+    /* Floating Glass Header */
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(20, 20, 24, 0.85);
-      backdrop-filter: blur(12px);
-      padding: 12px 20px;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 14px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--card-border);
     }
 
-    .logo {
+    .brand-logo {
       font-size: 22px;
       font-weight: 900;
-      color: #fff;
+      color: #ffffff;
       display: flex;
       align-items: center;
       gap: 6px;
+      letter-spacing: -0.5px;
     }
 
-    .logo .sun {
-      color: var(--kurdish-sun);
-      font-size: 20px;
+    .brand-logo .sun-badge {
+      background: radial-gradient(circle, #fbbf24 30%, transparent 70%);
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-size: 14px;
     }
 
-    .logo span {
-      color: var(--kurdish-red);
+    .brand-logo span {
+      color: var(--kurd-red);
     }
 
-    /* Integrated Modern Search Bar */
-    .search-wrapper {
-      position: relative;
+    /* Rounded Pill Search Container */
+    .search-box {
       flex-grow: 1;
-      max-width: 320px;
-      margin: 0 12px;
+      max-width: 340px;
+      margin: 0 14px;
+      position: relative;
     }
 
-    .search-wrapper input {
+    .search-box input {
       width: 100%;
-      background: #1c1c22;
-      border: 1px solid var(--border-color);
-      padding: 8px 14px 8px 36px;
-      border-radius: 30px;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--card-border);
+      padding: 10px 42px 10px 16px;
+      border-radius: 99px;
       color: #fff;
       font-family: inherit;
       font-size: 13px;
       outline: none;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
       text-align: right;
     }
 
-    .search-wrapper input:focus {
-      border-color: var(--kurdish-sun);
-      box-shadow: 0 0 10px rgba(254, 189, 17, 0.2);
+    .search-box input:focus {
+      border-color: var(--kurd-gold);
+      box-shadow: 0 0 15px rgba(251, 191, 36, 0.2);
+      background: rgba(30, 41, 59, 1);
     }
 
-    .search-wrapper .search-icon {
+    .search-box input::placeholder {
+      color: #94a3b8;
+    }
+
+    .search-box .icon {
       position: absolute;
-      left: 12px;
+      right: 14px;
       top: 50%;
       transform: translateY(-50%);
-      font-size: 13px;
+      font-size: 14px;
+      opacity: 0.6;
       pointer-events: none;
-      opacity: 0.7;
     }
 
-    .cart-btn {
-      background: #1c1c22;
-      border: 1px solid var(--border-color);
-      width: 38px;
-      height: 38px;
+    .cart-chip {
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--card-border);
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 18px;
       cursor: pointer;
+      transition: transform 0.2s ease;
     }
 
-    /* Floating Category Chips */
-    .categories-wrapper {
-      padding: 15px 20px;
-      overflow-x: auto;
-      white-space: nowrap;
+    .cart-chip:hover {
+      transform: scale(1.05);
+      border-color: var(--kurd-gold);
+    }
+
+    /* Category Navigation */
+    .category-scroll {
       display: flex;
-      gap: 8px;
-      border-bottom: 1px solid var(--border-color);
-      background: #0e0e12;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 16px 20px;
+      background: rgba(15, 23, 42, 0.6);
+      border-bottom: 1px solid var(--card-border);
     }
 
-    .categories-wrapper::-webkit-scrollbar {
+    .category-scroll::-webkit-scrollbar {
       display: none;
     }
 
-    .category-btn {
-      background: #1c1c22;
-      color: #a0a0ab;
-      border: 1px solid var(--border-color);
-      padding: 8px 16px;
-      border-radius: 20px;
+    .cat-pill {
+      background: rgba(30, 41, 59, 0.6);
+      color: #94a3b8;
+      border: 1px solid var(--card-border);
+      padding: 8px 18px;
+      border-radius: 99px;
+      white-space: nowrap;
       cursor: pointer;
       font-family: inherit;
       font-size: 13px;
-      transition: all 0.2s ease;
+      transition: all 0.25s ease;
     }
 
-    .category-btn:hover, .category-btn.active {
-      background: var(--kurdish-green);
-      border-color: var(--kurdish-green);
-      color: #fff;
-    }
-
-    /* Hero Banner Area */
-    .hero-banner {
-      margin: 15px 20px 0;
-      padding: 30px 20px;
-      background: linear-gradient(135deg, #181409 0%, #0e0e12 100%);
-      border: 1px solid rgba(254, 189, 17, 0.15);
-      border-radius: 16px;
-      text-align: center;
-    }
-
-    .hero-banner h1 {
-      font-size: 26px;
-      margin-bottom: 6px;
+    .cat-pill:hover, .cat-pill.active {
+      background: linear-gradient(135deg, var(--kurd-red) 0%, #b91c1c 100%);
+      border-color: var(--kurd-red);
       color: #ffffff;
+      box-shadow: 0 4px 12px rgba(228, 30, 38, 0.3);
     }
 
-    .hero-banner p {
-      color: var(--kurdish-sun);
+    /* Banner Card */
+    .hero-card {
+      margin: 20px 20px 10px;
+      padding: 32px 20px;
+      background: radial-gradient(circle at top right, rgba(251, 191, 36, 0.15), transparent 60%),
+                  linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.9) 100%);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card h1 {
+      font-size: 28px;
+      margin-bottom: 6px;
+      background: linear-gradient(90deg, #ffffff 0%, #f1f5f9 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-card p {
+      color: var(--kurd-gold);
       font-size: 14px;
     }
 
-    /* Product Grid Layout */
-    .products-grid {
+    /* Products Grid */
+    .product-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      padding: 20px;
+      gap: 16px;
+      padding: 16px 20px 30px;
     }
 
     .product-card {
       background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      transition: transform 0.2s, border-color 0.2s;
+      transition: all 0.3s ease;
     }
 
     .product-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--kurdish-sun);
+      transform: translateY(-4px);
+      border-color: rgba(251, 191, 36, 0.4);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .img-container {
+      width: 100%;
+      height: 210px;
+      overflow: hidden;
+      background: #0f172a;
     }
 
     .product-card img {
       width: 100%;
-      height: 200px;
+      height: 100%;
       object-fit: cover;
-      background: #1a1a20;
+      transition: transform 0.4s ease;
     }
 
-    .product-details {
-      padding: 12px;
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .details {
+      padding: 14px;
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
 
-    .product-title {
+    .title {
       font-size: 14px;
-      color: #f0f0f5;
+      color: #f1f5f9;
+      line-height: 1.4;
     }
 
-    .product-price {
-      font-size: 15px;
-      color: var(--kurdish-green);
+    .price-tag {
+      font-size: 16px;
+      color: var(--kurd-green);
       font-weight: 800;
     }
 
-    .product-stock {
+    .stock-info {
       font-size: 11px;
-      color: #80808e;
+      color: #64748b;
     }
 
-    /* Custom Kurdish Footer */
+    /* Premium Footer */
     footer {
       margin-top: auto;
-      padding: 30px 20px;
-      background: #0e0e12;
-      border-top: 1px solid var(--border-color);
+      padding: 35px 20px;
+      background: rgba(15, 23, 42, 0.9);
+      border-top: 1px solid var(--card-border);
       text-align: center;
-      color: #666675;
-      font-size: 12px;
+      color: #64748b;
+      font-size: 13px;
     }
 
     .footer-sun {
-      font-size: 22px;
+      font-size: 24px;
       margin-bottom: 8px;
+      display: inline-block;
+      animation: pulse 3s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(1.1); opacity: 1; }
+    }
+
+    @media (max-width: 500px) {
+      header {
+        padding: 12px 14px;
+      }
+      .brand-logo {
+        font-size: 18px;
+      }
+      .search-box {
+        margin: 0 8px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Kurdish Flag Accent Strip -->
-  <div class="flag-header">
-    <div class="flag-red"></div>
-    <div class="flag-white"></div>
-    <div class="flag-green"></div>
-  </div>
+  <!-- Top Kurdish Flag Accent Bar -->
+  <div class="top-flag-line"></div>
 
-  <!-- Header -->
+  <!-- Header Container -->
   <header>
-    <div class="logo">
-      <span class="sun">☀️</span> Kurd<span>Shein</span>
+    <div class="brand-logo">
+      <div class="sun-badge">☀️</div>
+      Kurd<span>Shein</span>
     </div>
 
-    <div class="search-wrapper">
-      <input type="text" id="search-input" placeholder="گەڕان...">
-      <span class="search-icon">🔍</span>
+    <!-- Real-time Search Input Bar -->
+    <div class="search-box">
+      <span class="icon">🔍</span>
+      <input type="text" id="search-input" placeholder="گەڕان بکه...">
     </div>
 
-    <div class="cart-btn">🛒</div>
+    <div class="cart-chip">🛒</div>
   </header>
 
-  <!-- Categories Scrollbar -->
-  <div class="categories-wrapper">
-    <button class="category-btn active" data-category="all">هەمووی 🛍️</button>
-    <button class="category-btn" data-category="new">بابەتی نوێ🔥</button>
-    <button class="category-btn">گشتی📦</button>
-    <button class="category-btn">ئەکسسوارات💍</button>
-    <button class="category-btn">پیاوان🤵🏻‍♂️</button>
-    <button class="category-btn">ئافرەتان💁🏼‍♀️</button>
-    <button class="category-btn">ئەلکترۆنیات🪫</button>
+  <!-- Horizontal Scrollable Categories -->
+  <div class="category-scroll">
+    <button class="cat-pill active" data-category="all">هەمووی 🛍️</button>
+    <button class="cat-pill" data-category="new">بابەتی نوێ🔥</button>
+    <button class="cat-pill">گشتی📦</button>
+    <button class="cat-pill">ئەکسسوارات💍</button>
+    <button class="cat-pill">پیاوان🤵🏻‍♂️</button>
+    <button class="cat-pill">ئافرەتان💁🏼‍♀️</button>
+    <button class="cat-pill">ئەلکترۆنیات🪫</button>
   </div>
 
-  <!-- Hero Section -->
-  <div class="hero-banner">
+  <!-- Hero Section Banner -->
+  <div class="hero-card">
     <h1>Shop KurdShein</h1>
-    <p>نوێترین بەرهەمەکان لێرە دەستبکەوە</p>
+    <p>باشترین و نوێترین بەرهەمەکان لێرە دەستبکەوە</p>
   </div>
 
-  <!-- Products Grid -->
-  <section class="products-grid">
+  <!-- Product Listing Grid -->
+  <section class="product-grid">
 
     <div class="product-card" data-category="new">
-      <img src="./IMG_1707.jpeg" alt="چاویلەی دژە رۆژ">
-      <div class="product-details">
-        <div class="product-title">چاویلەی دژە رۆژ</div>
-        <div class="product-price">3000 IQD</div>
+      <div class="img-container">
+        <img src="./IMG_1707.jpeg" alt="چاویلەی دژە رۆژ">
+      </div>
+      <div class="details">
+        <div class="title">چاویلەی دژە رۆژ</div>
+        <div class="price-tag">3000 IQD</div>
       </div>
     </div>
 
     <div class="product-card">
-      <img src="https://placehold.co/600x800/222/fff?text=Product+2" alt="Product 2">
-      <div class="product-details">
-        <div class="product-title">Product Name</div>
-        <div class="product-price">$15.00</div>
-        <div class="product-stock">Stock: 5</div>
+      <div class="img-container">
+        <img src="https://placehold.co/600x800/222/fff?text=Product+2" alt="Product 2">
+      </div>
+      <div class="details">
+        <div class="title">Product Name</div>
+        <div class="price-tag">$15.00</div>
+        <div class="stock-info">Stock: 5</div>
       </div>
     </div>
 
   </section>
 
-  <!-- Footer -->
+  <!-- Footer Area -->
   <footer>
     <div class="footer-sun">☀️</div>
-    <p>© 2026 KurdShein - هەموو مافەکانی پارێزراوە</p>
+    <p>© 2026 KurdShein - سەرجەم مافەکانی پارێزراوە</p>
   </footer>
 
 <script>
-// Category Filter Logic
-const categoryButtons = document.querySelectorAll('.category-btn');
+// Category Filter Handler
+const categoryButtons = document.querySelectorAll('.cat-pill');
 const products = document.querySelectorAll('.product-card');
 
 categoryButtons.forEach(button => {
@@ -345,16 +403,16 @@ categoryButtons.forEach(button => {
   });
 });
 
-// Search Bar Filter Logic
+// Real-time Search Filter Handler
 const searchInput = document.getElementById('search-input');
 
 searchInput.addEventListener('input', () => {
   const query = searchInput.value.toLowerCase().trim();
 
   products.forEach(product => {
-    const productName = product.querySelector('.product-title').textContent.toLowerCase();
+    const title = product.querySelector('.title').textContent.toLowerCase();
     
-    if (productName.includes(query)) {
+    if (title.includes(query)) {
       product.style.display = '';
     } else {
       product.style.display = 'none';

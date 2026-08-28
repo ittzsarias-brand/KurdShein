@@ -1,288 +1,265 @@
 <!DOCTYPE html>
-<html lang="kmr" dir="rtl">
+<html lang="ku" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KurdShein | کوردشین</title>
+
+  <title>KurdShein | کورد شین</title>
 
   <style>
-    @font-face {
-      font-family: 'Rabar';
-      src: url('./Rabar_037.ttf') format('truetype');
-      font-weight: 700;
-      font-style: normal;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      color: #ffffff;
-      font-family: 'Rabar', sans-serif;
-      font-weight: 700;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      position: relative;
+      background: #f7f7f7;
+      color: #222;
     }
 
-    /* --- FULL SCREEN KURDISTAN FLAG BACKGROUND --- */
-    .flag-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -2;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .flag-red-stripe { background: #e41e26; flex: 1; }
-    .flag-white-stripe { background: #ffffff; flex: 1; position: relative; }
-    .flag-green-stripe { background: #278e43; flex: 1; }
-
-    /* Centered Sun Emblem */
-    .sun-emblem {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 380px;
-      height: 380px;
-      z-index: -2;
-      pointer-events: none;
-      filter: drop-shadow(0 0 35px rgba(254, 189, 17, 0.9));
-    }
-
-    /* Dark Glass Overlay for Readability */
-    .dark-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(10, 10, 15, 0.72);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: -1;
-    }
-
-    /* Floating Navigation Bar */
+    /* HEADER */
     header {
+      background: white;
+      padding: 18px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(15, 15, 20, 0.85);
-      backdrop-filter: blur(15px);
-      padding: 14px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(254, 189, 17, 0.3);
     }
 
     .logo {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: bold;
-      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    nav {
       display: flex;
-      align-items: center;
-      gap: 6px;
+      gap: 25px;
     }
 
-    .logo span {
-      color: #e41e26;
+    nav a {
+      text-decoration: none;
+      color: #222;
+      font-size: 15px;
     }
 
-    /* Curved Search Bar */
-    .search-container {
+    nav a:hover {
+      color: #ff3b81;
+    }
+
+    .icons {
       display: flex;
-      flex-grow: 1;
-      max-width: 350px;
-      margin: 0 14px;
-      position: relative;
+      gap: 15px;
+      font-size: 21px;
     }
 
-    .search-container input {
-      width: 100%;
-      padding: 9px 16px 9px 40px;
-      border-radius: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      background: rgba(255, 255, 255, 0.08);
-      color: #fff;
-      outline: none;
-      font-family: inherit;
-      font-size: 13px;
-      text-align: right;
-      transition: all 0.2s ease;
-    }
-
-    .search-container input:focus {
-      border-color: #febd11;
-      background: rgba(0, 0, 0, 0.6);
-      box-shadow: 0 0 12px rgba(254, 189, 17, 0.3);
-    }
-
-    .search-container input::placeholder {
-      color: #aaa;
-    }
-
-    .search-container .search-btn {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: #fff;
-      cursor: pointer;
-      font-size: 14px;
-      opacity: 0.8;
-    }
-
-    .cart {
-      font-size: 22px;
-      background: rgba(255, 255, 255, 0.1);
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+    /* HERO */
+    .hero {
+      margin: 25px auto;
+      width: 88%;
+      min-height: 390px;
+      border-radius: 18px;
+      background:
+        linear-gradient(
+          rgba(0,0,0,.25),
+          rgba(0,0,0,.25)
+        ),
+        url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80")
+        center/cover;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(255, 255, 255, 0.15);
+      text-align: center;
+      color: white;
+    }
+
+    .hero-content h1 {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    .hero-content p {
+      font-size: 21px;
+      margin-bottom: 25px;
+    }
+
+    .button {
+      display: inline-block;
+      background: #ff3b81;
+      color: white;
+      padding: 13px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
       cursor: pointer;
     }
 
-    /* Category Buttons */
-    .categories {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      padding: 14px 20px;
-      background: rgba(10, 10, 15, 0.4);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    .button:hover {
+      background: #e52c6d;
     }
 
-    .categories::-webkit-scrollbar {
-      display: none;
+    /* SECTION */
+    .section {
+      width: 88%;
+      margin: 45px auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 25px;
+    }
+
+    /* CATEGORIES */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
     }
 
     .category {
-      background: rgba(255, 255, 255, 0.08);
-      color: #e5e5e5;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      padding: 8px 18px;
-      border-radius: 20px;
-      white-space: nowrap;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 13px;
-      transition: all 0.2s ease;
-    }
-
-    .category:hover, .category.active {
-      background: linear-gradient(135deg, #e41e26 0%, #278e43 100%);
-      border-color: #febd11;
-      color: #ffffff;
-    }
-
-    /* Hero Banner Box */
-    .hero {
-      margin: 18px 20px 6px;
-      padding: 32px 20px;
+      background: white;
+      padding: 25px 10px;
       text-align: center;
-      background: rgba(20, 20, 25, 0.6);
-      backdrop-filter: blur(10px);
-      border-radius: 20px;
-      border: 1px solid rgba(254, 189, 17, 0.25);
+      border-radius: 15px;
+      cursor: pointer;
+      transition: .2s;
+      font-size: 17px;
     }
 
-    .hero h1 {
-      font-size: 28px;
-      margin-bottom: 6px;
-      color: #ffffff;
+    .category:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,.08);
     }
 
-    .hero p {
-      color: #febd11;
-      font-size: 14px;
+    .category-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
     }
 
-    /* Product Cards Grid */
+    /* PRODUCTS */
     .products {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      padding: 16px 20px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
     }
 
     .product {
-      background: rgba(20, 20, 25, 0.7);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
+      background: white;
+      border-radius: 15px;
       overflow: hidden;
-      transition: transform 0.25s, border-color 0.25s;
+      transition: .2s;
     }
 
     .product:hover {
-      transform: translateY(-3px);
-      border-color: #febd11;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,.1);
     }
 
     .product img {
       width: 100%;
-      height: 200px;
+      height: 270px;
       object-fit: cover;
-      background: rgba(0, 0, 0, 0.5);
     }
 
     .product-info {
-      padding: 12px;
+      padding: 15px;
     }
 
     .product-name {
-      font-size: 14px;
-      margin-bottom: 6px;
-      color: #ffffff;
+      font-size: 16px;
+      margin-bottom: 8px;
     }
 
     .price {
+      font-size: 18px;
       font-weight: bold;
-      font-size: 16px;
-      color: #febd11;
+      margin-bottom: 12px;
     }
 
-    .stock {
-      color: #aaa;
-      font-size: 11px;
-      margin-top: 4px;
+    .add {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: #222;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
     }
 
-    /* Footer */
+    .add:hover {
+      background: #ff3b81;
+    }
+
+    /* FOOTER */
     footer {
+      background: #222;
+      color: white;
       text-align: center;
-      padding: 35px 20px;
-      color: #aaa;
-      background: rgba(10, 10, 15, 0.85);
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      margin-top: auto;
-      font-size: 13px;
+      padding: 35px;
+      margin-top: 60px;
     }
 
-    @media (max-width: 500px) {
-      header {
-        padding: 10px 14px;
+    /* MOBILE */
+    @media (max-width: 800px) {
+
+      nav {
+        display: none;
       }
-      .logo {
-        font-size: 20px;
+
+      .hero {
+        min-height: 300px;
       }
-      .search-container {
-        margin: 0 6px;
+
+      .hero-content h1 {
+        font-size: 34px;
+      }
+
+      .categories {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .product img {
+        height: 220px;
+      }
+    }
+
+    @media (max-width: 450px) {
+
+      .hero {
+        width: 94%;
+      }
+
+      .section {
+        width: 94%;
+      }
+
+      .hero-content h1 {
+        font-size: 28px;
+      }
+
+      .hero-content p {
+        font-size: 17px;
+      }
+
+      .products {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .product img {
+        height: 180px;
       }
     }
   </style>
@@ -290,140 +267,214 @@
 
 <body>
 
-  <!-- Full Screen Kurdistan Flag Background -->
-  <div class="flag-bg">
-    <div class="flag-red-stripe"></div>
-    <div class="flag-white-stripe"></div>
-    <div class="flag-green-stripe"></div>
-  </div>
-
-  <!-- SVG Golden Kurdish Sun (21 Rays) -->
-  <svg class="sun-emblem" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="18" fill="#febd11"/>
-    <!-- 21 Rays -->
-    <g stroke="#febd11" stroke-width="2.2" stroke-linecap="round">
-      <line x1="50" y1="50" x2="50" y2="20"/>
-      <line x1="50" y1="50" x2="58.7" y2="21.3"/>
-      <line x1="50" y1="50" x2="66.6" y2="25"/>
-      <line x1="50" y1="50" x2="73" y2="30.9"/>
-      <line x1="50" y1="50" x2="77.2" y2="38.4"/>
-      <line x1="50" y1="50" x2="78.8" y2="46.8"/>
-      <line x1="50" y1="50" x2="77.8" y2="55.4"/>
-      <line x1="50" y1="50" x2="74.2" y2="63.4"/>
-      <line x1="50" y1="50" x2="68.3" y2="70"/>
-      <line x1="50" y1="50" x2="60.7" y2="74.5"/>
-      <line x1="50" y1="50" x2="52.2" y2="76.6"/>
-      <line x1="50" y1="50" x2="43.5" y2="76"/>
-      <line x1="50" y1="50" x2="35.3" y2="73"/>
-      <line x1="50" y1="50" x2="28.3" y2="67.5"/>
-      <line x1="50" y1="50" x2="23.5" y2="60.1"/>
-      <line x1="50" y1="50" x2="21.5" y2="51.7"/>
-      <line x1="50" y1="50" x2="22.2" y2="43.1"/>
-      <line x1="50" y1="50" x2="25.4" y2="35"/>
-      <line x1="50" y1="50" x2="31" y2="28.3"/>
-      <line x1="50" y1="50" x2="38.2" y2="23.4"/>
-      <line x1="50" y1="50" x2="46.1" y2="20.7"/>
-    </g>
-  </svg>
-
-  <!-- Dark glass layer -->
-  <div class="dark-overlay"></div>
-
-  <!-- Navigation Header -->
+  <!-- HEADER -->
   <header>
-    <div class="logo">Kurd<span>Shein</span></div>
 
-    <!-- Live Search Bar -->
-    <div class="search-container">
-      <input type="text" id="search-input" placeholder="گەڕان...">
-      <button class="search-btn" type="button">🔍</button>
+    <div class="logo">
+      🛍️ KurdShein
     </div>
 
-    <div class="cart">🛒</div>
+    <nav>
+      <a href="#">سەرەکی</a>
+      <a href="#categories">بەشەکان</a>
+      <a href="#products">کاڵاکان</a>
+      <a href="#offers">داشکاندن</a>
+    </nav>
+
+    <div class="icons">
+      🔍
+      🛒
+    </div>
+
   </header>
 
-  <!-- Categories Scrollbar -->
-  <div class="categories">
-    <button class="category active" data-category="all">هەمووی 🛍️</button>
-    <button class="category" data-category="new">بابەتی نوێ🔥</button>
-    <button class="category">گشتی📦</button>
-    <button class="category">ئەکسسوارات💍</button>
-    <button class="category">پیاوان🤵🏻‍♂️</button>
-    <button class="category">ئافرەتان💁🏼‍♀️</button>
-    <button class="category">ئەلکترۆنیات🪫</button>
-  </div>
 
-  <!-- Hero Section -->
+  <!-- HERO -->
   <section class="hero">
-    <h1>Shop KurdShein</h1>
-    <p>نوێترین بەرهەمەکان لێرە دەستبکەوە</p>
-  </section>
 
-  <!-- Products Grid -->
-  <section class="products">
+    <div class="hero-content">
 
-    <div class="product" data-category="new">
-      <img src="./IMG_1707.jpeg" alt="چاویلەی دژە رۆژ">
-      <div class="product-info">
-        <div class="product-name">چاویلەی دژە رۆژ</div>
-        <div class="price">3000 IQD</div>
-      </div>
-    </div>
+      <h1>کورد شین</h1>
 
-    <div class="product">
-      <img src="https://placehold.co/600x800/222/fff?text=Product+2" alt="Product 2">
-      <div class="product-info">
-        <div class="product-name">Product Name</div>
-        <div class="price">$15.00</div>
-        <div class="stock">Stock: 5</div>
-      </div>
+      <p>
+        جلوبەرگ و شتی جوان بۆ تۆ 💕
+      </p>
+
+      <a href="#products" class="button">
+        ئێستا بکڕە
+      </a>
+
     </div>
 
   </section>
 
-  <!-- Footer -->
+
+  <!-- CATEGORIES -->
+  <section class="section" id="categories">
+
+    <h2 class="section-title">
+      بەشەکان
+    </h2>
+
+    <div class="categories">
+
+      <div class="category">
+        <div class="category-icon">👗</div>
+        جلوبەرگی ژنان
+      </div>
+
+      <div class="category">
+        <div class="category-icon">👕</div>
+        جلوبەرگی پیاوان
+      </div>
+
+      <div class="category">
+        <div class="category-icon">👟</div>
+        پێڵاو
+      </div>
+
+      <div class="category">
+        <div class="category-icon">👜</div>
+        جانتا و ئەکسسوارات
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- PRODUCTS -->
+  <section class="section" id="products">
+
+    <h2 class="section-title">
+      ⭐ کاڵاکانی ئێمە
+    </h2>
+
+    <div class="products">
+
+      <!-- PRODUCT 1 -->
+      <div class="product">
+
+        <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=600&q=80">
+
+        <div class="product-info">
+
+          <div class="product-name">
+            جلوبەرگی جوانی ژنان
+          </div>
+
+          <div class="price">
+            ٣٥,٠٠٠ د.ع
+          </div>
+
+          <button class="add" onclick="addToCart()">
+            🛒 زیادکردن بۆ سەبەتە
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT 2 -->
+      <div class="product">
+
+        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80">
+
+        <div class="product-info">
+
+          <div class="product-name">
+            پانتۆڵی فاشن
+          </div>
+
+          <div class="price">
+            ٢٨,٠٠٠ د.ع
+          </div>
+
+          <button class="add" onclick="addToCart()">
+            🛒 زیادکردن بۆ سەبەتە
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT 3 -->
+      <div class="product">
+
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80">
+
+        <div class="product-info">
+
+          <div class="product-name">
+            پێڵاوی فاشن
+          </div>
+
+          <div class="price">
+            ٤٥,٠٠٠ د.ع
+          </div>
+
+          <button class="add" onclick="addToCart()">
+            🛒 زیادکردن بۆ سەبەتە
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- PRODUCT 4 -->
+      <div class="product">
+
+        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80">
+
+        <div class="product-info">
+
+          <div class="product-name">
+            جانتای ژنان
+          </div>
+
+          <div class="price">
+            ٣٢,٠٠٠ د.ع
+          </div>
+
+          <button class="add" onclick="addToCart()">
+            🛒 زیادکردن بۆ سەبەتە
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- FOOTER -->
   <footer>
-    © 2026 KurdShein - سەرجەم مافەکانی پارێزراوە
+
+    <h3>KurdShein 🛍️</h3>
+
+    <p style="margin-top:10px;">
+      فرۆشتنی جلوبەرگ و ئەکسسوارات
+    </p>
+
+    <p style="margin-top:10px;">
+      © 2026 KurdShein
+    </p>
+
   </footer>
 
-<script>
-// Category Filter
-const categoryButtons = document.querySelectorAll('.category');
-const products = document.querySelectorAll('.product');
 
-categoryButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    categoryButtons.forEach(btn => btn.classList.remove('active'));
-    button.classList.add('active');
+  <script>
 
-    const category = button.dataset.category;
-
-    products.forEach(product => {
-      if (!category || category === 'all') {
-        product.style.display = '';
-      } else if (category === 'new') {
-        product.style.display = product.dataset.category === 'new' ? '' : 'none';
-      }
-    });
-  });
-});
-
-// Live Search Filter
-const searchInput = document.getElementById('search-input');
-
-searchInput.addEventListener('input', () => {
-  const query = searchInput.value.toLowerCase().trim();
-
-  products.forEach(product => {
-    const productName = product.querySelector('.product-name').textContent.toLowerCase();
-    
-    if (productName.includes(query)) {
-      product.style.display = '';
-    } else {
-      product.style.display = 'none';
+    function addToCart() {
+      alert("کاڵاکە زیادکرا بۆ سەبەتە 🛒");
     }
-  });
-});
-</script>
+
+  </script>
+
 </body>
 </html>

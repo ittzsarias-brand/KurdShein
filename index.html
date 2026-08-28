@@ -7,11 +7,11 @@
 
   <style>
     @font-face {
-  font-family: 'Rabar';
-  src: url('./Rabar_037.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
+      font-family: 'Rabar';
+      src: url('./Rabar_037.ttf') format('truetype');
+      font-weight: 700;
+      font-style: normal;
+    }
     * {
       box-sizing: border-box;
       margin: 0;
@@ -19,11 +19,10 @@
     }
 
     body {
-  background: #000;
-  color: #fff;
-  font-family: 'Rabar', sans-serif;
-  font-weight: 700;
-
+      background: #000;
+      color: #fff;
+      font-family: 'Rabar', sans-serif;
+      font-weight: 700;
     }
 
     .top-banner {
@@ -54,6 +53,36 @@
     .cart {
       font-size: 24px;
     }
+
+    /* --- SEARCH BAR STYLES --- */
+    .search-container {
+      display: flex;
+      flex-grow: 1;
+      max-width: 300px;
+      margin: 0 15px;
+    }
+
+    .search-container input {
+      width: 100%;
+      padding: 6px 12px;
+      border-radius: 20px 0 0 20px;
+      border: 1px solid #333;
+      background-color: #1a1a1a;
+      color: #fff;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .search-container button {
+      padding: 6px 12px;
+      border-radius: 0 20px 20px 0;
+      border: 1px solid #333;
+      border-left: none;
+      background-color: #222;
+      color: #fff;
+      cursor: pointer;
+    }
+    /* ------------------------- */
 
     .categories {
       display: flex;
@@ -151,11 +180,18 @@
 
   <header>
     <div class="logo">KurdShein</div>
+    
+    <!-- SEARCH BAR ADDED HERE -->
+    <div class="search-container">
+      <input type="text" placeholder="گەڕان...">
+      <button type="button">🔍</button>
+    </div>
+
     <div class="cart">🛒</div>
   </header>
 
   <div class="categories">
-   <button class="category" data-category="new">بابەتی نوێ🔥</button>
+    <button class="category" data-category="new">بابەتی نوێ🔥</button>
     <button class="category">گشتی📦</button>
     <button class="category">ئەکسسوارات💍</button>
     <button class="category">پیاوان🤵🏻‍♂️</button>
@@ -171,18 +207,11 @@
   <section class="products">
 
     <div class="product" data-category="new">
-
-    <img src="./IMG_1707.jpeg" alt="چاویلەی دژە رۆژ">
-
-    <div class="product-info">
-
+      <img src="./IMG_1707.jpeg" alt="چاویلەی دژە رۆژ">
+      <div class="product-info">
         <div class="product-name">چاویلەی دژە رۆژ</div>
-
         <div class="price">3000 IQD</div>
-
-    </div>
-
-
+      </div>
     </div>
 
     <div class="product">
@@ -199,6 +228,7 @@
   <footer>
     © 2026 KurdShein
   </footer>
+
 <script>
 const categoryButtons = document.querySelectorAll('.category');
 const products = document.querySelectorAll('.product');

@@ -146,7 +146,7 @@
 
   <div class="top-banner">
     <span class="flag">🇹🇯</span>
-    Welcome to KurdShein
+    KurdShein
   </div>
 
   <header>
@@ -170,13 +170,19 @@
 
   <section class="products">
 
-    <div class="product">
-      <img src="https://placehold.co/600x800/222/fff?text=Product+1">
-      <div class="product-info">
-        <div class="product-name">Product Name</div>
-        <div class="price">$10.00</div>
-        <div class="stock">Stock: 10</div>
-      </div>
+    <div class="product" data-category="new">
+
+    <img src="./IMG_1707.jpeg" alt="چاویلەی دژە رۆژ">
+
+    <div class="product-info">
+
+        <div class="product-name">چاویلەی دژە رۆژ</div>
+
+        <div class="price">3000 IQD</div>
+
+    </div>
+
+
     </div>
 
     <div class="product">
@@ -193,6 +199,27 @@
   <footer>
     © 2026 KurdShein
   </footer>
+<script>
+const categoryButtons = document.querySelectorAll('.category');
+const products = document.querySelectorAll('.product');
 
+categoryButtons.forEach(button => {
+  button.addEventListener('click', () => {
+
+    const category = button.dataset.category;
+
+    products.forEach(product => {
+      if (category === 'new') {
+        if (product.dataset.category === 'new') {
+          product.style.display = '';
+        } else {
+          product.style.display = 'none';
+        }
+      }
+    });
+
+  });
+});
+</script>
 </body>
 </html>

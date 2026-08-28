@@ -1,480 +1,1372 @@
 <!DOCTYPE html>
 <html lang="ku" dir="rtl">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>KurdShein | کورد شین</title>
+<title>KurdShein</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
+<style>
+
+/* ================================
+   RABAR FONT
+   Your exact GitHub filename:
+   Rabar_037 2.ttf
+================================ */
+
+@font-face {
+    font-family: "Rabar";
+    src: url("Rabar_037%202.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #08090c;
+    color: white;
+    font-family: "Rabar", Arial, sans-serif;
+}
+
+
+/* ================================
+   TOP BAR
+================================ */
+
+.top-bar {
+    height: 40px;
+    background: #111318;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-bottom: 1px solid #272a30;
+
+    font-size: 14px;
+}
+
+.top-bar-text {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.sun {
+    color: #ffd21c;
+    font-size: 17px;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+header {
+    background: #0b0d11;
+
+    min-height: 82px;
+
+    padding: 12px 30px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+
+    border-bottom: 1px solid #292c32;
+}
+
+
+/* LOGO */
+
+.logo {
+    font-family: Arial, sans-serif;
+
+    font-size: 26px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+.logo-red {
+    color: #ff2020;
+}
+
+.logo-white {
+    color: white;
+}
+
+
+/* ================================
+   SEARCH
+================================ */
+
+.search-container {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+}
+
+.search {
+    width: 100%;
+    max-width: 560px;
+
+    height: 46px;
+
+    display: flex;
+
+    background: #17191e;
+
+    border: 1px solid #3a3d44;
+
+    border-radius: 25px;
+
+    overflow: hidden;
+}
+
+.search input {
+    flex: 1;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    padding: 0 20px;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    font-size: 15px;
+
+    text-align: right;
+}
+
+.search input::placeholder {
+    color: #85878c;
+}
+
+.search-button {
+    width: 65px;
+
+    border: none;
+
+    background: #e90012;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.search-button:hover {
+    background: #ff1d30;
+}
+
+
+/* ================================
+   SHOPPING CART
+================================ */
+
+.cart {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    background: #191b20;
+
+    border: 1px solid #3a3d44;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    position: relative;
+
+    font-size: 21px;
+
+    transition: 0.2s;
+}
+
+.cart:hover {
+    border-color: #ff2020;
+}
+
+.cart-count {
+    position: absolute;
+
+    top: -4px;
+    right: -3px;
+
+    width: 19px;
+    height: 19px;
+
+    border-radius: 50%;
+
+    background: #e90012;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ================================
+   KURDISTAN FLAG STRIPE
+================================ */
+
+.kurdistan-line {
+    height: 4px;
+
+    width: 100%;
+
+    background: linear-gradient(
+        to right,
+        #e21b23 0%,
+        #e21b23 33.33%,
+        #ffffff 33.33%,
+        #ffffff 66.66%,
+        #169447 66.66%,
+        #169447 100%
+    );
+}
+
+
+/* ================================
+   WELCOME MESSAGE
+================================ */
+
+.welcome {
+    width: fit-content;
+
+    margin: 12px auto;
+
+    padding: 6px 20px;
+
+    border-radius: 20px;
+
+    background: #17191d;
+
+    border: 1px solid #292c32;
+
+    color: #ddd;
+
+    font-size: 14px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.welcome::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: linear-gradient(
+        to bottom,
+        #e21b23 0%,
+        #e21b23 33%,
+        white 33%,
+        white 66%,
+        #169447 66%,
+        #169447 100%
+    );
+}
+
+
+/* ================================
+   CATEGORIES
+================================ */
+
+.categories {
+    width: 95%;
+
+    margin: 10px auto 25px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    flex-wrap: wrap;
+}
+
+.category {
+    background: #202227;
+
+    color: #eee;
+
+    border: 1px solid #393c43;
+
+    border-radius: 22px;
+
+    padding: 9px 17px;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.category:hover {
+    background: #2b2e35;
+
+    transform: translateY(-2px);
+}
+
+.category.active {
+    background: #159447;
+
+    border-color: #159447;
+}
+
+
+/* ================================
+   PAGE TITLE
+================================ */
+
+.title {
+    text-align: center;
+
+    margin: 25px auto 30px;
+}
+
+.title h1 {
+    font-size: 34px;
+
+    margin-bottom: 6px;
+}
+
+.title p {
+    color: #85878c;
+
+    font-size: 14px;
+}
+
+
+/* ================================
+   PRODUCTS
+================================ */
+
+.products {
+    width: 94%;
+    max-width: 1400px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+
+/* PRODUCT CARD */
+
+.product {
+    background: #15171b;
+
+    border: 1px solid #30333a;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    transition: 0.25s;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+
+    border-color: #555960;
+
+    box-shadow: 0 12px 35px rgba(0,0,0,0.55);
+}
+
+
+/* PRODUCT IMAGE */
+
+.product-image {
+    width: 100%;
+
+    height: 270px;
+
+    background: #202227;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: 0.3s;
+}
+
+.product:hover img {
+    transform: scale(1.04);
+}
+
+
+/* SALE */
+
+.sale {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    z-index: 2;
+
+    background: #e90012;
+
+    padding: 5px 10px;
+
+    border-radius: 15px;
+
+    font-size: 12px;
+}
+
+
+/* PRODUCT INFORMATION */
+
+.product-info {
+    padding: 14px;
+}
+
+.product-name {
+    font-size: 17px;
+
+    margin-bottom: 5px;
+}
+
+.product-description {
+    color: #85878c;
+
+    font-size: 12px;
+
+    margin-bottom: 10px;
+}
+
+.price {
+    color: #ffd000;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+.old-price {
+    color: #777;
+
+    text-decoration: line-through;
+
+    font-size: 12px;
+
+    margin-right: 7px;
+}
+
+
+/* ADD TO CART */
+
+.add-cart {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 10px;
+
+    background: #24272c;
+
+    border: 1px solid #41444b;
+
+    color: white;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.add-cart:hover {
+    background: #e90012;
+
+    border-color: #e90012;
+}
+
+
+/* ================================
+   FOOTER
+================================ */
+
+footer {
+    margin-top: 60px;
+
+    padding: 35px 20px;
+
+    text-align: center;
+
+    background: #101217;
+
+    border-top: 3px solid #e90012;
+
+    color: #888;
+}
+
+.footer-logo {
+    font-family: Arial, sans-serif;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+
+    color: white;
+}
+
+
+/* ================================
+   CART MESSAGE
+================================ */
+
+.cart-message {
+    position: fixed;
+
+    bottom: 25px;
+
+    left: 50%;
+
+    transform: translate(-50%, 100px);
+
+    background: #1b1d22;
+
+    border: 1px solid #444850;
+
+    padding: 12px 25px;
+
+    border-radius: 30px;
+
+    z-index: 1000;
+
+    transition: 0.3s;
+
+    font-size: 14px;
+}
+
+.cart-message.show {
+    transform: translate(-50%, 0);
+}
+
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 1000px) {
+
+    .products {
+        grid-template-columns: repeat(3, 1fr);
     }
 
-    body {
-      background: #f7f7f7;
-      color: #222;
-    }
+}
 
-    /* HEADER */
+
+/* ================================
+   PHONE
+================================ */
+
+@media (max-width: 700px) {
+
     header {
-      background: white;
-      padding: 18px 6%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid #eee;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+        padding: 12px 15px;
+
+        flex-wrap: wrap;
     }
 
     .logo {
-      font-size: 26px;
-      font-weight: bold;
-      letter-spacing: 1px;
+        width: 100%;
+
+        text-align: center;
+
+        order: 1;
     }
 
-    nav {
-      display: flex;
-      gap: 25px;
+    .search-container {
+        order: 2;
+
+        width: calc(100% - 58px);
     }
 
-    nav a {
-      text-decoration: none;
-      color: #222;
-      font-size: 15px;
+    .cart {
+        order: 3;
     }
 
-    nav a:hover {
-      color: #ff3b81;
-    }
-
-    .icons {
-      display: flex;
-      gap: 15px;
-      font-size: 21px;
-    }
-
-    /* HERO */
-    .hero {
-      margin: 25px auto;
-      width: 88%;
-      min-height: 390px;
-      border-radius: 18px;
-      background:
-        linear-gradient(
-          rgba(0,0,0,.25),
-          rgba(0,0,0,.25)
-        ),
-        url("https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80")
-        center/cover;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: white;
-    }
-
-    .hero-content h1 {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
-
-    .hero-content p {
-      font-size: 21px;
-      margin-bottom: 25px;
-    }
-
-    .button {
-      display: inline-block;
-      background: #ff3b81;
-      color: white;
-      padding: 13px 30px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-    }
-
-    .button:hover {
-      background: #e52c6d;
-    }
-
-    /* SECTION */
-    .section {
-      width: 88%;
-      margin: 45px auto;
-    }
-
-    .section-title {
-      text-align: center;
-      font-size: 28px;
-      margin-bottom: 25px;
-    }
-
-    /* CATEGORIES */
     .categories {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
+        justify-content: flex-start;
+
+        flex-wrap: nowrap;
+
+        overflow-x: auto;
+
+        padding: 3px 5px 8px;
     }
 
     .category {
-      background: white;
-      padding: 25px 10px;
-      text-align: center;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: .2s;
-      font-size: 17px;
+        white-space: nowrap;
     }
 
-    .category:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,.08);
-    }
-
-    .category-icon {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
-
-    /* PRODUCTS */
     .products {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+
+        width: 94%;
+
+        gap: 10px;
     }
 
-    .product {
-      background: white;
-      border-radius: 15px;
-      overflow: hidden;
-      transition: .2s;
-    }
-
-    .product:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,.1);
-    }
-
-    .product img {
-      width: 100%;
-      height: 270px;
-      object-fit: cover;
-    }
-
-    .product-info {
-      padding: 15px;
+    .product-image {
+        height: 210px;
     }
 
     .product-name {
-      font-size: 16px;
-      margin-bottom: 8px;
+        font-size: 14px;
     }
 
     .price {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 12px;
+        font-size: 14px;
     }
 
-    .add {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      background: #222;
-      color: white;
-      border-radius: 8px;
-      cursor: pointer;
+    .add-cart {
+        font-size: 12px;
     }
 
-    .add:hover {
-      background: #ff3b81;
+    .title h1 {
+        font-size: 27px;
     }
 
-    /* FOOTER */
-    footer {
-      background: #222;
-      color: white;
-      text-align: center;
-      padding: 35px;
-      margin-top: 60px;
-    }
+}
 
-    /* MOBILE */
-    @media (max-width: 800px) {
 
-      nav {
-        display: none;
-      }
+/* ================================
+   SMALL PHONE
+================================ */
 
-      .hero {
-        min-height: 300px;
-      }
+@media (max-width: 390px) {
 
-      .hero-content h1 {
-        font-size: 34px;
-      }
-
-      .categories {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .products {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-      }
-
-      .product img {
-        height: 220px;
-      }
-    }
-
-    @media (max-width: 450px) {
-
-      .hero {
-        width: 94%;
-      }
-
-      .section {
-        width: 94%;
-      }
-
-      .hero-content h1 {
-        font-size: 28px;
-      }
-
-      .hero-content p {
-        font-size: 17px;
-      }
-
-      .products {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .product img {
+    .product-image {
         height: 180px;
-      }
     }
-  </style>
+
+    .product-info {
+        padding: 10px;
+    }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-  <!-- HEADER -->
-  <header>
+
+<!-- TOP MESSAGE -->
+
+<div class="top-bar">
+
+    <div class="top-bar-text">
+
+        <span class="sun">☀</span>
+
+        بەخێربێیت بۆ کورد شین
+
+        <span class="sun">☀</span>
+
+    </div>
+
+</div>
+
+
+<!-- HEADER -->
+
+<header>
+
+
+    <!-- LOGO -->
 
     <div class="logo">
-      🛍️ KurdShein
-    </div>
 
-    <nav>
-      <a href="#">سەرەکی</a>
-      <a href="#categories">بەشەکان</a>
-      <a href="#products">کاڵاکان</a>
-      <a href="#offers">داشکاندن</a>
-    </nav>
+        <span class="logo-red">Shein</span>
 
-    <div class="icons">
-      🔍
-      🛒
-    </div>
-
-  </header>
-
-
-  <!-- HERO -->
-  <section class="hero">
-
-    <div class="hero-content">
-
-      <h1>کورد شین</h1>
-
-      <p>
-        جلوبەرگ و شتی جوان بۆ تۆ 💕
-      </p>
-
-      <a href="#products" class="button">
-        ئێستا بکڕە
-      </a>
+        <span class="logo-white"> Kurd</span>
 
     </div>
 
-  </section>
 
+    <!-- SEARCH -->
 
-  <!-- CATEGORIES -->
-  <section class="section" id="categories">
+    <div class="search-container">
 
-    <h2 class="section-title">
-      بەشەکان
-    </h2>
+        <div class="search">
 
-    <div class="categories">
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="گەڕان لە ناو بەرهەمەکان..."
+            >
 
-      <div class="category">
-        <div class="category-icon">👗</div>
-        جلوبەرگی ژنان
-      </div>
-
-      <div class="category">
-        <div class="category-icon">👕</div>
-        جلوبەرگی پیاوان
-      </div>
-
-      <div class="category">
-        <div class="category-icon">👟</div>
-        پێڵاو
-      </div>
-
-      <div class="category">
-        <div class="category-icon">👜</div>
-        جانتا و ئەکسسوارات
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- PRODUCTS -->
-  <section class="section" id="products">
-
-    <h2 class="section-title">
-      ⭐ کاڵاکانی ئێمە
-    </h2>
-
-    <div class="products">
-
-      <!-- PRODUCT 1 -->
-      <div class="product">
-
-        <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=600&q=80">
-
-        <div class="product-info">
-
-          <div class="product-name">
-            جلوبەرگی جوانی ژنان
-          </div>
-
-          <div class="price">
-            ٣٥,٠٠٠ د.ع
-          </div>
-
-          <button class="add" onclick="addToCart()">
-            🛒 زیادکردن بۆ سەبەتە
-          </button>
+            <button
+                class="search-button"
+                onclick="searchProducts()"
+            >
+                🔍
+            </button>
 
         </div>
 
-      </div>
+    </div>
 
 
-      <!-- PRODUCT 2 -->
-      <div class="product">
+    <!-- CART -->
 
-        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80">
+    <div class="cart" onclick="openCart()">
 
-        <div class="product-info">
+        🛒
 
-          <div class="product-name">
-            پانتۆڵی فاشن
-          </div>
-
-          <div class="price">
-            ٢٨,٠٠٠ د.ع
-          </div>
-
-          <button class="add" onclick="addToCart()">
-            🛒 زیادکردن بۆ سەبەتە
-          </button>
-
+        <div
+            class="cart-count"
+            id="cartCount"
+        >
+            0
         </div>
-
-      </div>
-
-
-      <!-- PRODUCT 3 -->
-      <div class="product">
-
-        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80">
-
-        <div class="product-info">
-
-          <div class="product-name">
-            پێڵاوی فاشن
-          </div>
-
-          <div class="price">
-            ٤٥,٠٠٠ د.ع
-          </div>
-
-          <button class="add" onclick="addToCart()">
-            🛒 زیادکردن بۆ سەبەتە
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <!-- PRODUCT 4 -->
-      <div class="product">
-
-        <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80">
-
-        <div class="product-info">
-
-          <div class="product-name">
-            جانتای ژنان
-          </div>
-
-          <div class="price">
-            ٣٢,٠٠٠ د.ع
-          </div>
-
-          <button class="add" onclick="addToCart()">
-            🛒 زیادکردن بۆ سەبەتە
-          </button>
-
-        </div>
-
-      </div>
 
     </div>
 
-  </section>
+</header>
 
 
-  <!-- FOOTER -->
-  <footer>
+<!-- KURDISTAN COLORS -->
 
-    <h3>KurdShein 🛍️</h3>
+<div class="kurdistan-line"></div>
 
-    <p style="margin-top:10px;">
-      فرۆشتنی جلوبەرگ و ئەکسسوارات
+
+<!-- WELCOME -->
+
+<div class="welcome">
+
+    🇹🇯
+
+    <span>
+        کاڵای جوان بۆ کوردستان
+    </span>
+
+</div>
+
+
+<!-- CATEGORIES -->
+
+<div class="categories">
+
+    <button
+        class="category active"
+        onclick="filterProducts('new', this)"
+    >
+        ١. بابەتی نوێ
+    </button>
+
+
+    <button
+        class="category"
+        onclick="filterProducts('sale', this)"
+    >
+        ٢. داشکاندن
+    </button>
+
+
+    <button
+        class="category"
+        onclick="filterProducts('men', this)"
+    >
+        ٣. پیاوان
+    </button>
+
+
+    <button
+        class="category"
+        onclick="filterProducts('women', this)"
+    >
+        ٤. ئافرەتان
+    </button>
+
+
+    <button
+        class="category"
+        onclick="filterProducts('kids', this)"
+    >
+        ٥. منداڵان
+    </button>
+
+
+    <button
+        class="category"
+        onclick="filterProducts('accessories', this)"
+    >
+        ٦. ئەکسسوارات
+    </button>
+
+
+    <button
+        class="category"
+        onclick="filterProducts('electronics', this)"
+    >
+        ٧. ئەلکترۆنی
+    </button>
+
+</div>
+
+
+<!-- TITLE -->
+
+<div class="title">
+
+    <h1 id="title">
+        بابەتی نوێ
+    </h1>
+
+    <p>
+        نوێترین بەرهەمەکانمان
+    </p>
+
+</div>
+
+
+<!-- PRODUCTS -->
+
+<div class="products" id="products">
+
+
+    <!-- PRODUCT 1 -->
+
+    <div
+        class="product"
+        data-category="new women"
+        data-name="جلوبەرگی ژنان"
+    >
+
+        <div class="product-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80"
+                alt="جلوبەرگی ژنان"
+            >
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+                جلوبەرگی ژنان
+            </div>
+
+            <div class="product-description">
+                جلوبەرگی فاشن
+            </div>
+
+            <div class="price">
+                ٣٥,٠٠٠ د.ع
+            </div>
+
+            <button
+                class="add-cart"
+                onclick="addToCart()"
+            >
+                🛒 زیادکردن بۆ سەبەتە
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT 2 -->
+
+    <div
+        class="product"
+        data-category="new men"
+        data-name="جلوبەرگی پیاوان"
+    >
+
+        <div class="product-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=700&q=80"
+                alt="جلوبەرگی پیاوان"
+            >
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+                جلوبەرگی پیاوان
+            </div>
+
+            <div class="product-description">
+                دیزاینی نوێ
+            </div>
+
+            <div class="price">
+                ٤٢,٠٠٠ د.ع
+            </div>
+
+            <button
+                class="add-cart"
+                onclick="addToCart()"
+            >
+                🛒 زیادکردن بۆ سەبەتە
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT 3 -->
+
+    <div
+        class="product"
+        data-category="sale accessories"
+        data-name="چاویلکەی فاشن"
+    >
+
+        <div class="product-image">
+
+            <div class="sale">
+                داشکاندن
+            </div>
+
+            <img
+                src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80"
+                alt="چاویلکە"
+            >
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+                چاویلکەی فاشن
+            </div>
+
+            <div class="product-description">
+                بۆ ژنان و پیاوان
+            </div>
+
+            <div>
+
+                <span class="price">
+                    ١٥,٠٠٠ د.ع
+                </span>
+
+                <span class="old-price">
+                    ٢٥,٠٠٠
+                </span>
+
+            </div>
+
+            <button
+                class="add-cart"
+                onclick="addToCart()"
+            >
+                🛒 زیادکردن بۆ سەبەتە
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT 4 -->
+
+    <div
+        class="product"
+        data-category="new accessories"
+        data-name="جانتای ژنان"
+    >
+
+        <div class="product-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80"
+                alt="جانتای ژنان"
+            >
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+                جانتای ژنان
+            </div>
+
+            <div class="product-description">
+                جانتای فاشن
+            </div>
+
+            <div class="price">
+                ٢٨,٠٠٠ د.ع
+            </div>
+
+            <button
+                class="add-cart"
+                onclick="addToCart()"
+            >
+                🛒 زیادکردن بۆ سەبەتە
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT 5 -->
+
+    <div
+        class="product"
+        data-category="kids"
+        data-name="جلوبەرگی منداڵان"
+    >
+
+        <div class="product-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=700&q=80"
+                alt="جلوبەرگی منداڵان"
+            >
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+                جلوبەرگی منداڵان
+            </div>
+
+            <div class="product-description">
+                جلوبەرگی منداڵان
+            </div>
+
+            <div class="price">
+                ٢٢,٠٠٠ د.ع
+            </div>
+
+            <button
+                class="add-cart"
+                onclick="addToCart()"
+            >
+                🛒 زیادکردن بۆ سەبەتە
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT 6 -->
+
+    <div
+        class="product"
+        data-category="electronics"
+        data-name="هێدفۆن"
+    >
+
+        <div class="product-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80"
+                alt="هێدفۆن"
+            >
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+                هێدفۆنی بلوتوس
+            </div>
+
+            <div class="product-description">
+                کوالیتی بەرز
+            </div>
+
+            <div class="price">
+                ٣٨,٠٠٠ د.ع
+            </div>
+
+            <button
+                class="add-cart"
+                onclick="addToCart()"
+            >
+                🛒 زیادکردن بۆ سەبەتە
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="footer-logo">
+
+        <span class="logo-red">
+            Shein
+        </span>
+
+        Kurd
+
+    </div>
+
+    <p>
+        کورد شین - فرۆشتنی کاڵا بۆ کوردستان
     </p>
 
     <p style="margin-top:10px;">
-      © 2026 KurdShein
+        © 2026 KurdShein
     </p>
 
-  </footer>
+</footer>
 
 
-  <script>
+<!-- CART MESSAGE -->
 
-    function addToCart() {
-      alert("کاڵاکە زیادکرا بۆ سەبەتە 🛒");
+<div
+    class="cart-message"
+    id="cartMessage"
+>
+    ✅ کاڵاکە زیادکرا بۆ سەبەتە
+</div>
+
+
+<script>
+
+/* ================================
+   CART
+================================ */
+
+let cartCount = 0;
+
+function addToCart() {
+
+    cartCount++;
+
+    document.getElementById("cartCount").innerText =
+        cartCount;
+
+    const message =
+        document.getElementById("cartMessage");
+
+    message.classList.add("show");
+
+    setTimeout(function() {
+
+        message.classList.remove("show");
+
+    }, 1800);
+}
+
+
+function openCart() {
+
+    if (cartCount === 0) {
+
+        alert("سەبەتەکەت بەتاڵە 🛒");
+
+    } else {
+
+        alert(
+            "ژمارەی کاڵاکان: " +
+            cartCount
+        );
+
     }
 
-  </script>
+}
+
+
+/* ================================
+   CATEGORY FILTER
+================================ */
+
+function filterProducts(category, button) {
+
+    const products =
+        document.querySelectorAll(".product");
+
+    const buttons =
+        document.querySelectorAll(".category");
+
+    buttons.forEach(function(btn) {
+
+        btn.classList.remove("active");
+
+    });
+
+    button.classList.add("active");
+
+
+    const titles = {
+
+        new: "بابەتی نوێ",
+
+        sale: "داشکاندن",
+
+        men: "پیاوان",
+
+        women: "ئافرەتان",
+
+        kids: "منداڵان",
+
+        accessories: "ئەکسسوارات",
+
+        electronics: "ئەلکترۆنی"
+
+    };
+
+
+    document.getElementById("title").innerText =
+        titles[category];
+
+
+    products.forEach(function(product) {
+
+        const categories =
+            product.dataset.category;
+
+        if (categories.includes(category)) {
+
+            product.style.display = "block";
+
+        } else {
+
+            product.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* ================================
+   SEARCH
+================================ */
+
+function searchProducts() {
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const products =
+        document.querySelectorAll(".product");
+
+
+    products.forEach(function(product) {
+
+        const name =
+            product.dataset.name.toLowerCase();
+
+
+        if (
+            search === "" ||
+            name.includes(search)
+        ) {
+
+            product.style.display = "block";
+
+        } else {
+
+            product.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* ENTER = SEARCH */
+
+document
+.getElementById("searchInput")
+.addEventListener(
+    "keydown",
+    function(event) {
+
+ b       if (event.key === "Enter") {
+
+            searchProducts();
+
+        }
+
+    }
+);
+
+</script>
 
 </body>
 </html>

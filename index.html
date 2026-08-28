@@ -19,326 +19,299 @@
       padding: 0;
     }
 
+    :root {
+      --kurdish-red: #e41e26;
+      --kurdish-green: #278e43;
+      --kurdish-sun: #febd11;
+      --bg-dark: #0a0a0c;
+      --card-bg: #141418;
+      --border-color: #22222a;
+    }
+
     body {
-      background: #09090b;
+      background: var(--bg-dark);
       color: #ffffff;
       font-family: 'Rabar', sans-serif;
       font-weight: 700;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    /* --- Kurdish Flag Top Strip --- */
-    .kurdish-strip {
+    /* Top Kurdish Flag Ribbon */
+    .flag-header {
       display: flex;
-      height: 6px;
+      height: 4px;
       width: 100%;
     }
-    .strip-red { background: #e41e26; flex: 1; }
-    .strip-white { background: #ffffff; flex: 1; }
-    .strip-yellow { background: #febd11; flex: 0.5; }
-    .strip-white2 { background: #ffffff; flex: 1; }
-    .strip-green { background: #278e43; flex: 1; }
+    .flag-red { background: var(--kurdish-red); flex: 1; }
+    .flag-white { background: #ffffff; flex: 1; }
+    .flag-green { background: var(--kurdish-green); flex: 1; }
 
-    /* Top Announcement Bar */
-    .top-banner {
-      background: #121215;
-      padding: 8px 15px;
-      text-align: center;
-      font-size: 13px;
-      border-bottom: 1px solid #22222a;
-      color: #e4e4e7;
-    }
-
-    .top-banner span {
-      color: #febd11;
-    }
-
-    /* Main Navigation Header */
+    /* Sticky Navigation Header */
     header {
-      padding: 14px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #121215;
-      border-bottom: 1px solid #27272a;
       position: sticky;
       top: 0;
       z-index: 100;
+      background: rgba(20, 20, 24, 0.85);
+      backdrop-filter: blur(12px);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
     }
 
-    /* Logo with Kurdish Red Accent */
     .logo {
-      font-size: 24px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.5px;
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo .sun {
+      color: var(--kurdish-sun);
+      font-size: 20px;
     }
 
     .logo span {
-      color: #e41e26;
+      color: var(--kurdish-red);
     }
 
-    /* Cart Icon */
-    .cart {
-      font-size: 22px;
-      cursor: pointer;
-      background: #18181b;
-      padding: 8px 12px;
-      border-radius: 12px;
-      border: 1px solid #27272a;
-    }
-
-    /* Search Bar Styling */
-    .search-container {
-      display: flex;
-      align-items: center;
+    /* Integrated Modern Search Bar */
+    .search-wrapper {
+      position: relative;
       flex-grow: 1;
-      max-width: 350px;
+      max-width: 320px;
       margin: 0 12px;
-      background: #18181b;
-      border: 1px solid #27272a;
-      border-radius: 25px;
-      padding: 4px 6px 4px 14px;
-      transition: border-color 0.2s;
     }
 
-    .search-container:focus-within {
-      border-color: #febd11;
-    }
-
-    .search-container input {
+    .search-wrapper input {
       width: 100%;
-      background: transparent;
-      border: none;
+      background: #1c1c22;
+      border: 1px solid var(--border-color);
+      padding: 8px 14px 8px 36px;
+      border-radius: 30px;
       color: #fff;
-      outline: none;
       font-family: inherit;
-      font-size: 14px;
+      font-size: 13px;
+      outline: none;
+      transition: all 0.2s ease;
       text-align: right;
     }
 
-    .search-container input::placeholder {
-      color: #71717a;
+    .search-wrapper input:focus {
+      border-color: var(--kurdish-sun);
+      box-shadow: 0 0 10px rgba(254, 189, 17, 0.2);
     }
 
-    .search-container button {
-      background: #e41e26;
-      border: none;
-      color: #fff;
+    .search-wrapper .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 13px;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .cart-btn {
+      background: #1c1c22;
+      border: 1px solid var(--border-color);
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      width: 32px;
-      height: 32px;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 18px;
       cursor: pointer;
-      font-size: 14px;
-      flex-shrink: 0;
     }
 
-    /* Horizontal Category Scroll Bar */
-    .categories {
-      display: flex;
-      gap: 10px;
+    /* Floating Category Chips */
+    .categories-wrapper {
+      padding: 15px 20px;
       overflow-x: auto;
-      padding: 14px 18px;
-      background: #09090b;
-      border-bottom: 1px solid #18181b;
+      white-space: nowrap;
+      display: flex;
+      gap: 8px;
+      border-bottom: 1px solid var(--border-color);
+      background: #0e0e12;
     }
 
-    .categories::-webkit-scrollbar {
+    .categories-wrapper::-webkit-scrollbar {
       display: none;
     }
 
-    .category {
-      background: #18181b;
-      color: #a1a1aa;
-      border: 1px solid #27272a;
+    .category-btn {
+      background: #1c1c22;
+      color: #a0a0ab;
+      border: 1px solid var(--border-color);
       padding: 8px 16px;
       border-radius: 20px;
-      white-space: nowrap;
       cursor: pointer;
       font-family: inherit;
-      font-size: 14px;
+      font-size: 13px;
       transition: all 0.2s ease;
     }
 
-    .category:hover, .category.active {
-      background: #278e43;
-      border-color: #278e43;
-      color: #ffffff;
+    .category-btn:hover, .category-btn.active {
+      background: var(--kurdish-green);
+      border-color: var(--kurdish-green);
+      color: #fff;
     }
 
-    /* Hero Section with Kurdish Sun Motif */
-    .hero {
-      padding: 35px 20px;
+    /* Hero Banner Area */
+    .hero-banner {
+      margin: 15px 20px 0;
+      padding: 30px 20px;
+      background: linear-gradient(135deg, #181409 0%, #0e0e12 100%);
+      border: 1px solid rgba(254, 189, 17, 0.15);
+      border-radius: 16px;
       text-align: center;
-      background: radial-gradient(circle at top, #241c07 0%, #09090b 80%);
-      border-bottom: 1px solid #18181b;
     }
 
-    .sun-badge {
-      display: inline-block;
-      font-size: 32px;
-      margin-bottom: 8px;
-      filter: drop-shadow(0 0 10px rgba(254, 189, 17, 0.5));
-    }
-
-    .hero h1 {
-      font-size: 28px;
-      color: #ffffff;
+    .hero-banner h1 {
+      font-size: 26px;
       margin-bottom: 6px;
+      color: #ffffff;
     }
 
-    .hero p {
-      color: #febd11;
+    .hero-banner p {
+      color: var(--kurdish-sun);
       font-size: 14px;
     }
 
-    /* Products Grid */
-    .products {
+    /* Product Grid Layout */
+    .products-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      padding: 16px;
+      gap: 12px;
+      padding: 20px;
     }
 
-    .product {
-      background: #121215;
-      border: 1px solid #27272a;
+    .product-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
       border-radius: 14px;
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
       transition: transform 0.2s, border-color 0.2s;
     }
 
-    .product:hover {
-      border-color: #febd11;
-      transform: translateY(-3px);
+    .product-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--kurdish-sun);
     }
 
-    .product img {
+    .product-card img {
       width: 100%;
-      height: 210px;
+      height: 200px;
       object-fit: cover;
-      background: #18181b;
+      background: #1a1a20;
     }
 
-    .product-info {
+    .product-details {
       padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
 
-    .product-name {
+    .product-title {
       font-size: 14px;
-      margin-bottom: 8px;
-      color: #f4f4f5;
+      color: #f0f0f5;
     }
 
-    .price {
+    .product-price {
+      font-size: 15px;
+      color: var(--kurdish-green);
       font-weight: 800;
-      font-size: 16px;
-      color: #278e43;
     }
 
-    .stock {
-      color: #71717a;
-      font-size: 12px;
-      margin-top: 4px;
+    .product-stock {
+      font-size: 11px;
+      color: #80808e;
     }
 
-    /* Footer Section */
+    /* Custom Kurdish Footer */
     footer {
+      margin-top: auto;
+      padding: 30px 20px;
+      background: #0e0e12;
+      border-top: 1px solid var(--border-color);
       text-align: center;
-      padding: 35px 20px;
-      color: #71717a;
-      background: #121215;
-      border-top: 1px solid #27272a;
-      margin-top: 30px;
-      font-size: 13px;
+      color: #666675;
+      font-size: 12px;
     }
 
     .footer-sun {
-      color: #febd11;
-      font-size: 20px;
+      font-size: 22px;
       margin-bottom: 8px;
-    }
-
-    @media (max-width: 500px) {
-      header {
-        padding: 10px 12px;
-      }
-      .logo {
-        font-size: 20px;
-      }
-      .search-container {
-        margin: 0 6px;
-      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Kurdish Flag Top Bar -->
-  <div class="kurdish-strip">
-    <div class="strip-red"></div>
-    <div class="strip-white"></div>
-    <div class="strip-yellow"></div>
-    <div class="strip-white2"></div>
-    <div class="strip-green"></div>
-  </div>
-
-  <!-- Announcement Bar -->
-  <div class="top-banner">
-    بەخێربێن بۆ فرۆشگای <span>کوردشین</span> ☀️
+  <!-- Kurdish Flag Accent Strip -->
+  <div class="flag-header">
+    <div class="flag-red"></div>
+    <div class="flag-white"></div>
+    <div class="flag-green"></div>
   </div>
 
   <!-- Header -->
   <header>
-    <div class="logo">Kurd<span>Shein</span></div>
-
-    <!-- Search Bar in Header -->
-    <div class="search-container">
-      <input type="text" id="search-input" placeholder="گەڕان...">
-      <button type="button">🔍</button>
+    <div class="logo">
+      <span class="sun">☀️</span> Kurd<span>Shein</span>
     </div>
 
-    <div class="cart">🛒</div>
+    <div class="search-wrapper">
+      <input type="text" id="search-input" placeholder="گەڕان...">
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <div class="cart-btn">🛒</div>
   </header>
 
-  <!-- Categories -->
-  <div class="categories">
-    <button class="category active" data-category="all">هەمووی 🛍️</button>
-    <button class="category" data-category="new">بابەتی نوێ🔥</button>
-    <button class="category">گشتی📦</button>
-    <button class="category">ئەکسسوارات💍</button>
-    <button class="category">پیاوان🤵🏻‍♂️</button>
-    <button class="category">ئافرەتان💁🏼‍♀️</button>
-    <button class="category">ئەلکترۆنیات🪫</button>
+  <!-- Categories Scrollbar -->
+  <div class="categories-wrapper">
+    <button class="category-btn active" data-category="all">هەمووی 🛍️</button>
+    <button class="category-btn" data-category="new">بابەتی نوێ🔥</button>
+    <button class="category-btn">گشتی📦</button>
+    <button class="category-btn">ئەکسسوارات💍</button>
+    <button class="category-btn">پیاوان🤵🏻‍♂️</button>
+    <button class="category-btn">ئافرەتان💁🏼‍♀️</button>
+    <button class="category-btn">ئەلکترۆنیات🪫</button>
   </div>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="sun-badge">☀️</div>
+  <div class="hero-banner">
     <h1>Shop KurdShein</h1>
-    <p>باشترین و نوێترین بەرهەمەکانی لێرە ببینە</p>
-  </section>
+    <p>نوێترین بەرهەمەکان لێرە دەستبکەوە</p>
+  </div>
 
-  <!-- Products Container -->
-  <section class="products">
+  <!-- Products Grid -->
+  <section class="products-grid">
 
-    <div class="product" data-category="new">
+    <div class="product-card" data-category="new">
       <img src="./IMG_1707.jpeg" alt="چاویلەی دژە رۆژ">
-      <div class="product-info">
-        <div class="product-name">چاویلەی دژە رۆژ</div>
-        <div class="price">3000 IQD</div>
+      <div class="product-details">
+        <div class="product-title">چاویلەی دژە رۆژ</div>
+        <div class="product-price">3000 IQD</div>
       </div>
     </div>
 
-    <div class="product">
+    <div class="product-card">
       <img src="https://placehold.co/600x800/222/fff?text=Product+2" alt="Product 2">
-      <div class="product-info">
-        <div class="product-name">Product Name</div>
-        <div class="price">$15.00</div>
-        <div class="stock">Stock: 5</div>
+      <div class="product-details">
+        <div class="product-title">Product Name</div>
+        <div class="product-price">$15.00</div>
+        <div class="product-stock">Stock: 5</div>
       </div>
     </div>
 
@@ -347,13 +320,13 @@
   <!-- Footer -->
   <footer>
     <div class="footer-sun">☀️</div>
-    <p>© 2026 KurdShein. هەموو مافەکانی پارێزراوە.</p>
+    <p>© 2026 KurdShein - هەموو مافەکانی پارێزراوە</p>
   </footer>
 
 <script>
-// Category Filter Function
-const categoryButtons = document.querySelectorAll('.category');
-const products = document.querySelectorAll('.product');
+// Category Filter Logic
+const categoryButtons = document.querySelectorAll('.category-btn');
+const products = document.querySelectorAll('.product-card');
 
 categoryButtons.forEach(button => {
   button.addEventListener('click', () => {
@@ -372,14 +345,14 @@ categoryButtons.forEach(button => {
   });
 });
 
-// Live Search Filter Function
+// Search Bar Filter Logic
 const searchInput = document.getElementById('search-input');
 
 searchInput.addEventListener('input', () => {
   const query = searchInput.value.toLowerCase().trim();
 
   products.forEach(product => {
-    const productName = product.querySelector('.product-name').textContent.toLowerCase();
+    const productName = product.querySelector('.product-title').textContent.toLowerCase();
     
     if (productName.includes(query)) {
       product.style.display = '';

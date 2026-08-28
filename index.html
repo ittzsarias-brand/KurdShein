@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kmr" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KurdShein</title>
+  <title>KurdShein | کوردشین</title>
 
   <style>
     @font-face {
@@ -12,6 +12,7 @@
       font-weight: 700;
       font-style: normal;
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -19,119 +20,183 @@
     }
 
     body {
-      background: #000;
+      background: #0d0d0d;
       color: #fff;
       font-family: 'Rabar', sans-serif;
       font-weight: 700;
     }
 
+    /* Top Flag Stripe (Kurdish Flag Colors) */
+    .flag-bar {
+      height: 5px;
+      width: 100%;
+      background: linear-gradient(to right, #e41e26 33%, #ffffff 33%, #ffffff 66%, #278e43 66%);
+    }
+
+    /* Top Announcement Banner */
     .top-banner {
-      background: #111;
-      padding: 12px;
+      background: #161616;
+      padding: 10px;
       text-align: center;
       font-size: 14px;
-      border-bottom: 1px solid #333;
+      border-bottom: 1px solid #282828;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
-    .flag {
-      margin-right: 8px;
+    .top-banner .sun-icon {
+      color: #febd11;
+      font-size: 16px;
     }
 
+    /* Main Header Layout */
     header {
-      padding: 18px 20px;
+      padding: 16px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid #222;
+      background: #121212;
+      border-bottom: 2px solid #278e43;
     }
 
     .logo {
-      font-size: 25px;
+      font-size: 26px;
       font-weight: bold;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: #e41e26;
     }
 
     .cart {
       font-size: 24px;
+      cursor: pointer;
+      position: relative;
     }
 
-    /* --- SEARCH BAR STYLES --- */
+    /* Kurdish Flag-Themed Search Bar */
     .search-container {
       display: flex;
       flex-grow: 1;
-      max-width: 300px;
+      max-width: 380px;
       margin: 0 15px;
     }
 
     .search-container input {
       width: 100%;
-      padding: 6px 12px;
-      border-radius: 20px 0 0 20px;
+      padding: 8px 14px;
+      border-radius: 0 25px 25px 0;
       border: 1px solid #333;
+      border-left: none;
       background-color: #1a1a1a;
       color: #fff;
       outline: none;
       font-family: inherit;
+      text-align: right;
+    }
+
+    .search-container input::placeholder {
+      color: #888;
     }
 
     .search-container button {
-      padding: 6px 12px;
-      border-radius: 0 20px 20px 0;
-      border: 1px solid #333;
-      border-left: none;
-      background-color: #222;
+      padding: 8px 16px;
+      border-radius: 25px 0 0 25px;
+      border: 1px solid #e41e26;
+      background-color: #e41e26;
       color: #fff;
       cursor: pointer;
+      font-size: 15px;
+      transition: background 0.2s;
     }
-    /* ------------------------- */
 
+    .search-container button:hover {
+      background-color: #c01820;
+    }
+
+    /* Category Buttons */
     .categories {
       display: flex;
       gap: 10px;
       overflow-x: auto;
       padding: 15px;
+      background: #111;
       border-bottom: 1px solid #222;
     }
 
+    .categories::-webkit-scrollbar {
+      display: none;
+    }
+
     .category {
-      background: #1a1a1a;
-      color: white;
+      background: #1c1c1c;
+      color: #fff;
       border: 1px solid #333;
-      padding: 10px 18px;
+      padding: 9px 18px;
       border-radius: 20px;
       white-space: nowrap;
       cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
     }
 
-    .category:hover {
-      background: white;
-      color: black;
+    .category:hover, .category.active {
+      background: #278e43;
+      border-color: #278e43;
+      color: #fff;
     }
 
+    /* Hero Banner with Sun Motif */
     .hero {
-      padding: 35px 20px;
+      padding: 40px 20px;
       text-align: center;
+      background: radial-gradient(circle at center, #221a05 0%, #0d0d0d 70%);
+      border-bottom: 1px solid #222;
+    }
+
+    .hero-sun {
+      font-size: 36px;
+      color: #febd11;
+      margin-bottom: 8px;
     }
 
     .hero h1 {
       font-size: 32px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      color: #fff;
     }
 
     .hero p {
-      color: #aaa;
+      color: #febd11;
+      font-size: 15px;
     }
 
+    /* Product Grid & Cards */
     .products {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      gap: 14px;
       padding: 15px;
     }
 
     .product {
-      background: #111;
-      border: 1px solid #222;
+      background: #141414;
+      border: 1px solid #262626;
+      border-radius: 12px;
       overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .product:hover {
+      border-color: #febd11;
+      transform: translateY(-2px);
     }
 
     .product img {
@@ -148,62 +213,98 @@
     .product-name {
       font-size: 15px;
       margin-bottom: 8px;
+      color: #eee;
     }
 
     .price {
       font-weight: bold;
       font-size: 17px;
+      color: #febd11;
     }
 
     .stock {
-      color: #999;
+      color: #888;
       font-size: 12px;
       margin-top: 5px;
     }
 
+    /* Kurdish Flag-Themed Footer */
     footer {
       text-align: center;
-      padding: 40px 20px;
-      color: #777;
-      border-top: 1px solid #222;
-      margin-top: 30px;
+      padding: 40px 20px 25px;
+      color: #888;
+      background: #111;
+      border-top: 2px solid #e41e26;
+      margin-top: 40px;
+    }
+
+    .footer-flag {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 12px;
+      font-size: 20px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 12px 15px;
+      }
+      .logo {
+        font-size: 20px;
+      }
+      .search-container {
+        margin: 0 8px;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- Top Kurdish Flag Color Stripe -->
+  <div class="flag-bar"></div>
+
+  <!-- Top Announcement Banner -->
   <div class="top-banner">
-    <span class="flag">🇹🇯</span>
-    KURDSHEIN
+    <span class="sun-icon">☀️</span>
+    <span>بەخێربێن بۆ فرۆشگای کوردشین</span>
+    <span class="sun-icon">☀️</span>
   </div>
 
+  <!-- Header Section -->
   <header>
-    <div class="logo">KURDSHEIN</div>
-    
-    <!-- SEARCH BAR ADDED HERE -->
+    <div class="logo">Kurd<span>Shein</span></div>
+
+    <!-- Search Bar Container -->
     <div class="search-container">
-      <input type="text" placeholder="گەڕان...">
+      <input type="text" id="search-input" placeholder="گەڕان بۆ بەرهەمەکان...">
       <button type="button">🔍</button>
     </div>
 
     <div class="cart">🛒</div>
   </header>
 
+  <!-- Categories Section -->
   <div class="categories">
-    <button class="category" data-category="new">🔥بابەتی نوێ</button>
-    <button class="category">📦گشتی</button>
-    <button class="category">💍ئەکسسوارات</button>
-    <button class="category">🤵🏻‍♂️پیاوان</button>
-    <button class="category">💁🏼‍♀️ئافرەتان</button>
-    <button class="category">🪫ئەلکترۆنیات</button>
+    <button class="category active" data-category="all">هەمووی 🛍️</button>
+    <button class="category" data-category="new">بابەتی نوێ🔥</button>
+    <button class="category">گشتی📦</button>
+    <button class="category">ئەکسسوارات💍</button>
+    <button class="category">پیاوان🤵🏻‍♂️</button>
+    <button class="category">ئافرەتان💁🏼‍♀️</button>
+    <button class="category">ئەلکترۆنیات🪫</button>
   </div>
 
+  <!-- Hero Section -->
   <section class="hero">
-    <h1>بازاری کردن لە کورد شیێن ئاسانترە</h1>
-    <p>!! ئێستا بازاڕی بکە !!</p>
+    <div class="hero-sun">☀️</div>
+    <h1>Shop KurdShein</h1>
+    <p>نوێترین و باشترین بەرهەمەکان لێرە دەستبکەوە</p>
   </section>
 
+  <!-- Products Section -->
   <section class="products">
 
     <div class="product" data-category="new">
@@ -215,7 +316,7 @@
     </div>
 
     <div class="product">
-      <img src="https://placehold.co/600x800/222/fff?text=Product+2">
+      <img src="https://placehold.co/600x800/222/fff?text=Product+2" alt="Product 2">
       <div class="product-info">
         <div class="product-name">Product Name</div>
         <div class="price">$15.00</div>
@@ -225,29 +326,50 @@
 
   </section>
 
+  <!-- Footer -->
   <footer>
-    © 2026 KurdShein
+    <div class="footer-flag">
+      <span>🔴</span><span>⚪</span><span>☀️</span><span>⚪</span><span>🟢</span>
+    </div>
+    <p>© 2026 KurdShein - سەرجەم مافەکانی پارێزراوە</p>
   </footer>
 
 <script>
+// Category Filtering
 const categoryButtons = document.querySelectorAll('.category');
 const products = document.querySelectorAll('.product');
 
 categoryButtons.forEach(button => {
   button.addEventListener('click', () => {
+    categoryButtons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
 
     const category = button.dataset.category;
 
     products.forEach(product => {
-      if (category === 'new') {
-        if (product.dataset.category === 'new') {
-          product.style.display = '';
-        } else {
-          product.style.display = 'none';
-        }
+      if (!category || category === 'all') {
+        product.style.display = '';
+      } else if (category === 'new') {
+        product.style.display = product.dataset.category === 'new' ? '' : 'none';
       }
     });
+  });
+});
 
+// Live Search Bar Filtering
+const searchInput = document.getElementById('search-input');
+
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase().trim();
+
+  products.forEach(product => {
+    const productName = product.querySelector('.product-name').textContent.toLowerCase();
+    
+    if (productName.includes(query)) {
+      product.style.display = '';
+    } else {
+      product.style.display = 'none';
+    }
   });
 });
 </script>

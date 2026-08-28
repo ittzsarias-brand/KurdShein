@@ -1,205 +1,190 @@
 <!DOCTYPE html>
-<html lang="ckb" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kurd Shein | Sarias </title>
-    <style>
-        :root {
-            --bg-color: #121212;
-            --surface-color: #1e1e1e;
-            --card-bg: #282828;
-            --text-color: #f5f5f5;
-            --text-secondary: #b3b3b3;
-            --kurd-red: #E4002B;
-            --kurd-white: #FFFFFF;
-            --kurd-green: #008751;
-            --kurd-yellow: #FFC72C;
-            --border-color: #333333;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KurdShein</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            text-align: right;
-        }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
 
-        .top-bar {
-            background: linear-gradient(90deg, var(--kurd-red) 0%, var(--kurd-white) 50%, var(--kurd-green) 100%);
-            color: #000;
-            text-align: center;
-            padding: 6px;
-            font-size: 14px;
-            font-weight: bold;
-        }
+    .top-banner {
+      background: #111;
+      padding: 12px;
+      text-align: center;
+      font-size: 14px;
+      border-bottom: 1px solid #333;
+    }
 
-        header {
-            background-color: var(--surface-color);
-            border-bottom: 2px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+    .flag {
+      margin-right: 8px;
+    }
 
-        .header-main {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-        }
+    header {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #222;
+    }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-        }
+    .logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
 
-        .logo-text {
-            font-size: 28px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            background: linear-gradient(45deg, var(--kurd-red), var(--kurd-yellow), var(--kurd-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+    .cart {
+      font-size: 24px;
+    }
 
-        .sun-icon {
-            color: var(--kurd-yellow);
-            font-size: 24px;
-        }
+    .categories {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding: 15px;
+      border-bottom: 1px solid #222;
+    }
 
-        .search-bar {
-            flex: 1;
-            max-width: 500px;
-            margin: 0 20px;
-            display: flex;
-        }
+    .category {
+      background: #1a1a1a;
+      color: white;
+      border: 1px solid #333;
+      padding: 10px 18px;
+      border-radius: 20px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
 
-        .search-bar input {
-            width: 100%;
-            padding: 10px 15px;
-            border-radius: 0 20px 20px 0;
-            border: 1px solid var(--border-color);
-            background-color: #2b2b2b;
-            color: var(--text-color);
-            outline: none;
-        }
+    .category:hover {
+      background: white;
+      color: black;
+    }
 
-        .search-bar button {
-            padding: 10px 20px;
-            border-radius: 20px 0 0 20px;
-            border: none;
-            background-color: var(--kurd-green);
-            color: var(--kurd-white);
-            cursor: pointer;
-            font-weight: bold;
-        }
+    .hero {
+      padding: 35px 20px;
+      text-align: center;
+    }
 
-        .user-actions {
-            display: flex;
-            gap: 20px;
-            font-size: 14px;
-        }
+    .hero h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
 
-        .user-actions button {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
-            font-size: 15px;
-        }
+    .hero p {
+      color: #aaa;
+    }
 
-        .cart-count {
-            background-color: var(--kurd-red);
-            color: white;
-            border-radius: 50%;
-            padding: 2px 7px;
-            font-size: 12px;
-            margin-right: 4px;
-        }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      padding: 15px;
+    }
 
-        nav {
-            background-color: #181818;
-            border-top: 1px solid var(--border-color);
-        }
+    .product {
+      background: #111;
+      border: 1px solid #222;
+      overflow: hidden;
+    }
 
-        .nav-links {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            padding: 12px 0;
-            gap: 30px;
-        }
+    .product img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      background: #222;
+    }
 
-        .nav-links a {
-            color: var(--text-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s;
-            cursor: pointer;
-        }
+    .product-info {
+      padding: 12px;
+    }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--kurd-yellow);
-        }
+    .product-name {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
 
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200') center/cover;
-            height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border-bottom: 3px solid var(--kurd-red);
-        }
+    .price {
+      font-weight: bold;
+      font-size: 17px;
+    }
 
-        .hero h1 {
-            font-size: 40px;
-            margin-bottom: 10px;
-            color: var(--kurd-white);
-        }
+    .stock {
+      color: #999;
+      font-size: 12px;
+      margin-top: 5px;
+    }
 
-        .hero p {
-            font-size: 18px;
-            color: var(--kurd-yellow);
-            margin-bottom: 20px;
-        }
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #777;
+      border-top: 1px solid #222;
+      margin-top: 30px;
+    }
+  </style>
+</head>
 
-        .shop-btn {
-            background-color: var(--kurd-red);
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            border: none;
-        }
+<body>
 
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
+  <div class="top-banner">
+    <span class="flag">🇹🇯</span>
+    Welcome to KurdShein
+  </div>
 
-        .section-title {
-            font-size: 24px;
-            margin-bottom: 20px;
-            border-right: 4px solid var(--kurd-green);
-            padding-right: 10px;
-        }
+  <header>
+    <div class="logo">KurdShein</div>
+    <div class="cart">🛒</div>
+  </header>
 
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
-        }
+  <div class="categories">
+    <button class="category">All</button>
+    <button class="category">Women</button>
+    <button class="category">Men</button>
+    <button class="category">Kids</button>
+    <button class="category">Beauty</button>
+    <button class="category">Accessories</button>
+  </div>
+
+  <section class="hero">
+    <h1>Shop KurdShein</h1>
+    <p>Discover our latest products</p>
+  </section>
+
+  <section class="products">
+
+    <div class="product">
+      <img src="https://placehold.co/600x800/222/fff?text=Product+1">
+      <div class="product-info">
+        <div class="product-name">Product Name</div>
+        <div class="price">$10.00</div>
+        <div class="stock">Stock: 10</div>
+      </div>
+    </div>
+
+    <div class="product">
+      <img src="https://placehold.co/600x800/222/fff?text=Product+2">
+      <div class="product-info">
+        <div class="product-name">Product Name</div>
+        <div class="price">$15.00</div>
+        <div class="stock">Stock: 5</div>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 KurdShein
+  </footer>
+
+</body>
+</html>

@@ -2574,6 +2574,134 @@ window.openProduct = function openProduct(product) {
 
     selectedProduct = product;
 
+    const images =
+        product.dataset.images
+        .split("|")
+        .filter(Boolean);
+
+    const main =
+        document.getElementById("mainProductImage");
+
+    main.src =
+        images[0];
+
+    const thumbnails =
+        document.getElementById("productThumbnails");
+
+    thumbnails.innerHTML = "";
+
+    images
+        .slice(0,6)
+        .forEach((src,index) => {
+
+            const img =
+                document.createElement("img");
+
+            img.src = src;
+
+            if (index === 0) {
+
+                img.classList.add("selected");
+
+            }
+
+            img.onclick = () => {
+
+                main.src = src;
+
+                thumbnails
+                    .querySelectorAll("img")
+                    .forEach(x =>
+                        x.classList.remove("selected")
+                    );
+
+                img.classList.add("selected");
+
+            };
+
+            thumbnails.appendChild(img);
+
+        });
+
+
+    document.getElementById("detailName").innerText =
+        product.dataset.name;
+
+
+    document.getElementById("detailDescription").innerText =
+        product.dataset.description;
+
+
+    // Parse prices separated by "|"
+    const rawPrices = (product.dataset.price || "0").split("|");
+    const prices = rawPrices.map(p => Number(p.trim()) || 0);
+
+    // Default to first price
+    let activePrice = prices[0];
+
+    document.getElementById("detailPrice").innerText =
+        activePrice.toLocaleString("ar-IQ") + " د.ع";
+
+
+    // Render Sizes with Dynamic Price Updates
+    const sizes = product.dataset.sizes ? product.dataset.sizes.split(",").filter(Boolean) : [];
+    const sizeContainer = document.getElementById("sizeOptions");
+    sizeContainer.innerHTML = "";
+
+    selectedSize = sizes[0] || "";
+
+    sizes.forEach((value, index) => {
+
+        const button = document.createElement("button");
+        button.className = "option-button" + (index === 0 ? " selected" : "");
+        button.innerText = value;
+
+        button.onclick = () => {
+
+            sizeContainer
+                .querySelectorAll("button")
+                .forEach(btn => btn.classList.remove("selected"));
+
+            button.classList.add("selected");
+            selectedSize = value;
+
+            // Update price based on selected size index
+            activePrice = prices[index] !== undefined ? prices[index] : prices[0];
+            selectedProduct.currentActivePrice = activePrice;
+
+            document.getElementById("detailPrice").innerText =
+                activePrice.toLocaleString("ar-IQ") + " د.ع";
+        };
+
+        sizeContainer.appendChild(button);
+    });
+
+    // Save initial selected price on the product object
+    selectedProduct.currentActivePrice = activePrice;
+
+
+    // Render Colors
+    createOptions(
+        "colorOptions",
+        product.dataset.colors,
+        "color"
+    );
+
+
+    document.getElementById("detailSizeArea").style.display =
+        product.dataset.sizes ? "block" : "none";
+
+    document.getElementById("detailColorArea").style.display =
+        product.dataset.colors ? "block" : "none";
+
+
+    openModal("productModal");
+
+}
+
+
+    selectedProduct = product;
+
     selectedSize = "";
 
     selectedColor = "";

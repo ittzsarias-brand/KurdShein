@@ -73,8 +73,6 @@ body {
 
     margin: 0;
 
-    /* KURDISTAN FLAG COLORS */
-
     background: linear-gradient(
         to bottom,
         #e21b23 0%,
@@ -360,57 +358,6 @@ header {
 }
 
 
-/* ================= WELCOME MESSAGE ================= */
-
-.welcome {
-    width: fit-content;
-
-    margin: 25px auto 30px;
-
-    padding: 8px 25px;
-
-    border-radius: 20px;
-
-    background: #17191d;
-
-    border: 1px solid #292c32;
-
-    color: #ddd;
-
-    font-size: 17px;
-
-    position: relative;
-
-    overflow: hidden;
-
-    text-align: center;
-}
-
-.welcome::before {
-    content: "";
-
-    position: absolute;
-
-    right: 0;
-    top: 0;
-
-    width: 4px;
-    height: 100%;
-
-    background: linear-gradient(
-        to bottom,
-        #e21b23 0%,
-        #e21b23 33%,
-
-        white 33%,
-        white 66%,
-
-        #169447 66%,
-        #169447 100%
-    );
-}
-
-
 /* ================= PRODUCTS ================= */
 
 .products {
@@ -623,10 +570,6 @@ footer {
     font-size: 14px;
 }
 
-.cart-message.show {
-    transform: translate(-50%, 0);
-}
-
 
 /* ================= CART MODAL ================= */
 
@@ -796,16 +739,6 @@ footer {
         white-space: nowrap;
     }
 
-    .welcome {
-        margin-top: 20px;
-
-        margin-bottom: 25px;
-
-        font-size: 15px;
-
-        padding: 7px 20px;
-    }
-
     .products {
         grid-template-columns: repeat(2, 1fr);
 
@@ -875,7 +808,7 @@ footer {
 </div>
 
 
-<!-- ================= BIG KURDSHEIN MOVED TO TOP ================= -->
+<!-- ================= BIG KURDSHEIN ================= -->
 
 <div class="top-logo">
 
@@ -994,21 +927,6 @@ footer {
     >
         ئەلکترۆنی
     </button>
-
-</div>
-
-
-<!-- ================= WELCOME MOVED DOWN ================= -->
-
-<div class="welcome">
-
-    ☀️
-
-    <span>
-        بەخێربێیت بۆ کورد شیئێن
-    </span>
-
-    ☀️
 
 </div>
 
@@ -1543,25 +1461,6 @@ function filterProducts(category, button) {
 
 
     button.classList.add("active");
-
-
-    const titles = {
-
-        new: "بابەتی نوێ",
-
-        sale: "داشکاندن",
-
-        men: "پیاوان",
-
-        women: "ئافرەتان",
-
-        kids: "منداڵان",
-
-        accessories: "ئەکسسوارات",
-
-        electronics: "ئەلکترۆنی"
-
-    };
 
 
     products.forEach(function(product) {

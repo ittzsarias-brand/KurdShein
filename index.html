@@ -24,97 +24,43 @@
     --bg: #08090c;
     --header: #0b0d11;
     --card: #15171b;
-    --card2: #202227;
+    --secondary: #202227;
     --border: #30333a;
     --text: white;
     --muted: #85878c;
-    --yellow: #ffd000;
     --red: #e90012;
     --green: #159447;
+    --yellow: #ffd000;
 }
 
 body {
     background: var(--bg);
     color: var(--text);
     font-family: "Rabar", Arial, sans-serif;
-    transition: background 0.3s, color 0.3s;
+    transition: 0.3s;
 }
 
-/* ================= BRIGHT MODE ================= */
-
-body.bright {
+body.light-mode {
     --bg: #f5f5f5;
     --header: #ffffff;
     --card: #ffffff;
-    --card2: #eeeeee;
+    --secondary: #eeeeee;
     --border: #d5d5d5;
     --text: #111111;
     --muted: #666666;
 }
 
-body.bright .top-bar {
-    background: #eeeeee;
-}
-
-body.bright .top-logo {
-    background: #ffffff;
-}
-
-body.bright header {
-    background: #ffffff;
-}
-
-body.bright .search {
-    background: #f0f0f0;
-}
-
-body.bright .search input {
-    color: #111;
-}
-
-body.bright .category {
-    background: #e8e8e8;
-    color: #111;
-}
-
-body.bright .product {
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-}
-
-body.bright .product-modal,
-body.bright .cart-modal {
-    background: rgba(0,0,0,0.55);
-}
-
-body.bright .product-box,
-body.bright .cart-box {
-    background: #ffffff;
-    color: #111;
-}
-
-body.bright .size-button,
-body.bright .color-button,
-body.bright .product-modal-close {
-    background: #eeeeee;
-    color: #111;
-}
-
-body.bright footer {
-    background: #eeeeee;
-    color: #666;
-}
 
 /* ================= TOP BAR ================= */
 
 .top-bar {
     min-height: 40px;
-    background: #111318;
+    background: var(--header);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid #272a30;
+    border-bottom: 1px solid var(--border);
     font-size: 14px;
-    transition: 0.3s;
 }
 
 .top-bar-text {
@@ -124,13 +70,14 @@ body.bright footer {
     gap: 9px;
 }
 
+
 /* ================= BIG LOGO ================= */
 
 .top-logo {
     text-align: center;
     padding: 10px 15px 8px;
-    background: #0b0d11;
-    border-bottom: 1px solid #292c32;
+    background: var(--header);
+    border-bottom: 1px solid var(--border);
 }
 
 .top-logo h1 {
@@ -169,6 +116,7 @@ body.bright footer {
     position: absolute;
     left: 50%;
     top: 50%;
+
     transform: translate(-50%, -50%);
 
     font-family: Arial, sans-serif;
@@ -187,18 +135,19 @@ body.bright footer {
     z-index: 5;
 }
 
+
 /* ================= HEADER ================= */
 
 header {
-    background: #0b0d11;
+    background: var(--header);
     min-height: 82px;
     padding: 12px 30px;
 
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 15px;
 
-    border-bottom: 1px solid #292c32;
+    border-bottom: 1px solid var(--border);
 }
 
 .logo {
@@ -215,6 +164,7 @@ header {
     color: var(--text);
 }
 
+
 /* ================= SEARCH ================= */
 
 .search-container {
@@ -230,35 +180,40 @@ header {
 
     display: flex;
 
-    background: #17191e;
-    border: 1px solid #3a3d44;
+    background: var(--secondary);
+    border: 1px solid var(--border);
     border-radius: 25px;
     overflow: hidden;
 }
 
 .search input {
     flex: 1;
+
     border: none;
     outline: none;
+
     background: transparent;
-    color: white;
+    color: var(--text);
 
     padding: 0 20px;
 
     font-family: "Rabar", Arial, sans-serif;
     font-size: 15px;
+
     text-align: right;
 }
 
 .search input::placeholder {
-    color: #85878c;
+    color: var(--muted);
 }
 
 .search-button {
     width: 65px;
     border: none;
-    background: #e90012;
+
+    background: var(--red);
     color: white;
+
     font-size: 20px;
     cursor: pointer;
 }
@@ -267,18 +222,19 @@ header {
     background: #ff1d30;
 }
 
-/* ================= THEME BUTTON ================= */
 
-.theme-button {
+/* ================= DARK / LIGHT BUTTON ================= */
+
+.mode-button {
     width: 48px;
     height: 48px;
 
-    flex-shrink: 0;
-
     border-radius: 50%;
 
-    background: #191b20;
-    border: 1px solid #3a3d44;
+    background: var(--secondary);
+    border: 1px solid var(--border);
+
+    color: var(--text);
 
     display: flex;
     align-items: center;
@@ -286,15 +242,70 @@ header {
 
     cursor: pointer;
 
-    font-size: 22px;
+    font-size: 21px;
 
-    transition: 0.25s;
+    transition: 0.2s;
 }
 
-.theme-button:hover {
-    transform: scale(1.08);
-    border-color: #ffd000;
+.mode-button:hover {
+    transform: scale(1.06);
 }
+
+
+/* ================= FAVORITES BUTTON ================= */
+
+.favorites-button {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    background: var(--secondary);
+    border: 1px solid var(--border);
+
+    color: var(--text);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    font-size: 21px;
+
+    position: relative;
+
+    transition: 0.2s;
+}
+
+.favorites-button:hover {
+    transform: scale(1.06);
+    border-color: #ff2020;
+}
+
+.favorites-count {
+    position: absolute;
+
+    top: -5px;
+    right: -4px;
+
+    width: 19px;
+    height: 19px;
+
+    border-radius: 50%;
+
+    background: #e90012;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 /* ================= CART ================= */
 
@@ -302,12 +313,10 @@ header {
     width: 48px;
     height: 48px;
 
-    flex-shrink: 0;
-
     border-radius: 50%;
 
-    background: #191b20;
-    border: 1px solid #3a3d44;
+    background: var(--secondary);
+    border: 1px solid var(--border);
 
     display: flex;
     align-items: center;
@@ -339,7 +348,6 @@ header {
     border-radius: 50%;
 
     background: #e90012;
-
     color: white;
 
     font-family: Arial, sans-serif;
@@ -349,6 +357,7 @@ header {
     align-items: center;
     justify-content: center;
 }
+
 
 /* ================= KURDISTAN LINE ================= */
 
@@ -367,49 +376,58 @@ header {
     );
 }
 
+
 /* ================= CATEGORIES ================= */
 
 .categories {
     width: 95%;
+
     margin: 15px auto 20px;
 
     display: flex;
+
     justify-content: center;
 
     gap: 9px;
+
     flex-wrap: wrap;
 }
 
 .category {
-    background: #202227;
-    color: #eee;
+    background: var(--secondary);
 
-    border: 1px solid #393c43;
+    color: var(--text);
+
+    border: 1px solid var(--border);
+
     border-radius: 22px;
 
     padding: 9px 17px;
 
     font-family: "Rabar", Arial, sans-serif;
+
     font-size: 14px;
 
     cursor: pointer;
+
     transition: 0.2s;
 }
 
 .category:hover {
-    background: #2b2e35;
     transform: translateY(-2px);
 }
 
 .category.active {
-    background: #159447;
-    border-color: #159447;
+    background: var(--green);
+    border-color: var(--green);
 }
+
 
 /* ================= PRODUCTS ================= */
 
 .products {
     width: 94%;
+
     max-width: 1400px;
 
     margin: auto;
@@ -433,6 +451,8 @@ header {
     transition: 0.25s;
 
     cursor: pointer;
+
+    position: relative;
 }
 
 .product:hover {
@@ -440,8 +460,50 @@ header {
 
     border-color: #555960;
 
-    box-shadow: 0 12px 35px rgba(0,0,0,0.55);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.25);
 }
+
+
+/* ================= FAVORITE HEART ON PRODUCT ================= */
+
+.product-heart {
+    position: absolute;
+
+    top: 10px;
+    left: 10px;
+
+    z-index: 10;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    background: rgba(0,0,0,0.65);
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.product-heart:hover {
+    transform: scale(1.1);
+}
+
+.product-heart.favorite {
+    color: #ff2638;
+}
+
 
 /* ================= PRODUCT IMAGE ================= */
 
@@ -449,9 +511,10 @@ header {
     width: 100%;
     height: 270px;
 
-    background: #202227;
+    background: var(--secondary);
 
     position: relative;
+
     overflow: hidden;
 }
 
@@ -467,6 +530,7 @@ header {
 .product:hover img {
     transform: scale(1.04);
 }
+
 
 /* ================= SALE ================= */
 
@@ -486,6 +550,7 @@ header {
 
     font-size: 12px;
 }
+
 
 /* ================= PRODUCT INFO ================= */
 
@@ -507,7 +572,7 @@ header {
 }
 
 .price {
-    color: #ffd000;
+    color: var(--yellow);
 
     font-family: Arial, sans-serif;
 
@@ -526,6 +591,7 @@ header {
     margin-right: 7px;
 }
 
+
 /* ================= ADD CART ================= */
 
 .add-cart {
@@ -535,11 +601,11 @@ header {
 
     padding: 10px;
 
-    background: #24272c;
+    background: var(--secondary);
 
-    border: 1px solid #41444b;
+    border: 1px solid var(--border);
 
-    color: white;
+    color: var(--text);
 
     border-radius: 7px;
 
@@ -555,7 +621,9 @@ header {
 .add-cart:hover {
     background: #e90012;
     border-color: #e90012;
+    color: white;
 }
+
 
 /* ================= FOOTER ================= */
 
@@ -566,19 +634,13 @@ footer {
 
     text-align: center;
 
-    background: #101217;
+    background: var(--header);
 
     border-top: 3px solid #e90012;
 
-    color: #888;
+    color: var(--muted);
 }
 
-.footer-logo {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: var(--text);
-}
 
 /* ================= CART MESSAGE ================= */
 
@@ -586,13 +648,14 @@ footer {
     position: fixed;
 
     bottom: 25px;
+
     left: 50%;
 
     transform: translate(-50%, 100px);
 
-    background: #1b1d22;
+    background: var(--secondary);
 
-    border: 1px solid #444850;
+    border: 1px solid var(--border);
 
     padding: 12px 25px;
 
@@ -609,349 +672,13 @@ footer {
     transform: translate(-50%, 0);
 }
 
-/* =========================================================
-   PRODUCT DETAILS
-========================================================= */
 
-.product-modal {
-    position: fixed;
+/* ================= GENERAL MODALS ================= */
 
-    inset: 0;
+.cart-modal,
+.product-modal,
+.favorites-modal {
 
-    background: rgba(0,0,0,0.78);
-
-    display: none;
-
-    align-items: center;
-    justify-content: center;
-
-    z-index: 3000;
-
-    padding: 15px;
-
-    overflow-y: auto;
-}
-
-.product-modal.show {
-    display: flex;
-}
-
-.product-box {
-    width: 100%;
-
-    max-width: 850px;
-
-    max-height: 94vh;
-
-    overflow-y: auto;
-
-    background: #15171b;
-
-    border: 1px solid #3a3d44;
-
-    border-radius: 18px;
-
-    padding: 20px;
-
-    box-shadow: 0 20px 70px rgba(0,0,0,0.8);
-
-    position: relative;
-}
-
-/* CLOSE X */
-
-.details-close-x {
-    position: absolute;
-
-    top: 12px;
-    left: 12px;
-
-    width: 38px;
-    height: 38px;
-
-    border-radius: 50%;
-
-    background: #24272c;
-
-    border: 1px solid #41444b;
-
-    color: white;
-
-    font-size: 22px;
-
-    cursor: pointer;
-
-    z-index: 20;
-}
-
-/* ================= PRODUCT GALLERY ================= */
-
-.product-gallery {
-    width: 100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-}
-
-.main-product-image {
-    width: 100%;
-
-    height: 430px;
-
-    background: #202227;
-
-    border-radius: 12px;
-
-    overflow: hidden;
-
-    margin-bottom: 10px;
-}
-
-.main-product-image img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-
-    background: #202227;
-}
-
-.product-thumbnails {
-    width: 100%;
-
-    display: flex;
-
-    gap: 8px;
-
-    overflow-x: auto;
-
-    padding: 3px;
-
-    justify-content: center;
-}
-
-.product-thumbnail {
-    width: 70px;
-    height: 70px;
-
-    flex-shrink: 0;
-
-    border-radius: 8px;
-
-    overflow: hidden;
-
-    border: 2px solid #41444b;
-
-    cursor: pointer;
-
-    background: #202227;
-}
-
-.product-thumbnail.selected {
-    border-color: #e90012;
-}
-
-.product-thumbnail img {
-    width: 100%;
-    height: 100%;
-
-    object-fit: cover;
-}
-
-/* ================= DETAILS ================= */
-
-.product-details-content {
-    margin-top: 18px;
-}
-
-.product-details-name {
-    font-size: 25px;
-
-    font-weight: bold;
-
-    margin-bottom: 8px;
-
-    text-align: right;
-}
-
-.product-details-price {
-    color: #ffd000;
-
-    font-family: Arial, sans-serif;
-
-    font-size: 23px;
-
-    font-weight: bold;
-
-    margin-bottom: 4px;
-}
-
-.product-details-old-price {
-    color: #777;
-
-    text-decoration: line-through;
-
-    font-family: Arial, sans-serif;
-
-    margin-bottom: 18px;
-}
-
-.details-description-title {
-    font-size: 18px;
-
-    margin-top: 18px;
-
-    margin-bottom: 8px;
-}
-
-.details-description {
-    color: #aaa;
-
-    line-height: 1.9;
-
-    font-size: 15px;
-
-    text-align: right;
-}
-
-/* ================= COLORS ================= */
-
-.option-title {
-    font-size: 16px;
-
-    margin-top: 20px;
-
-    margin-bottom: 10px;
-}
-
-.colors {
-    display: flex;
-
-    flex-wrap: wrap;
-
-    gap: 9px;
-}
-
-.color-button {
-    background: #24272c;
-
-    color: white;
-
-    border: 1px solid #41444b;
-
-    border-radius: 8px;
-
-    padding: 8px 14px;
-
-    cursor: pointer;
-
-    font-family: "Rabar", Arial, sans-serif;
-
-    transition: 0.2s;
-}
-
-.color-button.selected {
-    background: #159447;
-
-    border-color: #159447;
-}
-
-/* ================= SIZES ================= */
-
-.sizes {
-    display: flex;
-
-    justify-content: flex-start;
-
-    gap: 8px;
-
-    flex-wrap: wrap;
-}
-
-.size-button {
-    background: #24272c;
-
-    color: white;
-
-    border: 1px solid #41444b;
-
-    border-radius: 7px;
-
-    padding: 9px 16px;
-
-    cursor: pointer;
-
-    font-family: "Rabar", Arial, sans-serif;
-
-    transition: 0.2s;
-}
-
-.size-button.selected {
-    background: #159447;
-
-    border-color: #159447;
-}
-
-/* ================= DETAIL ADD ================= */
-
-.product-modal-add {
-    width: 100%;
-
-    margin-top: 22px;
-
-    padding: 14px;
-
-    background: #e90012;
-
-    color: white;
-
-    border: none;
-
-    border-radius: 9px;
-
-    font-family: "Rabar", Arial, sans-serif;
-
-    cursor: pointer;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    transition: 0.2s;
-}
-
-.product-modal-add:hover {
-    background: #ff1d30;
-}
-
-.product-modal-close {
-    width: 100%;
-
-    margin-top: 10px;
-
-    padding: 11px;
-
-    background: #24272c;
-
-    color: white;
-
-    border: 1px solid #41444b;
-
-    border-radius: 8px;
-
-    font-family: "Rabar", Arial, sans-serif;
-
-    cursor: pointer;
-
-    font-size: 14px;
-}
-
-/* ================= CART MODAL ================= */
-
-.cart-modal {
     position: fixed;
 
     inset: 0;
@@ -961,25 +688,32 @@ footer {
     display: none;
 
     align-items: center;
+
     justify-content: center;
 
-    z-index: 4000;
+    z-index: 3000;
 
     padding: 20px;
 }
 
-.cart-modal.show {
+.cart-modal.show,
+.product-modal.show,
+.favorites-modal.show {
     display: flex;
 }
 
+
+/* ================= CART BOX ================= */
+
 .cart-box {
+
     width: 100%;
 
     max-width: 450px;
 
-    background: #15171b;
+    background: var(--card);
 
-    border: 1px solid #3a3d44;
+    border: 1px solid var(--border);
 
     border-radius: 15px;
 
@@ -990,19 +724,17 @@ footer {
 
 .cart-box h2 {
     text-align: center;
-
     margin-bottom: 20px;
 }
 
 .cart-items {
     max-height: 300px;
-
     overflow-y: auto;
-
     margin-bottom: 15px;
 }
 
 .cart-item {
+
     display: flex;
 
     justify-content: space-between;
@@ -1013,7 +745,7 @@ footer {
 
     padding: 12px;
 
-    background: #202227;
+    background: var(--secondary);
 
     border-radius: 8px;
 
@@ -1021,7 +753,8 @@ footer {
 }
 
 .cart-total {
-    border-top: 1px solid #393c43;
+
+    border-top: 1px solid var(--border);
 
     padding-top: 15px;
 
@@ -1029,10 +762,11 @@ footer {
 
     font-size: 18px;
 
-    color: #ffd000;
+    color: var(--yellow);
 }
 
 .close-cart {
+
     width: 100%;
 
     margin-top: 15px;
@@ -1052,6 +786,427 @@ footer {
     cursor: pointer;
 }
 
+
+/* ================= PRODUCT DETAILS ================= */
+
+.product-box {
+
+    width: 100%;
+
+    max-width: 600px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+
+    text-align: center;
+
+    position: relative;
+}
+
+
+/* ================= DETAILS FAVORITE ================= */
+
+.details-heart {
+
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: var(--secondary);
+
+    border: 1px solid var(--border);
+
+    color: var(--text);
+
+    font-size: 23px;
+
+    cursor: pointer;
+}
+
+.details-heart.favorite {
+    color: #ff2638;
+}
+
+
+/* ================= 6 IMAGE GALLERY ================= */
+
+.detail-main-image {
+
+    width: 100%;
+
+    height: 350px;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    background: var(--secondary);
+
+    margin-bottom: 12px;
+}
+
+.detail-main-image img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.detail-thumbnails {
+
+    display: flex;
+
+    gap: 8px;
+
+    overflow-x: auto;
+
+    margin-bottom: 18px;
+
+    padding-bottom: 5px;
+}
+
+.detail-thumbnail {
+
+    min-width: 65px;
+    width: 65px;
+    height: 65px;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    border: 2px solid transparent;
+
+    cursor: pointer;
+}
+
+.detail-thumbnail.selected {
+    border-color: #e90012;
+}
+
+.detail-thumbnail img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* ================= DETAIL TEXT ================= */
+
+.product-box h2 {
+    margin-bottom: 10px;
+}
+
+.detail-description {
+
+    color: var(--muted);
+
+    line-height: 1.8;
+
+    font-size: 14px;
+
+    margin-bottom: 18px;
+
+    text-align: right;
+}
+
+.detail-price {
+
+    color: var(--yellow);
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    font-family: Arial, sans-serif;
+
+    margin-bottom: 18px;
+}
+
+
+/* ================= COLORS ================= */
+
+.option-title {
+
+    text-align: right;
+
+    font-size: 15px;
+
+    margin-bottom: 10px;
+
+    font-weight: bold;
+}
+
+.colors {
+
+    display: flex;
+
+    justify-content: flex-start;
+
+    gap: 9px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 20px;
+}
+
+.color-button {
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    background: var(--secondary);
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
+
+    cursor: pointer;
+
+    font-family: "Rabar", Arial, sans-serif;
+}
+
+.color-button.selected {
+
+    background: var(--green);
+
+    border-color: var(--green);
+}
+
+
+/* ================= SIZES ================= */
+
+.sizes {
+
+    display: flex;
+
+    justify-content: flex-start;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 20px;
+}
+
+.size-button {
+
+    background: var(--secondary);
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
+
+    border-radius: 7px;
+
+    padding: 9px 16px;
+
+    cursor: pointer;
+
+    font-family: "Rabar", Arial, sans-serif;
+}
+
+.size-button.selected {
+
+    background: var(--green);
+
+    border-color: var(--green);
+}
+
+.optional {
+
+    color: #888;
+
+    font-size: 12px;
+}
+
+
+/* ================= DETAIL ADD ================= */
+
+.product-modal-add {
+
+    width: 100%;
+
+    padding: 12px;
+
+    background: #e90012;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+.product-modal-close {
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 10px;
+
+    background: var(--secondary);
+
+    color: var(--text);
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    cursor: pointer;
+}
+
+
+/* ================= FAVORITES BOX ================= */
+
+.favorites-box {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    max-height: 85vh;
+
+    overflow-y: auto;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+}
+
+.favorites-box h2 {
+
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.favorite-list-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 10px;
+
+    margin-bottom: 10px;
+
+    background: var(--secondary);
+
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+.favorite-list-image {
+
+    width: 65px;
+    height: 65px;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+}
+
+.favorite-list-image img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.favorite-list-info {
+
+    flex: 1;
+
+    text-align: right;
+}
+
+.favorite-list-name {
+
+    font-size: 15px;
+
+    margin-bottom: 5px;
+}
+
+.favorite-list-price {
+
+    color: var(--yellow);
+
+    font-family: Arial, sans-serif;
+}
+
+.remove-favorite {
+
+    width: 35px;
+    height: 35px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: #e90012;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+.empty-favorites {
+
+    text-align: center;
+
+    color: var(--muted);
+
+    padding: 30px 10px;
+
+    font-size: 15px;
+}
+
+
 /* ================= TABLET ================= */
 
 @media (max-width: 1000px) {
@@ -1061,6 +1216,7 @@ footer {
     }
 
 }
+
 
 /* ================= PHONE ================= */
 
@@ -1076,44 +1232,42 @@ footer {
     }
 
     header {
-        padding: 12px 10px;
+
+        padding: 12px 15px;
 
         flex-wrap: wrap;
-
-        gap: 8px;
     }
 
     .logo {
+
         width: 100%;
 
         text-align: center;
 
         order: 1;
-
-        font-size: 21px;
     }
 
     .search-container {
+
         order: 2;
 
-        width: calc(100% - 112px);
+        width: calc(100% - 116px);
     }
 
-    .theme-button {
+    .mode-button {
         order: 3;
+    }
 
-        width: 46px;
-        height: 46px;
+    .favorites-button {
+        order: 4;
     }
 
     .cart {
-        order: 4;
-
-        width: 46px;
-        height: 46px;
+        order: 5;
     }
 
     .categories {
+
         justify-content: flex-start;
 
         flex-wrap: nowrap;
@@ -1128,6 +1282,7 @@ footer {
     }
 
     .products {
+
         grid-template-columns: repeat(2, 1fr);
 
         width: 94%;
@@ -1151,36 +1306,12 @@ footer {
         font-size: 12px;
     }
 
-    .product-box {
-        padding: 13px;
-
-        max-height: 96vh;
-
-        border-radius: 13px;
-    }
-
-    .main-product-image {
-        height: 300px;
-    }
-
-    .product-thumbnail {
-        width: 58px;
-        height: 58px;
-    }
-
-    .product-details-name {
-        font-size: 21px;
-    }
-
-    .product-details-price {
-        font-size: 20px;
-    }
-
-    .details-description {
-        font-size: 14px;
+    .detail-main-image {
+        height: 280px;
     }
 
 }
+
 
 /* ================= SMALL PHONE ================= */
 
@@ -1198,8 +1329,11 @@ footer {
         padding: 10px;
     }
 
-    .main-product-image {
-        height: 250px;
+    .mode-button,
+    .favorites-button,
+    .cart {
+        width: 43px;
+        height: 43px;
     }
 
 }
@@ -1207,9 +1341,11 @@ footer {
 </style>
 </head>
 
+
 <body>
 
-<!-- ================= TOP WELCOME ================= -->
+
+<!-- ================= TOP BAR ================= -->
 
 <div class="top-bar">
 
@@ -1225,6 +1361,7 @@ footer {
 
 </div>
 
+
 <!-- ================= BIG LOGO ================= -->
 
 <div class="top-logo">
@@ -1232,6 +1369,7 @@ footer {
     <h1>KurdShein</h1>
 
 </div>
+
 
 <!-- ================= HEADER ================= -->
 
@@ -1248,6 +1386,7 @@ footer {
         </span>
 
     </div>
+
 
     <div class="search-container">
 
@@ -1270,20 +1409,45 @@ footer {
 
     </div>
 
-    <!-- DARK / BRIGHT MODE -->
+
+    <!-- DARK / LIGHT -->
 
     <button
-        class="theme-button"
-        id="themeButton"
-        onclick="toggleTheme()"
+        class="mode-button"
+        id="modeButton"
+        onclick="toggleMode()"
         title="گۆڕینی ڕووناکی"
     >
         🌙
     </button>
 
+
+    <!-- FAVORITES -->
+
+    <button
+        class="favorites-button"
+        onclick="openFavorites()"
+        title="دڵخوازەکان"
+    >
+
+        ❤️
+
+        <span
+            class="favorites-count"
+            id="favoritesCount"
+        >
+            0
+        </span>
+
+    </button>
+
+
     <!-- CART -->
 
-    <div class="cart" onclick="openCart()">
+    <div
+        class="cart"
+        onclick="openCart()"
+    >
 
         🛒
 
@@ -1298,9 +1462,11 @@ footer {
 
 </header>
 
+
 <!-- ================= KURDISTAN LINE ================= -->
 
 <div class="kurdistan-line"></div>
+
 
 <!-- ================= CATEGORIES ================= -->
 
@@ -1357,9 +1523,14 @@ footer {
 
 </div>
 
+
 <!-- ================= PRODUCTS ================= -->
 
-<div class="products" id="products">
+<div
+    class="products"
+    id="products"
+>
+
 
     <!-- PRODUCT 1 -->
 
@@ -1368,12 +1539,18 @@ footer {
         data-category="new women"
         data-name="جلوبەرگی ژنان"
         data-price="35000"
-        data-oldprice=""
-        data-description="جلوبەرگێکی فاشن و جوان بۆ بەکارهێنانی ڕۆژانە. دروستکراوە لە مادەی نەرم و خۆش بۆ لەبەرکردن. گونجاوە بۆ چالاکییە جۆراوجۆرەکان و دەتوانیت ڕەنگ و قەبارەی دڵخوازت هەڵبژێریت."
-        data-colors="ڕەش,سپی,سۆر,شین"
+        data-description="جلوبەرگێکی فاشن و جوان، گونجاو بۆ بەکارهێنانی ڕۆژانە و بۆ شوێنە جیاوازەکان. بە پارچەیەکی نەرم و ئارام دروستکراوە."
         data-sizes="S,M,L,XL"
-        data-images="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=900&q=90,https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=900&q=90,https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=900&q=90"
+        data-colors="ڕەش,سپی,سور"
+        data-images="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80|https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=700&q=80|https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=700&q=80"
     >
+
+        <button
+            class="product-heart"
+            onclick="toggleFavorite(event, this)"
+        >
+            ♡
+        </button>
 
         <div class="product-image">
 
@@ -1400,7 +1577,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="quickAdd(event, 'جلوبەرگی ژنان', 35000)"
+                onclick="addToCart('جلوبەرگی ژنان', 35000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1409,6 +1586,7 @@ footer {
 
     </div>
 
+
     <!-- PRODUCT 2 -->
 
     <div
@@ -1416,11 +1594,18 @@ footer {
         data-category="new men"
         data-name="جلوبەرگی پیاوان"
         data-price="42000"
-        data-description="جلوبەرگێکی نوێ و ستایلی بۆ پیاوان. دیزاینێکی سادە و مۆدێرن هەیە و بۆ بەکارهێنانی ڕۆژانە زۆر گونجاوە."
-        data-colors="ڕەش,سپی,خۆڵەمێشی"
+        data-description="جلوبەرگی پیاوان بە دیزاینی نوێ و شێوازی مۆدێرن. گونجاوە بۆ بەکارهێنانی ڕۆژانە."
         data-sizes="M,L,XL,XXL"
-        data-images="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=900&q=90,https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=90,https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=900&q=90"
+        data-colors="ڕەش,شین,خۆڵەمێشی"
+        data-images="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=700&q=80|https://images.unsplash.com/photo-1516826957135-700dedea698c?auto=format&fit=crop&w=700&q=80|https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=700&q=80"
     >
+
+        <button
+            class="product-heart"
+            onclick="toggleFavorite(event, this)"
+        >
+            ♡
+        </button>
 
         <div class="product-image">
 
@@ -1447,7 +1632,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="quickAdd(event, 'جلوبەرگی پیاوان', 42000)"
+                onclick="addToCart('جلوبەرگی پیاوان', 42000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1456,6 +1641,7 @@ footer {
 
     </div>
 
+
     <!-- PRODUCT 3 -->
 
     <div
@@ -1463,12 +1649,18 @@ footer {
         data-category="sale accessories"
         data-name="چاویلکەی فاشن"
         data-price="15000"
-        data-oldprice="25000"
-        data-description="چاویلکەی فاشنی جوان بۆ ژنان و پیاوان. شێوەیەکی مۆدێرن و سووکە و بۆ بەکارهێنانی ڕۆژانە گونجاوە."
-        data-colors="ڕەش,قاوەیی,سپی"
+        data-description="چاویلکەی فاشن بۆ ژنان و پیاوان. دیزاینێکی سادە و مۆدێرن کە دەتوانیت لەگەڵ زۆر جلوبەرگ بەکاری بهێنیت."
         data-sizes="بێ سایز"
-        data-images="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=900&q=90,https://images.unsplash.com/photo-1577803645773-f96470509666?auto=format&fit=crop&w=900&q=90"
+        data-colors="ڕەش,قاوەیی,سپی"
+        data-images="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80|https://images.unsplash.com/photo-1508296695146-257a814070b4?auto=format&fit=crop&w=700&q=80"
     >
+
+        <button
+            class="product-heart"
+            onclick="toggleFavorite(event, this)"
+        >
+            ♡
+        </button>
 
         <div class="product-image">
 
@@ -1507,7 +1699,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="quickAdd(event, 'چاویلکەی فاشن', 15000)"
+                onclick="addToCart('چاویلکەی فاشن', 15000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1516,6 +1708,7 @@ footer {
 
     </div>
 
+
     <!-- PRODUCT 4 -->
 
     <div
@@ -1523,11 +1716,18 @@ footer {
         data-category="new accessories"
         data-name="جانتای ژنان"
         data-price="28000"
-        data-description="جانتای فاشنی ژنان بە دیزاینێکی جوان. قەبارەی گونجاو بۆ بەکارهێنانی ڕۆژانە و هەڵگرتنی شتە پێویستەکان."
-        data-colors="ڕەش,قاوەیی,سپی"
+        data-description="جانتای فاشن و شیک بۆ بەکارهێنانی ڕۆژانە. قەبارەی گونجاو و دیزاینی مۆدێرن."
         data-sizes="بێ سایز"
-        data-images="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=90,https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=90,https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?auto=format&fit=crop&w=900&q=90"
+        data-colors="ڕەش,قاوەیی,کریم"
+        data-images="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80|https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=700&q=80|https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=700&q=80"
     >
+
+        <button
+            class="product-heart"
+            onclick="toggleFavorite(event, this)"
+        >
+            ♡
+        </button>
 
         <div class="product-image">
 
@@ -1554,7 +1754,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="quickAdd(event, 'جانتای ژنان', 28000)"
+                onclick="addToCart('جانتای ژنان', 28000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1563,6 +1763,7 @@ footer {
 
     </div>
 
+
     <!-- PRODUCT 5 -->
 
     <div
@@ -1570,11 +1771,18 @@ footer {
         data-category="kids"
         data-name="جلوبەرگی منداڵان"
         data-price="22000"
-        data-description="جلوبەرگی منداڵان بە مادەی نەرم و خۆش. دیزاینێکی جوان و گونجاو بۆ بەکارهێنانی ڕۆژانە."
-        data-colors="شین,سۆر,سپی"
-        data-sizes="XS,S,M,L"
-        data-images="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=900&q=90,https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=900&q=90"
+        data-description="جلوبەرگی منداڵان بە پارچەی نەرم و ئارام، گونجاو بۆ بەکارهێنانی ڕۆژانە."
+        data-sizes="S,M,L,XL"
+        data-colors="سور,شین,زەرد"
+        data-images="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=700&q=80|https://images.unsplash.com/photo-1503919545889-aef636e10ad4?auto=format&fit=crop&w=700&q=80"
     >
+
+        <button
+            class="product-heart"
+            onclick="toggleFavorite(event, this)"
+        >
+            ♡
+        </button>
 
         <div class="product-image">
 
@@ -1601,7 +1809,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="quickAdd(event, 'جلوبەرگی منداڵان', 22000)"
+                onclick="addToCart('جلوبەرگی منداڵان', 22000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1610,6 +1818,7 @@ footer {
 
     </div>
 
+
     <!-- PRODUCT 6 -->
 
     <div
@@ -1617,11 +1826,18 @@ footer {
         data-category="electronics"
         data-name="هێدفۆنی بلوتوس"
         data-price="38000"
-        data-description="هێدفۆنی بلوتوسی کوالیتی بەرز بە دەنگێکی ڕوون و باترییەکی باش. گونجاوە بۆ گوێگرتن لە میوزیک و ڤیدیۆ."
-        data-colors="ڕەش,سپی,شین"
+        data-description="هێدفۆنی بلوتوس بە کوالیتی بەرز، دەنگی ڕوون و دیزاینی مۆدێرن. گونجاو بۆ مۆبایل و ئامێرەکانی تر."
         data-sizes="بێ سایز"
-        data-images="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=90,https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=900&q=90,https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=900&q=90"
+        data-colors="ڕەش,سپی,شین"
+        data-images="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80|https://images.unsplash.com/photo-1484704849700-f032a568e944?auto=format&fit=crop&w=700&q=80|https://images.unsplash.com/photo-1545127398-14699f92334b?auto=format&fit=crop&w=700&q=80"
     >
+
+        <button
+            class="product-heart"
+            onclick="toggleFavorite(event, this)"
+        >
+            ♡
+        </button>
 
         <div class="product-image">
 
@@ -1648,7 +1864,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="quickAdd(event, 'هێدفۆنی بلوتوس', 38000)"
+                onclick="addToCart('هێدفۆنی بلوتوس', 38000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1658,6 +1874,7 @@ footer {
     </div>
 
 </div>
+
 
 <!-- ================= FOOTER ================= -->
 
@@ -1673,9 +1890,8 @@ footer {
 
 </footer>
 
-<!-- =========================================================
-     PRODUCT DETAILS MODAL
-========================================================= -->
+
+<!-- ================= PRODUCT DETAILS MODAL ================= -->
 
 <div
     class="product-modal"
@@ -1685,127 +1901,142 @@ footer {
 
     <div class="product-box">
 
+
         <button
-            class="details-close-x"
-            onclick="closeProductModal()"
+            class="details-heart"
+            id="detailsHeart"
+            onclick="toggleDetailsFavorite(event)"
         >
-            ×
+            ♡
         </button>
 
-        <!-- GALLERY -->
 
-        <div class="product-gallery">
+        <!-- MAIN IMAGE -->
 
-            <div class="main-product-image">
+        <div class="detail-main-image">
 
-                <img
-                    id="mainProductImage"
-                    src=""
-                    alt="Product"
-                >
+            <img
+                id="detailMainImage"
+                src=""
+                alt=""
+            >
 
+        </div>
+
+
+        <!-- THUMBNAILS -->
+
+        <div
+            class="detail-thumbnails"
+            id="detailThumbnails"
+        >
+        </div>
+
+
+        <h2 id="productModalName"></h2>
+
+
+        <div
+            class="detail-price"
+            id="productModalPrice"
+        >
+        </div>
+
+
+        <p
+            class="detail-description"
+            id="productModalDescription"
+        >
+        </p>
+
+
+        <!-- COLORS -->
+
+        <div id="colorSection">
+
+            <div class="option-title">
+                ڕەنگ
             </div>
 
             <div
-                class="product-thumbnails"
-                id="productThumbnails"
+                class="colors"
+                id="productColors"
             >
             </div>
 
         </div>
 
-        <!-- DETAILS -->
 
-        <div class="product-details-content">
+        <!-- SIZES -->
 
-            <div
-                class="product-details-name"
-                id="productModalName"
-            >
+        <div id="sizeSection">
+
+            <div class="option-title">
+                قەبارە
+                <span class="optional">
+                    (ئاختیاری)
+                </span>
             </div>
 
             <div
-                class="product-details-price"
-                id="productModalPrice"
+                class="sizes"
+                id="productSizes"
             >
             </div>
-
-            <div
-                class="product-details-old-price"
-                id="productModalOldPrice"
-            >
-            </div>
-
-            <!-- DESCRIPTION -->
-
-            <div class="details-description-title">
-                📝 وەسفی بەرهەم
-            </div>
-
-            <div
-                class="details-description"
-                id="productModalDescription"
-            >
-            </div>
-
-            <!-- COLORS -->
-
-            <div
-                id="colorSection"
-            >
-
-                <div class="option-title">
-                    🎨 ڕەنگ هەڵبژێرە
-                </div>
-
-                <div
-                    class="colors"
-                    id="productColors"
-                >
-                </div>
-
-            </div>
-
-            <!-- SIZES -->
-
-            <div
-                id="sizeSection"
-            >
-
-                <div class="option-title">
-                    📏 قەبارە هەڵبژێرە
-                    <span style="color:#888;">
-                        (ئاختیاری)
-                    </span>
-                </div>
-
-                <div
-                    class="sizes"
-                    id="productSizes"
-                >
-                </div>
-
-            </div>
-
-            <button
-                class="product-modal-add"
-                onclick="addSelectedProduct()"
-            >
-                🛒 زیادکردن بۆ سەبەتە
-            </button>
-
-            <button
-                class="product-modal-close"
-                onclick="closeProductModal()"
-            >
-                داخستن
-            </button>
 
         </div>
+
+
+        <button
+            class="product-modal-add"
+            onclick="addSelectedProduct()"
+        >
+            🛒 زیادکردن بۆ سەبەتە
+        </button>
+
+
+        <button
+            class="product-modal-close"
+            onclick="closeProductModal()"
+        >
+            داخستن
+        </button>
 
     </div>
 
 </div>
+
+
+<!-- ================= FAVORITES MODAL ================= -->
+
+<div
+    class="favorites-modal"
+    id="favoritesModal"
+    onclick="closeFavoritesOutside(event)"
+>
+
+    <div class="favorites-box">
+
+        <h2>
+            ❤️ دڵخوازەکان
+        </h2>
+
+        <div
+            id="favoritesList"
+        >
+        </div>
+
+        <button
+            class="product-modal-close"
+            onclick="closeFavorites()"
+        >
+            داخستن
+        </button>
+
+    </div>
+
+</div>
+
 
 <!-- ================= CART MESSAGE ================= -->
 
@@ -1815,6 +2046,7 @@ footer {
 >
     ✅ کاڵاکە زیادکرا بۆ سەبەتە
 </div>
+
 
 <!-- ================= CART MODAL ================= -->
 
@@ -1854,11 +2086,13 @@ footer {
 
 </div>
 
+
 <script>
 
-/* =========================================================
+
+/* =====================================================
    CART
-========================================================= */
+===================================================== */
 
 let cart = [];
 
@@ -1872,34 +2106,9 @@ function addToCart(name, price) {
 
     updateCart();
 
-    const message =
-        document.getElementById("cartMessage");
-
-    message.classList.add("show");
-
-    setTimeout(function() {
-
-        message.classList.remove("show");
-
-    }, 1800);
+    showMessage("✅ کاڵاکە زیادکرا بۆ سەبەتە");
 }
 
-
-/* =========================================================
-   QUICK ADD
-========================================================= */
-
-function quickAdd(event, name, price) {
-
-    event.stopPropagation();
-
-    addToCart(name, price);
-}
-
-
-/* =========================================================
-   UPDATE CART
-========================================================= */
 
 function updateCart() {
 
@@ -1977,10 +2186,6 @@ function updateCart() {
 }
 
 
-/* =========================================================
-   REMOVE CART ITEM
-========================================================= */
-
 function removeFromCart(index) {
 
     cart.splice(index, 1);
@@ -1988,10 +2193,6 @@ function removeFromCart(index) {
     updateCart();
 }
 
-
-/* =========================================================
-   OPEN CART
-========================================================= */
 
 function openCart() {
 
@@ -2003,10 +2204,6 @@ function openCart() {
 }
 
 
-/* =========================================================
-   CLOSE CART
-========================================================= */
-
 function closeCart() {
 
     document
@@ -2014,10 +2211,6 @@ function closeCart() {
         .classList.remove("show");
 }
 
-
-/* =========================================================
-   CLOSE CART OUTSIDE
-========================================================= */
 
 function closeCartOutside(event) {
 
@@ -2032,9 +2225,30 @@ function closeCartOutside(event) {
 }
 
 
-/* =========================================================
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(message) {
+
+    const box =
+        document.getElementById("cartMessage");
+
+    box.innerText = message;
+
+    box.classList.add("show");
+
+    setTimeout(function() {
+
+        box.classList.remove("show");
+
+    }, 1800);
+}
+
+
+/* =====================================================
    PRODUCT DETAILS
-========================================================= */
+===================================================== */
 
 let selectedProduct = null;
 
@@ -2042,8 +2256,6 @@ let selectedSize = "";
 
 let selectedColor = "";
 
-
-/* OPEN PRODUCT */
 
 function openProduct(product) {
 
@@ -2060,122 +2272,74 @@ function openProduct(product) {
     const price =
         Number(product.dataset.price);
 
-    const oldPrice =
-        product.dataset.oldprice || "";
-
     const description =
-        product.dataset.description || "هیچ وەسفێک نییە.";
-
-    const images =
-        product.dataset.images
-        ? product.dataset.images.split(",")
-        : [product.querySelector("img").src];
-
-    const colors =
-        product.dataset.colors
-        ? product.dataset.colors.split(",")
-        : [];
-
-    const sizes =
-        product.dataset.sizes
-        ? product.dataset.sizes.split(",")
-        : [];
+        product.dataset.description;
 
 
-    /* NAME */
-
-    document.getElementById(
-        "productModalName"
-    ).innerText = name;
+    document.getElementById("productModalName").innerText =
+        name;
 
 
-    /* PRICE */
-
-    document.getElementById(
-        "productModalPrice"
-    ).innerText =
+    document.getElementById("productModalPrice").innerText =
         price.toLocaleString() + " د.ع";
 
 
-    /* OLD PRICE */
-
-    const oldPriceElement =
-        document.getElementById(
-            "productModalOldPrice"
-        );
-
-
-    if (oldPrice !== "") {
-
-        oldPriceElement.innerText =
-            Number(oldPrice).toLocaleString() + " د.ع";
-
-        oldPriceElement.style.display =
-            "block";
-
-    } else {
-
-        oldPriceElement.innerText = "";
-
-        oldPriceElement.style.display =
-            "none";
-    }
-
-
-    /* DESCRIPTION */
-
-    document.getElementById(
-        "productModalDescription"
-    ).innerText =
+    document.getElementById("productModalDescription").innerText =
         description;
 
 
-    /* =====================================================
-       IMAGES
-    ===================================================== */
+    /* ================= IMAGES ================= */
+
+    const imageList =
+        product.dataset.images
+        ? product.dataset.images.split("|")
+        : [
+            product.querySelector("img").src
+        ];
+
 
     const mainImage =
-        document.getElementById(
-            "mainProductImage"
-        );
+        document.getElementById("detailMainImage");
+
+
+    mainImage.src =
+        imageList[0];
+
+
+    mainImage.alt =
+        name;
+
 
     const thumbnails =
-        document.getElementById(
-            "productThumbnails"
-        );
+        document.getElementById("detailThumbnails");
 
 
     thumbnails.innerHTML = "";
 
 
-    mainImage.src = images[0];
-
-
-    images.forEach(function(image, index) {
-
-        if (index >= 6) {
-            return;
-        }
-
+    imageList.forEach(function(image, index) {
 
         const thumbnail =
             document.createElement("div");
 
         thumbnail.className =
-            "product-thumbnail";
+            "detail-thumbnail";
 
 
         if (index === 0) {
 
-            thumbnail.classList.add(
-                "selected"
-            );
+            thumbnail.classList.add("selected");
 
         }
 
 
         thumbnail.innerHTML = `
-            <img src="${image}" alt="Product image">
+
+            <img
+                src="${image}"
+                alt="${name}"
+            >
+
         `;
 
 
@@ -2187,48 +2351,39 @@ function openProduct(product) {
 
 
             document
-                .querySelectorAll(
-                    ".product-thumbnail"
-                )
+                .querySelectorAll(".detail-thumbnail")
                 .forEach(function(item) {
 
-                    item.classList.remove(
-                        "selected"
-                    );
+                    item.classList.remove("selected");
 
                 });
 
 
-            thumbnail.classList.add(
-                "selected"
-            );
+            thumbnail.classList.add("selected");
 
         };
 
 
-        thumbnails.appendChild(
-            thumbnail
-        );
+        thumbnails.appendChild(thumbnail);
 
     });
 
 
-    /* =====================================================
-       COLORS
-    ===================================================== */
+    /* ================= COLORS ================= */
 
     const colorSection =
-        document.getElementById(
-            "colorSection"
-        );
+        document.getElementById("colorSection");
 
-    const colorContainer =
-        document.getElementById(
-            "productColors"
-        );
+    const colorsBox =
+        document.getElementById("productColors");
+
+    colorsBox.innerHTML = "";
 
 
-    colorContainer.innerHTML = "";
+    const colors =
+        product.dataset.colors
+        ? product.dataset.colors.split(",")
+        : [];
 
 
     if (colors.length > 0) {
@@ -2253,33 +2408,12 @@ function openProduct(product) {
 
                 event.stopPropagation();
 
-                selectedColor =
-                    color.trim();
-
-
-                document
-                    .querySelectorAll(
-                        ".color-button"
-                    )
-                    .forEach(function(btn) {
-
-                        btn.classList.remove(
-                            "selected"
-                        );
-
-                    });
-
-
-                button.classList.add(
-                    "selected"
-                );
+                selectColor(button, color.trim());
 
             };
 
 
-            colorContainer.appendChild(
-                button
-            );
+            colorsBox.appendChild(button);
 
         });
 
@@ -2287,25 +2421,25 @@ function openProduct(product) {
 
         colorSection.style.display =
             "none";
+
     }
 
 
-    /* =====================================================
-       SIZES
-    ===================================================== */
+    /* ================= SIZES ================= */
 
     const sizeSection =
-        document.getElementById(
-            "sizeSection"
-        );
+        document.getElementById("sizeSection");
 
-    const sizeContainer =
-        document.getElementById(
-            "productSizes"
-        );
+    const sizesBox =
+        document.getElementById("productSizes");
+
+    sizesBox.innerHTML = "";
 
 
-    sizeContainer.innerHTML = "";
+    const sizes =
+        product.dataset.sizes
+        ? product.dataset.sizes.split(",")
+        : [];
 
 
     if (sizes.length > 0) {
@@ -2330,33 +2464,12 @@ function openProduct(product) {
 
                 event.stopPropagation();
 
-                selectedSize =
-                    size.trim();
-
-
-                document
-                    .querySelectorAll(
-                        ".size-button"
-                    )
-                    .forEach(function(btn) {
-
-                        btn.classList.remove(
-                            "selected"
-                        );
-
-                    });
-
-
-                button.classList.add(
-                    "selected"
-                );
+                selectSize(button, size.trim());
 
             };
 
 
-            sizeContainer.appendChild(
-                button
-            );
+            sizesBox.appendChild(button);
 
         });
 
@@ -2364,10 +2477,12 @@ function openProduct(product) {
 
         sizeSection.style.display =
             "none";
+
     }
 
 
-    /* OPEN */
+    updateDetailsHeart();
+
 
     document
         .getElementById("productModal")
@@ -2375,9 +2490,53 @@ function openProduct(product) {
 }
 
 
-/* =========================================================
+/* =====================================================
+   SIZE
+===================================================== */
+
+function selectSize(button, size) {
+
+    selectedSize = size;
+
+
+    document
+        .querySelectorAll("#productSizes .size-button")
+        .forEach(function(btn) {
+
+            btn.classList.remove("selected");
+
+        });
+
+
+    button.classList.add("selected");
+}
+
+
+/* =====================================================
+   COLOR
+===================================================== */
+
+function selectColor(button, color) {
+
+    selectedColor = color;
+
+
+    document
+        .querySelectorAll(".color-button")
+        .forEach(function(btn) {
+
+            btn.classList.remove("selected");
+
+        });
+
+
+    button.classList.add("selected");
+}
+
+
+/* =====================================================
    ADD SELECTED PRODUCT
-========================================================= */
+===================================================== */
 
 function addSelectedProduct() {
 
@@ -2391,30 +2550,27 @@ function addSelectedProduct() {
 
 
     const price =
-        Number(
-            selectedProduct.dataset.price
-        );
+        Number(selectedProduct.dataset.price);
 
 
-    let cartName = name;
+    let cartName =
+        name;
 
-
-    /* COLOR */
-
-    if (selectedColor !== "") {
-
-        cartName +=
-            " - " + selectedColor;
-
-    }
-
-
-    /* SIZE */
 
     if (selectedSize !== "") {
 
         cartName +=
-            " - " + selectedSize;
+            " - قەبارە: " +
+            selectedSize;
+
+    }
+
+
+    if (selectedColor !== "") {
+
+        cartName +=
+            " - ڕەنگ: " +
+            selectedColor;
 
     }
 
@@ -2429,22 +2585,13 @@ function addSelectedProduct() {
 }
 
 
-/* =========================================================
-   CLOSE PRODUCT
-========================================================= */
-
 function closeProductModal() {
 
     document
         .getElementById("productModal")
         .classList.remove("show");
-
 }
 
-
-/* =========================================================
-   CLOSE PRODUCT OUTSIDE
-========================================================= */
 
 function closeProductOutside(event) {
 
@@ -2456,25 +2603,391 @@ function closeProductOutside(event) {
         closeProductModal();
 
     }
+}
+
+
+/* =====================================================
+   PRODUCT CLICK
+===================================================== */
+
+document
+.querySelectorAll(".product")
+.forEach(function(product) {
+
+    product.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target.closest(".add-cart") ||
+                event.target.closest(".product-heart")
+            ) {
+
+                return;
+
+            }
+
+
+            openProduct(product);
+
+        }
+    );
+
+});
+
+
+/* =====================================================
+   FAVORITES
+===================================================== */
+
+let favorites =
+    JSON.parse(
+        localStorage.getItem("kurdSheinFavorites")
+    ) || [];
+
+
+function getProductId(product) {
+
+    return product.dataset.name;
 
 }
 
 
-/* =========================================================
-   PRODUCT CLICK
-========================================================= */
+function isFavorite(product) {
 
-document
+    return favorites.includes(
+        getProductId(product)
+    );
+
+}
+
+
+function toggleFavorite(event, button) {
+
+    event.stopPropagation();
+
+
+    const product =
+        button.closest(".product");
+
+
+    const id =
+        getProductId(product);
+
+
+    if (favorites.includes(id)) {
+
+        favorites =
+            favorites.filter(function(item) {
+
+                return item !== id;
+
+            });
+
+        showMessage("💔 لە دڵخوازەکان لابرا");
+
+    } else {
+
+        favorites.push(id);
+
+        showMessage("❤️ زیادکرا بۆ دڵخوازەکان");
+
+    }
+
+
+    saveFavorites();
+
+    updateFavoriteButtons();
+
+}
+
+
+function saveFavorites() {
+
+    localStorage.setItem(
+        "kurdSheinFavorites",
+        JSON.stringify(favorites)
+    );
+
+}
+
+
+function updateFavoriteButtons() {
+
+    document
     .querySelectorAll(".product")
     .forEach(function(product) {
 
-        product.addEventListener(
+        const button =
+            product.querySelector(".product-heart");
+
+
+        if (!button) {
+            return;
+        }
+
+
+        if (isFavorite(product)) {
+
+            button.classList.add("favorite");
+
+            button.innerText =
+                "♥";
+
+        } else {
+
+            button.classList.remove("favorite");
+
+            button.innerText =
+                "♡";
+
+        }
+
+    });
+
+
+    updateFavoritesCount();
+
+    renderFavorites();
+
+    updateDetailsHeart();
+
+}
+
+
+function updateFavoritesCount() {
+
+    document.getElementById(
+        "favoritesCount"
+    ).innerText =
+        favorites.length;
+
+}
+
+
+/* =====================================================
+   DETAILS FAVORITE
+===================================================== */
+
+function toggleDetailsFavorite(event) {
+
+    event.stopPropagation();
+
+
+    if (!selectedProduct) {
+        return;
+    }
+
+
+    const id =
+        getProductId(selectedProduct);
+
+
+    if (favorites.includes(id)) {
+
+        favorites =
+            favorites.filter(function(item) {
+
+                return item !== id;
+
+            });
+
+        showMessage("💔 لە دڵخوازەکان لابرا");
+
+    } else {
+
+        favorites.push(id);
+
+        showMessage("❤️ زیادکرا بۆ دڵخوازەکان");
+
+    }
+
+
+    saveFavorites();
+
+    updateFavoriteButtons();
+
+}
+
+
+function updateDetailsHeart() {
+
+    const heart =
+        document.getElementById("detailsHeart");
+
+
+    if (!selectedProduct) {
+        return;
+    }
+
+
+    if (isFavorite(selectedProduct)) {
+
+        heart.classList.add("favorite");
+
+        heart.innerText =
+            "♥";
+
+    } else {
+
+        heart.classList.remove("favorite");
+
+        heart.innerText =
+            "♡";
+
+    }
+
+}
+
+
+/* =====================================================
+   FAVORITES MODAL
+===================================================== */
+
+function openFavorites() {
+
+    renderFavorites();
+
+
+    document
+        .getElementById("favoritesModal")
+        .classList.add("show");
+
+}
+
+
+function closeFavorites() {
+
+    document
+        .getElementById("favoritesModal")
+        .classList.remove("show");
+
+}
+
+
+function closeFavoritesOutside(event) {
+
+    if (
+        event.target ===
+        document.getElementById("favoritesModal")
+    ) {
+
+        closeFavorites();
+
+    }
+
+}
+
+
+function renderFavorites() {
+
+    const list =
+        document.getElementById("favoritesList");
+
+
+    list.innerHTML = "";
+
+
+    const products =
+        document.querySelectorAll(".product");
+
+
+    const favoriteProducts =
+        Array.from(products).filter(function(product) {
+
+            return isFavorite(product);
+
+        });
+
+
+    if (favoriteProducts.length === 0) {
+
+        list.innerHTML = `
+
+            <div class="empty-favorites">
+
+                ❤️
+
+                <br><br>
+
+                هیچ بەرهەمێکت لە دڵخوازەکان نییە
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    favoriteProducts.forEach(function(product) {
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "favorite-list-item";
+
+
+        const image =
+            product.querySelector("img").src;
+
+
+        const name =
+            product.dataset.name;
+
+
+        const price =
+            Number(product.dataset.price);
+
+
+        item.innerHTML = `
+
+            <div class="favorite-list-image">
+
+                <img
+                    src="${image}"
+                    alt="${name}"
+                >
+
+            </div>
+
+
+            <div class="favorite-list-info">
+
+                <div class="favorite-list-name">
+
+                    ${name}
+
+                </div>
+
+                <div class="favorite-list-price">
+
+                    ${price.toLocaleString()} د.ع
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="remove-favorite"
+                onclick="removeFavoriteFromList(event, '${name}')"
+            >
+                ×
+            </button>
+
+        `;
+
+
+        item.addEventListener(
             "click",
             function(event) {
 
                 if (
                     event.target.closest(
-                        ".add-cart"
+                        ".remove-favorite"
                     )
                 ) {
 
@@ -2483,56 +2996,75 @@ document
                 }
 
 
+                closeFavorites();
+
                 openProduct(product);
 
             }
         );
 
+
+        list.appendChild(item);
+
     });
 
+}
 
-/* =========================================================
+
+function removeFavoriteFromList(event, name) {
+
+    event.stopPropagation();
+
+
+    favorites =
+        favorites.filter(function(item) {
+
+            return item !== name;
+
+        });
+
+
+    saveFavorites();
+
+    updateFavoriteButtons();
+
+    showMessage("💔 لە دڵخوازەکان لابرا");
+
+}
+
+
+/* =====================================================
    CATEGORY FILTER
-========================================================= */
+===================================================== */
 
 function filterProducts(category, button) {
 
     const products =
-        document.querySelectorAll(
-            ".product"
-        );
+        document.querySelectorAll(".product");
+
 
     const buttons =
-        document.querySelectorAll(
-            ".category"
-        );
+        document.querySelectorAll(".category");
 
 
     buttons.forEach(function(btn) {
 
-        btn.classList.remove(
-            "active"
-        );
+        btn.classList.remove("active");
 
     });
 
 
-    button.classList.add(
-        "active"
-    );
+    button.classList.add("active");
 
 
     products.forEach(function(product) {
 
         const categories =
-            product.dataset.category
-                .split(" ");
+            product.dataset.category.split(" ");
 
 
         if (
-            categories.includes(
-                category
-            )
+            categories.includes(category)
         ) {
 
             product.style.display =
@@ -2550,38 +3082,40 @@ function filterProducts(category, button) {
 }
 
 
-/* =========================================================
+/* =====================================================
    SEARCH
-========================================================= */
+===================================================== */
 
 function searchProducts() {
 
     const search =
         document
-            .getElementById(
-                "searchInput"
-            )
-            .value
-            .trim()
-            .toLowerCase();
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
 
 
     const products =
-        document.querySelectorAll(
-            ".product"
-        );
+        document.querySelectorAll(".product");
 
 
     products.forEach(function(product) {
 
         const name =
-            product.dataset.name
-                .toLowerCase();
+            product.dataset.name.toLowerCase();
+
+
+        const description =
+            product.dataset.description
+            ? product.dataset.description.toLowerCase()
+            : "";
 
 
         if (
             search === "" ||
-            name.includes(search)
+            name.includes(search) ||
+            description.includes(search)
         ) {
 
             product.style.display =
@@ -2599,102 +3133,88 @@ function searchProducts() {
 }
 
 
-/* =========================================================
-   ENTER SEARCH
-========================================================= */
-
 document
-    .getElementById(
-        "searchInput"
-    )
-    .addEventListener(
-        "keydown",
-        function(event) {
+.getElementById("searchInput")
+.addEventListener(
+    "keydown",
+    function(event) {
 
-            if (
-                event.key === "Enter"
-            ) {
+        if (event.key === "Enter") {
 
-                searchProducts();
-
-            }
+            searchProducts();
 
         }
-    );
-
-
-/* =========================================================
-   DARK / BRIGHT MODE
-========================================================= */
-
-function toggleTheme() {
-
-    document.body.classList.toggle(
-        "bright"
-    );
-
-
-    const button =
-        document.getElementById(
-            "themeButton"
-        );
-
-
-    if (
-        document.body.classList.contains(
-            "bright"
-        )
-    ) {
-
-        button.innerText = "☀️";
-
-        localStorage.setItem(
-            "theme",
-            "bright"
-        );
-
-    } else {
-
-        button.innerText = "🌙";
-
-        localStorage.setItem(
-            "theme",
-            "dark"
-        );
 
     }
+);
+
+
+/* =====================================================
+   DARK / LIGHT MODE
+===================================================== */
+
+function toggleMode() {
+
+    document.body.classList.toggle(
+        "light-mode"
+    );
+
+
+    const isLight =
+        document.body.classList.contains(
+            "light-mode"
+        );
+
+
+    document.getElementById(
+        "modeButton"
+    ).innerText =
+        isLight
+        ? "☀️"
+        : "🌙";
+
+
+    localStorage.setItem(
+        "kurdSheinMode",
+        isLight
+        ? "light"
+        : "dark"
+    );
 
 }
 
 
-/* =========================================================
-   REMEMBER THEME
-========================================================= */
+/* =====================================================
+   LOAD SAVED MODE
+===================================================== */
 
-const savedTheme =
+const savedMode =
     localStorage.getItem(
-        "theme"
+        "kurdSheinMode"
     );
 
 
-if (savedTheme === "bright") {
+if (savedMode === "light") {
 
     document.body.classList.add(
-        "bright"
+        "light-mode"
     );
 
     document.getElementById(
-        "themeButton"
-    ).innerText = "☀️";
+        "modeButton"
+    ).innerText =
+        "☀️";
 
 }
 
 
-/* =========================================================
-   START CART
-========================================================= */
+/* =====================================================
+   START
+===================================================== */
 
 updateCart();
+
+updateFavoriteButtons();
 
 </script>
 

@@ -503,12 +503,30 @@ header {
 }
 
 
-/* ================= ADD CART ================= */
+/* ================= ADD CART & QUANTITY ================= */
+
+.action-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.qty-input {
+    width: 60px;
+    height: 40px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 7px;
+    text-align: center;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    outline: none;
+}
 
 .add-cart {
     width: 100%;
-
-    margin-top: 12px;
 
     padding: 10px;
 
@@ -757,6 +775,13 @@ footer {
     font-weight: bold;
 
     margin: 18px 0;
+}
+
+.modal-action-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 15px;
 }
 
 .big-add {
@@ -1469,13 +1494,23 @@ footer {
     
         </div>
 
-      <button
-    class="add-cart"
-    onclick="event.stopPropagation();openProduct(this.closest('.product'))"
->
-    داوا کردن🛒
-</button>
-
+        <div class="action-wrapper">
+            <input 
+                type="number" 
+                class="qty-input" 
+                value="1" 
+                min="1" 
+                max="10"
+                onclick="event.stopPropagation();"
+            >
+            <button
+                class="add-cart"
+                style="margin-top: 0; flex: 1;"
+                onclick="event.stopPropagation(); quickAddWithQty(this.closest('.product'))"
+            >
+                داوا کردن🛒
+            </button>
+        </div>
 
     </div>
 
@@ -1528,14 +1563,23 @@ footer {
             ١٢,٠٠٠ د.ع
         </div>
 
-        <button
-    class="add-cart"
-    onclick="event.stopPropagation();openProduct(this.closest('.product'))"
->
-    داوا کردن🛒
-</button>
-
-
+        <div class="action-wrapper">
+            <input 
+                type="number" 
+                class="qty-input" 
+                value="1" 
+                min="1" 
+                max="10"
+                onclick="event.stopPropagation();"
+            >
+            <button
+                class="add-cart"
+                style="margin-top: 0; flex: 1;"
+                onclick="event.stopPropagation(); quickAddWithQty(this.closest('.product'))"
+            >
+                داوا کردن🛒
+            </button>
+        </div>
 
     </div>
 
@@ -1598,13 +1642,23 @@ footer {
 
         </div>
 
-        <button
-    class="add-cart"
-    onclick="event.stopPropagation();openProduct(this.closest('.product'))"
->
-    داوا کردن🛒
-</button>
-
+        <div class="action-wrapper">
+            <input 
+                type="number" 
+                class="qty-input" 
+                value="1" 
+                min="1" 
+                max="10"
+                onclick="event.stopPropagation();"
+            >
+            <button
+                class="add-cart"
+                style="margin-top: 0; flex: 1;"
+                onclick="event.stopPropagation(); quickAddWithQty(this.closest('.product'))"
+            >
+                داوا کردن🛒
+            </button>
+        </div>
 
     </div>
 
@@ -1654,13 +1708,23 @@ footer {
             ١٥,٠٠٠ د.ع
         </div>
 
-        <button
-    class="add-cart"
-    onclick="event.stopPropagation();openProduct(this.closest('.product'))"
->
-    داوا کردن🛒
-</button>
-
+        <div class="action-wrapper">
+            <input 
+                type="number" 
+                class="qty-input" 
+                value="1" 
+                min="1" 
+                max="10"
+                onclick="event.stopPropagation();"
+            >
+            <button
+                class="add-cart"
+                style="margin-top: 0; flex: 1;"
+                onclick="event.stopPropagation(); quickAddWithQty(this.closest('.product'))"
+            >
+                داوا کردن🛒
+            </button>
+        </div>
 
     </div>
 
@@ -1711,13 +1775,23 @@ footer {
             ٩,٠٠٠ د.ع
         </div>
 
-        <button
-    class="add-cart"
-    onclick="event.stopPropagation();openProduct(this.closest('.product'))"
->
-    داوا کردن🛒
-</button>
-
+        <div class="action-wrapper">
+            <input 
+                type="number" 
+                class="qty-input" 
+                value="1" 
+                min="1" 
+                max="10"
+                onclick="event.stopPropagation();"
+            >
+            <button
+                class="add-cart"
+                style="margin-top: 0; flex: 1;"
+                onclick="event.stopPropagation(); quickAddWithQty(this.closest('.product'))"
+            >
+                داوا کردن🛒
+            </button>
+        </div>
 
     </div>
 
@@ -1767,13 +1841,23 @@ footer {
             ١٨,٠٠٠ د.ع
         </div>
 
-        <button
-    class="add-cart"
-    onclick="event.stopPropagation();openProduct(this.closest('.product'))"
->
-    داوا کردن🛒
-</button>
-
+        <div class="action-wrapper">
+            <input 
+                type="number" 
+                class="qty-input" 
+                value="1" 
+                min="1" 
+                max="10"
+                onclick="event.stopPropagation();"
+            >
+            <button
+                class="add-cart"
+                style="margin-top: 0; flex: 1;"
+                onclick="event.stopPropagation(); quickAddWithQty(this.closest('.product'))"
+            >
+                داوا کردن🛒
+            </button>
+        </div>
 
     </div>
 
@@ -1881,12 +1965,23 @@ footer {
                 class="detail-price"
             ></div>
 
-            <button
-                class="big-add"
-                onclick="addSelectedProduct()"
-            >
-                🛒 زیادکردن بۆ سەبەتە
-            </button>
+            <div class="modal-action-wrapper">
+                <input 
+                    type="number" 
+                    id="modalQty" 
+                    class="qty-input" 
+                    value="1" 
+                    min="1" 
+                    max="10"
+                >
+                <button
+                    class="big-add"
+                    style="flex: 1;"
+                    onclick="addSelectedProduct()"
+                >
+                    🛒 زیادکردن بۆ سەبەتە
+                </button>
+            </div>
 
         </div>
 
@@ -2220,34 +2315,6 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
-/*
-==========================================================
-IMPORTANT
-==========================================================
-
-PASTE YOUR FIREBASE CONFIG HERE.
-
-Firebase Console:
-Project settings
-→ Your apps
-→ Web app
-→ Firebase SDK setup
-→ Config
-
-Example:
-
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.firebasestorage.app",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-
-==========================================================
-*/
-
 const firebaseConfig = {
     apiKey: "AIzaSyCC_gLPdruLlmCZJRiWWHjbrWlFvrhbfUA",
     authDomain: "kurdshein-4bf9a.firebaseapp.com",
@@ -2304,6 +2371,7 @@ let localFavorites =
     );
 
 let selectedProduct = null;
+let currentProductData = null;
 
 let selectedSize = "";
 
@@ -2371,14 +2439,17 @@ function showMessage(text) {
 }
 
 
-function addToCart(name, price, size="", color="") {
+function addToCart(name, price, size="", color="", quantity=1) {
+
+    const qty = Math.max(1, Math.min(10, parseInt(quantity) || 1));
 
     cart.push({
 
         name,
         price,
         size,
-        color
+        color,
+        quantity: qty
 
     });
 
@@ -2393,10 +2464,7 @@ function addToCart(name, price, size="", color="") {
 }
 
 
-function quickAdd(button) {
-
-    const product =
-        button.closest(".product");
+window.quickAddWithQty = function(product) {
 
     const name =
         product.dataset.name;
@@ -2404,9 +2472,15 @@ function quickAdd(button) {
     const price =
         Number(product.dataset.price);
 
+    const qtyInput = product.querySelector('.qty-input');
+    const quantity = qtyInput ? qtyInput.value : 1;
+
     addToCart(
         name,
-        price
+        price,
+        "",
+        "",
+        quantity
     );
 
 }
@@ -2414,8 +2488,13 @@ function quickAdd(button) {
 
 function updateCart() {
 
+    let totalItemCount = 0;
+    cart.forEach(item => {
+        totalItemCount += (item.quantity || 1);
+    });
+
     document.getElementById("cartCount").innerText =
-        cart.length;
+        totalItemCount;
 
     const box =
         document.getElementById("cartItems");
@@ -2438,7 +2517,9 @@ function updateCart() {
 
     cart.forEach((item,index) => {
 
-        total += Number(item.price);
+        const itemQty = item.quantity || 1;
+        const itemTotal = Number(item.price) * itemQty;
+        total += itemTotal;
 
         const div =
             document.createElement("div");
@@ -2464,6 +2545,8 @@ function updateCart() {
 
         }
 
+        options += "<br>ژمارە (دانە): " + itemQty;
+
         div.innerHTML = `
 
             <div>
@@ -2481,7 +2564,7 @@ function updateCart() {
             <div>
 
                 <span style="color:#ffd000;">
-                    ${Number(item.price).toLocaleString()}
+                    ${itemTotal.toLocaleString()}
                     د.ع
                 </span>
 
@@ -2572,157 +2655,90 @@ window.openCart = function() {
 
 /* ================= PRODUCT DETAILS ================= */
 
-window.openProduct = function openProduct(product) {
+window.openProduct = function openProduct(element) {
 
-    selectedProduct = product;
+    selectedProduct = element;
 
-    selectedSize = "";
+    const name = element.getAttribute('data-name');
+    const description = element.getAttribute('data-description');
+    const images = (element.getAttribute('data-images') || '').split('|').filter(Boolean);
+    const sizes = (element.getAttribute('data-sizes') || '').split(',').filter(Boolean);
+    const colors = (element.getAttribute('data-colors') || '').split(',').filter(Boolean);
 
-    selectedColor = "";
+    const rawPrices = (element.getAttribute('data-price') || '0').split('|');
+    const prices = rawPrices.map(p => parseInt(p.trim()) || 0);
 
-    const images =
-        product.dataset.images
-        .split("|")
-        .filter(Boolean);
+    currentProductData = { name, prices, description, images, sizes, colors, price: prices[0] };
 
-    const main =
-        document.getElementById("mainProductImage");
+    document.getElementById('detailName').textContent = name;
+    document.getElementById('detailDescription').textContent = description;
 
-    main.src =
-        images[0];
+    document.getElementById('detailPrice').textContent = prices[0].toLocaleString() + ' د.ع';
 
-    const thumbnails =
-        document.getElementById("productThumbnails");
+    const mainImg = document.getElementById('mainProductImage');
+    mainImg.src = images[0] || '';
 
-    thumbnails.innerHTML = "";
+    const thumbContainer = document.getElementById('productThumbnails');
+    thumbContainer.innerHTML = '';
+    images.forEach((imgSrc, idx) => {
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        if (idx === 0) img.classList.add('selected');
+        img.onclick = () => {
+            mainImg.src = imgSrc;
+            thumbContainer.querySelectorAll('img').forEach(i => i.classList.remove('selected'));
+            img.classList.add('selected');
+        };
+        thumbContainer.appendChild(img);
+    });
 
-    images
-        .slice(0,6)
-        .forEach((src,index) => {
+    const sizeContainer = document.getElementById('sizeOptions');
+    sizeContainer.innerHTML = '';
+    selectedSize = sizes[0] || '';
 
-            const img =
-                document.createElement("img");
+    sizes.forEach((s, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-button' + (idx === 0 ? ' selected' : '');
+        btn.textContent = s;
 
-            img.src = src;
+        btn.onclick = () => {
+            sizeContainer.querySelectorAll('.option-button').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedSize = s;
 
-            if (index === 0) {
+            const activePrice = parseInt(prices[idx]) || prices[0];
+            currentProductData.price = activePrice;
+            document.getElementById('detailPrice').textContent = activePrice.toLocaleString() + ' د.ع';
+        };
 
-                img.classList.add("selected");
+        sizeContainer.appendChild(btn);
+    });
 
-            }
-
-            img.onclick = () => {
-
-                main.src = src;
-
-                thumbnails
-                    .querySelectorAll("img")
-                    .forEach(x =>
-                        x.classList.remove("selected")
-                    );
-
-                img.classList.add("selected");
-
-            };
-
-            thumbnails.appendChild(img);
-
-        });
-
-
-    document.getElementById("detailName").innerText =
-        product.dataset.name;
-
-
-    document.getElementById("detailDescription").innerText =
-        product.dataset.description;
-
-
-    document.getElementById("detailPrice").innerText =
-        Number(
-            product.dataset.price
-        ).toLocaleString() +
-        " د.ع";
-
-
-    createOptions(
-        "sizeOptions",
-        product.dataset.sizes,
-        "size"
-    );
-
-    createOptions(
-        "colorOptions",
-        product.dataset.colors,
-        "color"
-    );
-
+    const colorContainer = document.getElementById('colorOptions');
+    colorContainer.innerHTML = '';
+    selectedColor = colors[0] || '';
+    colors.forEach((c, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-button color-button' + (idx === 0 ? ' selected' : '');
+        btn.textContent = c;
+        btn.onclick = () => {
+            colorContainer.querySelectorAll('.option-button').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedColor = c;
+        };
+        colorContainer.appendChild(btn);
+    });
 
     document.getElementById("detailSizeArea").style.display =
-        product.dataset.sizes ? "block" : "none";
+        sizes.length ? "block" : "none";
 
     document.getElementById("detailColorArea").style.display =
-        product.dataset.colors ? "block" : "none";
+        colors.length ? "block" : "none";
 
+    const modalQty = document.getElementById('modalQty');
+    if (modalQty) modalQty.value = 1;
 
-    openModal("productModal");
-
-}
-
-
-function createOptions(containerId,data,type) {
-
-    const container =
-        document.getElementById(containerId);
-
-    container.innerHTML = "";
-
-    if (!data) return;
-
-    data
-        .split(",")
-        .filter(Boolean)
-        .forEach(value => {
-
-            const button =
-                document.createElement("button");
-
-            button.className =
-                "option-button";
-
-            button.innerText =
-                value;
-
-            button.onclick = () => {
-
-                container
-                    .querySelectorAll("button")
-                    .forEach(btn =>
-                        btn.classList.remove("selected")
-                    );
-
-                button.classList.add("selected");
-
-                if (type === "size") {
-
-                    selectedSize =
-                        value;
-
-                }
-
-                if (type === "color") {
-
-                    selectedColor =
-                        value;
-
-                }
-
-            };
-
-            container.appendChild(button);
-
-        });
-
+    openModal('productModal');
 }
 
 
@@ -2730,17 +2746,20 @@ window.addSelectedProduct = function addSelectedProduct() {
 
     if (!selectedProduct) return;
 
+    const modalQtyInput = document.getElementById("modalQty");
+    const quantity = modalQtyInput ? modalQtyInput.value : 1;
+
     addToCart(
 
         selectedProduct.dataset.name,
 
-        Number(
-            selectedProduct.dataset.price
-        ),
+        currentProductData ? currentProductData.price : Number(selectedProduct.dataset.price),
 
         selectedSize,
 
-        selectedColor
+        selectedColor,
+
+        quantity
 
     );
 
@@ -2759,7 +2778,8 @@ document
 
                 if (
                     event.target.closest(".add-cart") ||
-                    event.target.closest(".favorite-button")
+                    event.target.closest(".favorite-button") ||
+                    event.target.closest(".qty-input")
                 ) {
 
                     return;
@@ -3553,8 +3573,9 @@ window.openOrders = async function() {
 
             items.forEach(item => {
 
+                const itemQty = item.quantity || 1;
                 itemsText +=
-                    `${item.name} × ${item.price.toLocaleString()} د.ع`;
+                    `${item.name} (دانە: ${itemQty}) × ${item.price.toLocaleString()} د.ع`;
 
                 if (item.size) {
 
@@ -3653,7 +3674,9 @@ window.startOrder = function() {
 
     cart.forEach(item => {
 
-        total += Number(item.price);
+        const itemQty = item.quantity || 1;
+        const itemTotal = Number(item.price) * itemQty;
+        total += itemTotal;
 
         let options = "";
 
@@ -3673,6 +3696,8 @@ window.startOrder = function() {
 
         }
 
+        options += " | دانە: " + itemQty;
+
 
         summary += `
 
@@ -3683,7 +3708,7 @@ window.startOrder = function() {
                 </span>
 
                 <span style="color:#ffd000;">
-                    ${Number(item.price).toLocaleString()}
+                    ${itemTotal.toLocaleString()}
                     د.ع
                 </span>
 
@@ -3693,7 +3718,7 @@ window.startOrder = function() {
 
 
         itemsText +=
-            `${item.name}${options} - ${Number(item.price).toLocaleString()} د.ع\n`;
+            `${item.name}${options} - ${itemTotal.toLocaleString()} د.ع\n`;
 
     });
 
@@ -3786,11 +3811,13 @@ window.sendOrderToWhatsApp = async function() {
 
     cart.forEach((item,index) => {
 
-        total += Number(item.price);
+        const itemQty = item.quantity || 1;
+        const itemTotal = Number(item.price) * itemQty;
+        total += itemTotal;
 
 
         itemsText +=
-            `${index + 1}. ${item.name}`;
+            `${index + 1}. ${item.name} (دانە: ${itemQty})`;
 
         if (item.size) {
 
@@ -3807,7 +3834,7 @@ window.sendOrderToWhatsApp = async function() {
         }
 
         itemsText +=
-            ` | ${Number(item.price).toLocaleString()} د.ع\n`;
+            ` | ${itemTotal.toLocaleString()} د.ع\n`;
 
     });
 
@@ -3862,6 +3889,7 @@ ${total.toLocaleString()} د.ع`;
                         cart.map(item => ({
                             name: item.name,
                             price: Number(item.price),
+                            quantity: item.quantity || 1,
                             size: item.size || "",
                             color: item.color || ""
                         })),
@@ -3888,13 +3916,7 @@ ${total.toLocaleString()} د.ع`;
     }
 
 
-    /*
-    YOUR WHATSAPP NUMBER
-
-    9647517401120
-    */
-
-        const whatsappNumber =
+    const whatsappNumber =
         "9647517401120";
 
 
@@ -4208,90 +4230,9 @@ updateFavoriteCount();
 
 updateFavoriteButtons();
 
-    function openProduct(element) {
-    const name = element.getAttribute('data-name');
-    const description = element.getAttribute('data-description');
-    const images = (element.getAttribute('data-images') || '').split('|');
-    const sizes = (element.getAttribute('data-sizes') || '').split(',');
-    const colors = (element.getAttribute('data-colors') || '').split(',');
-
-    // Split prices by pipe "|"
-    const rawPrices = (element.getAttribute('data-price') || '0').split('|');
-    const prices = rawPrices.map(p => parseInt(p.trim()) || 0);
-
-    currentProductData = { name, prices, description, images, sizes, colors };
-
-    document.getElementById('detailName').textContent = name;
-    document.getElementById('detailDescription').textContent = description;
-
-    // Set default initial price
-    currentProductData.price = prices[0];
-    document.getElementById('detailPrice').textContent = prices[0].toLocaleString('ar-IQ') + ' د.ع';
-
-    // Image gallery
-    const mainImg = document.getElementById('mainProductImage');
-    mainImg.src = images[0] || '';
-
-    const thumbContainer = document.getElementById('productThumbnails');
-    thumbContainer.innerHTML = '';
-    images.forEach((imgSrc, idx) => {
-        const img = document.createElement('img');
-        img.src = imgSrc;
-        if (idx === 0) img.classList.add('selected');
-        img.onclick = () => {
-            mainImg.src = imgSrc;
-            thumbContainer.querySelectorAll('img').forEach(i => i.classList.remove('selected'));
-            img.classList.add('selected');
-        };
-        thumbContainer.appendChild(img);
-    });
-
-    // Dynamic price switching per size
-    const sizeContainer = document.getElementById('sizeOptions');
-    sizeContainer.innerHTML = '';
-    selectedSize = sizes[0] || '';
-
-    sizes.forEach((s, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'option-button' + (idx === 0 ? ' selected' : '');
-        btn.textContent = s;
-
-        btn.onclick = () => {
-            sizeContainer.querySelectorAll('.option-button').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            selectedSize = s;
-
-            // Pick price matching the size index
-            const activePrice = parseInt(prices[idx]) || prices[0];
-            currentProductData.price = activePrice;
-            document.getElementById('detailPrice').textContent = activePrice.toLocaleString('ar-IQ') + ' د.ع';
-        };
-
-        sizeContainer.appendChild(btn);
-    });
-
-    // Colors setup
-    const colorContainer = document.getElementById('colorOptions');
-    colorContainer.innerHTML = '';
-    selectedColor = colors[0] || '';
-    colors.forEach((c, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'option-button color-button' + (idx === 0 ? ' selected' : '');
-        btn.textContent = c;
-        btn.onclick = () => {
-            colorContainer.querySelectorAll('.option-button').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            selectedColor = c;
-        };
-        colorContainer.appendChild(btn);
-    });
-
-    openModal('productModal');
-}
 </script>
 
 
 </body>
 
 </html>
-

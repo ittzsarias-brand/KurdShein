@@ -3877,21 +3877,19 @@ ${total.toLocaleString()} د.ع`;
     9647517401120
     */
 
-    const whatsappNumber =
+        const whatsappNumber =
         "9647517401120";
 
 
     const url =
-        "https://wa.me/" +
+        "https://api.whatsapp.com/send?phone=" +
         whatsappNumber +
-        "?text=" +
+        "&text=" +
         encodeURIComponent(message);
 
 
-    window.open(
-        url,
-        "_blank"
-    );
+    window.location.href = url;
+
 
 
     cart = [];

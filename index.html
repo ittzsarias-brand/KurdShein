@@ -1,3 +1,1219 @@
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>KurdShein</title>
+
+<style>
+
+@font-face {
+    font-family: "Rabar";
+    src: url("Rabar_037%202.ttf") format("truetype");
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #08090c;
+    color: white;
+    font-family: "Rabar", Arial, sans-serif;
+}
+
+
+/* ================= TOP BAR ================= */
+
+.top-bar {
+    min-height: 40px;
+    background: #111318;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #272a30;
+    font-size: 14px;
+}
+
+.top-bar-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+}
+
+
+/* ================= BIG KURDSHEIN ================= */
+
+.top-logo {
+    text-align: center;
+    padding: 10px 15px 8px;
+    background: #0b0d11;
+    border-bottom: 1px solid #292c32;
+}
+
+.top-logo h1 {
+    display: inline-block;
+
+    position: relative;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    font-size: clamp(55px, 11vw, 125px);
+
+    font-weight: 900;
+
+    line-height: 0.9;
+
+    letter-spacing: -3px;
+
+    margin: 0;
+
+    background: linear-gradient(
+        to bottom,
+        #e21b23 0%,
+        #e21b23 33.33%,
+
+        #ffffff 33.33%,
+        #ffffff 66.66%,
+
+        #159447 66.66%,
+        #159447 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    -webkit-text-stroke: 1px #050505;
+
+    filter:
+        drop-shadow(4px 4px 0px #000)
+        drop-shadow(0 0 5px rgba(255,255,255,0.15));
+}
+
+
+/* BIG YELLOW SUN */
+
+.top-logo h1::after {
+    content: "☀";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 0.28em;
+
+    color: #ffd21c;
+
+    -webkit-text-fill-color: #ffd21c;
+
+    -webkit-text-stroke: 0;
+
+    text-shadow:
+        0 0 5px #ffd21c,
+        0 0 12px #ffd21c,
+        0 0 20px rgba(255,210,28,0.7);
+
+    pointer-events: none;
+
+    z-index: 5;
+}
+
+
+/* ================= HEADER ================= */
+
+header {
+    background: #0b0d11;
+    min-height: 82px;
+
+    padding: 12px 30px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    border-bottom: 1px solid #292c32;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.logo-red {
+    color: #ff2020;
+}
+
+.logo-white {
+    color: white;
+}
+
+
+/* ================= SEARCH ================= */
+
+.search-container {
+    flex: 1;
+
+    display: flex;
+    justify-content: center;
+}
+
+.search {
+    width: 100%;
+    max-width: 560px;
+
+    height: 46px;
+
+    display: flex;
+
+    background: #17191e;
+
+    border: 1px solid #3a3d44;
+
+    border-radius: 25px;
+
+    overflow: hidden;
+}
+
+.search input {
+    flex: 1;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    padding: 0 20px;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    font-size: 15px;
+
+    text-align: right;
+}
+
+.search input::placeholder {
+    color: #85878c;
+}
+
+.search-button {
+    width: 65px;
+
+    border: none;
+
+    background: #e90012;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.search-button:hover {
+    background: #ff1d30;
+}
+
+
+/* ================= SHOPPING CART ================= */
+
+.cart {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    background: #191b20;
+
+    border: 1px solid #3a3d44;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    position: relative;
+
+    font-size: 21px;
+
+    transition: 0.2s;
+}
+
+.cart:hover {
+    border-color: #ff2020;
+
+    transform: scale(1.05);
+}
+
+.cart-count {
+    position: absolute;
+
+    top: -4px;
+    right: -3px;
+
+    width: 19px;
+    height: 19px;
+
+    border-radius: 50%;
+
+    background: #e90012;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 11px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ================= KURDISTAN LINE ================= */
+
+.kurdistan-line {
+    height: 4px;
+
+    width: 100%;
+
+    background: linear-gradient(
+        to right,
+        #e21b23 0%,
+        #e21b23 33.33%,
+
+        #ffffff 33.33%,
+        #ffffff 66.66%,
+
+        #169447 66.66%,
+        #169447 100%
+    );
+}
+
+
+/* ================= CATEGORIES ================= */
+
+.categories {
+    width: 95%;
+
+    margin: 15px auto 20px;
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    flex-wrap: wrap;
+}
+
+.category {
+    background: #202227;
+
+    color: #eee;
+
+    border: 1px solid #393c43;
+
+    border-radius: 22px;
+
+    padding: 9px 17px;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.category:hover {
+    background: #2b2e35;
+
+    transform: translateY(-2px);
+}
+
+.category.active {
+    background: #159447;
+
+    border-color: #159447;
+}
+
+
+/* ================= PRODUCTS ================= */
+
+.products {
+    width: 94%;
+
+    max-width: 1400px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+}
+
+.product {
+    background: #15171b;
+
+    border: 1px solid #30333a;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    transition: 0.25s;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+
+    border-color: #555960;
+
+    box-shadow: 0 12px 35px rgba(0,0,0,0.55);
+}
+
+
+/* ================= PRODUCT IMAGE ================= */
+
+.product-image {
+    width: 100%;
+
+    height: 270px;
+
+    background: #202227;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: 0.3s;
+}
+
+.product:hover img {
+    transform: scale(1.04);
+}
+
+
+/* ================= SALE ================= */
+
+.sale {
+    position: absolute;
+
+    top: 10px;
+    right: 10px;
+
+    z-index: 2;
+
+    background: #e90012;
+
+    padding: 5px 10px;
+
+    border-radius: 15px;
+
+    font-size: 12px;
+}
+
+
+/* ================= PRODUCT INFO ================= */
+
+.product-info {
+    padding: 14px;
+}
+
+.product-name {
+    font-size: 17px;
+
+    margin-bottom: 5px;
+}
+
+.product-description {
+    color: #85878c;
+
+    font-size: 12px;
+
+    margin-bottom: 10px;
+}
+
+.price {
+    color: #ffd000;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+.old-price {
+    color: #777;
+
+    text-decoration: line-through;
+
+    font-size: 12px;
+
+    margin-right: 7px;
+}
+
+
+/* ================= ADD CART ================= */
+
+.add-cart {
+    width: 100%;
+
+    margin-top: 12px;
+
+    padding: 10px;
+
+    background: #24272c;
+
+    border: 1px solid #41444b;
+
+    color: white;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+.add-cart:hover {
+    background: #e90012;
+
+    border-color: #e90012;
+}
+
+
+/* ================= FOOTER ================= */
+
+footer {
+    margin-top: 60px;
+
+    padding: 35px 20px;
+
+    text-align: center;
+
+    background: #101217;
+
+    border-top: 3px solid #e90012;
+
+    color: #888;
+}
+
+.footer-logo {
+    font-size: 22px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+
+    color: white;
+}
+
+
+/* ================= CART MESSAGE ================= */
+
+.cart-message {
+    position: fixed;
+
+    bottom: 25px;
+
+    left: 50%;
+
+    transform: translate(-50%, 100px);
+
+    background: #1b1d22;
+
+    border: 1px solid #444850;
+
+    padding: 12px 25px;
+
+    border-radius: 30px;
+
+    z-index: 1000;
+
+    transition: 0.3s;
+
+    font-size: 14px;
+}
+
+
+/* ================= CART MODAL ================= */
+
+.cart-modal {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.75);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 2000;
+
+    padding: 20px;
+}
+
+.cart-modal.show {
+    display: flex;
+}
+
+.cart-box {
+    width: 100%;
+
+    max-width: 450px;
+
+    background: #15171b;
+
+    border: 1px solid #3a3d44;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+}
+
+.cart-box h2 {
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.cart-items {
+    max-height: 300px;
+
+    overflow-y: auto;
+
+    margin-bottom: 15px;
+}
+
+.cart-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px;
+
+    background: #202227;
+
+    border-radius: 8px;
+
+    margin-bottom: 8px;
+}
+
+.cart-total {
+    border-top: 1px solid #393c43;
+
+    padding-top: 15px;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    color: #ffd000;
+}
+
+.close-cart {
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 11px;
+
+    background: #e90012;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    cursor: pointer;
+}
+
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1000px) {
+
+    .products {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+/* ================= PHONE ================= */
+
+@media (max-width: 700px) {
+
+    .top-logo {
+        padding: 8px 10px 6px;
+    }
+
+    .top-logo h1 {
+        font-size: 50px;
+
+        letter-spacing: -2px;
+    }
+
+    header {
+        padding: 12px 15px;
+
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        width: 100%;
+
+        text-align: center;
+
+        order: 1;
+    }
+
+    .search-container {
+        order: 2;
+
+        width: calc(100% - 58px);
+    }
+
+    .cart {
+        order: 3;
+    }
+
+    .categories {
+        justify-content: flex-start;
+
+        flex-wrap: nowrap;
+
+        overflow-x: auto;
+
+        padding: 3px 5px 8px;
+    }
+
+    .category {
+        white-space: nowrap;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, 1fr);
+
+        width: 94%;
+
+        gap: 10px;
+    }
+
+    .product-image {
+        height: 210px;
+    }
+
+    .product-name {
+        font-size: 14px;
+    }
+
+    .price {
+        font-size: 14px;
+    }
+
+    .add-cart {
+        font-size: 12px;
+    }
+
+}
+
+
+/* ================= SMALL PHONE ================= */
+
+@media (max-width: 390px) {
+
+    .top-logo h1 {
+        font-size: 43px;
+    }
+
+    .product-image {
+        height: 180px;
+    }
+
+    .product-info {
+        padding: 10px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ================= TOP WELCOME ================= -->
+
+<div class="top-bar">
+
+    <div class="top-bar-text">
+
+        <span>☀</span>
+
+        بەخێربێیت بۆ کورد شیئێن
+
+        <span>☀</span>
+
+    </div>
+
+</div>
+
+
+<!-- ================= BIG KURDSHEIN ================= -->
+
+<div class="top-logo">
+
+    <h1>
+        KurdShein
+    </h1>
+
+</div>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+
+        <span class="logo-white">هێنانەوەی کاڵا لە وڵاتی</span>
+
+        <span class="logo-red"> (صین)</span>
+
+    </div>
+
+
+    <div class="search-container">
+
+        <div class="search">
+
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="گەڕان لە ناو بەرهەمەکان..."
+            >
+
+            <button
+                class="search-button"
+                onclick="searchProducts()"
+            >
+                🔍
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="cart" onclick="openCart()">
+
+        🛒
+
+        <div
+            class="cart-count"
+            id="cartCount"
+        >
+            0
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- ================= KURDISTAN LINE ================= -->
+
+<div class="kurdistan-line"></div>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<div class="categories">
+
+    <button
+        class="category active"
+        onclick="filterProducts('new', this)"
+    >
+        بابەتی نوێ
+    </button>
+
+    <button
+        class="category"
+        onclick="filterProducts('sale', this)"
+    >
+        داشکاندن
+    </button>
+
+    <button
+        class="category"
+        onclick="filterProducts('men', this)"
+    >
+        پیاوان
+    </button>
+
+    <button
+        class="category"
+        onclick="filterProducts('women', this)"
+    >
+        ئافرەتان
+    </button>
+
+    <button
+        class="category"
+        onclick="filterProducts('kids', this)"
+    >
+        منداڵان
+    </button>
+
+    <button
+        class="category"
+        onclick="filterProducts('accessories', this)"
+    >
+        ئەکسسوارات
+    </button>
+
+    <button
+        class="category"
+        onclick="filterProducts('electronics', this)"
+    >
+        ئەلکترۆنی
+    </button>
+
+</div>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<div class="products" id="products">
+
+
+    <!-- PRODUCT 1 -->
+
+    <div
+        class="product"
+        data-category="new women"
+        data-name="جلوبەرگی ژنان"
+        data-price="35000"
+    >
+
+        <div class="product-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80"
+                alt="جلوبەرگی ژنان"
+            >
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+                جلوبەرگی ژنان
+            </div>
+
+            <div class="product-description">
+                جلوبەرگی فاشن
+            </div>
+
+            <div class="price">
+                ٣٥,٠٠٠ د.ع
+            </div>
+
+            <button
+                class="add-cart"
+                onclick="addToCart('جلوبەرگی ژنان', 35000)"
+            >
+                🛒 زیادکردن بۆ سەبەتە
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT 2 -->
+
+    <div
+        class="product"
+        data-category="new men"
+        data-name="جلوبەرگی پیاوان"
+        data-price="42000"
+    >
+
+        <div class="product-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=700&q=80"
+                alt="جلوبەرگی پیاوان"
+            >
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+                جلوبەرگی پیاوان
+            </div>
+
+            <div class="product-description">
+                دیزاینی نوێ
+            </div>
+
+            <div class="price">
+                ٤٢,٠٠٠ د.ع
+            </div>
+
+            <button
+                class="add-cart"
+                onclick="addToCart('جلوبەرگی پیاوان', 42000)"
+            >
+                🛒 زیادکردن بۆ سەبەتە
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT 3 -->
+
+    <div
+        class="product"
+        data-category="sale accessories"
+        data-name="چاویلکەی فاشن"
+        data-price="15000"
+    >
+
+        <div class="product-image">
+
+            <div class="sale">
+                داشکاندن
+            </div>
+
+            <img
+                src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?auto=format&fit=crop&w=700&q=80"
+                alt="چاویلکە"
+            >
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+                چاویلکەی فاشن
+            </div>
+
+            <div class="product-description">
+                بۆ ژنان و پیاوان
+            </div>
+
+            <div>
+
+                <span class="price">
+                    ١٥,٠٠٠ د.ع
+                </span>
+
+                <span class="old-price">
+                    ٢٥,٠٠٠
+                </span>
+
+            </div>
+
+            <button
+                class="add-cart"
+                onclick="addToCart('چاویلکەی فاشن', 15000)"
+            >
+                🛒 زیادکردن بۆ سەبەتە
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT 4 -->
+
+    <div
+        class="product"
+        data-category="new accessories"
+        data-name="جانتای ژنان"
+        data-price="28000"
+    >
+
+        <div class="product-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80"
+                alt="جانتای ژنان"
+            >
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+                جانتای ژنان
+            </div>
+
+            <div class="product-description">
+                جانتای فاشن
+            </div>
+
+            <div class="price">
+                ٢٨,٠٠٠ د.ع
+            </div>
+
+            <button
+                class="add-cart"
+                onclick="addToCart('جانتای ژنان', 28000)"
+            >
+                🛒 زیادکردن بۆ سەبەتە
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT 5 -->
+
+    <div
+        class="product"
+        data-category="kids"
+        data-name="جلوبەرگی منداڵان"
+        data-price="22000"
+    >
+
+        <div class="product-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1519238263530-99bdd11df2ea?auto=format&fit=crop&w=700&q=80"
+                alt="جلوبەرگی منداڵان"
+            >
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+                جلوبەرگی منداڵان
+            </div>
+
+            <div class="product-description">
+                جلوبەرگی منداڵان
+            </div>
+
+            <div class="price">
+                ٢٢,٠٠٠ د.ع
+            </div>
+
+            <button
+                class="add-cart"
+                onclick="addToCart('جلوبەرگی منداڵان', 22000)"
+            >
+                🛒 زیادکردن بۆ سەبەتە
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT 6 -->
+
+    <div
+        class="product"
+        data-category="electronics"
+        data-name="هێدفۆن"
+        data-price="38000"
+    >
+
+        <div class="product-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=700&q=80"
+                alt="هێدفۆن"
+            >
+
+        </div>
+
+        <div class="product-info">
+
+            <div class="product-name">
+                هێدفۆنی بلوتوس
+            </div>
+
+            <div class="product-description">
+                کوالیتی بەرز
+            </div>
+
+            <div class="price">
+                ٣٨,٠٠٠ د.ع
+            </div>
+
+            <button
+                class="add-cart"
+                onclick="addToCart('هێدفۆنی بلوتوس', 38000)"
+            >
+                🛒 زیادکردن بۆ سەبەتە
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
 <!-- ================= FOOTER ================= -->
 
 <footer>
@@ -11,3 +1227,316 @@
     </p>
 
 </footer>
+
+
+<!-- ================= CART MESSAGE ================= -->
+
+<div
+    class="cart-message"
+    id="cartMessage"
+>
+    ✅ کاڵاکە زیادکرا بۆ سەبەتە
+</div>
+
+
+<!-- ================= CART MODAL ================= -->
+
+<div
+    class="cart-modal"
+    id="cartModal"
+    onclick="closeCartOutside(event)"
+>
+
+    <div class="cart-box">
+
+        <h2>
+            🛒 سەبەتەکەت
+        </h2>
+
+        <div
+            class="cart-items"
+            id="cartItems"
+        >
+        </div>
+
+        <div
+            class="cart-total"
+            id="cartTotal"
+        >
+            کۆی گشتی: ٠ د.ع
+        </div>
+
+        <button
+            class="close-cart"
+            onclick="closeCart()"
+        >
+            داخستن
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ================= CART ================= */
+
+let cart = [];
+
+
+function addToCart(name, price) {
+
+    cart.push({
+        name: name,
+        price: price
+    });
+
+    updateCart();
+
+    const message =
+        document.getElementById("cartMessage");
+
+    message.classList.add("show");
+
+    setTimeout(function() {
+
+        message.classList.remove("show");
+
+    }, 1800);
+}
+
+
+/* ================= UPDATE CART ================= */
+
+function updateCart() {
+
+    document.getElementById("cartCount").innerText =
+        cart.length;
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML =
+            "<p style='text-align:center;color:#888;'>سەبەتەکەت بەتاڵە 🛒</p>";
+
+        document.getElementById("cartTotal").innerText =
+            "کۆی گشتی: ٠ د.ع";
+
+        return;
+    }
+
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+
+    cart.forEach(function(item, index) {
+
+        total += item.price;
+
+
+        const itemDiv =
+            document.createElement("div");
+
+        itemDiv.className = "cart-item";
+
+
+        itemDiv.innerHTML = `
+
+            <span>
+                ${item.name}
+            </span>
+
+            <span style="color:#ffd000;">
+                ${item.price.toLocaleString()} د.ع
+            </span>
+
+            <button
+                onclick="removeFromCart(${index})"
+                style="
+                    background:#e90012;
+                    color:white;
+                    border:none;
+                    border-radius:5px;
+                    padding:5px 8px;
+                    cursor:pointer;
+                "
+            >
+                ×
+            </button>
+
+        `;
+
+
+        cartItems.appendChild(itemDiv);
+
+    });
+
+
+    document.getElementById("cartTotal").innerText =
+        "کۆی گشتی: " +
+        total.toLocaleString() +
+        " د.ع";
+}
+
+
+/* ================= REMOVE ITEM ================= */
+
+function removeFromCart(index) {
+
+    cart.splice(index, 1);
+
+    updateCart();
+}
+
+
+/* ================= OPEN CART ================= */
+
+function openCart() {
+
+    document
+        .getElementById("cartModal")
+        .classList.add("show");
+
+    updateCart();
+}
+
+
+/* ================= CLOSE CART ================= */
+
+function closeCart() {
+
+    document
+        .getElementById("cartModal")
+        .classList.remove("show");
+}
+
+
+/* ================= CLOSE OUTSIDE ================= */
+
+function closeCartOutside(event) {
+
+    if (
+        event.target ===
+        document.getElementById("cartModal")
+    ) {
+
+        closeCart();
+
+    }
+}
+
+
+/* ================= CATEGORY FILTER ================= */
+
+function filterProducts(category, button) {
+
+    const products =
+        document.querySelectorAll(".product");
+
+    const buttons =
+        document.querySelectorAll(".category");
+
+
+    buttons.forEach(function(btn) {
+
+        btn.classList.remove("active");
+
+    });
+
+
+    button.classList.add("active");
+
+
+    products.forEach(function(product) {
+
+        const categories =
+            product.dataset.category.split(" ");
+
+
+        if (categories.includes(category)) {
+
+            product.style.display = "block";
+
+        } else {
+
+            product.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchProducts() {
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const products =
+        document.querySelectorAll(".product");
+
+
+    products.forEach(function(product) {
+
+        const name =
+            product.dataset.name.toLowerCase();
+
+
+        if (
+            search === "" ||
+            name.includes(search)
+        ) {
+
+            product.style.display = "block";
+
+        } else {
+
+            product.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* ================= ENTER SEARCH ================= */
+
+document
+.getElementById("searchInput")
+.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Enter") {
+
+            searchProducts();
+
+        }
+
+    }
+);
+
+
+/* ================= START CART ================= */
+
+updateCart();
+
+</script>
+
+</body>
+</html>

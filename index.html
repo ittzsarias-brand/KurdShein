@@ -384,6 +384,8 @@ header {
     overflow: hidden;
 
     transition: 0.25s;
+
+    cursor: pointer;
 }
 
 .product:hover {
@@ -568,6 +570,157 @@ footer {
     transition: 0.3s;
 
     font-size: 14px;
+}
+
+.cart-message.show {
+    transform: translate(-50%, 0);
+}
+
+
+/* ================= PRODUCT DETAILS ================= */
+
+.product-details-modal {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.78);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 2500;
+
+    padding: 20px;
+}
+
+.product-details-modal.show {
+    display: flex;
+}
+
+.product-details-box {
+    width: 100%;
+
+    max-width: 450px;
+
+    background: #15171b;
+
+    border: 1px solid #3a3d44;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+
+    text-align: center;
+}
+
+.product-details-box h2 {
+    font-size: 23px;
+
+    margin-bottom: 12px;
+}
+
+.product-details-description {
+    color: #aaa;
+
+    font-size: 14px;
+
+    margin-bottom: 18px;
+}
+
+.product-details-price {
+    color: #ffd000;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    margin-bottom: 18px;
+}
+
+.product-details-sizes-title {
+    font-size: 16px;
+
+    margin-bottom: 10px;
+}
+
+.product-details-sizes {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+.size-option {
+    background: #202227;
+
+    border: 1px solid #41444b;
+
+    border-radius: 8px;
+
+    padding: 8px 15px;
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+}
+
+.details-add-cart {
+    width: 100%;
+
+    padding: 11px;
+
+    background: #159447;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    margin-bottom: 10px;
+}
+
+.details-add-cart:hover {
+    background: #1aad54;
+}
+
+.close-details {
+    width: 100%;
+
+    padding: 11px;
+
+    background: #e90012;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    cursor: pointer;
 }
 
 
@@ -943,6 +1096,7 @@ footer {
         data-category="new women"
         data-name="جلوبەرگی ژنان"
         data-price="35000"
+        onclick="openProductDetails('جلوبەرگی ژنان', 'جلوبەرگی فاشن', '٣٥,٠٠٠ د.ع', 'S, M, L, XL')"
     >
 
         <div class="product-image">
@@ -970,7 +1124,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="addToCart('جلوبەرگی ژنان', 35000)"
+                onclick="event.stopPropagation(); addToCart('جلوبەرگی ژنان', 35000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -987,6 +1141,7 @@ footer {
         data-category="new men"
         data-name="جلوبەرگی پیاوان"
         data-price="42000"
+        onclick="openProductDetails('جلوبەرگی پیاوان', 'دیزاینی نوێ', '٤٢,٠٠٠ د.ع', 'M, L, XL, XXL')"
     >
 
         <div class="product-image">
@@ -1014,7 +1169,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="addToCart('جلوبەرگی پیاوان', 42000)"
+                onclick="event.stopPropagation(); addToCart('جلوبەرگی پیاوان', 42000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1031,6 +1186,7 @@ footer {
         data-category="sale accessories"
         data-name="چاویلکەی فاشن"
         data-price="15000"
+        onclick="openProductDetails('چاویلکەی فاشن', 'بۆ ژنان و پیاوان', '١٥,٠٠٠ د.ع', 'یەک قەبارە')"
     >
 
         <div class="product-image">
@@ -1070,7 +1226,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="addToCart('چاویلکەی فاشن', 15000)"
+                onclick="event.stopPropagation(); addToCart('چاویلکەی فاشن', 15000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1087,6 +1243,7 @@ footer {
         data-category="new accessories"
         data-name="جانتای ژنان"
         data-price="28000"
+        onclick="openProductDetails('جانتای ژنان', 'جانتای فاشن', '٢٨,٠٠٠ د.ع', 'یەک قەبارە')"
     >
 
         <div class="product-image">
@@ -1114,7 +1271,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="addToCart('جانتای ژنان', 28000)"
+                onclick="event.stopPropagation(); addToCart('جانتای ژنان', 28000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1131,6 +1288,7 @@ footer {
         data-category="kids"
         data-name="جلوبەرگی منداڵان"
         data-price="22000"
+        onclick="openProductDetails('جلوبەرگی منداڵان', 'جلوبەرگی منداڵان', '٢٢,٠٠٠ د.ع', 'S, M, L, XL')"
     >
 
         <div class="product-image">
@@ -1158,7 +1316,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="addToCart('جلوبەرگی منداڵان', 22000)"
+                onclick="event.stopPropagation(); addToCart('جلوبەرگی منداڵان', 22000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1175,6 +1333,7 @@ footer {
         data-category="electronics"
         data-name="هێدفۆن"
         data-price="38000"
+        onclick="openProductDetails('هێدفۆنی بلوتوس', 'کوالیتی بەرز', '٣٨,٠٠٠ د.ع', 'یەک قەبارە')"
     >
 
         <div class="product-image">
@@ -1202,7 +1361,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="addToCart('هێدفۆنی بلوتوس', 38000)"
+                onclick="event.stopPropagation(); addToCart('هێدفۆنی بلوتوس', 38000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1227,6 +1386,63 @@ footer {
     </p>
 
 </footer>
+
+
+<!-- ================= PRODUCT DETAILS MODAL ================= -->
+
+<div
+    class="product-details-modal"
+    id="productDetailsModal"
+    onclick="closeProductDetailsOutside(event)"
+>
+
+    <div class="product-details-box">
+
+        <h2 id="detailsName">
+            ناوی بەرهەم
+        </h2>
+
+        <div
+            class="product-details-description"
+            id="detailsDescription"
+        >
+            وەسف
+        </div>
+
+        <div
+            class="product-details-price"
+            id="detailsPrice"
+        >
+            نرخ
+        </div>
+
+        <div class="product-details-sizes-title">
+            📏 قەبارەی بەردەست
+        </div>
+
+        <div
+            class="product-details-sizes"
+            id="detailsSizes"
+        >
+        </div>
+
+        <button
+            class="details-add-cart"
+            id="detailsAddCart"
+        >
+            🛒 زیادکردن بۆ سەبەتە
+        </button>
+
+        <button
+            class="close-details"
+            onclick="closeProductDetails()"
+        >
+            داخستن
+        </button>
+
+    </div>
+
+</div>
 
 
 <!-- ================= CART MESSAGE ================= -->
@@ -1427,6 +1643,86 @@ function closeCartOutside(event) {
     ) {
 
         closeCart();
+
+    }
+}
+
+
+/* ================= PRODUCT DETAILS ================= */
+
+function openProductDetails(name, description, price, sizes) {
+
+    document.getElementById("detailsName").innerText =
+        name;
+
+    document.getElementById("detailsDescription").innerText =
+        description;
+
+    document.getElementById("detailsPrice").innerText =
+        price;
+
+    const sizesContainer =
+        document.getElementById("detailsSizes");
+
+    sizesContainer.innerHTML = "";
+
+    sizes.split(",").forEach(function(size) {
+
+        const sizeElement =
+            document.createElement("div");
+
+        sizeElement.className =
+            "size-option";
+
+        sizeElement.innerText =
+            size.trim();
+
+        sizesContainer.appendChild(sizeElement);
+
+    });
+
+    document.getElementById("detailsAddCart").onclick =
+        function(event) {
+
+            event.stopPropagation();
+
+            let numericPrice =
+                parseInt(
+                    price
+                    .replace(/,/g, "")
+                    .replace(/[^\d]/g, "")
+                );
+
+            addToCart(name, numericPrice);
+
+        };
+
+    document
+        .getElementById("productDetailsModal")
+        .classList.add("show");
+}
+
+
+/* ================= CLOSE PRODUCT DETAILS ================= */
+
+function closeProductDetails() {
+
+    document
+        .getElementById("productDetailsModal")
+        .classList.remove("show");
+}
+
+
+/* ================= CLOSE DETAILS OUTSIDE ================= */
+
+function closeProductDetailsOutside(event) {
+
+    if (
+        event.target ===
+        document.getElementById("productDetailsModal")
+    ) {
+
+        closeProductDetails();
 
     }
 }

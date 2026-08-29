@@ -4206,6 +4206,86 @@ updateFavoriteCount();
 
 updateFavoriteButtons();
 
+    function openProduct(element) {
+    const name = element.getAttribute('data-name');
+    const description = element.getAttribute('data-description');
+    const images = (element.getAttribute('data-images') || '').split('|');
+    const sizes = (element.getAttribute('data-sizes') || '').split(',');
+    const colors = (element.getAttribute('data-colors') || '').split(',');
+
+    // Split prices by pipe "|"
+    const rawPrices = (element.getAttribute('data-price') || '0').split('|');
+    const prices = rawPrices.map(p => parseInt(p.trim()) || 0);
+
+    currentProductData = { name, prices, description, images, sizes, colors };
+
+    document.getElementById('detailName').textContent = name;
+    document.getElementById('detailDescription').textContent = description;
+
+    // Set default initial price
+    currentProductData.price = prices[0];
+    document.getElementById('detailPrice').textContent = prices[0].toLocaleString('ar-IQ') + ' د.ع';
+
+    // Image gallery
+    const mainImg = document.getElementById('mainProductImage');
+    mainImg.src = images[0] || '';
+
+    const thumbContainer = document.getElementById('productThumbnails');
+    thumbContainer.innerHTML = '';
+    images.forEach((imgSrc, idx) => {
+        const img = document.createElement('img');
+        img.src = imgSrc;
+        if (idx === 0) img.classList.add('selected');
+        img.onclick = () => {
+            mainImg.src = imgSrc;
+            thumbContainer.querySelectorAll('img').forEach(i => i.classList.remove('selected'));
+            img.classList.add('selected');
+        };
+        thumbContainer.appendChild(img);
+    });
+
+    // Dynamic price switching per size
+    const sizeContainer = document.getElementById('sizeOptions');
+    sizeContainer.innerHTML = '';
+    selectedSize = sizes[0] || '';
+
+    sizes.forEach((s, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-button' + (idx === 0 ? ' selected' : '');
+        btn.textContent = s;
+
+        btn.onclick = () => {
+            sizeContainer.querySelectorAll('.option-button').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedSize = s;
+
+            // Pick price matching the size index
+            const activePrice = parseInt(prices[idx]) || prices[0];
+            currentProductData.price = activePrice;
+            document.getElementById('detailPrice').textContent = activePrice.toLocaleString('ar-IQ') + ' د.ع';
+        };
+
+        sizeContainer.appendChild(btn);
+    });
+
+    // Colors setup
+    const colorContainer = document.getElementById('colorOptions');
+    colorContainer.innerHTML = '';
+    selectedColor = colors[0] || '';
+    colors.forEach((c, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-button color-button' + (idx === 0 ? ' selected' : '');
+        btn.textContent = c;
+        btn.onclick = () => {
+            colorContainer.querySelectorAll('.option-button').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            selectedColor = c;
+        };
+        colorContainer.appendChild(btn);
+    });
+
+    openModal('productModal');
+}
 </script>
 
 

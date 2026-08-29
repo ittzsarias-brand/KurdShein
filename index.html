@@ -9,10 +9,6 @@
 
 <style>
 
-/* ================================
-   RABAR FONT
-================================ */
-
 @font-face {
     font-family: "Rabar";
     src: url("Rabar_037%202.ttf") format("truetype");
@@ -31,9 +27,7 @@ body {
 }
 
 
-/* ================================
-   TOP BAR
-================================ */
+/* ================= TOP BAR ================= */
 
 .top-bar {
     height: 40px;
@@ -53,13 +47,11 @@ body {
 
 .sun {
     color: #ffd21c;
-    font-size: 18px;
+    font-size: 19px;
 }
 
 
-/* ================================
-   HEADER
-================================ */
+/* ================= HEADER ================= */
 
 header {
     background: #0b0d11;
@@ -88,9 +80,7 @@ header {
 }
 
 
-/* ================================
-   SEARCH
-================================ */
+/* ================= SEARCH ================= */
 
 .search-container {
     flex: 1;
@@ -153,9 +143,7 @@ header {
 }
 
 
-/* ================================
-   SHOPPING CART ICON
-================================ */
+/* ================= SHOPPING CART ================= */
 
 .cart {
     width: 48px;
@@ -210,9 +198,7 @@ header {
 }
 
 
-/* ================================
-   KURDISTAN LINE
-================================ */
+/* ================= KURDISTAN LINE ================= */
 
 .kurdistan-line {
     height: 4px;
@@ -230,9 +216,7 @@ header {
 }
 
 
-/* ================================
-   WELCOME
-================================ */
+/* ================= WELCOME ================= */
 
 .welcome {
     width: fit-content;
@@ -261,7 +245,7 @@ header {
 
     position: absolute;
 
-    left: 0;
+    right: 0;
     top: 0;
 
     width: 4px;
@@ -279,9 +263,7 @@ header {
 }
 
 
-/* ================================
-   CATEGORIES
-================================ */
+/* ================= CATEGORIES ================= */
 
 .categories {
     width: 95%;
@@ -319,20 +301,16 @@ header {
 
 .category:hover {
     background: #2b2e35;
-
     transform: translateY(-2px);
 }
 
 .category.active {
     background: #159447;
-
     border-color: #159447;
 }
 
 
-/* ================================
-   BIG KURDSHEIN TITLE
-================================ */
+/* ================= KURDSHEIN TITLE ================= */
 
 .title {
     text-align: center;
@@ -341,6 +319,13 @@ header {
 
     position: relative;
 }
+
+
+/*
+   IMPORTANT:
+   The KurdShein text itself keeps
+   the red / white / green colors.
+*/
 
 .title h1 {
     display: inline-block;
@@ -363,8 +348,10 @@ header {
         to bottom,
         #e21b23 0%,
         #e21b23 33.33%,
+
         #ffffff 33.33%,
         #ffffff 66.66%,
+
         #159447 66.66%,
         #159447 100%
     );
@@ -374,17 +361,19 @@ header {
 
     -webkit-text-fill-color: transparent;
 
-    -webkit-text-stroke: 3px #050505;
+    /*
+       Thin outline only.
+       This DOES NOT cover the colors.
+    */
+    -webkit-text-stroke: 1px #050505;
 
-    text-shadow:
-        4px 4px 0 #050505,
-        0 0 8px rgba(0,0,0,0.9);
+    filter:
+        drop-shadow(4px 4px 0px #000)
+        drop-shadow(0 0 5px rgba(255,255,255,0.15));
 }
 
 
-/* ================================
-   BIG YELLOW SUN
-================================ */
+/* ================= BIG YELLOW SUN ================= */
 
 .title h1::after {
     content: "☀";
@@ -398,11 +387,16 @@ header {
 
     font-family: Arial, sans-serif;
 
-    font-size: 0.27em;
+    /*
+       Bigger sun
+    */
+    font-size: 0.28em;
 
     color: #ffd21c;
 
     -webkit-text-fill-color: #ffd21c;
+
+    -webkit-text-stroke: 0;
 
     text-shadow:
         0 0 5px #ffd21c,
@@ -410,12 +404,12 @@ header {
         0 0 20px rgba(255,210,28,0.7);
 
     pointer-events: none;
+
+    z-index: 5;
 }
 
 
-/* ================================
-   CATEGORY TITLE
-================================ */
+/* ================= CATEGORY TITLE ================= */
 
 .title p {
     margin-top: 18px;
@@ -426,9 +420,7 @@ header {
 }
 
 
-/* ================================
-   PRODUCTS
-================================ */
+/* ================= PRODUCTS ================= */
 
 .products {
     width: 94%;
@@ -464,7 +456,7 @@ header {
 }
 
 
-/* PRODUCT IMAGE */
+/* ================= PRODUCT IMAGE ================= */
 
 .product-image {
     width: 100%;
@@ -492,7 +484,7 @@ header {
 }
 
 
-/* SALE */
+/* ================= SALE ================= */
 
 .sale {
     position: absolute;
@@ -512,7 +504,7 @@ header {
 }
 
 
-/* PRODUCT INFO */
+/* ================= PRODUCT INFO ================= */
 
 .product-info {
     padding: 14px;
@@ -520,7 +512,6 @@ header {
 
 .product-name {
     font-size: 17px;
-
     margin-bottom: 5px;
 }
 
@@ -553,7 +544,7 @@ header {
 }
 
 
-/* ADD CART */
+/* ================= ADD TO CART ================= */
 
 .add-cart {
     width: 100%;
@@ -586,276 +577,7 @@ header {
 }
 
 
-/* ================================
-   CART PANEL
-================================ */
-
-.cart-overlay {
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(0,0,0,0.65);
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition: 0.3s;
-
-    z-index: 9998;
-}
-
-.cart-overlay.show {
-    opacity: 1;
-
-    visibility: visible;
-}
-
-
-.cart-panel {
-    position: fixed;
-
-    top: 0;
-
-    right: 0;
-
-    width: 390px;
-
-    max-width: 92%;
-
-    height: 100vh;
-
-    background: #111318;
-
-    border-left: 1px solid #33363d;
-
-    z-index: 9999;
-
-    transform: translateX(100%);
-
-    transition: 0.3s;
-
-    display: flex;
-
-    flex-direction: column;
-}
-
-.cart-panel.show {
-    transform: translateX(0);
-}
-
-
-/* CART HEADER */
-
-.cart-header {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 20px;
-
-    border-bottom: 1px solid #30333a;
-}
-
-.cart-header h2 {
-    font-size: 20px;
-}
-
-.close-cart {
-    width: 38px;
-
-    height: 38px;
-
-    border-radius: 50%;
-
-    border: 1px solid #3a3d44;
-
-    background: #202227;
-
-    color: white;
-
-    font-size: 18px;
-
-    cursor: pointer;
-}
-
-.close-cart:hover {
-    background: #e90012;
-}
-
-
-/* CART ITEMS */
-
-.cart-items {
-    flex: 1;
-
-    overflow-y: auto;
-
-    padding: 15px;
-}
-
-.empty-cart {
-    text-align: center;
-
-    color: #888;
-
-    margin-top: 50px;
-
-    font-size: 16px;
-}
-
-
-.cart-item {
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    padding: 12px;
-
-    margin-bottom: 10px;
-
-    background: #1a1c21;
-
-    border: 1px solid #30333a;
-
-    border-radius: 10px;
-}
-
-.cart-item-info {
-    flex: 1;
-}
-
-.cart-item-name {
-    font-size: 15px;
-
-    margin-bottom: 5px;
-}
-
-.cart-item-price {
-    color: #ffd000;
-
-    font-size: 14px;
-}
-
-.quantity-controls {
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-    margin-top: 9px;
-}
-
-.quantity-controls button {
-    width: 29px;
-
-    height: 29px;
-
-    border-radius: 6px;
-
-    border: 1px solid #41444b;
-
-    background: #24272c;
-
-    color: white;
-
-    cursor: pointer;
-
-    font-size: 16px;
-}
-
-.quantity-controls button:hover {
-    background: #159447;
-}
-
-.remove-item {
-    border: none;
-
-    background: transparent;
-
-    color: #ff3030;
-
-    cursor: pointer;
-
-    font-size: 18px;
-}
-
-
-/* CART BOTTOM */
-
-.cart-bottom {
-    padding: 18px;
-
-    border-top: 1px solid #30333a;
-
-    background: #0d0f13;
-}
-
-.cart-total {
-    display: flex;
-
-    justify-content: space-between;
-
-    font-size: 18px;
-
-    margin-bottom: 12px;
-}
-
-.cart-total strong {
-    color: #ffd000;
-}
-
-.clear-cart,
-.checkout-button {
-    width: 100%;
-
-    padding: 12px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-family: "Rabar", Arial, sans-serif;
-
-    font-size: 14px;
-
-    margin-top: 8px;
-}
-
-.clear-cart {
-    background: #24272c;
-
-    color: white;
-
-    border: 1px solid #41444b;
-}
-
-.clear-cart:hover {
-    background: #33363d;
-}
-
-.checkout-button {
-    background: #159447;
-
-    color: white;
-
-    border: 1px solid #159447;
-}
-
-.checkout-button:hover {
-    background: #19ad53;
-}
-
-
-/* ================================
-   FOOTER
-================================ */
+/* ================= FOOTER ================= */
 
 footer {
     margin-top: 60px;
@@ -882,9 +604,7 @@ footer {
 }
 
 
-/* ================================
-   CART MESSAGE
-================================ */
+/* ================= CART MESSAGE ================= */
 
 .cart-message {
     position: fixed;
@@ -903,7 +623,7 @@ footer {
 
     border-radius: 30px;
 
-    z-index: 10000;
+    z-index: 1000;
 
     transition: 0.3s;
 
@@ -915,9 +635,112 @@ footer {
 }
 
 
-/* ================================
-   TABLET
-================================ */
+/* ================= CART POPUP ================= */
+
+.cart-modal {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.75);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 2000;
+
+    padding: 20px;
+}
+
+.cart-modal.show {
+    display: flex;
+}
+
+.cart-box {
+    width: 100%;
+
+    max-width: 450px;
+
+    background: #15171b;
+
+    border: 1px solid #3a3d44;
+
+    border-radius: 15px;
+
+    padding: 25px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+}
+
+.cart-box h2 {
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.cart-items {
+    max-height: 300px;
+
+    overflow-y: auto;
+
+    margin-bottom: 15px;
+}
+
+.cart-item {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 12px;
+
+    background: #202227;
+
+    border-radius: 8px;
+
+    margin-bottom: 8px;
+}
+
+.cart-total {
+    border-top: 1px solid #393c43;
+
+    padding-top: 15px;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    color: #ffd000;
+}
+
+.close-cart {
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 11px;
+
+    background: #e90012;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    cursor: pointer;
+}
+
+
+/* ================= TABLET ================= */
 
 @media (max-width: 1000px) {
 
@@ -928,9 +751,7 @@ footer {
 }
 
 
-/* ================================
-   PHONE
-================================ */
+/* ================= PHONE ================= */
 
 @media (max-width: 700px) {
 
@@ -1005,9 +826,7 @@ footer {
 }
 
 
-/* ================================
-   SMALL PHONE
-================================ */
+/* ================= SMALL PHONE ================= */
 
 @media (max-width: 390px) {
 
@@ -1023,12 +842,6 @@ footer {
         padding: 10px;
     }
 
-    .cart-panel {
-        width: 100%;
-
-        max-width: 100%;
-    }
-
 }
 
 </style>
@@ -1038,9 +851,7 @@ footer {
 <body>
 
 
-<!-- ================================
-     TOP BAR
-================================ -->
+<!-- ================= TOP MESSAGE ================= -->
 
 <div class="top-bar">
 
@@ -1057,9 +868,7 @@ footer {
 </div>
 
 
-<!-- ================================
-     HEADER
-================================ -->
+<!-- ================= HEADER ================= -->
 
 <header>
 
@@ -1094,13 +903,7 @@ footer {
     </div>
 
 
-    <!-- WORKING CART ICON -->
-
-    <div
-        class="cart"
-        onclick="openCart()"
-        title="سەبەتە"
-    >
+    <div class="cart" onclick="openCart()">
 
         🛒
 
@@ -1121,7 +924,7 @@ footer {
 <div class="kurdistan-line"></div>
 
 
-<!-- WELCOME -->
+<!-- ================= WELCOME ================= -->
 
 <div class="welcome">
 
@@ -1134,9 +937,7 @@ footer {
 </div>
 
 
-<!-- ================================
-     CATEGORIES
-================================ -->
+<!-- ================= CATEGORIES ================= -->
 
 <div class="categories">
 
@@ -1192,24 +993,22 @@ footer {
 </div>
 
 
-<!-- ================================
-     TITLE
-================================ -->
+<!-- ================= TITLE ================= -->
 
 <div class="title">
 
-    <h1>KurdShein</h1>
+    <h1>
+        KurdShein
+    </h1>
 
     <p id="categoryTitle">
-        بابەتی نوێ
+       گەران بەدوای باشترین کاڵا
     </p>
 
 </div>
 
 
-<!-- ================================
-     PRODUCTS
-================================ -->
+<!-- ================= PRODUCTS ================= -->
 
 <div class="products" id="products">
 
@@ -1220,6 +1019,7 @@ footer {
         class="product"
         data-category="new women"
         data-name="جلوبەرگی ژنان"
+        data-price="35000"
     >
 
         <div class="product-image">
@@ -1247,7 +1047,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="addToCart(this)"
+                onclick="addToCart('جلوبەرگی ژنان', 35000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1263,6 +1063,7 @@ footer {
         class="product"
         data-category="new men"
         data-name="جلوبەرگی پیاوان"
+        data-price="42000"
     >
 
         <div class="product-image">
@@ -1290,7 +1091,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="addToCart(this)"
+                onclick="addToCart('جلوبەرگی پیاوان', 42000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1306,6 +1107,7 @@ footer {
         class="product"
         data-category="sale accessories"
         data-name="چاویلکەی فاشن"
+        data-price="15000"
     >
 
         <div class="product-image">
@@ -1345,7 +1147,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="addToCart(this)"
+                onclick="addToCart('چاویلکەی فاشن', 15000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1361,6 +1163,7 @@ footer {
         class="product"
         data-category="new accessories"
         data-name="جانتای ژنان"
+        data-price="28000"
     >
 
         <div class="product-image">
@@ -1388,7 +1191,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="addToCart(this)"
+                onclick="addToCart('جانتای ژنان', 28000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1404,6 +1207,7 @@ footer {
         class="product"
         data-category="kids"
         data-name="جلوبەرگی منداڵان"
+        data-price="22000"
     >
 
         <div class="product-image">
@@ -1431,7 +1235,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="addToCart(this)"
+                onclick="addToCart('جلوبەرگی منداڵان', 22000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1447,6 +1251,7 @@ footer {
         class="product"
         data-category="electronics"
         data-name="هێدفۆن"
+        data-price="38000"
     >
 
         <div class="product-image">
@@ -1474,7 +1279,7 @@ footer {
 
             <button
                 class="add-cart"
-                onclick="addToCart(this)"
+                onclick="addToCart('هێدفۆنی بلوتوس', 38000)"
             >
                 🛒 زیادکردن بۆ سەبەتە
             </button>
@@ -1486,9 +1291,7 @@ footer {
 </div>
 
 
-<!-- ================================
-     FOOTER
-================================ -->
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
@@ -1503,7 +1306,7 @@ footer {
     </div>
 
     <p>
-        کورد شین - فرۆشتنی کاڵا بۆ کوردستان
+        کورد شین - هێنانەوەی کاڵا بۆ کوردستان
     </p>
 
     <p style="margin-top:10px;">
@@ -1513,9 +1316,7 @@ footer {
 </footer>
 
 
-<!-- ================================
-     CART MESSAGE
-================================ -->
+<!-- ================= CART MESSAGE ================= -->
 
 <div
     class="cart-message"
@@ -1525,78 +1326,38 @@ footer {
 </div>
 
 
-<!-- ================================
-     CART PANEL
-================================ -->
+<!-- ================= CART MODAL ================= -->
 
 <div
-    class="cart-overlay"
-    id="cartOverlay"
-    onclick="closeCart()"
-></div>
-
-
-<div
-    class="cart-panel"
-    id="cartPanel"
+    class="cart-modal"
+    id="cartModal"
+    onclick="closeCartOutside(event)"
 >
 
-    <div class="cart-header">
+    <div class="cart-box">
 
         <h2>
-            🛒 سەبەتەی کڕین
+            🛒 سەبەتەکەت
         </h2>
+
+        <div
+            class="cart-items"
+            id="cartItems"
+        >
+        </div>
+
+        <div
+            class="cart-total"
+            id="cartTotal"
+        >
+            کۆی گشتی: ٠ د.ع
+        </div>
 
         <button
             class="close-cart"
             onclick="closeCart()"
         >
-            ✕
-        </button>
-
-    </div>
-
-
-    <div
-        class="cart-items"
-        id="cartItems"
-    >
-
-        <p class="empty-cart">
-            سەبەتەکەت بەتاڵە 🛒
-        </p>
-
-    </div>
-
-
-    <div class="cart-bottom">
-
-        <div class="cart-total">
-
-            <span>
-                کۆی گشتی:
-            </span>
-
-            <strong id="cartTotal">
-                ٠ د.ع
-            </strong>
-
-        </div>
-
-
-        <button
-            class="clear-cart"
-            onclick="clearCart()"
-        >
-            🗑️ پاککردنەوەی سەبەتە
-        </button>
-
-
-        <button
-            class="checkout-button"
-            onclick="checkout()"
-        >
-            💳 تەواوکردنی کڕین
+            داخستن
         </button>
 
     </div>
@@ -1606,340 +1367,176 @@ footer {
 
 <script>
 
-/* ================================
-   SHOPPING CART
-================================ */
+/* ================= CART ================= */
 
 let cart = [];
 
 
-/* ADD TO CART */
+function addToCart(name, price) {
 
-function addToCart(button) {
-
-    const product =
-        button.closest(".product");
-
-    const name =
-        product.dataset.name;
-
-    const priceElement =
-        product.querySelector(".price");
-
-    const priceText =
-        priceElement.innerText;
-
-    const price =
-        parseInt(
-            priceText.replace(/[^\d]/g, "")
-        );
-
-
-    const existingProduct =
-        cart.find(
-            item => item.name === name
-        );
-
-
-    if (existingProduct) {
-
-        existingProduct.quantity++;
-
-    } else {
-
-        cart.push({
-
-            name: name,
-
-            price: price,
-
-            quantity: 1
-
-        });
-
-    }
-
+    cart.push({
+        name: name,
+        price: price
+    });
 
     updateCart();
 
-    showCartMessage();
+    const message =
+        document.getElementById("cartMessage");
 
+    message.classList.add("show");
+
+    setTimeout(function() {
+
+        message.classList.remove("show");
+
+    }, 1800);
 }
 
 
-/* UPDATE CART */
+/* ================= UPDATE CART ================= */
 
 function updateCart() {
+
+    document.getElementById("cartCount").innerText =
+        cart.length;
+
 
     const cartItems =
         document.getElementById("cartItems");
 
-    const cartCount =
-        document.getElementById("cartCount");
-
-    const cartTotal =
-        document.getElementById("cartTotal");
-
-
-    let totalItems = 0;
-
-    let totalPrice = 0;
-
 
     if (cart.length === 0) {
 
-        cartItems.innerHTML = `
-            <p class="empty-cart">
-                سەبەتەکەت بەتاڵە 🛒
-            </p>
+        cartItems.innerHTML =
+            "<p style='text-align:center;color:#888;'>سەبەتەکەت بەتاڵە 🛒</p>";
+
+        document.getElementById("cartTotal").innerText =
+            "کۆی گشتی: ٠ د.ع";
+
+        return;
+    }
+
+
+    cartItems.innerHTML = "";
+
+
+    let total = 0;
+
+
+    cart.forEach(function(item, index) {
+
+        total += item.price;
+
+
+        const itemDiv =
+            document.createElement("div");
+
+        itemDiv.className = "cart-item";
+
+
+        itemDiv.innerHTML = `
+
+            <span>
+                ${item.name}
+            </span>
+
+            <span style="color:#ffd000;">
+                ${item.price.toLocaleString()} د.ع
+            </span>
+
+            <button
+                onclick="removeFromCart(${index})"
+                style="
+                    background:#e90012;
+                    color:white;
+                    border:none;
+                    border-radius:5px;
+                    padding:5px 8px;
+                    cursor:pointer;
+                "
+            >
+                ×
+            </button>
+
         `;
 
-    } else {
 
-        cartItems.innerHTML = "";
+        cartItems.appendChild(itemDiv);
 
-
-        cart.forEach(
-            function(item, index) {
-
-                totalItems +=
-                    item.quantity;
-
-                totalPrice +=
-                    item.price *
-                    item.quantity;
+    });
 
 
-                const itemElement =
-                    document.createElement("div");
-
-                itemElement.className =
-                    "cart-item";
-
-
-                itemElement.innerHTML = `
-
-                    <div class="cart-item-info">
-
-                        <div class="cart-item-name">
-                            ${item.name}
-                        </div>
-
-                        <div class="cart-item-price">
-                            ${item.price.toLocaleString()} د.ع
-                        </div>
-
-                        <div class="quantity-controls">
-
-                            <button
-                                onclick="changeQuantity(${index}, 1)"
-                            >
-                                +
-                            </button>
-
-                            <span>
-                                ${item.quantity}
-                            </span>
-
-                            <button
-                                onclick="changeQuantity(${index}, -1)"
-                            >
-                                −
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="remove-item"
-                        onclick="removeFromCart(${index})"
-                    >
-                        🗑️
-                    </button>
-
-                `;
-
-
-                cartItems.appendChild(
-                    itemElement
-                );
-
-            }
-        );
-
-    }
-
-
-    cartCount.innerText =
-        totalItems;
-
-
-    cartTotal.innerText =
-        totalPrice.toLocaleString() +
+    document.getElementById("cartTotal").innerText =
+        "کۆی گشتی: " +
+        total.toLocaleString() +
         " د.ع";
-
 }
 
 
-/* CHANGE QUANTITY */
-
-function changeQuantity(index, amount) {
-
-    cart[index].quantity += amount;
-
-
-    if (
-        cart[index].quantity <= 0
-    ) {
-
-        cart.splice(index, 1);
-
-    }
-
-
-    updateCart();
-
-}
-
-
-/* REMOVE ITEM */
+/* ================= REMOVE ITEM ================= */
 
 function removeFromCart(index) {
 
     cart.splice(index, 1);
 
     updateCart();
-
 }
 
 
-/* OPEN CART */
+/* ================= OPEN CART ================= */
 
 function openCart() {
 
     document
-        .getElementById("cartPanel")
+        .getElementById("cartModal")
         .classList.add("show");
 
-    document
-        .getElementById("cartOverlay")
-        .classList.add("show");
-
+    updateCart();
 }
 
 
-/* CLOSE CART */
+/* ================= CLOSE CART ================= */
 
 function closeCart() {
 
     document
-        .getElementById("cartPanel")
+        .getElementById("cartModal")
         .classList.remove("show");
-
-    document
-        .getElementById("cartOverlay")
-        .classList.remove("show");
-
 }
 
 
-/* CLEAR CART */
+/* ================= CLOSE OUTSIDE ================= */
 
-function clearCart() {
+function closeCartOutside(event) {
 
-    cart = [];
+    if (
+        event.target ===
+        document.getElementById("cartModal")
+    ) {
 
-    updateCart();
-
-}
-
-
-/* CART MESSAGE */
-
-function showCartMessage() {
-
-    const message =
-        document.getElementById(
-            "cartMessage"
-        );
-
-
-    message.classList.add("show");
-
-
-    setTimeout(
-        function() {
-
-            message.classList.remove(
-                "show"
-            );
-
-        },
-        1800
-    );
-
-}
-
-
-/* CHECKOUT */
-
-function checkout() {
-
-    if (cart.length === 0) {
-
-        alert(
-            "سەبەتەکەت بەتاڵە 🛒"
-        );
-
-        return;
+        closeCart();
 
     }
-
-
-    const total =
-        document.getElementById(
-            "cartTotal"
-        ).innerText;
-
-
-    alert(
-        "کۆی کڕین: " + total
-    );
-
 }
 
 
-/* ================================
-   CATEGORY FILTER
-================================ */
+/* ================= CATEGORY FILTER ================= */
 
-function filterProducts(
-    category,
-    button
-) {
+function filterProducts(category, button) {
 
     const products =
-        document.querySelectorAll(
-            ".product"
-        );
+        document.querySelectorAll(".product");
 
     const buttons =
-        document.querySelectorAll(
-            ".category"
-        );
+        document.querySelectorAll(".category");
 
 
-    buttons.forEach(
-        function(btn) {
+    buttons.forEach(function(btn) {
 
-            btn.classList.remove(
-                "active"
-            );
+        btn.classList.remove("active");
 
-        }
-    );
+    });
 
 
     button.classList.add("active");
@@ -1964,119 +1561,91 @@ function filterProducts(
     };
 
 
-    document
-        .getElementById(
-            "categoryTitle"
-        )
-        .innerText =
+    document.getElementById("categoryTitle").innerText =
         titles[category];
 
 
-    products.forEach(
-        function(product) {
+    products.forEach(function(product) {
 
-            const categories =
-                product.dataset.category;
+        const categories =
+            product.dataset.category
+                .split(" ");
 
 
-            if (
-                categories.includes(
-                    category
-                )
-            ) {
+        if (categories.includes(category)) {
 
-                product.style.display =
-                    "block";
+            product.style.display = "block";
 
-            } else {
+        } else {
 
-                product.style.display =
-                    "none";
-
-            }
+            product.style.display = "none";
 
         }
-    );
+
+    });
 
 }
 
 
-/* ================================
-   SEARCH
-================================ */
+/* ================= SEARCH ================= */
 
 function searchProducts() {
 
     const search =
         document
-            .getElementById(
-                "searchInput"
-            )
-            .value
-            .trim()
-            .toLowerCase();
+        .getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
 
 
     const products =
-        document.querySelectorAll(
-            ".product"
-        );
+        document.querySelectorAll(".product");
 
 
-    products.forEach(
-        function(product) {
+    products.forEach(function(product) {
 
-            const name =
-                product.dataset.name
-                    .toLowerCase();
+        const name =
+            product.dataset.name.toLowerCase();
 
 
-            if (
-                search === "" ||
-                name.includes(search)
-            ) {
+        if (
+            search === "" ||
+            name.includes(search)
+        ) {
 
-                product.style.display =
-                    "block";
+            product.style.display = "block";
 
-            } else {
+        } else {
 
-                product.style.display =
-                    "none";
-
-            }
+            product.style.display = "none";
 
         }
-    );
+
+    });
 
 }
 
 
-/* ================================
-   ENTER = SEARCH
-================================ */
+/* ================= ENTER SEARCH ================= */
 
 document
-    .getElementById(
-        "searchInput"
-    )
-    .addEventListener(
-        "keydown",
-        function(event) {
+.getElementById("searchInput")
+.addEventListener(
+    "keydown",
+    function(event) {
 
-            if (
-                event.key === "Enter"
-            ) {
+        if (event.key === "Enter") {
 
-                searchProducts();
-
-            }
+            searchProducts();
 
         }
-    );
+
+    }
+);
 
 
-/* INITIAL CART */
+/* ================= START CART ================= */
 
 updateCart();
 

@@ -11,8 +11,6 @@
 
 /* ================================
    RABAR FONT
-   Your exact GitHub filename:
-   Rabar_037 2.ttf
 ================================ */
 
 @font-face {
@@ -42,13 +40,10 @@ body {
 .top-bar {
     height: 40px;
     background: #111318;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     border-bottom: 1px solid #272a30;
-
     font-size: 14px;
 }
 
@@ -70,29 +65,23 @@ body {
 
 header {
     background: #0b0d11;
-
     min-height: 82px;
-
     padding: 12px 30px;
 
     display: flex;
     align-items: center;
-
     gap: 20px;
 
     border-bottom: 1px solid #292c32;
 }
 
 
-/* LOGO */
+/* HEADER LOGO */
 
 .logo {
-    font-family: Arial, sans-serif;
-
+    font-family: "Rabar", Arial, sans-serif;
     font-size: 26px;
-
     font-weight: bold;
-
     white-space: nowrap;
 }
 
@@ -111,7 +100,6 @@ header {
 
 .search-container {
     flex: 1;
-
     display: flex;
     justify-content: center;
 }
@@ -119,15 +107,12 @@ header {
 .search {
     width: 100%;
     max-width: 560px;
-
     height: 46px;
 
     display: flex;
 
     background: #17191e;
-
     border: 1px solid #3a3d44;
-
     border-radius: 25px;
 
     overflow: hidden;
@@ -140,13 +125,11 @@ header {
     outline: none;
 
     background: transparent;
-
     color: white;
 
     padding: 0 20px;
 
     font-family: "Rabar", Arial, sans-serif;
-
     font-size: 15px;
 
     text-align: right;
@@ -162,7 +145,6 @@ header {
     border: none;
 
     background: #e90012;
-
     color: white;
 
     font-size: 20px;
@@ -234,12 +216,11 @@ header {
 
 
 /* ================================
-   KURDISTAN FLAG STRIPE
+   KURDISTAN FLAG LINE
 ================================ */
 
 .kurdistan-line {
     height: 4px;
-
     width: 100%;
 
     background: linear-gradient(
@@ -255,7 +236,7 @@ header {
 
 
 /* ================================
-   WELCOME MESSAGE
+   WELCOME
 ================================ */
 
 .welcome {
@@ -355,17 +336,19 @@ header {
 
 
 /* ================================
-   KURDSHEIN FLAG TITLE
+   BIG KURDSHEIN TITLE
 ================================ */
 
 .title {
     text-align: center;
+
     margin: 35px auto 30px;
+
     position: relative;
 }
 
 
-/* MAIN LOGO */
+/* BIG TEXT */
 
 .title h1 {
     display: inline-block;
@@ -384,17 +367,17 @@ header {
 
     margin: 0;
 
-    /* KURDISTAN FLAG */
+    /* KURDISTAN FLAG COLORS */
 
     background: linear-gradient(
         to bottom,
         #e21b23 0%,
-        #e21b23 33%,
+        #e21b23 33.33%,
 
-        #ffffff 33%,
-        #ffffff 66%,
+        #ffffff 33.33%,
+        #ffffff 66.66%,
 
-        #159447 66%,
+        #159447 66.66%,
         #159447 100%
     );
 
@@ -403,17 +386,17 @@ header {
 
     -webkit-text-fill-color: transparent;
 
-    /* BLACK OUTLINE + SHADOW */
+    /* BLACK OUTLINE */
 
-    -webkit-text-stroke: 2px rgba(0,0,0,0.8);
+    -webkit-text-stroke: 2px #050505;
 
     filter:
         drop-shadow(5px 5px 0px #000)
-        drop-shadow(0 0 5px rgba(255,255,255,0.12));
+        drop-shadow(0 0 5px rgba(255,255,255,0.15));
 }
 
 
-/* DARK SHADOW BEHIND TEXT */
+/* BLACK OFFSET SHADOW */
 
 .title h1::before {
     content: attr(data-text);
@@ -436,7 +419,7 @@ header {
 }
 
 
-/* KURDISTAN SUN */
+/* YELLOW KURDISTAN SUN */
 
 .title h1::after {
     content: "☀";
@@ -448,17 +431,18 @@ header {
 
     transform: translate(-50%, -50%);
 
+    font-family: Arial, sans-serif;
+
+    font-size: 0.22em;
+
     color: #ffd21c;
 
     -webkit-text-fill-color: #ffd21c;
 
-    font-family: Arial, sans-serif;
-
-    font-size: 0.23em;
-
     text-shadow:
         0 0 5px #ffd21c,
-        0 0 12px rgba(255,210,28,0.8);
+        0 0 12px #ffd21c,
+        0 0 20px rgba(255,210,28,0.7);
 
     pointer-events: none;
 }
@@ -495,7 +479,7 @@ header {
 }
 
 
-/* PRODUCT CARD */
+/* PRODUCT */
 
 .product {
     background: #15171b;
@@ -607,7 +591,7 @@ header {
 }
 
 
-/* ADD TO CART */
+/* ADD CART */
 
 .add-cart {
     width: 100%;
@@ -659,7 +643,7 @@ footer {
 }
 
 .footer-logo {
-    font-family: Arial, sans-serif;
+    font-family: "Rabar", Arial, sans-serif;
 
     font-size: 22px;
 
@@ -786,7 +770,9 @@ footer {
     }
 
     .title h1 {
-        font-size: 27px;
+        font-size: 50px;
+
+        letter-spacing: -2px;
     }
 
 }
@@ -797,6 +783,10 @@ footer {
 ================================ */
 
 @media (max-width: 390px) {
+
+    .title h1 {
+        font-size: 43px;
+    }
 
     .product-image {
         height: 180px;
@@ -815,7 +805,9 @@ footer {
 <body>
 
 
-<!-- TOP MESSAGE -->
+<!-- ================================
+     TOP MESSAGE
+================================ -->
 
 <div class="top-bar">
 
@@ -823,8 +815,7 @@ footer {
 
         <span class="sun">☀</span>
 
-       
-       بەخێربێیت بۆ کورد شیئێن
+        بەخێربێیت بۆ کورد شیئێن
 
         <span class="sun">☀</span>
 
@@ -833,12 +824,11 @@ footer {
 </div>
 
 
-<!-- HEADER -->
+<!-- ================================
+     HEADER
+================================ -->
 
 <header>
-
-
-    <!-- LOGO -->
 
     <div class="logo">
 
@@ -848,8 +838,6 @@ footer {
 
     </div>
 
-
-    <!-- SEARCH -->
 
     <div class="search-container">
 
@@ -872,8 +860,6 @@ footer {
 
     </div>
 
-
-    <!-- CART -->
 
     <div class="cart" onclick="openCart()">
 
@@ -909,7 +895,9 @@ footer {
 </div>
 
 
-<!-- CATEGORIES -->
+<!-- ================================
+     CATEGORIES
+================================ -->
 
 <div class="categories">
 
@@ -917,7 +905,7 @@ footer {
         class="category active"
         onclick="filterProducts('new', this)"
     >
-         بابەتی نوێ
+        بابەتی نوێ
     </button>
 
 
@@ -925,7 +913,7 @@ footer {
         class="category"
         onclick="filterProducts('sale', this)"
     >
-         داشکاندن
+        داشکاندن
     </button>
 
 
@@ -933,7 +921,7 @@ footer {
         class="category"
         onclick="filterProducts('men', this)"
     >
-         پیاوان
+        پیاوان
     </button>
 
 
@@ -941,7 +929,7 @@ footer {
         class="category"
         onclick="filterProducts('women', this)"
     >
-         ئافرەتان
+        ئافرەتان
     </button>
 
 
@@ -949,7 +937,7 @@ footer {
         class="category"
         onclick="filterProducts('kids', this)"
     >
-         منداڵان
+        منداڵان
     </button>
 
 
@@ -957,7 +945,7 @@ footer {
         class="category"
         onclick="filterProducts('accessories', this)"
     >
-    ئەکسسوارات
+        ئەکسسوارات
     </button>
 
 
@@ -965,13 +953,15 @@ footer {
         class="category"
         onclick="filterProducts('electronics', this)"
     >
-         ئەلکترۆنی
+        ئەلکترۆنی
     </button>
 
 </div>
 
 
-<!-- TITLE -->
+<!-- ================================
+     TITLE
+================================ -->
 
 <div class="title">
 
@@ -986,7 +976,9 @@ footer {
 </div>
 
 
-<!-- PRODUCTS -->
+<!-- ================================
+     PRODUCTS
+================================ -->
 
 <div class="products" id="products">
 
@@ -1263,7 +1255,9 @@ footer {
 </div>
 
 
-<!-- FOOTER -->
+<!-- ================================
+     FOOTER
+================================ -->
 
 <footer>
 
@@ -1356,11 +1350,13 @@ function filterProducts(category, button) {
     const buttons =
         document.querySelectorAll(".category");
 
+
     buttons.forEach(function(btn) {
 
         btn.classList.remove("active");
 
     });
+
 
     button.classList.add("active");
 
@@ -1384,7 +1380,9 @@ function filterProducts(category, button) {
     };
 
 
-    document.getElementById("title").innerText =
+    /* THIS IS THE IMPORTANT FIX */
+
+    document.getElementById("categoryTitle").innerText =
         titles[category];
 
 
@@ -1450,7 +1448,9 @@ function searchProducts() {
 }
 
 
-/* ENTER = SEARCH */
+/* ================================
+   ENTER = SEARCH
+================================ */
 
 document
 .getElementById("searchInput")
@@ -1458,7 +1458,7 @@ document
     "keydown",
     function(event) {
 
- b       if (event.key === "Enter") {
+        if (event.key === "Enter") {
 
             searchProducts();
 

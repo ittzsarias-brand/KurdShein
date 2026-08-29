@@ -3007,7 +3007,7 @@ window.openFavorites = function() {
 
            <button
     class="option-button favorite-open-button"
-    onclick="openProduct(this.closest('.favorite-product').productElement)"
+    onclick="openFavoriteProduct(this)"
 >
     👁
 </button>
@@ -3025,6 +3025,11 @@ window.openFavorites = function() {
     openModal("favoritesModal");
 
 };
+    function openFavoriteProduct(button) {
+    const product = button.closest(".favorite-product").productElement;
+    closeModal("favoritesModal");
+    openProduct(product);
+}
 
 
 /* ================= ACCOUNT ================= */

@@ -9,15 +9,9 @@
 
 <style>
 
-/* ================================
-   RABAR FONT
-================================ */
-
 @font-face {
     font-family: "Rabar";
     src: url("Rabar_037%202.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
 }
 
 * {
@@ -33,9 +27,7 @@ body {
 }
 
 
-/* ================================
-   TOP BAR
-================================ */
+/* TOP BAR */
 
 .top-bar {
     height: 40px;
@@ -59,9 +51,7 @@ body {
 }
 
 
-/* ================================
-   HEADER
-================================ */
+/* HEADER */
 
 header {
     background: #0b0d11;
@@ -75,11 +65,7 @@ header {
     border-bottom: 1px solid #292c32;
 }
 
-
-/* HEADER LOGO */
-
 .logo {
-    font-family: "Rabar", Arial, sans-serif;
     font-size: 26px;
     font-weight: bold;
     white-space: nowrap;
@@ -94,9 +80,7 @@ header {
 }
 
 
-/* ================================
-   SEARCH
-================================ */
+/* SEARCH */
 
 .search-container {
     flex: 1;
@@ -150,8 +134,6 @@ header {
     font-size: 20px;
 
     cursor: pointer;
-
-    transition: 0.2s;
 }
 
 .search-button:hover {
@@ -159,9 +141,7 @@ header {
 }
 
 
-/* ================================
-   SHOPPING CART
-================================ */
+/* CART */
 
 .cart {
     width: 48px;
@@ -182,8 +162,6 @@ header {
     position: relative;
 
     font-size: 21px;
-
-    transition: 0.2s;
 }
 
 .cart:hover {
@@ -206,7 +184,6 @@ header {
     color: white;
 
     font-family: Arial, sans-serif;
-
     font-size: 11px;
 
     display: flex;
@@ -215,9 +192,7 @@ header {
 }
 
 
-/* ================================
-   KURDISTAN FLAG LINE
-================================ */
+/* KURDISTAN LINE */
 
 .kurdistan-line {
     height: 4px;
@@ -235,9 +210,7 @@ header {
 }
 
 
-/* ================================
-   WELCOME
-================================ */
+/* WELCOME */
 
 .welcome {
     width: fit-content;
@@ -284,9 +257,7 @@ header {
 }
 
 
-/* ================================
-   CATEGORIES
-================================ */
+/* CATEGORIES */
 
 .categories {
     width: 95%;
@@ -324,20 +295,19 @@ header {
 
 .category:hover {
     background: #2b2e35;
-
     transform: translateY(-2px);
 }
 
 .category.active {
     background: #159447;
-
     border-color: #159447;
 }
 
 
-/* ================================
-   BIG KURDSHEIN TITLE
-================================ */
+/* ==================================
+   KURDSHEIN TITLE
+   NO BLACK COPY / NO BLACK SHADOW
+================================== */
 
 .title {
     text-align: center;
@@ -347,13 +317,8 @@ header {
     position: relative;
 }
 
-
-/* BIG TEXT */
-
 .title h1 {
     display: inline-block;
-
-    position: relative;
 
     font-family: "Rabar", Arial, sans-serif;
 
@@ -367,7 +332,7 @@ header {
 
     margin: 0;
 
-    /* KURDISTAN FLAG COLORS */
+    /* RED - WHITE - GREEN */
 
     background: linear-gradient(
         to bottom,
@@ -386,28 +351,15 @@ header {
 
     -webkit-text-fill-color: transparent;
 
-    /* BLACK OUTLINE */
+    /* VERY SMALL OUTLINE */
 
-    -webkit-text-stroke: 2px #050505;
+    -webkit-text-stroke: 1px rgba(0,0,0,0.35);
 
-    filter:
-        drop-shadow(5px 5px 0px #000)
-        drop-shadow(0 0 5px rgba(255,255,255,0.15));
+    position: relative;
 }
 
 
-/* BLACK OUTLINE + CLEAN SHADOW */
-
-.title h1 {
-    -webkit-text-stroke: 3px #050505;
-
-    text-shadow:
-        4px 4px 0 #050505,
-        0 0 8px rgba(0,0,0,0.9);
-}
-
-
-/* YELLOW KURDISTAN SUN */
+/* YELLOW SUN */
 
 .title h1::after {
     content: "☀";
@@ -443,15 +395,11 @@ header {
 
     color: #bdbdbd;
 
-    font-family: "Rabar", Arial, sans-serif;
-
     font-size: 18px;
 }
 
 
-/* ================================
-   PRODUCTS
-================================ */
+/* PRODUCTS */
 
 .products {
     width: 94%;
@@ -465,9 +413,6 @@ header {
 
     gap: 18px;
 }
-
-
-/* PRODUCT */
 
 .product {
     background: #15171b;
@@ -538,7 +483,7 @@ header {
 }
 
 
-/* PRODUCT INFORMATION */
+/* PRODUCT INFO */
 
 .product-info {
     padding: 14px;
@@ -546,7 +491,6 @@ header {
 
 .product-name {
     font-size: 17px;
-
     margin-bottom: 5px;
 }
 
@@ -612,9 +556,7 @@ header {
 }
 
 
-/* ================================
-   FOOTER
-================================ */
+/* FOOTER */
 
 footer {
     margin-top: 60px;
@@ -631,8 +573,6 @@ footer {
 }
 
 .footer-logo {
-    font-family: "Rabar", Arial, sans-serif;
-
     font-size: 22px;
 
     font-weight: bold;
@@ -643,9 +583,7 @@ footer {
 }
 
 
-/* ================================
-   CART MESSAGE
-================================ */
+/* CART MESSAGE */
 
 .cart-message {
     position: fixed;
@@ -676,9 +614,7 @@ footer {
 }
 
 
-/* ================================
-   TABLET
-================================ */
+/* TABLET */
 
 @media (max-width: 1000px) {
 
@@ -689,29 +625,23 @@ footer {
 }
 
 
-/* ================================
-   PHONE
-================================ */
+/* PHONE */
 
 @media (max-width: 700px) {
 
     header {
         padding: 12px 15px;
-
         flex-wrap: wrap;
     }
 
     .logo {
         width: 100%;
-
         text-align: center;
-
         order: 1;
     }
 
     .search-container {
         order: 2;
-
         width: calc(100% - 58px);
     }
 
@@ -759,16 +689,13 @@ footer {
 
     .title h1 {
         font-size: 50px;
-
         letter-spacing: -2px;
     }
 
 }
 
 
-/* ================================
-   SMALL PHONE
-================================ */
+/* SMALL PHONE */
 
 @media (max-width: 390px) {
 
@@ -793,9 +720,7 @@ footer {
 <body>
 
 
-<!-- ================================
-     TOP MESSAGE
-================================ -->
+<!-- TOP MESSAGE -->
 
 <div class="top-bar">
 
@@ -812,9 +737,7 @@ footer {
 </div>
 
 
-<!-- ================================
-     HEADER
-================================ -->
+<!-- HEADER -->
 
 <header>
 
@@ -865,7 +788,7 @@ footer {
 </header>
 
 
-<!-- KURDISTAN COLORS -->
+<!-- KURDISTAN LINE -->
 
 <div class="kurdistan-line"></div>
 
@@ -883,9 +806,7 @@ footer {
 </div>
 
 
-<!-- ================================
-     CATEGORIES
-================================ -->
+<!-- CATEGORIES -->
 
 <div class="categories">
 
@@ -896,14 +817,12 @@ footer {
         بابەتی نوێ
     </button>
 
-
     <button
         class="category"
         onclick="filterProducts('sale', this)"
     >
         داشکاندن
     </button>
-
 
     <button
         class="category"
@@ -912,14 +831,12 @@ footer {
         پیاوان
     </button>
 
-
     <button
         class="category"
         onclick="filterProducts('women', this)"
     >
         ئافرەتان
     </button>
-
 
     <button
         class="category"
@@ -928,14 +845,12 @@ footer {
         منداڵان
     </button>
 
-
     <button
         class="category"
         onclick="filterProducts('accessories', this)"
     >
         ئەکسسوارات
     </button>
-
 
     <button
         class="category"
@@ -947,15 +862,11 @@ footer {
 </div>
 
 
-<!-- ================================
-     TITLE
-================================ -->
+<!-- KURDSHEIN TITLE -->
 
 <div class="title">
 
-    <h1 data-text="KurdShein">
-        KurdShein
-    </h1>
+    <h1>KurdShein</h1>
 
     <p id="categoryTitle">
         بابەتی نوێ
@@ -964,9 +875,7 @@ footer {
 </div>
 
 
-<!-- ================================
-     PRODUCTS
-================================ -->
+<!-- PRODUCTS -->
 
 <div class="products" id="products">
 
@@ -1243,9 +1152,7 @@ footer {
 </div>
 
 
-<!-- ================================
-     FOOTER
-================================ -->
+<!-- FOOTER -->
 
 <footer>
 
@@ -1282,9 +1189,7 @@ footer {
 
 <script>
 
-/* ================================
-   CART
-================================ */
+/* CART */
 
 let cartCount = 0;
 
@@ -1326,9 +1231,7 @@ function openCart() {
 }
 
 
-/* ================================
-   CATEGORY FILTER
-================================ */
+/* CATEGORY FILTER */
 
 function filterProducts(category, button) {
 
@@ -1338,16 +1241,11 @@ function filterProducts(category, button) {
     const buttons =
         document.querySelectorAll(".category");
 
-
     buttons.forEach(function(btn) {
-
         btn.classList.remove("active");
-
     });
 
-
     button.classList.add("active");
-
 
     const titles = {
 
@@ -1367,12 +1265,8 @@ function filterProducts(category, button) {
 
     };
 
-
-    /* THIS IS THE IMPORTANT FIX */
-
     document.getElementById("categoryTitle").innerText =
         titles[category];
-
 
     products.forEach(function(product) {
 
@@ -1394,9 +1288,7 @@ function filterProducts(category, button) {
 }
 
 
-/* ================================
-   SEARCH
-================================ */
+/* SEARCH */
 
 function searchProducts() {
 
@@ -1407,16 +1299,13 @@ function searchProducts() {
         .trim()
         .toLowerCase();
 
-
     const products =
         document.querySelectorAll(".product");
-
 
     products.forEach(function(product) {
 
         const name =
             product.dataset.name.toLowerCase();
-
 
         if (
             search === "" ||
@@ -1436,9 +1325,7 @@ function searchProducts() {
 }
 
 
-/* ================================
-   ENTER = SEARCH
-================================ */
+/* ENTER = SEARCH */
 
 document
 .getElementById("searchInput")

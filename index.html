@@ -396,26 +396,14 @@ header {
 }
 
 
-/* BLACK OFFSET SHADOW */
+/* BLACK OUTLINE + CLEAN SHADOW */
 
-.title h1::before {
-    content: attr(data-text);
+.title h1 {
+    -webkit-text-stroke: 3px #050505;
 
-    position: absolute;
-
-    left: 0;
-    top: 0;
-
-    width: 100%;
-    height: 100%;
-
-    z-index: -1;
-
-    color: #050505;
-
-    -webkit-text-fill-color: #050505;
-
-    transform: translate(5px, 6px);
+    text-shadow:
+        4px 4px 0 #050505,
+        0 0 8px rgba(0,0,0,0.9);
 }
 
 

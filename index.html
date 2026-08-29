@@ -2851,10 +2851,28 @@ function createOptions(containerId,data,type) {
 
 }
 
-
 window.addSelectedProduct = function addSelectedProduct() {
 
     if (!selectedProduct) return;
+
+    // Uses selected dynamic size price, or falls back to default product price
+    const finalPrice = selectedProduct.currentActivePrice || Number(selectedProduct.dataset.price.split("|")[0]);
+
+    addToCart(
+
+        selectedProduct.dataset.name,
+
+        finalPrice,
+
+        selectedSize,
+
+        selectedColor
+
+    );
+
+    closeModal("productModal");
+
+}
 
     addToCart(
 

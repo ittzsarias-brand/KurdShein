@@ -4244,6 +4244,12 @@ updateFavoriteButtons();
         thumbContainer.appendChild(img);
     });
 
+       // Extract price array and set initial price to avoid NaN
+    const prices = (productElement.getAttribute('data-price') || '').split('|');
+    const initialPrice = parseInt(prices[0]) || 0;
+    currentProductData.price = initialPrice;
+    document.getElementById('detailPrice').textContent = initialPrice.toLocaleString('ar-IQ') + ' د.ع';
+
     // Dynamic price switching per size
     const sizeContainer = document.getElementById('sizeOptions');
     sizeContainer.innerHTML = '';
@@ -4260,12 +4266,14 @@ updateFavoriteButtons();
             selectedSize = s;
 
             // Pick price matching the size index
-            const activePrice = parseInt(prices[idx]) || prices[0];
+            const activePrice = parseInt(prices[idx]) || parseInt(prices[0]) || 0;
             currentProductData.price = activePrice;
             document.getElementById('detailPrice').textContent = activePrice.toLocaleString('ar-IQ') + ' د.ع';
         };
 
         sizeContainer.appendChild(btn);
+    });
+
     });
 
     // Colors setup

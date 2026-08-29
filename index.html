@@ -355,25 +355,125 @@ header {
 
 
 /* ================================
-   PAGE TITLE
+   KURDSHEIN FLAG TITLE
 ================================ */
 
 .title {
     text-align: center;
-
-    margin: 25px auto 30px;
+    margin: 35px auto 30px;
+    position: relative;
 }
+
+
+/* MAIN LOGO */
 
 .title h1 {
-    font-size: 34px;
+    display: inline-block;
 
-    margin-bottom: 6px;
+    position: relative;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    font-size: clamp(55px, 11vw, 125px);
+
+    font-weight: 900;
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+
+    margin: 0;
+
+    /* KURDISTAN FLAG */
+
+    background: linear-gradient(
+        to bottom,
+        #e21b23 0%,
+        #e21b23 33%,
+
+        #ffffff 33%,
+        #ffffff 66%,
+
+        #159447 66%,
+        #159447 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    /* BLACK OUTLINE + SHADOW */
+
+    -webkit-text-stroke: 2px rgba(0,0,0,0.8);
+
+    filter:
+        drop-shadow(5px 5px 0px #000)
+        drop-shadow(0 0 5px rgba(255,255,255,0.12));
 }
 
-.title p {
-    color: #85878c;
 
-    font-size: 14px;
+/* DARK SHADOW BEHIND TEXT */
+
+.title h1::before {
+    content: attr(data-text);
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: -1;
+
+    color: #050505;
+
+    -webkit-text-fill-color: #050505;
+
+    transform: translate(5px, 6px);
+}
+
+
+/* KURDISTAN SUN */
+
+.title h1::after {
+    content: "☀";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    color: #ffd21c;
+
+    -webkit-text-fill-color: #ffd21c;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 0.23em;
+
+    text-shadow:
+        0 0 5px #ffd21c,
+        0 0 12px rgba(255,210,28,0.8);
+
+    pointer-events: none;
+}
+
+
+/* CATEGORY TITLE */
+
+.title p {
+    margin-top: 18px;
+
+    color: #bdbdbd;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    font-size: 18px;
 }
 
 

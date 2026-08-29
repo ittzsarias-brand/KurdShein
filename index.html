@@ -30,7 +30,7 @@ body {
 /* ================= TOP BAR ================= */
 
 .top-bar {
-    height: 40px;
+    min-height: 40px;
     background: #111318;
     display: flex;
     align-items: center;
@@ -42,12 +42,94 @@ body {
 .top-bar-text {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 9px;
 }
 
-.sun {
+
+/* ================= BIG KURDSHEIN ================= */
+
+.top-logo {
+    text-align: center;
+    padding: 10px 15px 8px;
+    background: #0b0d11;
+    border-bottom: 1px solid #292c32;
+}
+
+.top-logo h1 {
+    display: inline-block;
+
+    position: relative;
+
+    font-family: "Rabar", Arial, sans-serif;
+
+    font-size: clamp(55px, 11vw, 125px);
+
+    font-weight: 900;
+
+    line-height: 0.9;
+
+    letter-spacing: -3px;
+
+    margin: 0;
+
+    /* KURDISTAN FLAG COLORS */
+
+    background: linear-gradient(
+        to bottom,
+        #e21b23 0%,
+        #e21b23 33.33%,
+
+        #ffffff 33.33%,
+        #ffffff 66.66%,
+
+        #159447 66.66%,
+        #159447 100%
+    );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    -webkit-text-stroke: 1px #050505;
+
+    filter:
+        drop-shadow(4px 4px 0px #000)
+        drop-shadow(0 0 5px rgba(255,255,255,0.15));
+}
+
+
+/* BIG YELLOW SUN */
+
+.top-logo h1::after {
+    content: "☀";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    font-family: Arial, sans-serif;
+
+    font-size: 0.28em;
+
     color: #ffd21c;
-    font-size: 19px;
+
+    -webkit-text-fill-color: #ffd21c;
+
+    -webkit-text-stroke: 0;
+
+    text-shadow:
+        0 0 5px #ffd21c,
+        0 0 12px #ffd21c,
+        0 0 20px rgba(255,210,28,0.7);
+
+    pointer-events: none;
+
+    z-index: 5;
 }
 
 
@@ -56,6 +138,7 @@ body {
 header {
     background: #0b0d11;
     min-height: 82px;
+
     padding: 12px 30px;
 
     display: flex;
@@ -84,6 +167,7 @@ header {
 
 .search-container {
     flex: 1;
+
     display: flex;
     justify-content: center;
 }
@@ -91,12 +175,15 @@ header {
 .search {
     width: 100%;
     max-width: 560px;
+
     height: 46px;
 
     display: flex;
 
     background: #17191e;
+
     border: 1px solid #3a3d44;
+
     border-radius: 25px;
 
     overflow: hidden;
@@ -109,11 +196,13 @@ header {
     outline: none;
 
     background: transparent;
+
     color: white;
 
     padding: 0 20px;
 
     font-family: "Rabar", Arial, sans-serif;
+
     font-size: 15px;
 
     text-align: right;
@@ -129,6 +218,7 @@ header {
     border: none;
 
     background: #e90012;
+
     color: white;
 
     font-size: 20px;
@@ -170,6 +260,7 @@ header {
 
 .cart:hover {
     border-color: #ff2020;
+
     transform: scale(1.05);
 }
 
@@ -193,6 +284,7 @@ header {
     font-size: 11px;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 }
@@ -202,62 +294,18 @@ header {
 
 .kurdistan-line {
     height: 4px;
+
     width: 100%;
 
     background: linear-gradient(
         to right,
         #e21b23 0%,
         #e21b23 33.33%,
+
         #ffffff 33.33%,
         #ffffff 66.66%,
+
         #169447 66.66%,
-        #169447 100%
-    );
-}
-
-
-/* ================= WELCOME ================= */
-
-.welcome {
-    width: fit-content;
-
-    margin: 12px auto;
-
-    padding: 6px 20px;
-
-    border-radius: 20px;
-
-    background: #17191d;
-
-    border: 1px solid #292c32;
-
-    color: #ddd;
-
-    font-size: 14px;
-
-    position: relative;
-
-    overflow: hidden;
-}
-
-.welcome::before {
-    content: "";
-
-    position: absolute;
-
-    right: 0;
-    top: 0;
-
-    width: 4px;
-    height: 100%;
-
-    background: linear-gradient(
-        to bottom,
-        #e21b23 0%,
-        #e21b23 33%,
-        white 33%,
-        white 66%,
-        #169447 66%,
         #169447 100%
     );
 }
@@ -268,7 +316,7 @@ header {
 .categories {
     width: 95%;
 
-    margin: 10px auto 25px;
+    margin: 15px auto 20px;
 
     display: flex;
 
@@ -301,122 +349,65 @@ header {
 
 .category:hover {
     background: #2b2e35;
+
     transform: translateY(-2px);
 }
 
 .category.active {
     background: #159447;
+
     border-color: #159447;
 }
 
 
-/* ================= KURDSHEIN TITLE ================= */
+/* ================= WELCOME MESSAGE ================= */
 
-.title {
-    text-align: center;
+.welcome {
+    width: fit-content;
 
-    margin: 35px auto 30px;
+    margin: 25px auto 30px;
+
+    padding: 8px 25px;
+
+    border-radius: 20px;
+
+    background: #17191d;
+
+    border: 1px solid #292c32;
+
+    color: #ddd;
+
+    font-size: 17px;
 
     position: relative;
+
+    overflow: hidden;
+
+    text-align: center;
 }
 
+.welcome::before {
+    content: "";
 
-/*
-   IMPORTANT:
-   The KurdShein text itself keeps
-   the red / white / green colors.
-*/
+    position: absolute;
 
-.title h1 {
-    display: inline-block;
+    right: 0;
+    top: 0;
 
-    position: relative;
-
-    font-family: "Rabar", Arial, sans-serif;
-
-    font-size: clamp(55px, 11vw, 125px);
-
-    font-weight: 900;
-
-    line-height: 1;
-
-    letter-spacing: -3px;
-
-    margin: 0;
+    width: 4px;
+    height: 100%;
 
     background: linear-gradient(
         to bottom,
         #e21b23 0%,
-        #e21b23 33.33%,
+        #e21b23 33%,
 
-        #ffffff 33.33%,
-        #ffffff 66.66%,
+        white 33%,
+        white 66%,
 
-        #159447 66.66%,
-        #159447 100%
+        #169447 66%,
+        #169447 100%
     );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    -webkit-text-fill-color: transparent;
-
-    /*
-       Thin outline only.
-       This DOES NOT cover the colors.
-    */
-    -webkit-text-stroke: 1px #050505;
-
-    filter:
-        drop-shadow(4px 4px 0px #000)
-        drop-shadow(0 0 5px rgba(255,255,255,0.15));
-}
-
-
-/* ================= BIG YELLOW SUN ================= */
-
-.title h1::after {
-    content: "☀";
-
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    font-family: Arial, sans-serif;
-
-    /*
-       Bigger sun
-    */
-    font-size: 0.28em;
-
-    color: #ffd21c;
-
-    -webkit-text-fill-color: #ffd21c;
-
-    -webkit-text-stroke: 0;
-
-    text-shadow:
-        0 0 5px #ffd21c,
-        0 0 12px #ffd21c,
-        0 0 20px rgba(255,210,28,0.7);
-
-    pointer-events: none;
-
-    z-index: 5;
-}
-
-
-/* ================= CATEGORY TITLE ================= */
-
-.title p {
-    margin-top: 18px;
-
-    color: #bdbdbd;
-
-    font-size: 18px;
 }
 
 
@@ -424,6 +415,7 @@ header {
 
 .products {
     width: 94%;
+
     max-width: 1400px;
 
     margin: auto;
@@ -512,6 +504,7 @@ header {
 
 .product-name {
     font-size: 17px;
+
     margin-bottom: 5px;
 }
 
@@ -544,7 +537,7 @@ header {
 }
 
 
-/* ================= ADD TO CART ================= */
+/* ================= ADD CART ================= */
 
 .add-cart {
     width: 100%;
@@ -635,7 +628,7 @@ footer {
 }
 
 
-/* ================= CART POPUP ================= */
+/* ================= CART MODAL ================= */
 
 .cart-modal {
     position: fixed;
@@ -755,6 +748,16 @@ footer {
 
 @media (max-width: 700px) {
 
+    .top-logo {
+        padding: 8px 10px 6px;
+    }
+
+    .top-logo h1 {
+        font-size: 50px;
+
+        letter-spacing: -2px;
+    }
+
     header {
         padding: 12px 15px;
 
@@ -793,6 +796,16 @@ footer {
         white-space: nowrap;
     }
 
+    .welcome {
+        margin-top: 20px;
+
+        margin-bottom: 25px;
+
+        font-size: 15px;
+
+        padding: 7px 20px;
+    }
+
     .products {
         grid-template-columns: repeat(2, 1fr);
 
@@ -817,12 +830,6 @@ footer {
         font-size: 12px;
     }
 
-    .title h1 {
-        font-size: 50px;
-
-        letter-spacing: -2px;
-    }
-
 }
 
 
@@ -830,7 +837,7 @@ footer {
 
 @media (max-width: 390px) {
 
-    .title h1 {
+    .top-logo h1 {
         font-size: 43px;
     }
 
@@ -851,19 +858,30 @@ footer {
 <body>
 
 
-<!-- ================= TOP MESSAGE ================= -->
+<!-- ================= TOP WELCOME ================= -->
 
 <div class="top-bar">
 
     <div class="top-bar-text">
 
-        <span class="sun">☀</span>
+        <span>☀</span>
 
         بەخێربێیت بۆ کورد شیئێن
 
-        <span class="sun">☀</span>
+        <span>☀</span>
 
     </div>
+
+</div>
+
+
+<!-- ================= BIG KURDSHEIN MOVED TO TOP ================= -->
+
+<div class="top-logo">
+
+    <h1>
+        KurdShein
+    </h1>
 
 </div>
 
@@ -919,22 +937,9 @@ footer {
 </header>
 
 
-<!-- KURDISTAN COLORS -->
+<!-- ================= KURDISTAN LINE ================= -->
 
 <div class="kurdistan-line"></div>
-
-
-<!-- ================= WELCOME ================= -->
-
-<div class="welcome">
-
-    🇹🇯
-
-    <span>
-        کاڵای جوان بۆ کوردستان
-    </span>
-
-</div>
 
 
 <!-- ================= CATEGORIES ================= -->
@@ -993,17 +998,17 @@ footer {
 </div>
 
 
-<!-- ================= TITLE ================= -->
+<!-- ================= WELCOME MOVED DOWN ================= -->
 
-<div class="title">
+<div class="welcome">
 
-    <h1>
-        KurdShein
-    </h1>
+    ☀️
 
-    <p id="categoryTitle">
-       گەران بەدوای باشترین کاڵا
-    </p>
+    <span>
+        بەخێربێیت بۆ کورد شیئێن
+    </span>
+
+    ☀️
 
 </div>
 
@@ -1401,7 +1406,6 @@ function updateCart() {
     document.getElementById("cartCount").innerText =
         cart.length;
 
-
     const cartItems =
         document.getElementById("cartItems");
 
@@ -1419,7 +1423,6 @@ function updateCart() {
 
 
     cartItems.innerHTML = "";
-
 
     let total = 0;
 
@@ -1561,15 +1564,10 @@ function filterProducts(category, button) {
     };
 
 
-    document.getElementById("categoryTitle").innerText =
-        titles[category];
-
-
     products.forEach(function(product) {
 
         const categories =
-            product.dataset.category
-                .split(" ");
+            product.dataset.category.split(" ");
 
 
         if (categories.includes(category)) {

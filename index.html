@@ -1587,8 +1587,58 @@ startHeroSlider();
 
     const sizeArea=document.getElementById('detailSizeArea');
     const colorArea=document.getElementById('detailColorArea');
+    const sizeOptions=document.getElementById('sizeOptions');
+    const colorOptions=document.getElementById('colorOptions');
+
+    // Restore product size/color options in the fallback menu.
+    function fillOptions(container, data, type) {
+      if(!container) return;
+      container.innerHTML='';
+      if(!data) return;
+      data.split(',').map(v=>v.trim()).filter(Boolean).forEach((value, index)=>{
+        const btn=document.createElement('button');
+        btn.type='button';
+        btn.className='option-button';
+        btn.innerText=value;
+        btn.addEventListener('click', function(){
+          container.querySelectorAll('.option-button').forEach(x=>x.classList.remove('selected'));
+          btn.classList.add('selected');
+          if(type==='size') window.__fallbackSelectedSize=value;
+          if(type==='color') window.__fallbackSelectedColor=value;
+        });
+        container.appendChild(btn);
+        if(index===0){
+          btn.classList.add('selected');
+          if(type==='size') window.__fallbackSelectedSize=value;
+          if(type==='color') window.__fallbackSelectedColor=value;
+        }
+      });
+    }
+
+    window.__fallbackSelectedSize='';
+    window.__fallbackSelectedColor='';
+    fillOptions(sizeOptions, product.dataset.sizes, 'size');
+    fillOptions(colorOptions, product.dataset.colors, 'color');
+
     if(sizeArea) sizeArea.style.display=product.dataset.sizes?'block':'none';
     if(colorArea) colorArea.style.display=product.dataset.colors?'block':'none';
+
+    // Keep the Add to Cart button functional in fallback mode.
+    const fallbackAdd=document.querySelector('#productModal .big-add');
+    if(fallbackAdd){
+      fallbackAdd.onclick=function(){
+        if(typeof window.addToCart==='function'){
+          window.addToCart(
+            product.dataset.name,
+            Number(product.dataset.price||0),
+            window.__fallbackSelectedSize || '',
+            window.__fallbackSelectedColor || ''
+          );
+        }
+        modal.classList.remove('show');
+        document.body.style.overflow='';
+      };
+    }
 
     modal.classList.add('show');
     document.body.style.overflow='hidden';

@@ -312,7 +312,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
         <div class="hero-copy">
           <div class="eyebrow">✦ کۆمەڵەی نوێی KurdShein</div>
           <h2>هەڵبژاردەی <span>جوان</span>، داواکاریی ئاسان.</h2>
-          <p>بەرهەمە هەڵبژێردراوەکان ببینە، قەبارە و ڕەنگ هەڵبژێرە، پاشان داواکارییەکەت بە خێرایی بنێرە بۆ ئەدمین.</p>
+          <p>هەڵبژاردنی بابەتی شیاو لەسەر تۆ، هێنانەوەی بۆ بەردەرگای ماڵت لەسەر ئێمە</p>
           <div class="hero-actions">
             <button class="hero-btn primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">بینینی بەرهەمەکان ↓</button>
             <button class="hero-btn secondary" onclick="openKurdSheinDrawer()">🛒 سەبەتەکەم</button>
@@ -327,6 +327,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
         <div class="hero-copy">
           <div class="eyebrow">✦ بانەری دووەم</div>
           <h2>لێرە <span>دەقەکەت</span> دابنێ.</h2>
+          <p>ئەم بانەرە بۆ تۆ ئامادەیە. دواتر دەتوانیت دەق، نرخ، داشکاندن یان هەر زانیارییەکی تر بە ئاسانی بگۆڕیت.</p>
           <div class="hero-actions">
             <button class="hero-btn primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">بینینی بەرهەمەکان ↓</button>
             <button class="hero-btn secondary" onclick="openKurdSheinDrawer()">🛒 سەبەتەکەم</button>
@@ -1488,7 +1489,7 @@ window.showHeroSlide = function(index) {
     clearInterval(heroSlideTimer);
     heroSlideTimer = setInterval(() => {
         showHeroSlide(heroSlideIndex + 1);
-    }, 1000);
+    }, 3000);
 };
 
 function startHeroSlider() {

@@ -172,6 +172,18 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 .category{white-space:nowrap;background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:9px 17px;font-size:13px;transition:.2s}
 .category:hover{border-color:var(--red)}
 .category.active{background:var(--red);border-color:var(--red);color:#fff}
+
+
+/* ===== KURDSHEIN HERO BANNER SLIDER ===== */
+.hero-slider{position:relative;overflow:hidden;border-radius:28px}
+.hero-slide{display:none;animation:heroSlideIn .55s ease both}
+.hero-slide.active{display:block}
+.hero-inner-second{background:radial-gradient(circle at 15% 20%,rgba(22,138,70,.24),transparent 35%),radial-gradient(circle at 85% 70%,rgba(247,201,72,.16),transparent 35%),linear-gradient(135deg,var(--surface),var(--surface-2))}
+.hero-dots{display:flex;justify-content:center;gap:8px;margin-top:12px}
+.hero-dot{width:9px;height:9px;border:0;border-radius:50%;padding:0;background:var(--muted);opacity:.45;transition:.2s}
+.hero-dot.active{width:25px;border-radius:99px;background:var(--red);opacity:1}
+@keyframes heroSlideIn{from{opacity:.25;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.hero-slide{animation:none}}
 </style>
 </head>
 <body>
@@ -292,18 +304,42 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 
 
 
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-glow"></div>
-    <div class="hero-copy">
-      <div class="eyebrow">✦ کۆمەڵەی نوێی KurdShein</div>
-      <h2>هەڵبژاردەی <span>جوان</span>، داواکاریی ئاسان.</h2>
-      <p>بەرهەمە هەڵبژێردراوەکان ببینە، قەبارە و ڕەنگ هەڵبژێرە، پاشان داواکارییەکەت بە خێرایی بنێرە بۆ ئەدمین.</p>
-      <div class="hero-actions">
-        <button class="hero-btn primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">بینینی بەرهەمەکان ↓</button>
-        <button class="hero-btn secondary" onclick="openKurdSheinDrawer()">🛒 سەبەتەکەم</button>
+<section class="hero" aria-label="KurdShein banners">
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-slide active">
+      <div class="hero-inner">
+        <div class="hero-glow"></div>
+        <div class="hero-copy">
+          <div class="eyebrow">✦ کۆمەڵەی نوێی KurdShein</div>
+          <h2>هەڵبژاردەی <span>جوان</span>، داواکاریی ئاسان.</h2>
+          <p>بەرهەمە هەڵبژێردراوەکان ببینە، قەبارە و ڕەنگ هەڵبژێرە، پاشان داواکارییەکەت بە خێرایی بنێرە بۆ ئەدمین.</p>
+          <div class="hero-actions">
+            <button class="hero-btn primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">بینینی بەرهەمەکان ↓</button>
+            <button class="hero-btn secondary" onclick="openKurdSheinDrawer()">🛒 سەبەتەکەم</button>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="hero-slide">
+      <div class="hero-inner hero-inner-second">
+        <div class="hero-glow"></div>
+        <div class="hero-copy">
+          <div class="eyebrow">✦ بانەری دووەم</div>
+          <h2>لێرە <span>دەقەکەت</span> دابنێ.</h2>
+          <p>ئەم بانەرە بۆ تۆ ئامادەیە. دواتر دەتوانیت دەق، نرخ، داشکاندن یان هەر زانیارییەکی تر بە ئاسانی بگۆڕیت.</p>
+          <div class="hero-actions">
+            <button class="hero-btn primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">بینینی بەرهەمەکان ↓</button>
+            <button class="hero-btn secondary" onclick="openKurdSheinDrawer()">🛒 سەبەتەکەم</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-dots" id="heroDots" aria-label="Banner navigation">
+    <button class="hero-dot active" type="button" aria-label="بانەری یەکەم" onclick="showHeroSlide(0)"></button>
+    <button class="hero-dot" type="button" aria-label="بانەری دووەم" onclick="showHeroSlide(1)"></button>
   </div>
 </section>
 <div class="section-head"><div><h2>بەرهەمەکان</h2><p>نوێترین بەرهەمە بەردەستەکان</p></div></div>
@@ -1432,6 +1468,34 @@ document.addEventListener("keydown", function(e) {
     }
 });
 
+
+
+/* ================= HERO BANNER SLIDER ================= */
+let heroSlideIndex = 0;
+let heroSlideTimer = null;
+
+window.showHeroSlide = function(index) {
+    const slides = document.querySelectorAll("#heroSlider .hero-slide");
+    const dots = document.querySelectorAll("#heroDots .hero-dot");
+    if (!slides.length) return;
+
+    heroSlideIndex = (index + slides.length) % slides.length;
+    slides.forEach((slide, i) => slide.classList.toggle("active", i === heroSlideIndex));
+    dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === heroSlideIndex);
+        dot.setAttribute("aria-current", i === heroSlideIndex ? "true" : "false");
+    });
+
+    clearInterval(heroSlideTimer);
+    heroSlideTimer = setInterval(() => {
+        showHeroSlide(heroSlideIndex + 1);
+    }, 1000);
+};
+
+function startHeroSlider() {
+    showHeroSlide(0);
+}
+
 /* ================= INITIALIZE ================= */
 normalizeCart();
 saveCart();
@@ -1442,6 +1506,7 @@ updateCart();
 updateFavoriteCount();
 updateFavoriteButtons();
 renderFavoritesSection();
+startHeroSlider();
 </script>
 </body>
 </html>

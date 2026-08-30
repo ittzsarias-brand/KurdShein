@@ -429,7 +429,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 
 <section class="recent-section" id="recentSection" hidden>
   <div class="section-head">
-    <div><h2>دواین بەرهەمە سەیرکراوەکان</h2><p>ئەو بەرهەمانەی دوایی سەیرت کردوون</p></div>
+    <div><h2>بەرهەمە دڵخوازەکان</h2><p>ئەو بەرهەمانەی دوایی سەیرت کردوون</p></div>
     <button class="clear-recent" type="button" onclick="clearRecentlyViewed()">پاککردنەوە</button>
   </div>
   <div class="recent-products" id="recentProducts"></div>
@@ -596,7 +596,7 @@ let galleryImages = [];
 let galleryIndex = 0;
 let deliveryFees = { Erbil: 3000, Sulaymaniyah: 4000, Duhok: 4000, Other: 5000 };
 const couponCodes = { KURD10: 0.10, NEW5: 0.05 };
-let recentlyViewed = JSON.parse(localStorage.getItem("kurdSheinRecentlyViewed") || "[]");
+let favoritesProducts = JSON.parse(localStorage.getItem("kurdSheinRecentlyViewed") || "[]");
 
 /* ================= THEME ================= */
 let savedTheme = localStorage.getItem("kurdSheinTheme");
@@ -1217,8 +1217,8 @@ window.updateCheckoutTotals = function() {
 /* ================= RECENTLY VIEWED ================= */
 function rememberRecentlyViewed(product) {
     const key = favoriteKey(product);
-    recentlyViewed = [key, ...recentlyViewed.filter(x => x !== key)].slice(0, 8);
-    localStorage.setItem("kurdSheinRecentlyViewed", JSON.stringify(recentlyViewed));
+    favoritesProducts = [key, ...favoritesProducts.filter(x => x !== key)].slice(0, 8);
+    localStorage.setItem("kurdSheinRecentlyViewed", JSON.stringify(favoritesProducts));
     renderRecentlyViewed();
 }
 
@@ -1227,7 +1227,7 @@ function renderRecentlyViewed() {
     const box = document.getElementById("recentProducts");
     if (!section || !box) return;
     const products = Array.from(document.querySelectorAll(".product"));
-    const matches = recentlyViewed.map(key => products.find(p => favoriteKey(p) === key)).filter(Boolean);
+    const matches = favoritesProducts.map(key => products.find(p => favoriteKey(p) === key)).filter(Boolean);
     if (!matches.length) { section.hidden = true; return; }
     section.hidden = false;
     box.innerHTML = matches.map(product => `
@@ -1239,7 +1239,7 @@ function renderRecentlyViewed() {
 }
 
 window.clearRecentlyViewed = function() {
-    recentlyViewed = [];
+    favoritesProducts = [];
     localStorage.removeItem("kurdSheinRecentlyViewed");
     renderRecentlyViewed();
     showMessage("🧹 بەرهەمە سەیرکراوەکان پاککرانەوە");

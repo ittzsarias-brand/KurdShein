@@ -4,11 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KurdShein | Luxury Shopping</title>
-    <!-- Google Fonts for Modern Typography -->
+    <title>KurdShein | Modern Luxury Shopping</title>
+    
+    <!-- Google Fonts Integration -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     
     <style>
         @font-face {
@@ -18,33 +19,45 @@
         }
 
         :root {
-            --bg: #07090e;
-            --surface: #0f131c;
-            --surface-card: #161b26;
-            --border: rgba(255, 255, 255, 0.08);
-            --border-hover: rgba(238, 43, 67, 0.4);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #ee2b43;
-            --primary-glow: rgba(238, 43, 67, 0.25);
-            --accent-gold: #f59e0b;
-            --accent-green: #10b981;
-            --radius-lg: 20px;
-            --radius-md: 12px;
-            --radius-sm: 8px;
-            --shadow-main: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
-            --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            --bg-base: #06080c;
+            --bg-surface: #0e121a;
+            --bg-card: #151a26;
+            --bg-glass: rgba(14, 18, 26, 0.75);
+            
+            --border-subtle: rgba(255, 255, 255, 0.07);
+            --border-hover: rgba(238, 43, 67, 0.5);
+            
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            
+            --brand-red: #ee2b43;
+            --brand-gold: #fbbf24;
+            --brand-green: #10b981;
+            --brand-glow: rgba(238, 43, 67, 0.3);
+            
+            --radius-full: 9999px;
+            --radius-xl: 24px;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            
+            --shadow-subtle: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            --shadow-elevated: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
+            
+            --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         body.light {
-            --bg: #f8fafc;
-            --surface: #ffffff;
-            --surface-card: #f1f5f9;
-            --border: rgba(0, 0, 0, 0.08);
-            --border-hover: rgba(238, 43, 67, 0.4);
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --shadow-main: 0 20px 30px -10px rgba(0, 0, 0, 0.06);
+            --bg-base: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-card: #f1f5f9;
+            --bg-glass: rgba(255, 255, 255, 0.8);
+            --border-subtle: rgba(0, 0, 0, 0.08);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #94a3b8;
+            --shadow-subtle: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            --shadow-elevated: 0 20px 30px -10px rgba(0, 0, 0, 0.08);
         }
 
         * {
@@ -54,23 +67,24 @@
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
+            background-color: var(--bg-base);
+            color: var(--text-primary);
             font-family: "Rabar", "Plus Jakarta Sans", sans-serif;
-            transition: background-color 0.4s, color 0.4s;
+            transition: background-color 0.4s ease, color 0.4s ease;
             overflow-x: hidden;
-            padding-bottom: 60px;
+            min-height: 100vh;
         }
 
-        /* High-End Announcement Bar */
-        .announcement-bar {
+        /* Top Announcement Ticker */
+        .ticker-bar {
             background: linear-gradient(90deg, #169447 0%, #ffd21c 50%, #ee2b43 100%);
-            color: #000;
-            font-weight: 700;
-            font-size: 13px;
+            color: #000000;
+            font-weight: 800;
+            font-size: 12px;
             text-align: center;
             padding: 8px 16px;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
         }
 
         /* Glassmorphic Navbar */
@@ -78,180 +92,165 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(15, 19, 28, 0.75);
+            background: var(--bg-glass);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
-            padding: 16px 5%;
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 16px 6%;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
+            gap: 24px;
         }
 
-        body.light header {
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-        .brand h1 {
-            font-size: 30px;
+        .brand-container h1 {
+            font-size: 28px;
             font-weight: 900;
             letter-spacing: -1px;
-            background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+            background: linear-gradient(135deg, #ffffff 0%, var(--text-secondary) 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             cursor: pointer;
         }
 
-        body.light .brand h1 {
+        body.light .brand-container h1 {
             background: linear-gradient(135deg, #0f172a 0%, #475569 100%);
             -webkit-background-clip: text;
             background-clip: text;
         }
 
-        .brand h1 span {
-            color: var(--primary);
-            -webkit-text-fill-color: var(--primary);
+        .brand-container h1 span {
+            color: var(--brand-red);
+            -webkit-text-fill-color: var(--brand-red);
         }
 
-        .search-box {
+        .search-container {
             flex: 1;
-            max-width: 550px;
+            max-width: 580px;
             position: relative;
         }
 
-        .search-box input {
+        .search-container input {
             width: 100%;
-            height: 48px;
-            background: var(--surface-card);
-            border: 1px solid var(--border);
-            border-radius: 40px;
-            padding: 0 24px 0 50px;
-            color: var(--text-main);
+            height: 46px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-full);
+            padding: 0 24px 0 52px;
+            color: var(--text-primary);
             font-family: inherit;
             font-size: 14px;
             outline: none;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
-        .search-box input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 20px var(--primary-glow);
+        .search-container input:focus {
+            border-color: var(--brand-red);
+            box-shadow: 0 0 25px var(--brand-glow);
         }
 
-        .search-box button {
+        .search-container button {
             position: absolute;
             left: 6px;
             top: 6px;
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             border: none;
-            background: var(--primary);
+            background: var(--brand-red);
             color: white;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 14px;
-            transition: var(--transition);
+            font-size: 13px;
+            transition: var(--transition-smooth);
         }
 
-        .search-box button:hover {
+        .search-container button:hover {
             transform: scale(1.05);
         }
 
-        .nav-tools {
+        .action-cluster {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .nav-btn {
+        .action-btn {
             position: relative;
             width: 44px;
             height: 44px;
-            border-radius: 14px;
-            background: var(--surface-card);
-            border: 1px solid var(--border);
-            color: var(--text-main);
+            border-radius: var(--radius-lg);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
             font-size: 18px;
         }
 
-        .nav-btn:hover {
-            border-color: var(--primary);
+        .action-btn:hover {
+            border-color: var(--brand-red);
             transform: translateY(-2px);
-            background: var(--surface);
+            background: var(--bg-surface);
         }
 
-        .nav-btn .count-badge {
+        .action-btn .badge {
             position: absolute;
-            top: -6px;
-            right: -6px;
-            background: var(--primary);
-            color: #fff;
-            font-size: 11px;
+            top: -5px;
+            right: -5px;
+            background: var(--brand-red);
+            color: #ffffff;
+            font-size: 10px;
             font-weight: 800;
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid var(--bg);
+            border: 2px solid var(--bg-base);
         }
 
         /* Hero Banner */
-        .hero-banner {
-            width: 90%;
-            max-width: 1350px;
-            margin: 30px auto;
-            border-radius: var(--radius-lg);
-            background: linear-gradient(135deg, rgba(238, 43, 67, 0.15) 0%, rgba(15, 19, 28, 0.95) 100%), var(--surface-card);
-            border: 1px solid var(--border);
-            padding: 60px 40px;
+        .hero-section {
+            width: 88%;
+            max-width: 1400px;
+            margin: 32px auto;
+            border-radius: var(--radius-xl);
+            background: linear-gradient(135deg, rgba(238, 43, 67, 0.12) 0%, rgba(14, 18, 26, 0.95) 100%), var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            padding: 70px 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-main);
+            box-shadow: var(--shadow-subtle);
         }
 
-        .hero-banner::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(238,43,67,0.08) 0%, transparent 70%);
-            pointer-events: none;
-        }
-
-        .hero-banner h2 {
-            font-size: clamp(28px, 4vw, 44px);
+        .hero-section h2 {
+            font-size: clamp(30px, 4.5vw, 48px);
             font-weight: 800;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             letter-spacing: -0.5px;
         }
 
-        .hero-banner p {
-            color: var(--text-muted);
+        .hero-section p {
+            color: var(--text-secondary);
             font-size: 16px;
-            max-width: 600px;
+            max-width: 640px;
             margin: 0 auto;
         }
 
-        /* Horizontal Filter Pills */
-        .filter-container {
-            width: 90%;
-            max-width: 1350px;
-            margin: 0 auto 35px;
+        /* Filter Pills Horizontal Scroll */
+        .category-scroll {
+            width: 88%;
+            max-width: 1400px;
+            margin: 0 auto 36px;
             display: flex;
             gap: 12px;
             overflow-x: auto;
@@ -259,134 +258,134 @@
             scrollbar-width: none;
         }
 
-        .filter-container::-webkit-scrollbar {
+        .category-scroll::-webkit-scrollbar {
             display: none;
         }
 
-        .pill-btn {
-            background: var(--surface-card);
-            border: 1px solid var(--border);
-            color: var(--text-muted);
-            padding: 12px 26px;
-            border-radius: 30px;
+        .filter-chip {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-secondary);
+            padding: 12px 28px;
+            border-radius: var(--radius-full);
             font-family: inherit;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             white-space: nowrap;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
-        .pill-btn.active,
-        .pill-btn:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: #fff;
-            box-shadow: 0 8px 20px var(--primary-glow);
+        .filter-chip.active,
+        .filter-chip:hover {
+            background: var(--brand-red);
+            border-color: var(--brand-red);
+            color: #ffffff;
+            box-shadow: 0 8px 25px var(--brand-glow);
         }
 
         /* Product Showcase Grid */
-        .product-grid {
-            width: 90%;
-            max-width: 1350px;
+        .main-catalog {
+            width: 88%;
+            max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 28px;
         }
 
-        .card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
+        .catalog-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
             position: relative;
         }
 
-        .card:hover {
+        .catalog-card:hover {
             transform: translateY(-8px);
             border-color: var(--border-hover);
-            box-shadow: var(--shadow-main);
+            box-shadow: var(--shadow-elevated);
         }
 
-        .card-img-wrapper {
+        .card-preview {
             width: 100%;
-            height: 280px;
-            background: var(--surface-card);
+            height: 300px;
+            background: var(--bg-card);
             position: relative;
             overflow: hidden;
         }
 
-        .card-img-wrapper img {
+        .card-preview img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .card:hover .card-img-wrapper img {
+        .catalog-card:hover .card-preview img {
             transform: scale(1.08);
         }
 
-        .card-badge {
+        .tag-badge {
             position: absolute;
             top: 14px;
             right: 14px;
-            background: var(--primary);
-            color: white;
+            background: var(--brand-red);
+            color: #ffffff;
             font-size: 11px;
             font-weight: 800;
             padding: 5px 12px;
-            border-radius: 20px;
+            border-radius: var(--radius-full);
             text-transform: uppercase;
         }
 
-        .fav-toggle {
+        .fav-trigger {
             position: absolute;
             top: 14px;
             left: 14px;
-            width: 38px;
-            height: 38px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
-            background: rgba(15, 19, 28, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
+            background: rgba(14, 18, 26, 0.65);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #ffffff;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 16px;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
             z-index: 2;
         }
 
-        .fav-toggle.active {
+        .fav-trigger.active {
             color: #ff3b30;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
         }
 
-        .card-content {
-            padding: 22px;
+        .card-details {
+            padding: 24px;
             display: flex;
             flex-direction: column;
             flex: 1;
         }
 
         .card-title {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: 700;
-            margin-bottom: 6px;
-            color: var(--text-main);
+            margin-bottom: 8px;
+            color: var(--text-primary);
         }
 
-        .card-description {
+        .card-desc {
             font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 22px;
             line-height: 1.5;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -395,211 +394,240 @@
             overflow: hidden;
         }
 
-        .card-footer {
+        .card-action-bar {
             margin-top: auto;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .price-tag {
-            font-size: 19px;
+        .price-text {
+            font-size: 20px;
             font-weight: 800;
-            color: var(--accent-gold);
+            color: var(--brand-gold);
         }
 
-        .cta-btn {
-            padding: 10px 18px;
-            border-radius: var(--radius-md);
-            background: var(--surface-card);
-            border: 1px solid var(--border);
-            color: var(--text-main);
+        .view-btn {
+            padding: 10px 20px;
+            border-radius: var(--radius-lg);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
             font-family: inherit;
             font-size: 13px;
             font-weight: 700;
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
-        .card:hover .cta-btn {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-            box-shadow: 0 6px 15px var(--primary-glow);
+        .catalog-card:hover .view-btn {
+            background: var(--brand-red);
+            border-color: var(--brand-red);
+            color: #ffffff;
+            box-shadow: 0 6px 16px var(--brand-glow);
         }
 
-        /* Modal Architecture */
-        .modal-overlay {
+        /* Modal Subsystem */
+        .modal-backdrop {
             position: fixed;
             inset: 0;
             background: rgba(4, 6, 10, 0.85);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(14px);
             display: none;
             align-items: center;
             justify-content: center;
             z-index: 2000;
-            padding: 20px;
+            padding: 24px;
         }
 
-        .modal-overlay.active {
+        .modal-backdrop.active {
             display: flex;
         }
 
-        .modal-window {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
+        .modal-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-xl);
             width: 100%;
             max-width: 520px;
-            padding: 30px;
+            padding: 32px;
             position: relative;
-            box-shadow: var(--shadow-main);
+            box-shadow: var(--shadow-elevated);
             max-height: 90vh;
             overflow-y: auto;
-            animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: modalScale 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes modalIn {
-            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+        @keyframes modalScale {
+            from { opacity: 0; transform: scale(0.95) translateY(12px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        .modal-window.large {
-            max-width: 850px;
+        .modal-card.wide {
+            max-width: 880px;
         }
 
-        .close-modal-btn {
+        .close-trigger {
             position: absolute;
             top: 20px;
             left: 20px;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            background: var(--surface-card);
-            border: 1px solid var(--border);
-            color: var(--text-main);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
             cursor: pointer;
             font-size: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
-        .close-modal-btn:hover {
-            background: var(--primary);
-            color: white;
+        .close-trigger:hover {
+            background: var(--brand-red);
+            color: #ffffff;
         }
 
-        .modal-header-title {
+        .modal-heading {
             font-size: 22px;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             text-align: center;
         }
 
-        /* Product Detail Modal Specifics */
-        .product-modal-grid {
+        /* Interactive Detail View */
+        .product-modal-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
+            gap: 32px;
         }
 
-        .modal-product-img {
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .primary-image {
             width: 100%;
             height: 340px;
             object-fit: cover;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
         }
 
-        .selector-label {
-            font-size: 12px;
+        .thumbnail-strip {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+        }
+
+        .thumbnail-strip img {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-md);
+            object-fit: cover;
+            cursor: pointer;
+            border: 1px solid var(--border-subtle);
+            opacity: 0.6;
+            transition: var(--transition-smooth);
+        }
+
+        .thumbnail-strip img.active,
+        .thumbnail-strip img:hover {
+            opacity: 1;
+            border-color: var(--brand-red);
+        }
+
+        .selection-label {
+            font-size: 13px;
             color: var(--text-muted);
             margin-bottom: 8px;
             font-weight: 600;
         }
 
-        .selector-row {
+        .chip-group {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
-        .chip-option {
+        .chip-item {
             padding: 8px 16px;
-            border-radius: var(--radius-sm);
-            background: var(--surface-card);
-            border: 1px solid var(--border);
-            color: var(--text-main);
+            border-radius: var(--radius-md);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-primary);
             font-family: inherit;
             font-size: 13px;
             cursor: pointer;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
-        .chip-option.selected {
-            background: var(--accent-green);
-            border-color: var(--accent-green);
-            color: #fff;
+        .chip-item.selected {
+            background: var(--brand-green);
+            border-color: var(--brand-green);
+            color: #ffffff;
         }
 
-        .modal-action-btn {
+        .btn-primary {
             width: 100%;
-            padding: 14px;
-            border-radius: var(--radius-md);
-            background: var(--primary);
+            padding: 16px;
+            border-radius: var(--radius-lg);
+            background: var(--brand-red);
             border: none;
-            color: white;
+            color: #ffffff;
             font-family: inherit;
             font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            transition: var(--transition);
-            box-shadow: 0 8px 20px var(--primary-glow);
+            transition: var(--transition-smooth);
+            box-shadow: 0 8px 24px var(--brand-glow);
         }
 
-        .modal-action-btn:hover {
+        .btn-primary:hover {
             transform: translateY(-2px);
             opacity: 0.95;
         }
 
-        /* Input Controls */
-        .form-field {
-            margin-bottom: 16px;
+        /* Form Control Framework */
+        .form-group {
+            margin-bottom: 18px;
         }
 
-        .form-field label {
+        .form-group label {
             display: block;
             font-size: 13px;
-            color: var(--text-muted);
-            margin-bottom: 6px;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
         }
 
-        .form-field input,
-        .form-field textarea {
+        .form-group input,
+        .form-group textarea {
             width: 100%;
-            padding: 12px 16px;
-            background: var(--surface-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            color: var(--text-main);
+            padding: 14px 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            color: var(--text-primary);
             font-family: inherit;
             outline: none;
-            transition: var(--transition);
+            transition: var(--transition-smooth);
         }
 
-        .form-field input:focus,
-        .form-field textarea:focus {
-            border-color: var(--primary);
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--brand-red);
         }
 
         footer {
-            margin-top: 80px;
-            border-top: 1px solid var(--border);
-            padding: 40px 20px;
+            margin-top: 100px;
+            border-top: 1px solid var(--border-subtle);
+            padding: 48px 20px;
             text-align: center;
             color: var(--text-muted);
             font-size: 14px;
@@ -607,110 +635,110 @@
 
         @media (max-width: 768px) {
             header { flex-wrap: wrap; }
-            .search-box { order: 3; max-width: 100%; }
-            .product-modal-grid { grid-template-columns: 1fr; }
+            .search-container { order: 3; max-width: 100%; }
+            .product-modal-layout { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="announcement-bar">
+    <div class="ticker-bar">
         ✨ بەخێربێیت بۆ KURDSHEIN - تاقانەی شۆپینگی ئۆنلاین لە کوردستان ✨
     </div>
 
     <header>
-        <div class="brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <div class="brand-container" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
             <h1>KURD<span>SHEIN</span></h1>
         </div>
 
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="گەڕان بۆ ناوی بەرهەم، براند یان جۆر..." onkeyup="searchProducts()">
-            <button onclick="searchProducts()">🔍</button>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="گەڕان بۆ ناوی بەرهەم، براند یان جۆر..." onkeyup="searchCatalog()">
+            <button onclick="searchCatalog()">🔍</button>
         </div>
 
-        <div class="nav-tools">
-            <button class="nav-btn" onclick="openModal('languageModal')" title="Language">🌐</button>
-            <button class="nav-btn" onclick="toggleTheme()" id="themeBtn" title="Theme">☀️</button>
-            <button class="nav-btn" onclick="openFavorites()" title="Favorites">
-                ❤️ <span class="count-badge" id="favBadge">0</span>
+        <div class="action-cluster">
+            <button class="action-btn" onclick="openModal('languageModal')" title="Language">🌐</button>
+            <button class="action-btn" onclick="toggleTheme()" id="themeToggleBtn" title="Theme">☀️</button>
+            <button class="action-btn" onclick="openFavorites()" title="Favorites">
+                ❤️ <span class="badge" id="favBadgeCount">0</span>
             </button>
-            <button class="nav-btn" onclick="openAccount()" title="Account">👤</button>
-            <button class="nav-btn" onclick="openCart()" title="Cart">
-                🛒 <span class="count-badge" id="cartBadge">0</span>
+            <button class="action-btn" onclick="openAccount()" title="Account">👤</button>
+            <button class="action-btn" onclick="openCart()" title="Cart">
+                🛒 <span class="badge" id="cartBadgeCount">0</span>
             </button>
         </div>
     </header>
 
-    <section class="hero-banner">
+    <section class="hero-section">
         <h2>شۆپینگی مۆدێرن و خێرا</h2>
         <p>بەرزترین کوالێتی بەرهەمەکان و ناردنی خێرا بۆ سەرجەم شارەکانی کوردستان</p>
     </section>
 
-    <div class="filter-container">
-        <button class="pill-btn active" onclick="filterCategory('all', this)">هەمووی</button>
-        <button class="pill-btn" onclick="filterCategory('new', this)">🔥 بابەتی نوێ</button>
-        <button class="pill-btn" onclick="filterCategory('sale', this)">🏷️ داشکاندن</button>
-        <button class="pill-btn" onclick="filterCategory('electronics', this)">⚡ ئامێری ئەلکترۆنی</button>
-        <button class="pill-btn" onclick="filterCategory('fashion', this)">👗 فاشن و پۆشاک</button>
-        <button class="pill-btn" onclick="filterCategory('accessories', this)">⌚ ئەکسسوارات</button>
-    </div>
+    <nav class="category-scroll">
+        <button class="filter-chip active" onclick="filterCategory('all', this)">هەمووی</button>
+        <button class="filter-chip" onclick="filterCategory('new', this)">🔥 بابەتی نوێ</button>
+        <button class="filter-chip" onclick="filterCategory('sale', this)">🏷️ داشکاندن</button>
+        <button class="filter-chip" onclick="filterCategory('electronics', this)">⚡ ئامێری ئەلکترۆنی</button>
+        <button class="filter-chip" onclick="filterCategory('fashion', this)">👗 فاشن و پۆشاک</button>
+        <button class="filter-chip" onclick="filterCategory('accessories', this)">⌚ ئەکسسوارات</button>
+    </nav>
 
-    <main class="product-grid" id="productGrid">
+    <main class="main-catalog" id="catalogGrid">
 
-        <!-- Item 1 -->
-        <article class="card" data-category="new electronics" data-name="جیهازی بۆن بڵاوکەرەوە" data-price="5000"
+        <!-- Product Item 1 -->
+        <article class="catalog-card" data-category="new electronics" data-name="جیهازی بۆن بڵاوکەرەوە" data-price="5000"
             data-description="ئامێری بڵاوکردنەوەی بۆن لە براندی تێکوی. گونجاوە بۆ ناو سەیارە و ناو ماڵ. ئیشکردنی بێدەنگ و دیزاینی سەرنجڕاکێش."
             data-images="IMG_9186.jpeg|IMG_9187.jpeg" data-sizes="Standard" data-colors="RGB">
-            <div class="card-img-wrapper">
-                <span class="card-badge">نوێ</span>
-                <button class="fav-toggle" onclick="toggleFavorite(event, this)">♡</button>
+            <div class="card-preview">
+                <span class="tag-badge">نوێ</span>
+                <button class="fav-trigger" onclick="toggleFavorite(event, this)">♡</button>
                 <img src="IMG_9186.jpeg" alt="Product Image">
             </div>
-            <div class="card-content">
+            <div class="card-details">
                 <h3 class="card-title">جیهازی بۆن</h3>
-                <p class="card-description">بۆ سەیارە و ماڵ - بە کواڵتی بەرز</p>
-                <div class="card-footer">
-                    <span class="price-tag">٥,٠٠٠ د.ع</span>
-                    <button class="cta-btn" onclick="openProductModal(this.closest('.card'))">سەیرکردن 👁️</button>
+                <p class="card-desc">بۆ سەیارە و ماڵ - بە کواڵتی بەرز</p>
+                <div class="card-action-bar">
+                    <span class="price-text">٥,٠٠٠ د.ع</span>
+                    <button class="view-btn" onclick="openProductModal(this.closest('.catalog-card'))">سەیرکردن 👁️</button>
                 </div>
             </div>
         </article>
 
-        <!-- Item 2 -->
-        <article class="card" data-category="new electronics" data-name="لیدی نیۆن RGB" data-price="12000"
+        <!-- Product Item 2 -->
+        <article class="catalog-card" data-category="new electronics" data-name="لیدی نیۆن RGB" data-price="12000"
             data-description="لیدی نیۆنی زیرەک بۆ ڕووناککردنەوە و دیمەنی ژوور. لەڕێگەی کۆنترۆڵ و بەرنامەی مۆبایلەوە کۆنترۆڵ دەکرێت."
             data-images="IMG_9205.jpeg|IMG_9196.jpeg" data-sizes="2M,3M,5M" data-colors="Multi-Color">
-            <div class="card-img-wrapper">
-                <span class="card-badge">ترێند</span>
-                <button class="fav-toggle" onclick="toggleFavorite(event, this)">♡</button>
+            <div class="card-preview">
+                <span class="tag-badge">ترێند</span>
+                <button class="fav-trigger" onclick="toggleFavorite(event, this)">♡</button>
                 <img src="IMG_9205.jpeg" alt="Product Image">
             </div>
-            <div class="card-content">
+            <div class="card-details">
                 <h3 class="card-title">لیدی نیۆن RGB</h3>
-                <p class="card-description">کۆنترۆڵ لەڕێگەی مۆبایل و ریمۆت</p>
-                <div class="card-footer">
-                    <span class="price-tag">١٢,٠٠٠ د.ع</span>
-                    <button class="cta-btn" onclick="openProductModal(this.closest('.card'))">سەیرکردن 👁️</button>
+                <p class="card-desc">کۆنترۆڵ لەڕێگەی مۆبایل و ریمۆت</p>
+                <div class="card-action-bar">
+                    <span class="price-text">١٢,٠٠٠ د.ع</span>
+                    <button class="view-btn" onclick="openProductModal(this.closest('.catalog-card'))">سەیرکردن 👁️</button>
                 </div>
             </div>
         </article>
 
-        <!-- Item 3 -->
-        <article class="card" data-category="sale electronics" data-name="پرۆجێکتەری گالاکسی" data-price="13000"
+        <!-- Product Item 3 -->
+        <article class="catalog-card" data-category="sale electronics" data-name="پرۆجێکتەری گالاکسی" data-price="13000"
             data-description="نمایشکردنی ئەستێرە و گەلەستێرەکان لەناو ژووردا. ڕەبتکردنی بلوتوث بۆ لێدانی میوزیک."
             data-images="IMG_9235.jpeg|IMG_9236.jpeg" data-sizes="Standard" data-colors="ڕەش,سپی">
-            <div class="card-img-wrapper">
-                <span class="card-badge">داشکاندن</span>
-                <button class="fav-toggle" onclick="toggleFavorite(event, this)">♡</button>
+            <div class="card-preview">
+                <span class="tag-badge">داشکاندن</span>
+                <button class="fav-trigger" onclick="toggleFavorite(event, this)">♡</button>
                 <img src="IMG_9235.jpeg" alt="Product Image">
             </div>
-            <div class="card-content">
+            <div class="card-details">
                 <h3 class="card-title">پرۆجێکتەری گالاکسی</h3>
-                <p class="card-description">دیمەنی سحرئامێز بۆ ژووری خەوتن</p>
-                <div class="card-footer">
-                    <span class="price-tag">١٣,٠٠٠ د.ع</span>
-                    <button class="cta-btn" onclick="openProductModal(this.closest('.card'))">سەیرکردن 👁️</button>
+                <p class="card-desc">دیمەنی سحرئامێز بۆ ژووری خەوتن</p>
+                <div class="card-action-bar">
+                    <span class="price-text">١٣,٠٠٠ د.ع</span>
+                    <button class="view-btn" onclick="openProductModal(this.closest('.catalog-card'))">سەیرکردن 👁️</button>
                 </div>
             </div>
         </article>
@@ -722,95 +750,96 @@
         <p style="margin-top: 8px; color: var(--text-muted);">هەموو مافەکان پارێزراوە © 2026</p>
     </footer>
 
-    <!-- Product Details Modal -->
-    <div class="modal-overlay" id="productModal" onclick="closeModalOutside(event, 'productModal')">
-        <div class="modal-window large">
-            <button class="close-modal-btn" onclick="closeModal('productModal')">✕</button>
-            <div class="product-modal-grid">
-                <div>
-                    <img id="mProductImg" class="modal-product-img" src="" alt="Product Detail">
+    <!-- Interactive Product Detail Modal -->
+    <div class="modal-backdrop" id="productModal" onclick="closeModalOnOutsideClick(event, 'productModal')">
+        <div class="modal-card wide">
+            <button class="close-trigger" onclick="closeModal('productModal')">✕</button>
+            <div class="product-modal-layout">
+                <div class="gallery-container">
+                    <img id="mProductMainImg" class="primary-image" src="" alt="Detail View">
+                    <div class="thumbnail-strip" id="mProductThumbs"></div>
                 </div>
                 <div>
-                    <h2 id="mProductName" class="modal-header-title" style="text-align:right;"></h2>
-                    <p id="mProductDesc" style="color:var(--text-muted); font-size:14px; margin-bottom:20px; line-height:1.6;"></p>
+                    <h2 id="mProductName" class="modal-heading" style="text-align:right;"></h2>
+                    <p id="mProductDesc" style="color:var(--text-secondary); font-size:14px; margin-bottom:20px; line-height:1.6;"></p>
                     
-                    <div class="selector-label">قەبارە هەڵبژێرە:</div>
-                    <div class="selector-row" id="mSizes"></div>
+                    <div class="selection-label">قەبارە هەڵبژێرە:</div>
+                    <div class="chip-group" id="mSizes"></div>
 
-                    <div class="selector-label">ڕەنگ هەڵبژێرە:</div>
-                    <div class="selector-row" id="mColors"></div>
+                    <div class="selection-label">ڕەنگ هەڵبژێرە:</div>
+                    <div class="chip-group" id="mColors"></div>
 
-                    <div id="mProductPrice" class="price-tag" style="margin: 20px 0; font-size:24px;"></div>
+                    <div id="mProductPrice" class="price-text" style="margin: 20px 0; font-size:24px;"></div>
 
-                    <button class="modal-action-btn" onclick="addToCartFromModal()">زیادکردن بۆ سەبەتە 🛒</button>
+                    <button class="btn-primary" onclick="addToCartFromModal()">زیادکردن بۆ سەبەتە 🛒</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Cart Modal -->
-    <div class="modal-overlay" id="cartModal" onclick="closeModalOutside(event, 'cartModal')">
-        <div class="modal-window">
-            <button class="close-modal-btn" onclick="closeModal('cartModal')">✕</button>
-            <h2 class="modal-header-title">🛒 سەبەتەی کڕین</h2>
+    <!-- Cart Drawer Modal -->
+    <div class="modal-backdrop" id="cartModal" onclick="closeModalOnOutsideClick(event, 'cartModal')">
+        <div class="modal-card">
+            <button class="close-trigger" onclick="closeModal('cartModal')">✕</button>
+            <h2 class="modal-heading">🛒 سەبەتەی کڕین</h2>
             <div id="cartContentList"></div>
-            <div id="cartTotalPrice" class="price-tag" style="margin:20px 0; text-align:center;">کۆی گشتی: ٠ د.ع</div>
-            <button class="modal-action-btn" onclick="checkoutOrder()">داواکردن لە واتسئەپ 💬</button>
+            <div id="cartTotalPrice" class="price-text" style="margin:20px 0; text-align:center;">کۆی گشتی: ٠ د.ع</div>
+            <button class="btn-primary" onclick="proceedToCheckout()">داواکردن لە واتسئەپ 💬</button>
         </div>
     </div>
 
     <!-- Checkout Modal -->
-    <div class="modal-overlay" id="checkoutModal" onclick="closeModalOutside(event, 'checkoutModal')">
-        <div class="modal-window">
-            <button class="close-modal-btn" onclick="closeModal('checkoutModal')">✕</button>
-            <h2 class="modal-header-title">📋 زانیاری گەیاندن</h2>
-            <div class="form-field">
+    <div class="modal-backdrop" id="checkoutModal" onclick="closeModalOnOutsideClick(event, 'checkoutModal')">
+        <div class="modal-card">
+            <button class="close-trigger" onclick="closeModal('checkoutModal')">✕</button>
+            <h2 class="modal-heading">📋 زانیاری گەیاندن</h2>
+            <div class="form-group">
                 <label>ناوی تەواو</label>
                 <input type="text" id="custName" placeholder="ناوی سیانی بنووسە">
             </div>
-            <div class="form-field">
+            <div class="form-group">
                 <label>ناونیشانی تەواو</label>
                 <textarea id="custAddr" placeholder="شار، گەڕەک، نێزیک کۆڵان..."></textarea>
             </div>
-            <div class="form-field">
+            <div class="form-group">
                 <label>ژمارەی تەلەفۆن</label>
                 <input type="tel" id="custPhone" placeholder="07XXXXXXXXX">
             </div>
-            <button class="modal-action-btn" style="background: var(--accent-green);" onclick="submitWhatsApp()">ناردنی داواکاری 🚀</button>
+            <button class="btn-primary" style="background: var(--brand-green);" onclick="submitOrderToWhatsApp()">ناردنی داواکاری 🚀</button>
         </div>
     </div>
 
     <!-- Favorites Modal -->
-    <div class="modal-overlay" id="favoritesModal" onclick="closeModalOutside(event, 'favoritesModal')">
-        <div class="modal-window">
-            <button class="close-modal-btn" onclick="closeModal('favoritesModal')">✕</button>
-            <h2 class="modal-header-title">❤️ دڵخوازەکان</h2>
+    <div class="modal-backdrop" id="favoritesModal" onclick="closeModalOnOutsideClick(event, 'favoritesModal')">
+        <div class="modal-card">
+            <button class="close-trigger" onclick="closeModal('favoritesModal')">✕</button>
+            <h2 class="modal-heading">❤️ دڵخوازەکان</h2>
             <div id="favsContentList"></div>
         </div>
     </div>
 
     <!-- Account Modal -->
-    <div class="modal-overlay" id="accountModal" onclick="closeModalOutside(event, 'accountModal')">
-        <div class="modal-window">
-            <button class="close-modal-btn" onclick="closeModal('accountModal')">✕</button>
-            <h2 class="modal-header-title">👤 هەژماری من</h2>
-            <div id="accountContainer" style="text-align:center; color: var(--text-muted);"></div>
+    <div class="modal-backdrop" id="accountModal" onclick="closeModalOnOutsideClick(event, 'accountModal')">
+        <div class="modal-card">
+            <button class="close-trigger" onclick="closeModal('accountModal')">✕</button>
+            <h2 class="modal-heading">👤 هەژماری من</h2>
+            <div id="accountContainer" style="text-align:center; color: var(--text-secondary);"></div>
         </div>
     </div>
 
-    <!-- Language Modal -->
-    <div class="modal-overlay" id="languageModal" onclick="closeModalOutside(event, 'languageModal')">
-        <div class="modal-window">
-            <button class="close-modal-btn" onclick="closeModal('languageModal')">✕</button>
-            <h2 class="modal-header-title">🌐 زمانی ماڵپەڕ</h2>
-            <button class="modal-action-btn" style="margin-bottom: 10px;" onclick="closeModal('languageModal')">کوردی</button>
-            <button class="modal-action-btn" style="background: var(--surface-card); color: var(--text-main);" onclick="closeModal('languageModal')">English</button>
+    <!-- Language Selector Modal -->
+    <div class="modal-backdrop" id="languageModal" onclick="closeModalOnOutsideClick(event, 'languageModal')">
+        <div class="modal-card">
+            <button class="close-trigger" onclick="closeModal('languageModal')">✕</button>
+            <h2 class="modal-heading">🌐 زمانی ماڵپەڕ</h2>
+            <button class="btn-primary" style="margin-bottom: 10px;" onclick="closeModal('languageModal')">کوردی</button>
+            <button class="btn-primary" style="background: var(--bg-card); color: var(--text-primary);" onclick="closeModal('languageModal')">English</button>
         </div>
     </div>
 
     <script>
-        let shoppingCart = JSON.parse(localStorage.getItem('ks_v2_cart')) || [];
-        let favoriteItems = JSON.parse(localStorage.getItem('ks_v2_favs')) || [];
+        let shoppingCart = JSON.parse(localStorage.getItem('ks_v3_cart')) || [];
+        let favoriteItems = JSON.parse(localStorage.getItem('ks_v3_favs')) || [];
         
         let activeProduct = null;
         let chosenSize = '';
@@ -820,28 +849,28 @@
 
         function toggleTheme() {
             document.body.classList.toggle('light');
-            document.getElementById('themeBtn').textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
+            document.getElementById('themeToggleBtn').textContent = document.body.classList.contains('light') ? '🌙' : '☀️';
         }
 
         function openModal(id) { document.getElementById(id).classList.add('active'); }
         function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-        function closeModalOutside(e, id) { if (e.target.classList.contains('modal-overlay')) closeModal(id); }
+        function closeModalOnOutsideClick(e, id) { if (e.target.classList.contains('modal-backdrop')) closeModal(id); }
 
         function filterCategory(cat, btn) {
-            document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             
-            document.querySelectorAll('.card').forEach(card => {
+            document.querySelectorAll('.catalog-card').forEach(card => {
                 const categories = card.dataset.category.split(' ');
                 card.style.display = (cat === 'all' || categories.includes(cat)) ? 'flex' : 'none';
             });
         }
 
-        function searchProducts() {
+        function searchCatalog() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            document.querySelectorAll('.card').forEach(card => {
-                const content = (card.dataset.name + card.dataset.description).toLowerCase();
-                card.style.display = content.includes(query) ? 'flex' : 'none';
+            document.querySelectorAll('.catalog-card').forEach(card => {
+                const text = (card.dataset.name + card.dataset.description).toLowerCase();
+                card.style.display = text.includes(query) ? 'flex' : 'none';
             });
         }
 
@@ -859,53 +888,70 @@
             document.getElementById('mProductName').textContent = activeProduct.name;
             document.getElementById('mProductDesc').textContent = card.dataset.description;
             document.getElementById('mProductPrice').textContent = `${activeProduct.price.toLocaleString()} د.ع`;
-            document.getElementById('mProductImg').src = images[0];
+            
+            const mainImg = document.getElementById('mProductMainImg');
+            mainImg.src = images[0];
 
-            renderSelectors('mSizes', sizes, s => chosenSize = s);
-            renderSelectors('mColors', colors, c => chosenColor = c);
+            // Render Multi-Image Gallery Thumbnails
+            const thumbsContainer = document.getElementById('mProductThumbs');
+            thumbsContainer.innerHTML = '';
+            images.forEach((imgSrc, idx) => {
+                const thumb = document.createElement('img');
+                thumb.src = imgSrc;
+                if (idx === 0) thumb.classList.add('active');
+                thumb.onclick = () => {
+                    mainImg.src = imgSrc;
+                    thumbsContainer.querySelectorAll('img').forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                };
+                thumbsContainer.appendChild(thumb);
+            });
+
+            renderChips('mSizes', sizes, s => chosenSize = s);
+            renderChips('mColors', colors, c => chosenColor = c);
 
             openModal('productModal');
         }
 
-        function renderSelectors(containerId, options, callback) {
-            const cont = document.getElementById(containerId);
-            cont.innerHTML = '';
-            callback(options[0] || '');
-            options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = `chip-option ${idx === 0 ? 'selected' : ''}`;
-                btn.textContent = opt;
-                btn.onclick = () => {
-                    cont.querySelectorAll('.chip-option').forEach(b => b.classList.remove('selected'));
-                    btn.classList.add('selected');
-                    callback(opt);
+        function renderChips(containerId, list, selectionCallback) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+            selectionCallback(list[0] || '');
+            list.forEach((item, idx) => {
+                const chip = document.createElement('button');
+                chip.className = `chip-item ${idx === 0 ? 'selected' : ''}`;
+                chip.textContent = item;
+                chip.onclick = () => {
+                    container.querySelectorAll('.chip-item').forEach(b => b.classList.remove('selected'));
+                    chip.classList.add('selected');
+                    selectionCallback(item);
                 };
-                cont.appendChild(btn);
+                container.appendChild(chip);
             });
         }
 
         function addToCartFromModal() {
             shoppingCart.push({ ...activeProduct, size: chosenSize, color: chosenColor, id: Date.now() });
-            localStorage.setItem('ks_v2_cart', JSON.stringify(shoppingCart));
+            localStorage.setItem('ks_v3_cart', JSON.stringify(shoppingCart));
             updateBadges();
             closeModal('productModal');
         }
 
         function openCart() {
-            const cont = document.getElementById('cartContentList');
-            cont.innerHTML = shoppingCart.length ? '' : '<p style="text-align:center; color:var(--text-muted);">سەبەتەکەت بەتاڵە</p>';
+            const container = document.getElementById('cartContentList');
+            container.innerHTML = shoppingCart.length ? '' : '<p style="text-align:center; color:var(--text-secondary);">سەبەتەکەت بەتاڵە</p>';
             let total = 0;
             shoppingCart.forEach((item, index) => {
                 total += item.price;
-                cont.innerHTML += `
-                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding:12px; background:var(--surface-card); border-radius:10px;">
+                container.innerHTML += `
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding:14px; background:var(--bg-card); border-radius:12px;">
                         <div>
                             <strong>${item.name}</strong><br>
-                            <small style="color:var(--text-muted);">${item.size} / ${item.color}</small>
+                            <small style="color:var(--text-secondary);">${item.size} / ${item.color}</small>
                         </div>
                         <div style="font-weight:bold;">
                             ${item.price.toLocaleString()} د.ع
-                            <button onclick="removeCartItem(${index})" style="background:none; border:none; color:var(--primary); cursor:pointer; margin-right:8px;">✕</button>
+                            <button onclick="removeCartItem(${index})" style="background:none; border:none; color:var(--brand-red); cursor:pointer; margin-right:8px;">✕</button>
                         </div>
                     </div>
                 `;
@@ -916,14 +962,14 @@
 
         function removeCartItem(index) {
             shoppingCart.splice(index, 1);
-            localStorage.setItem('ks_v2_cart', JSON.stringify(shoppingCart));
+            localStorage.setItem('ks_v3_cart', JSON.stringify(shoppingCart));
             updateBadges();
             openCart();
         }
 
         function toggleFavorite(e, btn) {
             e.stopPropagation();
-            const card = btn.closest('.card');
+            const card = btn.closest('.catalog-card');
             const name = card.dataset.name;
             const idx = favoriteItems.findIndex(f => f.name === name);
 
@@ -936,20 +982,20 @@
                 btn.classList.add('active');
                 btn.textContent = '❤️';
             }
-            localStorage.setItem('ks_v2_favs', JSON.stringify(favoriteItems));
+            localStorage.setItem('ks_v3_favs', JSON.stringify(favoriteItems));
             updateBadges();
         }
 
         function openFavorites() {
-            const cont = document.getElementById('favsContentList');
-            cont.innerHTML = favoriteItems.length ? '' : '<p style="text-align:center; color:var(--text-muted);">هیچ بابەتێک لە دڵخوازەکان نییە</p>';
+            const container = document.getElementById('favsContentList');
+            container.innerHTML = favoriteItems.length ? '' : '<p style="text-align:center; color:var(--text-secondary);">هیچ بابەتێک لە دڵخوازەکان نییە</p>';
             favoriteItems.forEach(item => {
-                cont.innerHTML += `
-                    <div style="display:flex; gap:12px; align-items:center; margin-bottom:12px;">
-                        <img src="${item.image}" style="width:45px; height:45px; border-radius:8px; object-fit:cover;">
+                container.innerHTML += `
+                    <div style="display:flex; gap:14px; align-items:center; margin-bottom:12px;">
+                        <img src="${item.image}" style="width:48px; height:48px; border-radius:10px; object-fit:cover;">
                         <div>
                             <strong>${item.name}</strong><br>
-                            <span style="color:var(--accent-gold); font-size:13px;">${parseInt(item.price).toLocaleString()} د.ع</span>
+                            <span style="color:var(--brand-gold); font-size:13px;">${parseInt(item.price).toLocaleString()} د.ع</span>
                         </div>
                     </div>
                 `;
@@ -957,40 +1003,40 @@
             openModal('favoritesModal');
         }
 
-        function checkoutOrder() {
+        function proceedToCheckout() {
             if (!shoppingCart.length) return alert('سەبەتەکەت بەتاڵە');
             closeModal('cartModal');
             openModal('checkoutModal');
         }
 
-        function submitWhatsApp() {
+        function submitOrderToWhatsApp() {
             const name = document.getElementById('custName').value.trim();
             const addr = document.getElementById('custAddr').value.trim();
             const phone = document.getElementById('custPhone').value.trim();
 
-            if (!name || !addr || !phone) return alert('تکایە زانیارییەکان تەواو بکە');
+            if (!name || !addr || !phone) return alert('تکایە سەرجەم خانەکان پڕبکەرەوە');
 
             let itemsMsg = shoppingCart.map(i => `- ${i.name} (${i.size}/${i.color})`).join('\n');
             let text = `تەواوکردنی داواکاری لە KURDSHEIN:\n\n👤 ناو: ${name}\n📍 ناونیشان: ${addr}\n📞 تەلەفۆن: ${phone}\n\n🛍️ بابەتەکان:\n${itemsMsg}`;
 
             window.open(`https://wa.me/9647500000000?text=${encodeURIComponent(text)}`, '_blank');
             shoppingCart = [];
-            localStorage.setItem('ks_v2_cart', JSON.stringify(shoppingCart));
+            localStorage.setItem('ks_v3_cart', JSON.stringify(shoppingCart));
             updateBadges();
             closeModal('checkoutModal');
         }
 
         function openAccount() {
             document.getElementById('accountContainer').innerHTML = `
-                <p style="font-size:18px; color:var(--text-main); font-weight:bold;">بەخێربێیت بۆ هەژمارەکەت</p>
+                <p style="font-size:18px; color:var(--text-primary); font-weight:bold;">بەخێربێیت بۆ هەژمارەکەت</p>
                 <p style="margin-top:10px;">سەبەتە: ${shoppingCart.length} | دڵخوازەکان: ${favoriteItems.length}</p>
             `;
             openModal('accountModal');
         }
 
         function updateBadges() {
-            document.getElementById('cartBadge').textContent = shoppingCart.length;
-            document.getElementById('favBadge').textContent = favoriteItems.length;
+            document.getElementById('cartBadgeCount').textContent = shoppingCart.length;
+            document.getElementById('favBadgeCount').textContent = favoriteItems.length;
         }
     </script>
 </body>

@@ -301,6 +301,18 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   </div>
 </section>
 <div class="section-head"><div><h2>بەرهەمەکان</h2><p>نوێترین بەرهەمە بەردەستەکان</p></div></div>
+
+<div class="categories">
+ <button class="category active" onclick="filterProducts('all',this)" data-i18n="all">گشتی</button>
+ <button class="category" onclick="filterProducts('new',this)" data-i18n="new">بابەتی نوێ</button>
+ <button class="category" onclick="filterProducts('sale',this)" data-i18n="sale">داشکاندن</button>
+ <button class="category" onclick="filterProducts('men',this)" data-i18n="men">پیاوان</button>
+ <button class="category" onclick="filterProducts('women',this)" data-i18n="women">ئافرەتان</button>
+ <button class="category" onclick="filterProducts('kids',this)" data-i18n="kids">منداڵان</button>
+ <button class="category" onclick="filterProducts('accessories',this)" data-i18n="accessories">ئەکسسوارات</button>
+ <button class="category" onclick="filterProducts('electronics',this)" data-i18n="electronics">ئەلکترۆنی</button>
+</div>
+
 <div class="products" id="products">
   <div class="product" data-category="all new electronics" data-colors="رەنگاورەنگRGBلیدی" data-description="١. ئامێری بڵاوکردنەوەی بۆن لە براندی تێکوی  ٢. بۆ ماڵان و ناو سەیارە بەکاردێت  ٣.بە دڵی خۆت ئەتوانی بۆنی تێبکەیت  ٤. لیدی ئارجیبیە و ئۆتۆماتیکی رەنگەکان ئەگۆرێت" data-images="IMG_9186.jpeg|IMG_9187.jpeg|IMG_9188.jpeg|IMG_9189.jpeg|IMG_9190.jpeg|IMG_9191.jpeg" data-name="ئامێری بۆن بڵاوکردنەوە" data-price="5000" data-stock="12" data-sizes="One Size">
     <div class="product-image">

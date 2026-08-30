@@ -1549,5 +1549,61 @@ updateFavoriteButtons();
 renderFavoritesSection();
 startHeroSlider();
 </script>
+<script>
+/* ===== PRODUCT MENU SAFETY FALLBACK =====
+   Ensures the product details menu opens even if the Firebase module
+   is delayed or unavailable. It does not replace the normal behavior.
+*/
+(function(){
+  function fallbackOpenProduct(product){
+    if(!product) return;
+    const modal=document.getElementById('productModal');
+    if(!modal) return;
+
+    const images=(product.dataset.images||'').split('|').map(x=>x.trim()).filter(Boolean);
+    const main=document.getElementById('mainProductImage');
+    const thumbs=document.getElementById('productThumbnails');
+    if(main) main.src=images[0]||'';
+    if(thumbs){
+      thumbs.innerHTML='';
+      images.slice(0,6).forEach((src,i)=>{
+        const img=document.createElement('img');
+        img.src=src;
+        if(i===0) img.classList.add('selected');
+        img.addEventListener('click',function(){
+          if(main) main.src=src;
+          thumbs.querySelectorAll('img').forEach(x=>x.classList.remove('selected'));
+          img.classList.add('selected');
+        });
+        thumbs.appendChild(img);
+      });
+    }
+    const name=document.getElementById('detailName');
+    const desc=document.getElementById('detailDescription');
+    const price=document.getElementById('detailPrice');
+    if(name) name.innerText=product.dataset.name||'';
+    if(desc) desc.innerText=product.dataset.description||'';
+    if(price) price.innerText=Number(product.dataset.price||0).toLocaleString()+' د.ع';
+
+    const sizeArea=document.getElementById('detailSizeArea');
+    const colorArea=document.getElementById('detailColorArea');
+    if(sizeArea) sizeArea.style.display=product.dataset.sizes?'block':'none';
+    if(colorArea) colorArea.style.display=product.dataset.colors?'block':'none';
+
+    modal.classList.add('show');
+    document.body.style.overflow='hidden';
+  }
+
+  document.addEventListener('click',function(event){
+    const button=event.target.closest('.add-cart');
+    if(!button) return;
+    const modal=document.getElementById('productModal');
+    if(modal && !modal.classList.contains('show')){
+      event.stopPropagation();
+      fallbackOpenProduct(button.closest('.product'));
+    }
+  },true);
+})();
+</script>
 </body>
 </html>

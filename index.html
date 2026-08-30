@@ -542,6 +542,7 @@ footer {
     padding: 35px 20px;
 
     width: 100%;
+    max-width: 100vw;
     box-sizing: border-box;
 
     text-align: center;
@@ -551,6 +552,11 @@ footer {
     border-top: 3px solid var(--red);
 
     color: var(--muted);
+
+    position: relative;
+    left: 0;
+    right: 0;
+    overflow: hidden;
 }
 
 
@@ -1171,6 +1177,10 @@ footer {
         padding: 10px;
     }
 
+}
+
+html, body {
+    overflow-x: hidden;
 }
 
 </style>

@@ -661,6 +661,111 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 }
 </style>
 
+
+<style id="ks-final-fixes">
+/* 1) Keep the product-card "داوا کردن" button small, as before. */
+.product .add-cart{
+  width:100% !important;
+  min-height:36px !important;
+  height:36px !important;
+  padding:6px 9px !important;
+  margin-top:7px !important;
+  font-size:10px !important;
+  line-height:1.2 !important;
+  border-radius:8px !important;
+}
+
+/* 2) Make popup/gallery arrows clearly visible and clickable. */
+.product-main-stage{
+  position:relative !important;
+}
+.gallery-arrow{
+  display:grid !important;
+  place-items:center !important;
+  z-index:20 !important;
+  width:42px !important;
+  height:42px !important;
+  padding:0 !important;
+  background:rgba(0,0,0,.62) !important;
+  color:#fff !important;
+  border:2px solid rgba(255,255,255,.35) !important;
+  font-size:30px !important;
+  line-height:1 !important;
+  pointer-events:auto !important;
+}
+.gallery-prev{left:10px !important;right:auto !important}
+.gallery-next{right:10px !important;left:auto !important}
+
+/* 3) Always show the X close buttons above popup content. */
+.modal-box{
+  position:relative !important;
+}
+.modal .close-button{
+  position:absolute !important;
+  top:10px !important;
+  left:10px !important;
+  z-index:100 !important;
+  display:grid !important;
+  place-items:center !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+  padding:0 !important;
+  background:var(--surface-2) !important;
+  color:var(--text) !important;
+  border:2px solid var(--border) !important;
+  border-radius:11px !important;
+  font-family:Arial,sans-serif !important;
+  font-size:25px !important;
+  font-weight:900 !important;
+  line-height:1 !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  box-shadow:0 4px 14px rgba(0,0,0,.28) !important;
+}
+.modal .close-button:hover{
+  color:#fff !important;
+  background:var(--red) !important;
+  border-color:var(--red) !important;
+}
+
+/* Keep the product image away from the close button. */
+.product-details-box .product-gallery{
+  padding-top:2px;
+}
+
+/* On small screens, make arrows and close button easy to tap. */
+@media(max-width:600px){
+  .product .add-cart{
+    min-height:34px !important;
+    height:34px !important;
+    padding:5px 7px !important;
+    font-size:9px !important;
+  }
+  .gallery-arrow{
+    width:38px !important;
+    height:38px !important;
+    font-size:27px !important;
+  }
+  .gallery-prev{left:7px !important}
+  .gallery-next{right:7px !important}
+  .modal .close-button{
+    top:8px !important;
+    left:8px !important;
+    width:38px !important;
+    height:38px !important;
+  }
+}
+</style>
+
+
+<style id="requested-store-fixes">
+.close-button{display:grid !important;place-items:center !important;z-index:9999 !important;opacity:1 !important;visibility:visible !important;background:var(--surface-2) !important;color:var(--text) !important;border:2px solid rgba(255,255,255,.28) !important;box-shadow:0 5px 18px rgba(0,0,0,.35) !important}
+.detail-quantity-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px}.detail-quantity-label{font-size:13px;font-weight:800;white-space:nowrap}.detail-quantity-control{display:flex;align-items:center;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);overflow:hidden;height:44px}.detail-qty-btn{width:42px;height:44px;border:0;background:transparent;color:var(--text);font-size:21px;font-weight:900}.detail-qty-btn:hover{background:var(--surface-3);color:var(--yellow)}#detailQuantity{width:45px;height:44px;border:0;border-left:1px solid var(--border);border-right:1px solid var(--border);background:transparent;color:var(--text);text-align:center;font-weight:900;outline:0}.detail-quantity-row .big-add{flex:1;margin:0}.favorite-product .favorite-view-button{display:grid;place-items:center;min-width:42px;height:42px;font-size:20px}.cart-item-premium{display:grid !important;grid-template-columns:58px minmax(0,1fr) auto;gap:12px !important}.cart-item-image{width:58px;height:58px;border-radius:13px;object-fit:cover;background:var(--surface-3);border:1px solid var(--border)}.cart-header-summary{display:flex;justify-content:space-between;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:11px 13px;margin-bottom:12px;font-size:12px;color:var(--muted)}.cart-header-summary strong{color:var(--text);font-size:14px}.cart-item-main{min-width:0}
+@media(max-width:600px){.detail-quantity-row{flex-wrap:wrap}.detail-quantity-row .big-add{width:100%;flex-basis:100%}.cart-item-premium{grid-template-columns:50px minmax(0,1fr)}.cart-item-actions{grid-column:1/-1;justify-content:flex-start}.cart-item-image{width:50px;height:50px}}
+</style>
 </head>
 <body>
 
@@ -800,8 +905,8 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
         <div class="hero-glow"></div>
         <div class="hero-copy">
           <div class="eyebrow">✦ بانەری دووەم</div>
-          <h2>لێرە <span>دەقەکەت</span> دابنێ.</h2>
-          <p>ئەم بانەرە بۆ تۆ ئامادەیە. دواتر دەتوانیت دەق، نرخ، داشکاندن یان هەر زانیارییەکی تر بە ئاسانی بگۆڕیت.</p>
+          <h2>کڕینی راستەوخۆ ئێستا بەردەستە</h2>
+          <p>ئەم بابەتانەی لە کوردستان بەردەستە دەتوانیت راستەوخۆ بیان کڕیت</p>
           <div class="hero-actions">
           </div>
         </div>
@@ -932,13 +1037,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   </div>
 </div>
 
-<section class="recent-section" id="recentSection" hidden>
-  <div class="section-head">
-    <div><h2>بەرهەمە دڵخوازەکان</h2><p>ئەو بەرهەمانەی دڵت پێیانە</p></div>
-    <button class="clear-recent" type="button" onclick="clearFavoriteSection()">پاککردنەوە</button>
-  </div>
-  <div class="recent-products" id="recentProducts"></div>
-</section>
 
 <div class="coming">
   <div><strong>بەرهەمی زیاتر لە ڕێگادایە</strong><br><span>بەردەوامین لە زیادکردنی بەرهەمی نوێ بۆ KurdShein.</span></div>
@@ -973,7 +1071,15 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
         <div class="option-buttons" id="colorOptions"></div>
       </div>
       <div class="detail-price" id="detailPrice"></div>
-      <button class="big-add" onclick="addSelectedProduct()">🛒 زیادکردن بۆ سەبەتە</button>
+      <div class="detail-quantity-row">
+        <span class="detail-quantity-label">ژمارە</span>
+        <div class="detail-quantity-control">
+          <button type="button" class="detail-qty-btn" onclick="changeDetailQuantity(-1)" aria-label="کەمکردنەوە">−</button>
+          <input id="detailQuantity" type="number" min="1" value="1" inputmode="numeric" aria-label="ژمارەی دانە">
+          <button type="button" class="detail-qty-btn" onclick="changeDetailQuantity(1)" aria-label="زیادکردن">+</button>
+        </div>
+        <button class="big-add" type="button" onclick="addSelectedProduct()">🛒 زیادکردن بۆ سەبەتە</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1100,6 +1206,7 @@ let localFavorites = JSON.parse(localStorage.getItem("kurdSheinFavorites") || "[
 let selectedProduct = null;
 let selectedSize = "";
 let selectedColor = "";
+let detailQuantity = 1;
 let appliedCoupon = null;
 let galleryImages = [];
 let galleryIndex = 0;
@@ -1126,6 +1233,7 @@ function normalizeCart() {
         price: Number(item.price) || 0,
         size: item.size || "",
         color: item.color || "",
+        image: item.image || "",
         quantity: Math.max(1, Number(item.quantity) || 1),
         stock: Math.max(1, Number(item.stock) || 10)
     }));
@@ -1157,19 +1265,27 @@ function showMessage(text) {
     }, 1800);
 }
 
-function addToCart(name, price, size="", color="", stock=10) {
+function addToCart(name, price, size="", color="", stock=10, quantity=1, image="") {
     normalizeCart();
+    const qty = Math.max(1, Number(quantity) || 1);
+    const maxStock = Number(stock) || 10;
     const requested = cart.find(item => cartItemKey(item) === cartItemKey({name, price, size, color}));
-    if (requested && requested.quantity >= Number(stock)) {
-        return showMessage("⚠️ ئەم بەرهەمە بەم ژمارەیە بەردەست نییە");
+    const currentQty = requested ? Number(requested.quantity) || 0 : 0;
+    if (currentQty + qty > maxStock) {
+        return showMessage("⚠️ ئەم ژمارەیە لە کۆگادا بەردەست نییە");
     }
-    const existing = cart.find(item => cartItemKey(item) === cartItemKey({name, price, size, color}));
-    if (existing) existing.quantity += 1;
-    else cart.push({ name, price: Number(price), size, color, quantity: 1, stock: Number(stock) || 10 });
+    if (requested) {
+        requested.quantity = currentQty + qty;
+        if (!requested.image && image) requested.image = image;
+    } else {
+        cart.push({ name, price:Number(price), size, color, image:image || "", quantity:qty, stock:maxStock });
+    }
     saveCart();
     updateCart();
     showMessage("✅ کاڵاکە زیادکرا بۆ سەبەتە");
 }
+
+window.addToCart = addToCart;
 
 window.changeCartQuantity = function(index, delta) {
     if (!cart[index]) return;
@@ -1184,11 +1300,25 @@ function updateCart() {
     document.getElementById("cartCount").innerText = getCartCount();
     const box = document.getElementById("cartItems");
     const total = getCartTotal();
+    const modalBox = box?.closest(".modal-box");
 
     if (!cart.length) {
         box.innerHTML = `<div class="empty-cart"><div class="empty-cart-icon">🛒</div><strong>سەبەتەکەت بەتاڵە</strong><span>بەرهەمێک زیاد بکە بۆ دەستپێکردن</span></div>`;
         document.getElementById("cartTotal").innerText = "کۆی گشتی: ٠ د.ع";
+        modalBox?.querySelector(".cart-header-summary")?.remove();
         return;
+    }
+
+    if (modalBox && !modalBox.querySelector(".cart-header-summary")) {
+        const summary = document.createElement("div");
+        summary.className = "cart-header-summary";
+        summary.innerHTML = `<span>کۆی دانەکان</span><strong>${getCartCount().toLocaleString()} دانە</strong>`;
+        const title = modalBox.querySelector(".cart-subtitle");
+        if (title) title.insertAdjacentElement("afterend", summary);
+        else box.insertAdjacentElement("beforebegin", summary);
+    } else {
+        const summary = modalBox?.querySelector(".cart-header-summary");
+        if (summary) summary.innerHTML = `<span>کۆی دانەکان</span><strong>${getCartCount().toLocaleString()} دانە</strong>`;
     }
 
     box.innerHTML = "";
@@ -1198,10 +1328,14 @@ function updateCart() {
         let options = "";
         if (item.size) options += `<span>قەبارە: ${item.size}</span>`;
         if (item.color) options += `<span>ڕەنگ: ${item.color}</span>`;
+        const matchedProduct = Array.from(document.querySelectorAll(".product")).find(product => product.dataset.name === item.name);
+        const image = item.image || matchedProduct?.querySelector("img")?.src || "";
+        if (!item.image && image) item.image = image;
         div.innerHTML = `
+            <img class="cart-item-image" src="${image}" alt="${item.name}">
             <div class="cart-item-main">
                 <strong>${item.name}</strong>
-                <small class="cart-options">${options}</small>
+                <small class="cart-options">${options || "هەڵبژاردەکان دیاریکراون"}</small>
                 <b class="cart-line-price">${(Number(item.price) * Number(item.quantity)).toLocaleString()} د.ع</b>
             </div>
             <div class="cart-item-actions">
@@ -1214,7 +1348,6 @@ function updateCart() {
     });
     document.getElementById("cartTotal").innerText = "کۆی گشتی: " + total.toLocaleString() + " د.ع";
 }
-
 window.removeFromCart = function(index) {
     cart.splice(index, 1);
     saveCart();
@@ -1253,6 +1386,9 @@ window.openProduct = function openProduct(product) {
     selectedProduct = product;
     selectedSize = "";
     selectedColor = "";
+    detailQuantity = 1;
+    const quantityInput = document.getElementById("detailQuantity");
+    if (quantityInput) quantityInput.value = "1";
 
     const images = (product.dataset.images || "").split("|").map(x => x.trim()).filter(Boolean);
     galleryImages = images;
@@ -1286,8 +1422,8 @@ window.openProduct = function openProduct(product) {
     createOptions("sizeOptions", product.dataset.sizes, "size");
     createOptions("colorOptions", product.dataset.colors, "color");
 
-    document.getElementById("detailSizeArea").style.display = product.dataset.sizes ? "block" : "none";
-    document.getElementById("detailColorArea").style.display = product.dataset.colors ? "block" : "none";
+    document.getElementById("detailSizeArea").style.display = "block";
+    document.getElementById("detailColorArea").style.display = "block";
 
     openModal("productModal");
 };
@@ -1346,14 +1482,24 @@ function createOptions(containerId, data, type) {
     });
 }
 
+window.changeDetailQuantity = function(delta) {
+    const input = document.getElementById("detailQuantity");
+    const max = selectedProduct ? (Number(selectedProduct.dataset.stock) || 10) : 10;
+    detailQuantity = Math.min(max, Math.max(1, (Number(input?.value) || 1) + Number(delta)));
+    if (input) input.value = detailQuantity;
+};
+
 window.addSelectedProduct = function addSelectedProduct() {
     if (!selectedProduct) return;
-    addToCart(
-        selectedProduct.dataset.name,
-        Number(selectedProduct.dataset.price),
-        selectedSize,
-        selectedColor
-    );
+    const hasSize = !!selectedProduct.dataset.sizes;
+    const hasColor = !!selectedProduct.dataset.colors;
+    if (hasSize && !selectedSize) return showMessage("⚠️ تکایە قەبارە هەڵبژێرە");
+    if (hasColor && !selectedColor) return showMessage("⚠️ تکایە ڕەنگ هەڵبژێرە");
+    const input = document.getElementById("detailQuantity");
+    detailQuantity = Math.max(1, Number(input?.value) || 1);
+    const stock = Number(selectedProduct.dataset.stock) || 10;
+    if (detailQuantity > stock) return showMessage("⚠️ ئەم ژمارەیە لە کۆگادا بەردەست نییە");
+    addToCart(selectedProduct.dataset.name, Number(selectedProduct.dataset.price), selectedSize, selectedColor, stock, detailQuantity, selectedProduct.querySelector("img")?.src || "");
     closeModal("productModal");
 };
 
@@ -1443,34 +1589,30 @@ function updateFavoriteButtons() {
 
 window.openFavorites = function() {
     const list = document.getElementById("favoritesList");
-    const products = Array.from(document.querySelectorAll(".product")).filter(product =>
-        localFavorites.includes(favoriteKey(product))
-    );
-
+    const products = Array.from(document.querySelectorAll(".product")).filter(product => localFavorites.includes(favoriteKey(product)));
     if (!products.length) {
         list.innerHTML = "<p style='text-align:center;color:#888;'>هیچ بەرهەمێکت بەدڵخواز نەکردووە ❤️</p>";
         openModal("favoritesModal");
         return;
     }
-
     list.innerHTML = "";
     products.forEach(product => {
         const div = document.createElement("div");
         div.className = "favorite-product";
         div.innerHTML = `
-            <img src="${product.querySelector("img").src}">
-            <div class="favorite-product-info">
-                <strong>${product.dataset.name}</strong>
-                <div style="color:#ffd000;">${Number(product.dataset.price).toLocaleString()} د.ع</div>
-            </div>
-            <button class="option-button" onclick="openProduct(this.closest('.favorite-product').productElement)">👁</button>
-        `;
-        div.productElement = product;
+          <img src="${product.querySelector("img")?.src || ""}" alt="${product.dataset.name || ""}">
+          <div class="favorite-product-info"><strong>${product.dataset.name}</strong><div style="color:#ffd000;">${Number(product.dataset.price).toLocaleString()} د.ع</div></div>
+          <button type="button" class="option-button favorite-view-button" aria-label="بینینی بەرهەم">👁️</button>`;
+        div.querySelector(".favorite-view-button").addEventListener("click", event => {
+            event.stopPropagation();
+            closeModal("favoritesModal");
+            openProduct(product);
+        });
         list.appendChild(div);
     });
-
     openModal("favoritesModal");
 };
+
 
 /* ================= ACCOUNT ================= */
 window.openAccount = function() {
@@ -1764,35 +1906,7 @@ window.updateCheckoutTotals = function() {
 };
 
 /* ================= FAVORITES SECTION ================= */
-function renderFavoritesSection() {
-    const section = document.getElementById("recentSection");
-    const box = document.getElementById("recentProducts");
-    if (!section || !box) return;
-
-    const products = Array.from(document.querySelectorAll(".product"));
-    const matches = products.filter(product => localFavorites.includes(favoriteKey(product)));
-
-    if (!matches.length) {
-        section.hidden = true;
-        box.innerHTML = "";
-        return;
-    }
-
-    section.hidden = false;
-    box.innerHTML = matches.map(product => `
-      <div class="recent-card" onclick="openProduct(this.productElement)">
-        <div class="recent-card-image-wrap">
-          <img src="${product.querySelector("img")?.src || ""}" alt="${product.dataset.name || ""}">
-          <button class="recent-favorite-button active" type="button" aria-label="Remove from favorites" onclick="event.stopPropagation();toggleFavoriteFromSection(event,this.closest('.recent-card').productElement)">♥</button>
-        </div>
-        <div class="recent-card-body">
-          <div class="recent-card-name">${product.dataset.name}</div>
-          <div class="recent-card-price">${Number(product.dataset.price).toLocaleString()} د.ع</div>
-        </div>
-      </div>`).join("");
-
-    box.querySelectorAll(".recent-card").forEach((card, i) => card.productElement = matches[i]);
-}
+function renderFavoritesSection() {}
 
 window.toggleFavoriteFromSection = async function(event, product) {
     if (!product) return;
@@ -1883,8 +1997,28 @@ function updateLightbox() {
 }
 window.galleryStep = function(delta) {
     if (!galleryImages.length) return;
+
     galleryIndex = (galleryIndex + delta + galleryImages.length) % galleryImages.length;
-    updateLightbox();
+
+    // Update the main product picture.
+    const main = document.getElementById("mainProductImage");
+    if (main) {
+        main.src = galleryImages[galleryIndex] || "";
+    }
+
+    // Keep the selected thumbnail synchronized.
+    const thumbnails = document.getElementById("productThumbnails");
+    if (thumbnails) {
+        thumbnails.querySelectorAll("img").forEach((img, i) => {
+            img.classList.toggle("selected", i === galleryIndex);
+        });
+    }
+
+    // If the fullscreen lightbox is open, update it too.
+    const lightbox = document.getElementById("imageLightbox");
+    if (lightbox && lightbox.classList.contains("show")) {
+        updateLightbox();
+    }
 };
 window.toggleImageZoom = function(event) {
     event.stopPropagation();
@@ -1899,19 +2033,26 @@ window.closeImageLightbox = function(event) {
 /* ================= SEARCH & FILTER ================= */
 let activeCategory = "all";
 
+function normalizeSearchText(value) {
+    return String(value || "").toLowerCase().normalize("NFKC").replace(/[،,.;:!?؟\-_/|]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
 function applyProductFilters() {
     const input = document.getElementById("searchInput");
-    const search = (input ? input.value : "").trim().toLowerCase();
+    const search = normalizeSearchText(input?.value || "");
+    const terms = search ? search.split(" ").filter(Boolean) : [];
     document.querySelectorAll(".product").forEach(product => {
         const categories = (product.dataset.category || "").split(/\s+/);
-        const searchable = [product.dataset.name, product.dataset.description, product.dataset.category, product.dataset.colors]
-            .filter(Boolean).join(" ").toLowerCase();
+        const searchable = normalizeSearchText([
+            product.dataset.name, product.querySelector(".product-name")?.textContent,
+            product.dataset.description, product.querySelector(".product-description")?.textContent,
+            product.dataset.category, product.dataset.colors, product.dataset.sizes
+        ].filter(Boolean).join(" "));
         const matchesCategory = activeCategory === "all" || categories.includes(activeCategory);
-        const matchesSearch = !search || searchable.includes(search);
+        const matchesSearch = !terms.length || terms.every(term => searchable.includes(term));
         product.style.display = matchesCategory && matchesSearch ? "" : "none";
     });
 }
-
 window.searchProducts = function() {
     applyProductFilters();
 };
@@ -2079,36 +2220,28 @@ startHeroSlider();
           if(type==='color') window.__fallbackSelectedColor=value;
         });
         container.appendChild(btn);
-        if(index===0){
-          btn.classList.add('selected');
-          if(type==='size') window.__fallbackSelectedSize=value;
-          if(type==='color') window.__fallbackSelectedColor=value;
-        }
       });
     }
 
     window.__fallbackSelectedSize='';
     window.__fallbackSelectedColor='';
+    const qtyInput=document.getElementById('detailQuantity');
+    if(qtyInput) qtyInput.value='1';
     fillOptions(sizeOptions, product.dataset.sizes, 'size');
     fillOptions(colorOptions, product.dataset.colors, 'color');
 
-    if(sizeArea) sizeArea.style.display=product.dataset.sizes?'block':'none';
-    if(colorArea) colorArea.style.display=product.dataset.colors?'block':'none';
+    if(sizeArea) sizeArea.style.display='block';
+    if(colorArea) colorArea.style.display='block';
 
     // Keep the Add to Cart button functional in fallback mode.
     const fallbackAdd=document.querySelector('#productModal .big-add');
     if(fallbackAdd){
       fallbackAdd.onclick=function(){
-        if(typeof window.addToCart==='function'){
-          window.addToCart(
-            product.dataset.name,
-            Number(product.dataset.price||0),
-            window.__fallbackSelectedSize || '',
-            window.__fallbackSelectedColor || ''
-          );
-        }
-        modal.classList.remove('show');
-        document.body.style.overflow='';
+        if(product.dataset.sizes && !window.__fallbackSelectedSize) { if(window.showMessage) window.showMessage('⚠️ تکایە قەبارە هەڵبژێرە'); return; }
+        if(product.dataset.colors && !window.__fallbackSelectedColor) { if(window.showMessage) window.showMessage('⚠️ تکایە ڕەنگ هەڵبژێرە'); return; }
+        const q=Math.max(1, Number(document.getElementById('detailQuantity')?.value)||1);
+        if(typeof window.addToCart==='function') window.addToCart(product.dataset.name,Number(product.dataset.price||0),window.__fallbackSelectedSize||'',window.__fallbackSelectedColor||'',Number(product.dataset.stock)||10,q,product.querySelector('img')?.src||'');
+        modal.classList.remove('show'); document.body.style.overflow='';
       };
     }
 

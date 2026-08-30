@@ -184,19 +184,98 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 .hero-dot.active{width:25px;border-radius:99px;background:var(--red);opacity:1}
 @keyframes heroSlideIn{from{opacity:.25;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
 @media(prefers-reduced-motion:reduce){.hero-slide{animation:none}}
-
-/* ===== MOBILE 75% LAYOUT + 90% PRODUCT TEXT/PRICE ===== */
-@media (max-width:700px){
-  body{zoom:.75;}
-  /* Keep product text visually at 90% of its normal mobile size
-     after the 75% page scaling. */
-  .product-name{font-size:15.6px;}
-  .product-description{font-size:13.2px;}
-  .price{font-size:16.8px;}
-  .old-price{font-size:14.4px;}
-}
-
 </style>
+
+<style id="ks-homepage-scale">
+/* ===== HOMEPAGE SCALE — requested elements only ===== */
+.brand-row{padding:12.6px 16.8px 10.5px}
+.brand{font-size:clamp(24px,4.2vw,46.2px);gap:7.7px}
+.brand-mark{width:30.8px;height:30.8px;font-size:14px}
+
+/* The 3 header controls: menu, search button, cart */
+.ks-main-header{padding:7.7px max(12.6px,calc((100vw - 994px)/2));gap:11.2px}
+.ks-menu-button,.ks-cart-button{width:32.2px;height:32.2px;border-radius:9px}
+.ks-menu-button span{width:14.7px;height:1.4px;gap:3.5px}
+.ks-search{height:33.6px;border-radius:10.5px}
+.ks-search input{padding:0 11.9px;font-size:9.8px}
+.search-button{width:40.6px;font-size:12.6px}
+
+/* Banner */
+.hero{max-width:994px;margin:18.2px auto 12.6px;padding:0 12.6px}
+.hero-inner{min-height:231px;border-radius:19.6px}
+.hero-copy{max-width:490px;padding:36.4px}
+.eyebrow{gap:5.6px;padding:4.9px 8.4px;border-radius:999px;font-size:8.4px;margin-bottom:9.8px}
+.hero h2{font-size:clamp(21px,3.5vw,40.6px);margin-bottom:8.4px}
+.hero p{font-size:11.2px;line-height:1.9}
+.hero-actions{gap:7px;margin-top:16.8px}
+.hero-btn{border-radius:8.4px;padding:8.4px 14px}
+.hero-glow{width:231px;height:231px;left:-56px;bottom:-77px}
+
+/* بەرهەمەکان */
+.section-head{max-width:969px;margin:21px auto 9.8px;padding:0 12.6px}
+.section-head h2{font-size:17.5px}
+.section-head p{font-size:8.4px;margin-top:2.8px}
+
+/* Categories */
+.categories{max-width:969px;margin:0 auto 14px;padding:0 12.6px;gap:5.6px}
+.category{padding:6.3px 11.9px;font-size:9.1px}
+
+/* All product cards */
+.products{max-width:969px;width:calc(100% - 25.2px);gap:11.2px}
+.product{border-radius:12.6px}
+.product-image{height:199.5px}
+.favorite-button{top:8.4px;left:8.4px;width:27.3px;height:27.3px;border-radius:8.4px;font-size:14px}
+.sale,.new-badge,.discount-pill{top:8.4px;right:8.4px;padding:4.2px 7px;font-size:7.7px}
+.product-info{padding:10.5px}
+.product-name{font-size:14.4px;min-height:21.6px}
+.product-rating{font-size:10.8px;margin:3.5px 0}
+.product-description{font-size:8.4px;min-height:28px}
+.price{font-size:15.3px}
+.old-price{font-size:10.8px;margin-right:4.9px}
+.add-cart{margin-top:8.4px;padding:7.7px;border-radius:7.7px;font-size:9.8px}
+
+/* Product names, prices and remaining-stock text are 90% */
+.stock-line{margin-top:4.9px;gap:4.9px;font-size:9.9px}
+.stock-dot{width:4.9px;height:4.9px}
+
+/* Keep the requested scale consistent on smaller screens */
+@media(max-width:700px){
+  .brand-row{padding:9.8px 9.8px 7.4px}
+  .brand{font-size:26.6px;gap:5.6px}
+  .brand-mark{width:23.8px;height:23.8px;font-size:11.2px}
+
+  .ks-main-header{padding:6.3px 8.4px;grid-template-columns:29.4px minmax(0,1fr) 29.4px;gap:5.6px}
+  .ks-menu-button,.ks-cart-button{width:29.4px;height:29.4px}
+  .ks-search{height:30.8px}
+  .search-button{width:40.6px}
+
+  .hero{margin:12.7px auto 8.8px;padding:0 8.8px}
+  .hero-inner{min-height:161.7px;border-radius:13.7px}
+  .hero-copy{padding:25.5px}
+  .hero h2{font-size:22.4px}
+  .hero p{font-size:9.8px}
+  .hero-actions{margin-top:11.8px}
+  .hero-btn{padding:5.9px 9.8px;font-size:9.8px}
+
+  .section-head{padding:0 8.4px;margin:14.7px auto 6.9px}
+  .categories{padding:0 8.4px;gap:4px}
+  .category{padding:4.4px 8.4px;font-size:8.4px}
+
+  .products{width:calc(100% - 16.8px);gap:7px}
+  .product{border-radius:8.8px}
+  .product-image{height:143.5px}
+  .product-info{padding:7.7px}
+  .product-name{font-size:11.7px;min-height:18px}
+  .product-rating{font-size:8.4px;margin:2.8px 0}
+  .product-description{font-size:7.7px;min-height:25px}
+  .price{font-size:12.6px}
+  .old-price{font-size:9px}
+  .add-cart{margin-top:5.9px;padding:7px;font-size:8.4px}
+  .stock-line{font-size:8.9px;margin-top:3.5px;gap:3.5px}
+  .stock-dot{width:4.2px;height:4.2px}
+}
+</style>
+
 </head>
 <body>
 

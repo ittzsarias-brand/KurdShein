@@ -429,8 +429,8 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 
 <section class="recent-section" id="recentSection" hidden>
   <div class="section-head">
-    <div><h2>بەرهەمە دڵخوازەکان</h2><p>ئەو بەرهەمانەی دوایی سەیرت کردوون</p></div>
-    <button class="clear-recent" type="button" onclick="clearRecentlyViewed()">پاککردنەوە</button>
+    <div><h2>بەرهەمە دڵخوازەکان</h2><p>ئەو بەرهەمانەی دڵت پێیانە</p></div>
+    <button class="clear-recent" type="button" onclick="clearFavoriteSection()">پاککردنەوە</button>
   </div>
   <div class="recent-products" id="recentProducts"></div>
 </section>
@@ -843,6 +843,8 @@ window.toggleFavorite = async function toggleFavorite(event, button) {
 
     localStorage.setItem("kurdSheinFavorites", JSON.stringify(localFavorites));
     updateFavoriteCount();
+    updateFavoriteButtons();
+    renderFavoritesSection();
 
     if (currentUser && firebaseReady) {
         try {
@@ -876,6 +878,7 @@ async function loadFavorites() {
         console.error(error);
     }
     updateFavoriteButtons();
+    renderFavoritesSection();
 }
 
 function updateFavoriteButtons() {
@@ -1214,35 +1217,72 @@ window.updateCheckoutTotals = function() {
       <div class="checkout-total-row grand"><span>کۆی گشتی</span><strong>${total.toLocaleString()} د.ع</strong></div>`;
 };
 
-/* ================= RECENTLY VIEWED ================= */
-function rememberRecentlyViewed(product) {
-    const key = favoriteKey(product);
-    favoritesProducts = [key, ...favoritesProducts.filter(x => x !== key)].slice(0, 8);
-    localStorage.setItem("kurdSheinRecentlyViewed", JSON.stringify(favoritesProducts));
-    renderRecentlyViewed();
-}
-
-function renderRecentlyViewed() {
+/* ================= FAVORITES SECTION ================= */
+function renderFavoritesSection() {
     const section = document.getElementById("recentSection");
     const box = document.getElementById("recentProducts");
     if (!section || !box) return;
+
     const products = Array.from(document.querySelectorAll(".product"));
-    const matches = favoritesProducts.map(key => products.find(p => favoriteKey(p) === key)).filter(Boolean);
-    if (!matches.length) { section.hidden = true; return; }
+    const matches = products.filter(product => localFavorites.includes(favoriteKey(product)));
+
+    if (!matches.length) {
+        section.hidden = true;
+        box.innerHTML = "";
+        return;
+    }
+
     section.hidden = false;
     box.innerHTML = matches.map(product => `
       <div class="recent-card" onclick="openProduct(this.productElement)">
-        <img src="${product.querySelector("img")?.src || ""}" alt="">
-        <div class="recent-card-body"><div class="recent-card-name">${product.dataset.name}</div><div class="recent-card-price">${Number(product.dataset.price).toLocaleString()} د.ع</div></div>
+        <div class="recent-card-image-wrap">
+          <img src="${product.querySelector("img")?.src || ""}" alt="${product.dataset.name || ""}">
+          <button class="recent-favorite-button active" type="button" aria-label="Remove from favorites" onclick="event.stopPropagation();toggleFavoriteFromSection(event,this.closest('.recent-card').productElement)">♥</button>
+        </div>
+        <div class="recent-card-body">
+          <div class="recent-card-name">${product.dataset.name}</div>
+          <div class="recent-card-price">${Number(product.dataset.price).toLocaleString()} د.ع</div>
+        </div>
       </div>`).join("");
+
     box.querySelectorAll(".recent-card").forEach((card, i) => card.productElement = matches[i]);
 }
 
-window.clearRecentlyViewed = function() {
-    favoritesProducts = [];
-    localStorage.removeItem("kurdSheinRecentlyViewed");
-    renderRecentlyViewed();
-    showMessage("🧹 بەرهەمە سەیرکراوەکان پاککرانەوە");
+window.toggleFavoriteFromSection = async function(event, product) {
+    if (!product) return;
+    const key = favoriteKey(product);
+    if (!localFavorites.includes(key)) return;
+
+    localFavorites = localFavorites.filter(x => x !== key);
+    localStorage.setItem("kurdSheinFavorites", JSON.stringify(localFavorites));
+    updateFavoriteCount();
+    updateFavoriteButtons();
+    renderFavoritesSection();
+
+    if (currentUser && firebaseReady) {
+        try {
+            await setDoc(doc(db, "users", currentUser.uid), { favorites: localFavorites }, { merge: true });
+        } catch(error) {
+            console.error(error);
+        }
+    }
+};
+
+window.clearFavoriteSection = async function() {
+    localFavorites = [];
+    localStorage.setItem("kurdSheinFavorites", JSON.stringify(localFavorites));
+    updateFavoriteCount();
+    updateFavoriteButtons();
+    renderFavoritesSection();
+
+    if (currentUser && firebaseReady) {
+        try {
+            await setDoc(doc(db, "users", currentUser.uid), { favorites: [] }, { merge: true });
+        } catch(error) {
+            console.error(error);
+        }
+    }
+    showMessage("🧹 بەرهەمە دڵخوازەکان پاککرانەوە");
 };
 
 /* ================= STOCK / DISCOUNTS ================= */
@@ -1404,6 +1444,7 @@ renderRecentlyViewed();
 updateCart();
 updateFavoriteCount();
 updateFavoriteButtons();
+renderFavoritesSection();
 </script>
 </body>
 </html>

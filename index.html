@@ -175,15 +175,17 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 
 
 /* ===== KURDSHEIN HERO BANNER SLIDER ===== */
-.hero-slider{position:relative;overflow:hidden;border-radius:28px}
-.hero-slide{display:none;animation:heroSlideIn .55s ease both}
-.hero-slide.active{display:block}
+.hero-slider{position:relative;overflow:hidden;border-radius:28px;min-height:330px}
+.hero-slide{position:absolute;inset:0;display:block;transform:translateX(100%);opacity:1;z-index:1;transition:transform .7s cubic-bezier(.65,0,.35,1);will-change:transform}
+.hero-slide.active{transform:translateX(0);z-index:2}
+.hero-slide.slide-out-left{transform:translateX(-100%);z-index:1}
+.hero-slide.slide-out-right{transform:translateX(100%);z-index:1}
+.hero-inner{height:100%;min-height:330px}
 .hero-inner-second{background:radial-gradient(circle at 15% 20%,rgba(22,138,70,.24),transparent 35%),radial-gradient(circle at 85% 70%,rgba(247,201,72,.16),transparent 35%),linear-gradient(135deg,var(--surface),var(--surface-2))}
 .hero-dots{display:flex;justify-content:center;gap:8px;margin-top:12px}
-.hero-dot{width:9px;height:9px;border:0;border-radius:50%;padding:0;background:var(--muted);opacity:.45;transition:.2s}
+.hero-dot{width:9px;height:9px;border:0;border-radius:50%;padding:0;background:var(--muted);opacity:.45;transition:.25s}
 .hero-dot.active{width:25px;border-radius:99px;background:var(--red);opacity:1}
-@keyframes heroSlideIn{from{opacity:.25;transform:translateX(18px)}to{opacity:1;transform:translateX(0)}}
-@media(prefers-reduced-motion:reduce){.hero-slide{animation:none}}
+@media(prefers-reduced-motion:reduce){.hero-slide{transition:none}}
 </style>
 </head>
 <body>
@@ -1479,17 +1481,34 @@ window.showHeroSlide = function(index) {
     const dots = document.querySelectorAll("#heroDots .hero-dot");
     if (!slides.length) return;
 
-    heroSlideIndex = (index + slides.length) % slides.length;
-    slides.forEach((slide, i) => slide.classList.toggle("active", i === heroSlideIndex));
+    const nextIndex = (index + slides.length) % slides.length;
+    const currentIndex = heroSlideIndex;
+    if (nextIndex === currentIndex && slides[currentIndex]?.classList.contains("active")) return;
+
+    const direction = nextIndex > currentIndex ? 1 : -1;
+    const current = slides[currentIndex];
+    const next = slides[nextIndex];
+
+    slides.forEach(slide => slide.classList.remove("active", "slide-out-left", "slide-out-right"));
+    next.style.transition = "none";
+    next.style.transform = `translateX(${direction * 100}%)`;
+    next.classList.add("active");
+    void next.offsetWidth;
+    next.style.transition = "";
+    next.style.transform = "translateX(0)";
+    if (current && current !== next) {
+        current.style.transform = `translateX(${-direction * 100}%)`;
+        current.classList.add(direction > 0 ? "slide-out-left" : "slide-out-right");
+    }
+
+    heroSlideIndex = nextIndex;
     dots.forEach((dot, i) => {
         dot.classList.toggle("active", i === heroSlideIndex);
         dot.setAttribute("aria-current", i === heroSlideIndex ? "true" : "false");
     });
 
     clearInterval(heroSlideTimer);
-    heroSlideTimer = setInterval(() => {
-        showHeroSlide(heroSlideIndex + 1);
-    }, 3000);
+    heroSlideTimer = setInterval(() => showHeroSlide(heroSlideIndex + 1), 3000);
 };
 
 function startHeroSlider() {

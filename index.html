@@ -1031,13 +1031,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   </div>
 </div>
 
-<section class="recent-section" id="recentSection" hidden>
-  <div class="section-head">
-    <div><h2>بەرهەمە دڵخوازەکان</h2><p>ئەو بەرهەمانەی دڵت پێیانە</p></div>
-    <button class="clear-recent" type="button" onclick="clearFavoriteSection()">پاککردنەوە</button>
-  </div>
-  <div class="recent-products" id="recentProducts"></div>
-</section>
+
 
 
 <footer class="ks-clean-footer">
@@ -1068,6 +1062,14 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
         <div class="option-buttons" id="colorOptions"></div>
       </div>
       <div class="detail-price" id="detailPrice"></div>
+      <div class="detail-quantity-row">
+        <span class="detail-quantity-label">ژمارە</span>
+        <div class="detail-quantity-control">
+          <button type="button" class="detail-qty-btn" onclick="changeDetailQuantity(-1)" aria-label="کەمکردنەوە">−</button>
+          <input id="detailQuantity" type="number" min="1" value="1" inputmode="numeric" aria-label="ژمارەی دانە">
+          <button type="button" class="detail-qty-btn" onclick="changeDetailQuantity(1)" aria-label="زیادکردن">+</button>
+        </div>
+      </div>
       <button class="big-add" onclick="addSelectedProduct()">🛒 زیادکردن بۆ سەبەتە</button>
     </div>
   </div>
@@ -1126,10 +1128,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
       <button type="button" class="coupon-button" onclick="applyCoupon()">جێبەجێکردن</button>
     </div>
     <div class="checkout-totals" id="checkoutTotals"></div>
-    <div class="form-group">
-      <label>بابەتەکان</label>
-      <textarea id="customerItems" readonly=""></textarea>
-    </div>
     <button class="form-button" onclick="sendOrderToWhatsApp()">📱 ناردن بۆ ئەدمین لە WhatsApp</button>
   </div>
 </div>
@@ -1252,20 +1250,30 @@ function showMessage(text) {
     }, 1800);
 }
 
-function addToCart(name, price, size="", color="", stock=10) {
-    if (!String(size || "").trim()) return showMessage("قەبارە هەڵبژێرە");
-    if (!String(color || "").trim()) return showMessage("ڕەنگ هەڵبژێرە");
-    normalizeCart();
-    const requested = cart.find(item => cartItemKey(item) === cartItemKey({name, price, size, color}));
-    if (requested && requested.quantity >= Number(stock)) {
-        return showMessage("⚠️ ئەم بەرهەمە بەم ژمارەیە بەردەست نییە");
+function addToCart(name, price, size="", color="", stock=10, quantity=1) {
+    if (!String(size || "").trim()) {
+        showMessage("قەبارە هەڵبژێرە");
+        return false;
     }
+    if (!String(color || "").trim()) {
+        showMessage("ڕەنگ هەڵبژێرە");
+        return false;
+    }
+    normalizeCart();
+    const qty = Math.max(1, Number(quantity) || 1);
+    const maxStock = Math.max(1, Number(stock) || 10);
     const existing = cart.find(item => cartItemKey(item) === cartItemKey({name, price, size, color}));
-    if (existing) existing.quantity += 1;
-    else cart.push({ name, price: Number(price), size, color, quantity: 1, stock: Number(stock) || 10 });
+    const currentQty = existing ? Number(existing.quantity) || 0 : 0;
+    if (currentQty + qty > maxStock) {
+        showMessage("⚠️ ئەم بەرهەمە بەم ژمارەیە بەردەست نییە");
+        return false;
+    }
+    if (existing) existing.quantity = currentQty + qty;
+    else cart.push({ name, price: Number(price), size: String(size).trim(), color: String(color).trim(), quantity: qty, stock: maxStock });
     saveCart();
     updateCart();
     showMessage("✅ کاڵاکە زیادکرا بۆ سەبەتە");
+    return true;
 }
 
 window.changeCartQuantity = function(index, delta) {
@@ -1350,6 +1358,8 @@ window.openProduct = function openProduct(product) {
     selectedProduct = product;
     selectedSize = "";
     selectedColor = "";
+    const quantityInput = document.getElementById("detailQuantity");
+    if (quantityInput) quantityInput.value = "1";
 
     const images = (product.dataset.images || "").split("|").map(x => x.trim()).filter(Boolean);
     galleryImages = images;
@@ -1443,15 +1453,27 @@ function createOptions(containerId, data, type) {
     });
 }
 
+window.changeDetailQuantity = function(delta) {
+    const input = document.getElementById("detailQuantity");
+    if (!input) return;
+    const current = Math.max(1, Number(input.value) || 1);
+    const stock = Math.max(1, Number(selectedProduct?.dataset.stock) || 10);
+    input.value = Math.min(stock, Math.max(1, current + delta));
+};
+
 window.addSelectedProduct = function addSelectedProduct() {
-    if (!selectedProduct) return;
-    addToCart(
+    if (!selectedProduct) return false;
+    const quantity = Math.max(1, Number(document.getElementById("detailQuantity")?.value) || 1);
+    const success = addToCart(
         selectedProduct.dataset.name,
         Number(selectedProduct.dataset.price),
         selectedSize,
-        selectedColor
+        selectedColor,
+        Number(selectedProduct.dataset.stock) || 10,
+        quantity
     );
-    closeModal("productModal");
+    if (success) closeModal("productModal");
+    return success;
 };
 
 document.querySelectorAll(".product").forEach(product => {
@@ -1487,7 +1509,6 @@ window.toggleFavorite = async function toggleFavorite(event, button) {
     localStorage.setItem("kurdSheinFavorites", JSON.stringify(localFavorites));
     updateFavoriteCount();
     updateFavoriteButtons();
-    renderFavoritesSection();
 
     if (currentUser && firebaseReady) {
         try {
@@ -1521,7 +1542,6 @@ async function loadFavorites() {
         console.error(error);
     }
     updateFavoriteButtons();
-    renderFavoritesSection();
 }
 
 function updateFavoriteButtons() {
@@ -1560,9 +1580,18 @@ window.openFavorites = function() {
                 <strong>${product.dataset.name}</strong>
                 <div style="color:#ffd000;">${Number(product.dataset.price).toLocaleString()} د.ع</div>
             </div>
-            <button class="option-button" onclick="openProduct(this.closest('.favorite-product').productElement)">👁</button>
+            <button class="option-button favorite-view-button" type="button" aria-label="بینینی بەرهەم">👁</button>
         `;
-        div.productElement = product;
+        const viewButton = div.querySelector(".favorite-view-button");
+        viewButton.addEventListener("click", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            closeModal("favoritesModal");
+            openProduct(product);
+        });
+        div.addEventListener("click", function(event) {
+            if (!event.target.closest("button")) openProduct(product);
+        });
         list.appendChild(div);
     });
 
@@ -1751,7 +1780,6 @@ window.startOrder = function() {
     summary += `<div style="text-align:center;color:#ffd000;padding-top:10px;font-weight:bold;">کۆی گشتی: ${total.toLocaleString()} د.ع</div>`;
 
     document.getElementById("orderSummary").innerHTML = summary;
-    document.getElementById("customerItems").value = itemsText;
     appliedCoupon = null;
     document.getElementById("couponInput").value = "";
     document.getElementById("customerCity").value = "Erbil";
@@ -1900,7 +1928,6 @@ window.toggleFavoriteFromSection = async function(event, product) {
     localStorage.setItem("kurdSheinFavorites", JSON.stringify(localFavorites));
     updateFavoriteCount();
     updateFavoriteButtons();
-    renderFavoritesSection();
 
     if (currentUser && firebaseReady) {
         try {
@@ -1916,7 +1943,6 @@ window.clearFavoriteSection = async function() {
     localStorage.setItem("kurdSheinFavorites", JSON.stringify(localFavorites));
     updateFavoriteCount();
     updateFavoriteButtons();
-    renderFavoritesSection();
 
     if (currentUser && firebaseReady) {
         try {
@@ -2135,109 +2161,8 @@ renderRecentlyViewed();
 updateCart();
 updateFavoriteCount();
 updateFavoriteButtons();
-renderFavoritesSection();
 startHeroSlider();
 </script>
-<script>
-/* ===== PRODUCT MENU SAFETY FALLBACK =====
-   Ensures the product details menu opens even if the Firebase module
-   is delayed or unavailable. It does not replace the normal behavior.
-*/
-(function(){
-  function fallbackOpenProduct(product){
-    if(!product) return;
-    const modal=document.getElementById('productModal');
-    if(!modal) return;
 
-    const images=(product.dataset.images||'').split('|').map(x=>x.trim()).filter(Boolean);
-    const main=document.getElementById('mainProductImage');
-    const thumbs=document.getElementById('productThumbnails');
-    if(main) main.src=images[0]||'';
-    if(thumbs){
-      thumbs.innerHTML='';
-      images.slice(0,6).forEach((src,i)=>{
-        const img=document.createElement('img');
-        img.src=src;
-        if(i===0) img.classList.add('selected');
-        img.addEventListener('click',function(){
-          if(main) main.src=src;
-          thumbs.querySelectorAll('img').forEach(x=>x.classList.remove('selected'));
-          img.classList.add('selected');
-        });
-        thumbs.appendChild(img);
-      });
-    }
-    const name=document.getElementById('detailName');
-    const desc=document.getElementById('detailDescription');
-    const price=document.getElementById('detailPrice');
-    if(name) name.innerText=product.dataset.name||'';
-    if(desc) desc.innerText=product.dataset.description||'';
-    if(price) price.innerText=Number(product.dataset.price||0).toLocaleString()+' د.ع';
-
-    const sizeArea=document.getElementById('detailSizeArea');
-    const colorArea=document.getElementById('detailColorArea');
-    const sizeOptions=document.getElementById('sizeOptions');
-    const colorOptions=document.getElementById('colorOptions');
-
-    // Restore product size/color options in the fallback menu.
-    function fillOptions(container, data, type) {
-      if(!container) return;
-      container.innerHTML='';
-      if(!data) return;
-      data.split(',').map(v=>v.trim()).filter(Boolean).forEach((value, index)=>{
-        const btn=document.createElement('button');
-        btn.type='button';
-        btn.className='option-button';
-        btn.innerText=value;
-        btn.addEventListener('click', function(){
-          container.querySelectorAll('.option-button').forEach(x=>x.classList.remove('selected'));
-          btn.classList.add('selected');
-          if(type==='size') window.__fallbackSelectedSize=value;
-          if(type==='color') window.__fallbackSelectedColor=value;
-        });
-        container.appendChild(btn);
-      });
-    }
-
-    window.__fallbackSelectedSize='';
-    window.__fallbackSelectedColor='';
-    fillOptions(sizeOptions, product.dataset.sizes, 'size');
-    fillOptions(colorOptions, product.dataset.colors, 'color');
-
-    if(sizeArea) sizeArea.style.display=product.dataset.sizes?'block':'none';
-    if(colorArea) colorArea.style.display=product.dataset.colors?'block':'none';
-
-    // Keep the Add to Cart button functional in fallback mode.
-    const fallbackAdd=document.querySelector('#productModal .big-add');
-    if(fallbackAdd){
-      fallbackAdd.onclick=function(){
-        if(typeof window.addToCart==='function'){
-          window.addToCart(
-            product.dataset.name,
-            Number(product.dataset.price||0),
-            window.__fallbackSelectedSize || '',
-            window.__fallbackSelectedColor || ''
-          );
-        }
-        modal.classList.remove('show');
-        document.body.style.overflow='';
-      };
-    }
-
-    modal.classList.add('show');
-    document.body.style.overflow='hidden';
-  }
-
-  document.addEventListener('click',function(event){
-    const button=event.target.closest('.add-cart');
-    if(!button) return;
-    const modal=document.getElementById('productModal');
-    if(modal && !modal.classList.contains('show')){
-      event.stopPropagation();
-      fallbackOpenProduct(button.closest('.product'));
-    }
-  },true);
-})();
-</script>
 </body>
 </html>

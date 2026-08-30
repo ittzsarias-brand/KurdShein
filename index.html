@@ -142,6 +142,59 @@ footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--bord
   .ks-search{height:44px}
 }
 
+
+/* ===== HAMBURGER DRAWER OPTIONS FIX ===== */
+.ks-nav-drawer{
+  width:min(420px,92vw)!important;
+}
+.ks-nav-subtitle{
+  color:var(--muted);font-size:10px;margin-top:3px;
+}
+.ks-menu-divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+  margin:20px 5px;
+}
+.ks-option{
+  width:100%;min-height:76px;margin-bottom:10px;padding:12px;
+  border-radius:17px;border:1px solid var(--border);
+  background:rgba(255,255,255,.025);color:var(--text);
+  cursor:pointer;font-family:Rabar,Arial,sans-serif;
+  display:flex;align-items:center;gap:13px;text-align:right;
+  transition:.22s;
+}
+.ks-option:hover{
+  transform:translateX(-4px);
+  border-color:rgba(247,201,72,.55);
+  background:rgba(247,201,72,.055);
+}
+.ks-option-icon{
+  width:44px;height:44px;flex:0 0 44px;border-radius:13px;
+  display:grid;place-items:center;font-size:20px;
+  background:rgba(247,201,72,.12);
+  border:1px solid rgba(247,201,72,.18);
+}
+.ks-option-copy{
+  flex:1;display:flex;flex-direction:column;gap:4px;
+}
+.ks-option-copy strong{font-size:15px}
+.ks-option-copy small{color:var(--muted);font-size:10.5px}
+.ks-option-arrow{font-size:25px;color:var(--muted)}
+.ks-fav-count{
+  min-width:26px;height:26px;padding:0 7px;border-radius:14px;
+  display:grid;place-items:center;color:#111;
+  background:linear-gradient(145deg,#ffe18a,#b9821d);
+  font:700 11px Arial;
+}
+.ks-menu-footer{
+  margin:auto 16px 18px;padding:15px;border-radius:16px;
+  border:1px solid rgba(247,201,72,.2);
+  background:rgba(247,201,72,.045);
+  display:flex;flex-direction:column;gap:4px;text-align:center;
+  color:var(--muted);font-size:10px;
+}
+.ks-menu-footer strong{color:var(--yellow);font-size:12px}
+
 </style></head><body>
 <div class="top-bar"><div class="top-bar-text"><span>☀</span><span data-i18n="welcome">بەخێربێیت بۆ KurdShein — کاڵای نوێ بۆ تۆ</span><span>☀</span></div></div>
 <div class="brand-row"><div class="brand"><span class="brand-mark">☀</span><span>KurdShein</span></div></div>
@@ -164,16 +217,63 @@ footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--bord
 
 <!-- ===== KURDSHEIN NAVIGATION DRAWER ===== -->
 <div class="ks-nav-backdrop" id="ksNavBackdrop" onclick="closeSideMenu()"></div>
-<aside class="ks-nav-drawer" id="ksNavDrawer" aria-label="مێنیوی KurdShein">
+<aside class="ks-nav-drawer" id="ksNavDrawer" aria-label="بژاردەکانی KurdShein">
   <div class="ks-drawer-head">
-    <div class="ks-brand">Kurd<span>Shein</span></div>
+    <div>
+      <div class="ks-brand">Kurd<span>Shein</span></div>
+      <div class="ks-nav-subtitle">بژاردەکانی تۆ</div>
+    </div>
     <button class="ks-close" type="button" onclick="closeSideMenu()">×</button>
   </div>
+
   <div class="ks-drawer-body">
-    <div class="ks-drawer-label">بەشەکان</div>
-    <button class="ks-nav-item" onclick="closeSideMenu();window.scrollTo({top:0,behavior:'smooth'})">⌂ <span>سەرەتا</span></button>
-    <button class="ks-nav-item" onclick="closeSideMenu();document.getElementById('products').scrollIntoView({behavior:'smooth'})">▦ <span>بەرهەمەکان</span></button>
-    <button class="ks-nav-item" onclick="closeSideMenu();document.getElementById('products').scrollIntoView({behavior:'smooth'})">🏷️ <span>داشکاندنەکان</span></button>
+    <div class="ks-drawer-label">بژاردەکان</div>
+
+    <button class="ks-option" type="button" onclick="toggleTheme();closeSideMenu()">
+      <span class="ks-option-icon">◐</span>
+      <span class="ks-option-copy">
+        <strong>ڕووناک / تاریک</strong>
+        <small>گۆڕینی شێوەی دەرکەوتنی سایت</small>
+      </span>
+      <span class="ks-option-arrow">‹</span>
+    </button>
+
+    <button class="ks-option" type="button" onclick="closeSideMenu();openAccount()">
+      <span class="ks-option-icon">👤</span>
+      <span class="ks-option-copy">
+        <strong>بەڕێوەبردنی هەژمار</strong>
+        <small>هەژمار و زانیارییەکانت</small>
+      </span>
+      <span class="ks-option-arrow">‹</span>
+    </button>
+
+    <button class="ks-option" type="button" onclick="closeSideMenu();openFavorites()">
+      <span class="ks-option-icon">♡</span>
+      <span class="ks-option-copy">
+        <strong>دڵخوازەکان</strong>
+        <small>بەرهەمە دڵخوازکراوەکانت</small>
+      </span>
+      <span class="ks-fav-count" id="ksMenuFavoriteCount">0</span>
+    </button>
+
+    <div class="ks-menu-divider"></div>
+
+    <div class="ks-drawer-label">گەڕان</div>
+
+    <button class="ks-nav-item" type="button"
+      onclick="closeSideMenu();window.scrollTo({top:0,behavior:'smooth'})">
+      ⌂ <span>سەرەتا</span>
+    </button>
+
+    <button class="ks-nav-item" type="button"
+      onclick="closeSideMenu();document.getElementById('products').scrollIntoView({behavior:'smooth'})">
+      ▦ <span>بەرهەمەکان</span>
+    </button>
+  </div>
+
+  <div class="ks-menu-footer">
+    <strong>KurdShein</strong>
+    <span>تجربەیەکی سادە و مۆدێرن بۆ کڕین</span>
   </div>
 </aside>
 
@@ -2513,6 +2613,17 @@ window.updateKsFavoriteCount=function(){
 document.addEventListener("keydown",function(e){
   if(e.key==="Escape"){closeSideMenu();closeKurdSheinDrawer();}
 });
+
+
+/* ===== HAMBURGER FAVORITE COUNT ===== */
+window.updateKsMenuFavoriteCount=function(){
+  const el=document.getElementById("ksMenuFavoriteCount");
+  if(!el)return;
+  try{
+    const favs=Array.isArray(localFavorites)?localFavorites:[];
+    el.textContent=favs.length;
+  }catch(e){el.textContent="0";}
+};
 
 </script>
 </body></html>

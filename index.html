@@ -287,6 +287,193 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 }
 </style>
 
+
+<style id="user-scale-30">
+/* Requested: description, Add to Cart, and Favorites at 30% */
+.product-description{font-size:30% !important;}
+.add-cart{font-size:30% !important; padding:30% !important;}
+.favorite-button{width:30% !important;height:30% !important;font-size:30% !important;}
+/* Keep close/cross buttons properly visible and clickable */
+.ks-close,.modal-close,.close-modal,.lightbox-close{display:grid !important;place-items:center !important;line-height:1 !important;font-family:Arial,sans-serif !important;font-weight:900 !important;overflow:visible !important;opacity:1 !important;visibility:visible !important;}
+.ks-close{font-size:23px !important;}
+.modal-close,.close-modal{font-size:24px !important;min-width:40px !important;min-height:40px !important;}
+</style>
+
+<style id="compact-overlay-layout">
+/* ===== COMPACT PRODUCT / CART / SETTINGS VIEWS ===== */
+.modal-box{
+  max-width: 680px !important;
+  max-height: 86vh !important;
+  padding: 18px !important;
+  border-radius: 18px !important;
+}
+.product-details-box{
+  max-width: 760px !important;
+}
+.main-product-image{
+  height: 300px !important;
+}
+.product-thumbnails{
+  max-height: 300px !important;
+}
+.product-thumbnails img{
+  width: 64px !important;
+  height: 64px !important;
+}
+.details-content{
+  margin-top: 12px !important;
+}
+.details-content h2{
+  font-size: 19px !important;
+}
+.details-description{
+  font-size: 13px !important;
+  line-height: 1.65 !important;
+  margin-bottom: 10px !important;
+}
+.option-title{
+  margin: 10px 0 6px !important;
+  font-size: 12px !important;
+}
+.option-button{
+  padding: 7px 11px !important;
+  font-size: 12px !important;
+}
+.detail-price{
+  font-size: 19px !important;
+  margin: 12px 0 !important;
+}
+.big-add{
+  font-size: 13px !important;
+  padding: 10px !important;
+}
+.form-group{
+  margin-bottom: 9px !important;
+}
+.form-group label{
+  font-size: 12px !important;
+  margin-bottom: 4px !important;
+}
+.form-group input,.form-group textarea,.checkout-select{
+  padding: 9px !important;
+}
+.form-group textarea{
+  min-height: 70px !important;
+}
+.form-button{
+  padding: 10px !important;
+}
+.cart-items{
+  max-height: 270px !important;
+}
+.cart-item-premium{
+  padding: 10px !important;
+}
+.cart-total{
+  font-size: 17px !important;
+  padding: 12px 0 9px !important;
+}
+.order-summary{
+  padding: 9px !important;
+  margin-bottom: 12px !important;
+}
+.order-summary-item{
+  padding: 6px 0 !important;
+}
+.checkout-totals{
+  padding: 9px !important;
+}
+.ks-options-drawer,.ks-nav-drawer{
+  width: min(340px, 84vw) !important;
+}
+.ks-drawer-head,.ks-options-head{
+  min-height: 70px !important;
+  padding: 12px 14px !important;
+}
+.ks-brand,.ks-options-brand{
+  font-size: 20px !important;
+}
+.ks-close{
+  width: 36px !important;
+  height: 36px !important;
+  font-size: 20px !important;
+}
+.ks-options-body,.ks-drawer-body{
+  padding: 14px 12px !important;
+}
+.ks-option{
+  min-height: 60px !important;
+  margin-bottom: 8px !important;
+  padding: 9px !important;
+  border-radius: 13px !important;
+  gap: 9px !important;
+}
+.ks-option-icon{
+  width: 36px !important;
+  height: 36px !important;
+  flex-basis: 36px !important;
+  font-size: 17px !important;
+}
+.ks-option-copy strong{
+  font-size: 13px !important;
+}
+.ks-option-copy small{
+  font-size: 9px !important;
+}
+.ks-options-footer,.ks-menu-footer{
+  margin: auto 12px 12px !important;
+  padding: 10px !important;
+}
+
+/* Phone: make the popup fit naturally without taking over the screen */
+@media(max-width:600px){
+  .modal{
+    padding: 8px !important;
+    align-items: center !important;
+  }
+  .modal-box{
+    max-width: 94vw !important;
+    max-height: 84vh !important;
+    padding: 14px !important;
+    border-radius: 17px !important;
+  }
+  .product-details-box{
+    max-width: 94vw !important;
+  }
+  .main-product-image{
+    height: 230px !important;
+  }
+  .product-thumbnails{
+    max-height: none !important;
+  }
+  .product-thumbnails img{
+    width: 55px !important;
+    height: 55px !important;
+  }
+  .details-content h2{
+    font-size: 17px !important;
+  }
+  .details-description{
+    font-size: 12px !important;
+  }
+  .option-button{
+    padding: 6px 9px !important;
+    font-size: 11px !important;
+  }
+  .detail-price{
+    font-size: 17px !important;
+    margin: 9px 0 !important;
+  }
+  .big-add{
+    font-size: 12px !important;
+    padding: 9px !important;
+  }
+  .ks-options-drawer,.ks-nav-drawer{
+    width: min(320px, 82vw) !important;
+  }
+}
+</style>
+
 </head>
 <body>
 

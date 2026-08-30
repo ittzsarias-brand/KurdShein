@@ -1,4 +1,12 @@
-<!DOCTYPE html><html lang="ku" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#e51c2a"><meta name="description" content="KurdShein — هێنانەوەی کاڵا بۆ کوردستان"><title>KurdShein | کاڵای نوێ بۆ کوردستان</title><style>
+<!DOCTYPE html>
+<html lang="ku" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#e51c2a">
+<meta name="description" content="KurdShein — هێنانەوەی کاڵا بۆ کوردستان">
+<title>KurdShein | کاڵای نوێ بۆ کوردستان</title>
+<style>
 @font-face{font-family:Rabar;src:url("Rabar_037%202.ttf") format("truetype");font-display:swap}
 :root{--bg:#080a0f;--surface:#10141b;--surface-2:#171c24;--surface-3:#202631;--text:#f8fafc;--muted:#98a2b3;--border:rgba(255,255,255,.09);--red:#e51c2a;--green:#168a46;--yellow:#f7c948;--shadow:0 20px 55px rgba(0,0,0,.25)}
 body.light{--bg:#f5f7fa;--surface:#fff;--surface-2:#f2f4f7;--surface-3:#e8ebf0;--text:#111827;--muted:#667085;--border:rgba(16,24,40,.10);--shadow:0 20px 50px rgba(16,24,40,.10)}
@@ -38,7 +46,7 @@ footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--bord
 .ks-cart-button{width:46px;height:46px}
 .ks-cart-button:hover{transform:translateY(-2px);border-color:var(--yellow)}
 
-/* ===== PREMIUM OPTIONS DRAWER ===== */
+/* ===== PREMIUM OPTIONS DRAWER & HAMBURGER DRAWER ===== */
 .ks-options-backdrop,.ks-nav-backdrop{
   position:fixed;inset:0;background:rgba(0,0,0,.68);
   backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
@@ -82,7 +90,7 @@ footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--bord
   background:linear-gradient(145deg,#ffe18a,#b9821d);
   box-shadow:0 8px 22px rgba(247,201,72,.24);
 }
-.ks-options-sub{color:var(--muted);font-size:10px;margin-top:3px}
+.ks-options-sub,.ks-nav-subtitle{color:var(--muted);font-size:10px;margin-top:3px}
 .ks-options-body,.ks-drawer-body{padding:20px 16px;overflow:auto}
 .ks-drawer-label{color:var(--muted);font-size:11px;margin:0 5px 11px}
 .ks-option,.ks-nav-item{
@@ -113,16 +121,14 @@ footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--bord
   background:linear-gradient(145deg,#ffe18a,#b9821d);
   font:700 11px Arial;
 }
-.ks-nav-item{justify-content:flex-start;font-size:16px}
-.ks-nav-item span{flex:1}
-.ks-options-footer{
+.ks-options-footer,.ks-menu-footer{
   margin:auto 16px 18px;padding:15px;border-radius:16px;
   border:1px solid rgba(247,201,72,.2);
   background:rgba(247,201,72,.045);
   display:flex;flex-direction:column;gap:4px;text-align:center;
   color:var(--muted);font-size:10px;
 }
-.ks-options-footer strong{color:var(--yellow);font-size:12px}
+.ks-options-footer strong,.ks-menu-footer strong{color:var(--yellow);font-size:12px}
 
 .ks-clean-footer{
   margin-top:55px;padding:25px 18px 20px;text-align:center;
@@ -141,63 +147,17 @@ footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--bord
   .ks-menu-button,.ks-cart-button{width:42px;height:42px}
   .ks-search{height:44px}
 }
+</style>
+</head>
+<body>
 
+<div class="top-bar">
+  <div class="top-bar-text"><span>☀</span><span data-i18n="welcome">بەخێربێیت بۆ KurdShein — کاڵای نوێ بۆ تۆ</span><span>☀</span></div>
+</div>
+<div class="brand-row">
+  <div class="brand"><span class="brand-mark">☀</span><span>KurdShein</span></div>
+</div>
 
-/* ===== HAMBURGER DRAWER OPTIONS FIX ===== */
-.ks-nav-drawer{
-  width:min(420px,92vw)!important;
-}
-.ks-nav-subtitle{
-  color:var(--muted);font-size:10px;margin-top:3px;
-}
-.ks-menu-divider{
-  height:1px;
-  background:linear-gradient(90deg,transparent,var(--border),transparent);
-  margin:20px 5px;
-}
-.ks-option{
-  width:100%;min-height:76px;margin-bottom:10px;padding:12px;
-  border-radius:17px;border:1px solid var(--border);
-  background:rgba(255,255,255,.025);color:var(--text);
-  cursor:pointer;font-family:Rabar,Arial,sans-serif;
-  display:flex;align-items:center;gap:13px;text-align:right;
-  transition:.22s;
-}
-.ks-option:hover{
-  transform:translateX(-4px);
-  border-color:rgba(247,201,72,.55);
-  background:rgba(247,201,72,.055);
-}
-.ks-option-icon{
-  width:44px;height:44px;flex:0 0 44px;border-radius:13px;
-  display:grid;place-items:center;font-size:20px;
-  background:rgba(247,201,72,.12);
-  border:1px solid rgba(247,201,72,.18);
-}
-.ks-option-copy{
-  flex:1;display:flex;flex-direction:column;gap:4px;
-}
-.ks-option-copy strong{font-size:15px}
-.ks-option-copy small{color:var(--muted);font-size:10.5px}
-.ks-option-arrow{font-size:25px;color:var(--muted)}
-.ks-fav-count{
-  min-width:26px;height:26px;padding:0 7px;border-radius:14px;
-  display:grid;place-items:center;color:#111;
-  background:linear-gradient(145deg,#ffe18a,#b9821d);
-  font:700 11px Arial;
-}
-.ks-menu-footer{
-  margin:auto 16px 18px;padding:15px;border-radius:16px;
-  border:1px solid rgba(247,201,72,.2);
-  background:rgba(247,201,72,.045);
-  display:flex;flex-direction:column;gap:4px;text-align:center;
-  color:var(--muted);font-size:10px;
-}
-.ks-menu-footer strong{color:var(--yellow);font-size:12px}
-
-</style></head><body>
-<div class="top-bar"><div class="top-bar-text"><span>☀</span><span data-i18n="welcome">بەخێربێیت بۆ KurdShein — کاڵای نوێ بۆ تۆ</span><span>☀</span></div></div>
-<div class="brand-row"><div class="brand"><span class="brand-mark">☀</span><span>KurdShein</span></div></div>
 <header class="main-header ks-main-header">
   <button class="ks-menu-button" type="button" onclick="toggleSideMenu()" aria-label="مێنیو" title="مێنیو">
     <span></span><span></span><span></span>
@@ -305,384 +265,247 @@ footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--bord
   </div>
 </aside>
 
-
 <section class="hero">
-  <div class="hero-inner"><div class="hero-glow"></div><div class="hero-copy">
-    <div class="eyebrow">✦ کۆمەڵەی نوێی KurdShein</div>
-    <h2>هەڵبژاردەی <span>جوان</span>، داواکاریی ئاسان.</h2>
-    <p>بەرهەمە هەڵبژێردراوەکان ببینە، قەبارە و ڕەنگ هەڵبژێرە، پاشان داواکارییەکەت بە خێرایی بنێرە بۆ ئەدمین.</p>
-    <div class="hero-actions"><button class="hero-btn primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">بینینی بەرهەمەکان ↓</button><button class="hero-btn secondary" onclick="openKurdSheinDrawer()">🛒 سەبەتەکەم</button></div>
-  </div></div>
+  <div class="hero-inner">
+    <div class="hero-glow"></div>
+    <div class="hero-copy">
+      <div class="eyebrow">✦ کۆمەڵەی نوێی KurdShein</div>
+      <h2>هەڵبژاردەی <span>جوان</span>، داواکاریی ئاسان.</h2>
+      <p>بەرهەمە هەڵبژێردراوەکان ببینە، قەبارە و ڕەنگ هەڵبژێرە، پاشان داواکارییەکەت بە خێرایی بنێرە بۆ ئەدمین.</p>
+      <div class="hero-actions">
+        <button class="hero-btn primary" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})">بینینی بەرهەمەکان ↓</button>
+        <button class="hero-btn secondary" onclick="openKurdSheinDrawer()">🛒 سەبەتەکەم</button>
+      </div>
+    </div>
+  </div>
 </section>
+
 <section class="trust">
  <div class="trust-card"><div class="trust-icon">🚚</div><div><strong>گەیاندنی ئاسان</strong><span>داواکارییەکەت بە خێرایی پڕۆسە دەکرێت</span></div></div>
  <div class="trust-card"><div class="trust-icon">💬</div><div><strong>پەیوەندی لە WhatsApp</strong><span>ناردنی داواکاریی ڕاستەوخۆ بۆ ئەدمین</span></div></div>
  <div class="trust-card"><div class="trust-icon">🔒</div><div><strong>هەژمار و ئۆردەر</strong><span>مێژووی داواکارییەکانت لە هەژمارەکەت</span></div></div>
  <div class="trust-card"><div class="trust-icon">❤️</div><div><strong>دلخوازەکان</strong><span>بەرهەمە پەسەندکراوەکانت هەڵبگرە</span></div></div>
 </section>
+
 <div class="section-head"><div><h2>بەرهەمەکان</h2><p>نوێترین بەرهەمە بەردەستەکان</p></div></div>
+
 <div class="categories">
- <button class="category active" onclick="filterProducts('all',this)" data-i18n="all">گشتی</button><button class="category" onclick="filterProducts('new',this)" data-i18n="new">بابەتی نوێ</button><button class="category" onclick="filterProducts('sale',this)" data-i18n="sale">داشکاندن</button><button class="category" onclick="filterProducts('men',this)" data-i18n="men">پیاوان</button><button class="category" onclick="filterProducts('women',this)" data-i18n="women">ئافرەتان</button><button class="category" onclick="filterProducts('kids',this)" data-i18n="kids">منداڵان</button><button class="category" onclick="filterProducts('accessories',this)" data-i18n="accessories">ئەکسسوارات</button><button class="category" onclick="filterProducts('electronics',this)" data-i18n="electronics">ئەلکترۆنی</button>
+ <button class="category active" onclick="filterProducts('all',this)" data-i18n="all">گشتی</button>
+ <button class="category" onclick="filterProducts('new',this)" data-i18n="new">بابەتی نوێ</button>
+ <button class="category" onclick="filterProducts('sale',this)" data-i18n="sale">داشکاندن</button>
+ <button class="category" onclick="filterProducts('men',this)" data-i18n="men">پیاوان</button>
+ <button class="category" onclick="filterProducts('women',this)" data-i18n="women">ئافرەتان</button>
+ <button class="category" onclick="filterProducts('kids',this)" data-i18n="kids">منداڵان</button>
+ <button class="category" onclick="filterProducts('accessories',this)" data-i18n="accessories">ئەکسسوارات</button>
+ <button class="category" onclick="filterProducts('electronics',this)" data-i18n="electronics">ئەلکترۆنی</button>
 </div>
-<div class="products" id="products"><div class="product" data-category="all new electronics" data-colors="رەنگاورەنگRGBلیدی" data-description="١. ئامێری بڵاوکردنەوەی بۆن لە براندی تێکوی
-    ٢. بۆ ماڵان و ناو سەیارە بەکاردێت
-    ٣.بە دڵی خۆت ئەتوانی بۆنی تێبکەیت
-    ٤. لیدی ئارجیبیە و ئۆتۆماتیکی رەنگەکان ئەگۆرێت
-    " data-images="IMG_9186.jpeg|IMG_9187.jpeg|IMG_9188.jpeg|IMG_9189.jpeg|IMG_9190.jpeg|IMG_9191.jpeg" data-name="ئامێری بۆن بڵاوکردنەوە" data-price="5000" data-sizes="One Size">
-<div class="product-image"><div class="new-badge">نوێ</div>
-<button class="favorite-button" onclick="toggleFavorite(event,this)">
-            ♡
-        </button>
-<img alt="" src="IMG_9186.jpeg"/>
+
+<div class="products" id="products">
+  <div class="product" data-category="all new electronics" data-colors="رەنگاورەنگRGBلیدی" data-description="١. ئامێری بڵاوکردنەوەی بۆن لە براندی تێکوی  ٢. بۆ ماڵان و ناو سەیارە بەکاردێت  ٣.بە دڵی خۆت ئەتوانی بۆنی تێبکەیت  ٤. لیدی ئارجیبیە و ئۆتۆماتیکی رەنگەکان ئەگۆرێت" data-images="IMG_9186.jpeg|IMG_9187.jpeg|IMG_9188.jpeg|IMG_9189.jpeg|IMG_9190.jpeg|IMG_9191.jpeg" data-name="ئامێری بۆن بڵاوکردنەوە" data-price="5000" data-sizes="One Size">
+    <div class="product-image">
+      <div class="new-badge">نوێ</div>
+      <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+      <img alt="" src="IMG_9186.jpeg"/>
+    </div>
+    <div class="product-info">
+      <div class="product-rating">★★★★★</div>
+      <div class="product-name">جیهازی بۆن</div>
+      <div class="product-description">بۆ سەیارە و ماڵ</div>
+      <div class="price">٥٠٠٠ د.ع</div>
+      <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
+    </div>
+  </div>
+
+  <div class="product" data-category="all new electronics" data-colors="RGB-IC" data-description="١.لیدێک بۆ جوانکردنی ژوور  ٢. کۆنترۆلی خۆی لەگەل دایە  ٣. ⁠بەرنامەی تایبەت بەخۆی هەیە" data-images="IMG_9196.jpeg|IMG_9205.jpeg|IMG_9206.jpeg|IMG_9207.jpeg" data-name="لیدی نیۆن" data-price="12000" data-sizes="2M,3M,5M,10M">
+    <div class="product-image">
+      <div class="new-badge">نوێ</div>
+      <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+      <img alt="" src="IMG_9205.jpeg"/>
+    </div>
+    <div class="product-info">
+      <div class="product-rating">★★★★★</div>
+      <div class="product-name">لیدی نیۆن</div>
+      <div class="product-description">کۆنترۆل + بەرنامەی موبایل</div>
+      <div class="price">١٢,٠٠٠ د.ع</div>
+      <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
+    </div>
+  </div>
+
+  <div class="product" data-category="all sale electronics" data-colors="ڕەش،سپی" data-description="١. یەکێک لە جوانترین بابەتەکانی ژوور. ٢. کۆنترۆلی خۆی لەگەڵدایە. ٣. پەیوەندی بە مۆبایل دەبێت." data-images="IMG_9235.jpeg|IMG_9236.jpeg" data-name="گالاکسی پرۆجێکتەر" data-price="13000" data-sizes="قیاس گەورە">
+    <div class="product-image">
+      <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+      <div class="sale">داشکاندن</div>
+      <img src="IMG_9235.jpeg"/>
+    </div>
+    <div class="product-info">
+      <div class="product-rating">★★★★★</div>
+      <div class="product-name">گالاکسی پرۆجێکتەر</div>
+      <div class="product-description">جوانکاری ژوور</div>
+      <div>
+        <span class="price">١٣،٠٠٠ د.ع</span>
+        <span class="old-price">٢٠,٠٠٠</span>
+      </div>
+      <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
+    </div>
+  </div>
+
+  <div class="product" data-category="all new accessories" data-colors="ڕەش,شین,پەمەیی,سەوز" data-description="جانتای جوانی رۆژانە و قوتابخانە  ." data-images="IMG_9245.png|IMG_9246.jpeg|IMG_9247.jpeg|IMG_9248.jpeg" data-name="جانتای ژنان" data-price="14000" data-sizes=" یەک قەبارە">
+    <div class="product-image">
+      <div class="new-badge">نوێ</div>
+      <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+      <img alt="" src="IMG_9245.png"/>
+    </div>
+    <div class="product-info">
+      <div class="product-rating">★★★★★</div>
+      <div class="product-name">جانتای پشتی</div>
+      <div class="product-description">قوتابخانە و رۆژانە</div>
+      <div class="price">١٥,٠٠٠ د.ع</div>
+      <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
+    </div>
+  </div>
+
+  <div class="product" data-category="all kids" data-colors="سەرەوە مۆر,خوارەوە سپی" data-description="جلوبەرگی منداڵان بە شێوەیەکی ئاسوودە و جوان." data-images="IMG_9254.jpeg|IMG_9255.jpeg|IMG_9256.jpeg" data-name="جلوبەرگی منداڵان" data-price="9000" data-sizes="١ساڵ تا ٢ ساڵ">
+    <div class="product-image">
+      <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+      <img alt="" src="IMG_9254.jpeg"/>
+    </div>
+    <div class="product-info">
+      <div class="product-rating">★★★★★</div>
+      <div class="product-name">جلوبەرگی منداڵان</div>
+      <div class="product-description">جلوبەرگی منداڵان</div>
+      <div class="price">٩,٠٠٠ د.ع</div>
+      <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
+    </div>
+  </div>
+
+  <div class="product" data-category="all electronics" data-colors="ڕەش,سپی" data-description=" براندی ئەتاک شارک هێدفۆنی بلوتوس بە کوالیتی بەرز و دەنگی ڕوون." data-images="IMG_9258.jpeg|IMG_9259.jpeg|IMG_9260.jpeg" data-name="هێدفۆنی ئەتاک شارک | Attack Shark Headphones" data-price="18000" data-sizes="بێ سایز">
+    <div class="product-image">
+      <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+      <img alt="" src="IMG_9258.jpeg"/>
+    </div>
+    <div class="product-info">
+      <div class="product-rating">★★★★★</div>
+      <div class="product-name">براندی ئەتاکشارک-Attack Shark</div>
+      <div class="product-description">هێدفۆنی گەیمینگ</div>
+      <div class="price">١٨,٠٠٠ د.ع</div>
+      <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
+    </div>
+  </div>
+
+  <div class="product" data-category="all accessories" data-colors="رەش,پەمەیی" data-description="مەتارەیەکی ئاو بۆ بەلارهێنانی رۆژانە  ٥٠٠ مل ئاو دەگرێت و شتێکی ناسکە  بە دوو رەنگ بەردەستە" data-images="IMG_1740.jpeg|IMG_1741.jpeg " data-name="مەتارەی ئاو" data-price="5000" data-sizes="500ml">
+    <div class="product-image">
+      <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+      <img alt="" src="IMG_1740.jpeg"/>
+    </div>
+    <div class="product-info">
+      <div class="product-rating">★★★★★</div>
+      <div class="product-name">مەتارەی ئاو</div>
+      <div class="product-description">مەتارەیەکی جوان بۆ کاری رۆژانە</div>
+      <div class="price">٥،٠٠٠ د.ع</div>
+      <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
+    </div>
+  </div>
 </div>
-<div class="product-info">
-<div class="product-rating">★★★★★</div><div class="product-name">
-            جیهازی بۆن 
-        </div>
-<div class="product-description">
-           بۆ سەیارە و ماڵ
-        </div>
-<div class="price">
-            ٥٠٠٠ د.ع
-    
-        </div>
-<button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">
-    داوا کردن🛒
-</button>
+
+<div class="coming">
+  <div><strong>بەرهەمی زیاتر لە ڕێگادایە</strong><br><span>بەردەوامین لە زیادکردنی بەرهەمی نوێ بۆ KurdShein.</span></div>
+  <div class="coming-badge">COMING SOON</div>
 </div>
-</div>
-<div class="product" data-category="all new electronics" data-colors="RGB-IC" data-description="١.لیدێک بۆ جوانکردنی ژوور 
-٢. کۆنترۆلی خۆی لەگەل دایە
-٣. ⁠بەرنامەی تایبەت بەخۆی هەیە
-." data-images="IMG_9196.jpeg|IMG_9205.jpeg|IMG_9206.jpeg|IMG_9207.jpeg" data-name="لیدی نیۆن" data-price="12000" data-sizes="2M,3M,5M,10M">
-<div class="product-image"><div class="new-badge">نوێ</div>
-<button class="favorite-button" onclick="toggleFavorite(event,this)">
-            ♡
-        </button>
-<img alt="" src="IMG_9205.jpeg"/>
-</div>
-<div class="product-info">
-<div class="product-rating">★★★★★</div><div class="product-name">
-           لیدی نیۆن
-        </div>
-<div class="product-description">
-            کۆنترۆل + بەرنامەی موبایل
-        </div>
-<div class="price">
-            ١٢,٠٠٠ د.ع
-        </div>
-<button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">
-    داوا کردن🛒
-</button>
-</div>
-</div>
-<div (سەماعەیە)="" 0"="" class="product" data-category="all sale electronics" data-colors="ڕەش،سپی" data-description="١. یەکێک لە جوانترین بابەتەکانی ژوور. ٢. کۆنترۆلی خۆی لەگەڵدایە. ٣. پەیوەندی بە مۆبایل دەبێت." data-images="IMG_9235.jpeg|IMG_9236.jpeg" data-name="گالاکسی پرۆجێکتەر" data-price="13000" data-sizes="قیاس گەورە" دەبێت="" موبایل="" ٣.رەبتی="">
-<div class="product-image">
-<button class="favorite-button" onclick="toggleFavorite(event,this)">
-            ♡
-        </button>
-<div class="sale">
-            داشکاندن
-        </div>
-<img src="IMG_9235.jpeg"/>
-</div>
-<div class="product-info">
-<div class="product-rating">★★★★★</div><div class="product-name">
-         گالاکسی پرۆجێکتەر  
-        </div>
-<div class="product-description">
-            جوانکاری ژوور
-        </div>
-<div>
-<span class="price">
-                ١٣،٠٠٠ د.ع
-            </span>
-<span class="old-price">
-                ٢٠,٠٠٠
-            </span>
-</div>
-<button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">
-    داوا کردن🛒
-</button>
-</div>
-</div>
-<div class="product" data-category="all new accessories" data-colors="ڕەش,شین,پەمەیی,سەوز" data-description="جانتای جوانی رۆژانە و قوتابخانە  ." data-images="IMG_9245.png|IMG_9246.jpeg|IMG_9247.jpeg|IMG_9248.jpeg" data-name="جانتای ژنان" data-price="14000" data-sizes=" یەک قەبارە">
-<div class="product-image"><div class="new-badge">نوێ</div>
-<button class="favorite-button" onclick="toggleFavorite(event,this)">
-            ♡
-        </button>
-<img alt="" src="IMG_9245.png"/>
-</div>
-<div class="product-info">
-<div class="product-rating">★★★★★</div><div class="product-name">
-            جانتای پشتی
-        </div>
-<div class="product-description">
-            قوتابخانە و رۆژانە
-        </div>
-<div class="price">
-            ١٥,٠٠٠ د.ع
-        </div>
-<button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">
-    داوا کردن🛒
-</button>
-</div>
-</div>
-<div class="product" data-category="all kids" data-colors="سەرەوە مۆر
-خوارەوە سپی" data-description="جلوبەرگی منداڵان بە شێوەیەکی ئاسوودە و جوان." data-images="IMG_9254.jpeg|IMG_9255.jpeg|IMG_9256.jpeg" data-name="جلوبەرگی منداڵان" data-price="9000" data-sizes="١ساڵ تا ٢ ساڵ">
-<div class="product-image">
-<button class="favorite-button" onclick="toggleFavorite(event,this)">
-            ♡
-        </button>
-<img alt="" src="IMG_9254.jpeg"/>
-</div>
-<div class="product-info">
-<div class="product-rating">★★★★★</div><div class="product-name">
-            جلوبەرگی منداڵان
-        </div>
-<div class="product-description">
-            جلوبەرگی منداڵان
-        </div>
-<div class="price">
-            ٩,٠٠٠ د.ع
-        </div>
-<button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">
-    داوا کردن🛒
-</button>
-</div>
-</div>
-<div class="product" data-category="all electronics" data-colors="ڕەش,سپی" data-description=" براندی ئەتاک شارک هێدفۆنی بلوتوس بە کوالیتی بەرز و دەنگی ڕوون." data-images="IMG_9258.jpeg|IMG_9259.jpeg|IMG_9260.jpeg" data-name="هێدفۆنی ئەتاک شارک | Attack Shark Headphones" data-price="18000" data-sizes="بێ سایز">
-<div class="product-image">
-<button class="favorite-button" onclick="toggleFavorite(event,this)">
-            ♡
-        </button>
-<img alt="" src="IMG_9258.jpeg"/>
-</div>
-<div class="product-info">
-<div class="product-rating">★★★★★</div><div class="product-name">
-             براندی ئەتاکشارک-Attack Shark
-        </div>
-<div class="product-description">
-     هێدفۆنی گەیمینگ
-        </div>
-<div class="price">
-            ١٨,٠٠٠ د.ع
-        </div>
-<button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">
-    داوا کردن🛒
-</button>
-</div>
-</div>
-<div class="product" data-category="all accessories" data-colors="رەش,پەمەیی" data-description="مەتارەیەکی ئاو بۆ بەلارهێنانی رۆژانە
-    ٥٠٠ مل ئاو دەگرێت و شتێکی ناسکە
-    بە دوو رەنگ بەردەستە" data-images="IMG_1740.jpeg|IMG_1741.jpeg " data-name="مەتارەی ئاو" data-price="5000" data-sizes="500ml">
-<div class="product-image">
-<button class="favorite-button" onclick="toggleFavorite(event,this)">
-            ♡
-        </button>
-<img alt="" src="IMG_1740.jpeg"/>
-</div>
-<div class="product-info">
-<div class="product-rating">★★★★★</div><div class="product-name">
-            مەتارەی ئاو 
-        </div>
-<div class="product-description">
-             مەتارەیەکی جوان بۆ کاری رۆژانە
-        </div>
-<div class="price">
-            ٥،٠٠٠ د.ع
-        </div>
-<button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">
-    داوا کردن🛒
-</button>
-</div>
-</div></div>
-<div class="coming"><div><strong>بەرهەمی زیاتر لە ڕێگادایە</strong><br><span>بەردەوامین لە زیادکردنی بەرهەمی نوێ بۆ KurdShein.</span></div><div class="coming-badge">COMING SOON</div></div>
+
 <footer class="ks-clean-footer">
   <div class="ks-footer-brand">Kurd<span>Shein</span></div>
   <div>© 2026 KurdShein — هەموو مافەکان پارێزراون.</div>
 </footer>
+
 <div class="modal" id="productModal" onclick="closeOutside(event,'productModal')">
-<div class="modal-box product-details-box">
-<button class="close-button" onclick="closeModal('productModal')">
-            ×
-        </button>
-<div class="product-gallery">
-<img alt="" class="main-product-image" id="mainProductImage" src=""/>
-<div class="product-thumbnails" id="productThumbnails"></div>
+  <div class="modal-box product-details-box">
+    <button class="close-button" onclick="closeModal('productModal')">×</button>
+    <div class="product-gallery">
+      <img alt="" class="main-product-image" id="mainProductImage" src=""/>
+      <div class="product-thumbnails" id="productThumbnails"></div>
+    </div>
+    <div class="details-content">
+      <h2 id="detailName"></h2>
+      <p class="details-description" id="detailDescription"></p>
+      <div id="detailSizeArea">
+        <div class="option-title">قەبارە <span style="color:#888;">(هەڵبژێرە)</span></div>
+        <div class="option-buttons" id="sizeOptions"></div>
+      </div>
+      <div id="detailColorArea">
+        <div class="option-title">ڕەنگ <span style="color:#888;">(هەڵبژێرە)</span></div>
+        <div class="option-buttons" id="colorOptions"></div>
+      </div>
+      <div class="detail-price" id="detailPrice"></div>
+      <button class="big-add" onclick="addSelectedProduct()">🛒 زیادکردن بۆ سەبەتە</button>
+    </div>
+  </div>
 </div>
-<div class="details-content">
-<h2 id="detailName"></h2>
-<p class="details-description" id="detailDescription"></p>
-<div id="detailSizeArea">
-<div class="option-title">
-                    قەبارە
-                    <span style="color:#888;">
-                   (هەڵبژێرە)
-                    </span>
-</div>
-<div class="option-buttons" id="sizeOptions"></div>
-</div>
-<div id="detailColorArea">
-<div class="option-title">
-                    ڕەنگ
-                    <span style="color:#888;">
-                        (هەڵبژێرە)
-                    </span>
-</div>
-<div class="option-buttons" id="colorOptions"></div>
-</div>
-<div class="detail-price" id="detailPrice"></div>
-<button class="big-add" onclick="addSelectedProduct()">
-                🛒 زیادکردن بۆ سەبەتە
-            </button>
-</div>
-</div>
-</div>
+
 <div class="modal" id="cartModal" onclick="closeOutside(event,'cartModal')">
-<div class="modal-box">
-<button class="close-button" onclick="closeModal('cartModal')">
-            ×
-        </button>
-<h2 class="modal-title">
-            🛒 سەبەتەکەت
-        </h2>
-<div class="cart-items" id="cartItems"></div>
-<div class="cart-total" id="cartTotal">
-            کۆی گشتی: ٠ د.ع
-        </div>
-<button class="form-button" onclick="startOrder()">
-            ✅ تەواوکردنی داواکاری
-        </button>
+  <div class="modal-box">
+    <button class="close-button" onclick="closeModal('cartModal')">×</button>
+    <h2 class="modal-title">🛒 سەبەتەکەت</h2>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-total" id="cartTotal">کۆی گشتی: ٠ د.ع</div>
+    <button class="form-button" onclick="startOrder()">✅ تەواوکردنی داواکاری</button>
+  </div>
 </div>
-</div>
+
 <div class="modal" id="orderModal" onclick="closeOutside(event,'orderModal')">
-<div class="modal-box">
-<button class="close-button" onclick="closeModal('orderModal')">
-            ×
-        </button>
-<h2 class="modal-title">
-            🧾 تەواوکردنی داواکاری
-        </h2>
-<div class="order-summary" id="orderSummary"></div>
-<div class="form-group">
-<label>
-                ناو
-            </label>
-<input id="customerName" placeholder="ناوی تەواو" type="text"/>
+  <div class="modal-box">
+    <button class="close-button" onclick="closeModal('orderModal')">×</button>
+    <h2 class="modal-title">🧾 تەواوکردنی داواکاری</h2>
+    <div class="order-summary" id="orderSummary"></div>
+    <div class="form-group">
+      <label>ناو</label>
+      <input id="customerName" placeholder="ناوی تەواو" type="text"/>
+    </div>
+    <div class="form-group">
+      <label>ناونیشان</label>
+      <textarea id="customerAddress" placeholder="ناونیشانی تەواو"></textarea>
+    </div>
+    <div class="form-group">
+      <label>ژمارەی تەلەفۆن</label>
+      <input id="customerPhone" placeholder="07xxxxxxxxx" type="tel"/>
+    </div>
+    <div class="form-group">
+      <label>بابەتەکان</label>
+      <textarea id="customerItems" readonly=""></textarea>
+    </div>
+    <button class="form-button" onclick="sendOrderToWhatsApp()">📱 ناردن بۆ ئەدمین لە WhatsApp</button>
+  </div>
 </div>
-<div class="form-group">
-<label>
-                ناونیشان
-            </label>
-<textarea id="customerAddress" placeholder="ناونیشانی تەواو"></textarea>
-</div>
-<div class="form-group">
-<label>
-                ژمارەی تەلەفۆن
-            </label>
-<input id="customerPhone" placeholder="07xxxxxxxxx" type="tel"/>
-</div>
-<div class="form-group">
-<label>
-            بابەتەکان
-            </label>
-<textarea id="customerItems" readonly=""></textarea>
-</div>
-<button class="form-button" onclick="sendOrderToWhatsApp()">
-            📱 ناردن بۆ ئەدمین لە WhatsApp
-        </button>
-</div>
-</div>
+
 <div class="modal" id="accountModal" onclick="closeOutside(event,'accountModal')">
-<div class="modal-box">
-<button class="close-button" onclick="closeModal('accountModal')">
-            ×
-        </button>
-<h2 class="modal-title">
-            👤 هەژماری من
-        </h2>
-<div id="accountContent"></div>
+  <div class="modal-box">
+    <button class="close-button" onclick="closeModal('accountModal')">×</button>
+    <h2 class="modal-title">👤 هەژماری من</h2>
+    <div id="accountContent"></div>
+  </div>
 </div>
-</div>
+
 <div class="modal" id="favoritesModal" onclick="closeOutside(event,'favoritesModal')">
-<div class="modal-box">
-<button class="close-button" onclick="closeModal('favoritesModal')">
-            ×
-        </button>
-<h2 class="modal-title">
-            ❤️دلخواز
-        </h2>
-<div id="favoritesList"></div>
+  <div class="modal-box">
+    <button class="close-button" onclick="closeModal('favoritesModal')">×</button>
+    <h2 class="modal-title">❤️دلخواز</h2>
+    <div id="favoritesList"></div>
+  </div>
 </div>
-</div>
+
 <div class="modal" id="ordersModal" onclick="closeOutside(event,'ordersModal')">
-<div class="modal-box">
-<button class="close-button" onclick="closeModal('ordersModal')">
-            ×
-        </button>
-<h2 class="modal-title">
-            📦 ئۆردەرەکانم
-        </h2>
-<div id="ordersList"></div>
+  <div class="modal-box">
+    <button class="close-button" onclick="closeModal('ordersModal')">×</button>
+    <h2 class="modal-title">📦 ئۆردەرەکانم</h2>
+    <div id="ordersList"></div>
+  </div>
 </div>
-</div>
+
 <div class="cart-message" id="message">✅</div>
+
 <script type="module">
-
-import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged,
-    sendPasswordResetEmail
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
-import {
-    getFirestore,
-    doc,
-    getDoc,
-    setDoc,
-    collection,
-    addDoc,
-    query,
-    orderBy,
-    getDocs
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
-
-/*
-==========================================================
-IMPORTANT
-==========================================================
-
-PASTE YOUR FIREBASE CONFIG HERE.
-
-Firebase Console:
-Project settings
-→ Your apps
-→ Web app
-→ Firebase SDK setup
-→ Config
-
-Example:
-
-const firebaseConfig = {
-    apiKey: "YOUR_API_KEY",
-    authDomain: "YOUR_PROJECT.firebaseapp.com",
-    projectId: "YOUR_PROJECT_ID",
-    storageBucket: "YOUR_PROJECT.firebasestorage.app",
-    messagingSenderId: "YOUR_SENDER_ID",
-    appId: "YOUR_APP_ID"
-};
-
-==========================================================
-*/
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc, collection, addDoc, query, orderBy, getDocs } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCC_gLPdruLlmCZJRiWWHjbrWlFvrhbfUA",
@@ -694,1922 +517,628 @@ const firebaseConfig = {
     measurementId: "G-T5R7YJ9TQS"
 };
 
-
 let firebaseReady = false;
-
 let auth = null;
-
 let db = null;
 
-
 try {
-
-    const app =
-        initializeApp(firebaseConfig);
-
-    auth =
-        getAuth(app);
-
-    db =
-        getFirestore(app);
-
+    const app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
     firebaseReady = true;
-
 } catch(error) {
-
-    console.log(
-        "Firebase is not configured yet.",
-        error
-    );
-
+    console.log("Firebase is not configured yet.", error);
 }
 
-
 /* ================= GLOBAL DATA ================= */
-
 let currentUser = null;
-
-let cart =
-    JSON.parse(
-        localStorage.getItem("kurdSheinCart") || "[]"
-    );
-
-let localFavorites =
-    JSON.parse(
-        localStorage.getItem("kurdSheinFavorites") || "[]"
-    );
-
+let cart = JSON.parse(localStorage.getItem("kurdSheinCart") || "[]");
+let localFavorites = JSON.parse(localStorage.getItem("kurdSheinFavorites") || "[]");
 let selectedProduct = null;
-
 let selectedSize = "";
-
 let selectedColor = "";
 
-
 /* ================= THEME ================= */
-
-let savedTheme =
-    localStorage.getItem("kurdSheinTheme");
-
+let savedTheme = localStorage.getItem("kurdSheinTheme");
 if (savedTheme === "light") {
-
     document.body.classList.add("light");
-
-    document.getElementById("themeButton").innerText =
-        "🌙";
-
 }
 
 window.toggleTheme = function toggleTheme() {
-
     document.body.classList.toggle("light");
-
-    const isLight =
-        document.body.classList.contains("light");
-
-    localStorage.setItem(
-        "kurdSheinTheme",
-        isLight ? "light" : "dark"
-    );
-
-    document.getElementById("themeButton").innerText =
-        isLight ? "🌙" : "☀️";
-}
-
+    const isLight = document.body.classList.contains("light");
+    localStorage.setItem("kurdSheinTheme", isLight ? "light" : "dark");
+};
 
 /* ================= CART ================= */
-
 function saveCart() {
-
-    localStorage.setItem(
-        "kurdSheinCart",
-        JSON.stringify(cart)
-    );
-
+    localStorage.setItem("kurdSheinCart", JSON.stringify(cart));
 }
-
 
 function showMessage(text) {
-
-    const message =
-        document.getElementById("message");
-
+    const message = document.getElementById("message");
     message.innerText = text;
-
     message.classList.add("show");
-
     setTimeout(() => {
-
         message.classList.remove("show");
-
     }, 1800);
-
 }
-
 
 function addToCart(name, price, size="", color="") {
-
-    cart.push({
-
-        name,
-        price,
-        size,
-        color
-
-    });
-
+    cart.push({ name, price, size, color });
     saveCart();
-
     updateCart();
-
-    showMessage(
-        "✅ کاڵاکە زیادکرا بۆ سەبەتە"
-    );
-
+    showMessage("✅ کاڵاکە زیادکرا بۆ سەبەتە");
 }
-
-
-function quickAdd(button) {
-
-    const product =
-        button.closest(".product");
-
-    const name =
-        product.dataset.name;
-
-    const price =
-        Number(product.dataset.price);
-
-    addToCart(
-        name,
-        price
-    );
-
-}
-
 
 function updateCart() {
-
-    document.getElementById("cartCount").innerText =
-        cart.length;
-
-    const box =
-        document.getElementById("cartItems");
+    document.getElementById("cartCount").innerText = cart.length;
+    const box = document.getElementById("cartItems");
 
     if (!cart.length) {
-
-        box.innerHTML =
-            "<p style='text-align:center;color:#888;'>سەبەتەکەت بەتاڵە 🛒</p>";
-
-        document.getElementById("cartTotal").innerText =
-            "کۆی گشتی: ٠ د.ع";
-
+        box.innerHTML = "<p style='text-align:center;color:#888;'>سەبەتەکەت بەتاڵە 🛒</p>";
+        document.getElementById("cartTotal").innerText = "کۆی گشتی: ٠ د.ع";
         return;
-
     }
 
     box.innerHTML = "";
-
     let total = 0;
 
-    cart.forEach((item,index) => {
-
+    cart.forEach((item, index) => {
         total += Number(item.price);
-
-        const div =
-            document.createElement("div");
-
-        div.className =
-            "cart-item";
+        const div = document.createElement("div");
+        div.className = "cart-item";
 
         let options = "";
-
-        if (item.size) {
-
-            options +=
-                "<br>قەبارە: " +
-                item.size;
-
-        }
-
-        if (item.color) {
-
-            options +=
-                "<br>ڕەنگ: " +
-                item.color;
-
-        }
+        if (item.size) options += "<br>قەبارە: " + item.size;
+        if (item.color) options += "<br>ڕەنگ: " + item.color;
 
         div.innerHTML = `
-
             <div>
-
-                <strong>
-                    ${item.name}
-                </strong>
-
-                <small style="color:#888;">
-                    ${options}
-                </small>
-
+                <strong>${item.name}</strong>
+                <small style="color:#888;">${options}</small>
             </div>
-
             <div>
-
-                <span style="color:#ffd000;">
-                    ${Number(item.price).toLocaleString()}
-                    د.ع
-                </span>
-
-                <button
-                    onclick="removeFromCart(${index})"
-                    style="
-                        margin-right:8px;
-                        background:#e90012;
-                        color:white;
-                        border:none;
-                        border-radius:5px;
-                        padding:5px 8px;
-                        cursor:pointer;
-                    "
-                >
-                    ×
-                </button>
-
+                <span style="color:#ffd000;">${Number(item.price).toLocaleString()} د.ع</span>
+                <button onclick="removeFromCart(${index})" style="margin-right:8px;background:#e90012;color:white;border:none;border-radius:5px;padding:5px 8px;cursor:pointer;">×</button>
             </div>
-
         `;
-
         box.appendChild(div);
-
     });
 
-    document.getElementById("cartTotal").innerText =
-        "کۆی گشتی: " +
-        total.toLocaleString() +
-        " د.ع";
-
+    document.getElementById("cartTotal").innerText = "کۆی گشتی: " + total.toLocaleString() + " د.ع";
 }
-
 
 window.removeFromCart = function removeFromCart(index) {
-
-    cart.splice(index,1);
-
+    cart.splice(index, 1);
     saveCart();
-
     updateCart();
-
-}
-
+};
 
 /* ================= MODALS ================= */
-
 window.openModal = function(id) {
-
-    document
-        .getElementById(id)
-        .classList.add("show");
-
+    document.getElementById(id).classList.add("show");
 };
-
 
 window.closeModal = function(id) {
-
-    document
-        .getElementById(id)
-        .classList.remove("show");
-
+    document.getElementById(id).classList.remove("show");
 };
 
-
-window.closeOutside = function(event,id) {
-
-    if (
-        event.target ===
-        document.getElementById(id)
-    ) {
-
+window.closeOutside = function(event, id) {
+    if (event.target === document.getElementById(id)) {
         closeModal(id);
-
     }
-
 };
-
 
 window.openCart = function() {
-
     updateCart();
-
     openModal("cartModal");
-
 };
-
 
 /* ================= PRODUCT DETAILS ================= */
-
 window.openProduct = function openProduct(product) {
-
     selectedProduct = product;
-
     selectedSize = "";
-
     selectedColor = "";
 
-    const images =
-        product.dataset.images
-        .split("|")
-        .filter(Boolean);
+    const images = (product.dataset.images || "").split("|").filter(Boolean);
+    const main = document.getElementById("mainProductImage");
+    main.src = images[0] || "";
 
-    const main =
-        document.getElementById("mainProductImage");
-
-    main.src =
-        images[0];
-
-    const thumbnails =
-        document.getElementById("productThumbnails");
-
+    const thumbnails = document.getElementById("productThumbnails");
     thumbnails.innerHTML = "";
 
-    images
-        .slice(0,6)
-        .forEach((src,index) => {
+    images.slice(0, 6).forEach((src, index) => {
+        const img = document.createElement("img");
+        img.src = src;
+        if (index === 0) img.classList.add("selected");
+        img.onclick = () => {
+            main.src = src;
+            thumbnails.querySelectorAll("img").forEach(x => x.classList.remove("selected"));
+            img.classList.add("selected");
+        };
+        thumbnails.appendChild(img);
+    });
 
-            const img =
-                document.createElement("img");
+    document.getElementById("detailName").innerText = product.dataset.name;
+    document.getElementById("detailDescription").innerText = product.dataset.description;
+    document.getElementById("detailPrice").innerText = Number(product.dataset.price).toLocaleString() + " د.ع";
 
-            img.src = src;
+    createOptions("sizeOptions", product.dataset.sizes, "size");
+    createOptions("colorOptions", product.dataset.colors, "color");
 
-            if (index === 0) {
-
-                img.classList.add("selected");
-
-            }
-
-            img.onclick = () => {
-
-                main.src = src;
-
-                thumbnails
-                    .querySelectorAll("img")
-                    .forEach(x =>
-                        x.classList.remove("selected")
-                    );
-
-                img.classList.add("selected");
-
-            };
-
-            thumbnails.appendChild(img);
-
-        });
-
-
-    document.getElementById("detailName").innerText =
-        product.dataset.name;
-
-
-    document.getElementById("detailDescription").innerText =
-        product.dataset.description;
-
-
-    document.getElementById("detailPrice").innerText =
-        Number(
-            product.dataset.price
-        ).toLocaleString() +
-        " د.ع";
-
-
-    createOptions(
-        "sizeOptions",
-        product.dataset.sizes,
-        "size"
-    );
-
-    createOptions(
-        "colorOptions",
-        product.dataset.colors,
-        "color"
-    );
-
-
-    document.getElementById("detailSizeArea").style.display =
-        product.dataset.sizes ? "block" : "none";
-
-    document.getElementById("detailColorArea").style.display =
-        product.dataset.colors ? "block" : "none";
-
+    document.getElementById("detailSizeArea").style.display = product.dataset.sizes ? "block" : "none";
+    document.getElementById("detailColorArea").style.display = product.dataset.colors ? "block" : "none";
 
     openModal("productModal");
+};
 
-}
-
-
-function createOptions(containerId,data,type) {
-
-    const container =
-        document.getElementById(containerId);
-
+function createOptions(containerId, data, type) {
+    const container = document.getElementById(containerId);
     container.innerHTML = "";
-
     if (!data) return;
 
-    data
-        .split(",")
-        .filter(Boolean)
-        .forEach(value => {
+    data.split(",").filter(Boolean).forEach(value => {
+        const button = document.createElement("button");
+        button.className = "option-button";
+        button.innerText = value.trim();
 
-            const button =
-                document.createElement("button");
-
-            button.className =
-                "option-button";
-
-            button.innerText =
-                value;
-
-            button.onclick = () => {
-
-                container
-                    .querySelectorAll("button")
-                    .forEach(btn =>
-                        btn.classList.remove("selected")
-                    );
-
-                button.classList.add("selected");
-
-                if (type === "size") {
-
-                    selectedSize =
-                        value;
-
-                }
-
-                if (type === "color") {
-
-                    selectedColor =
-                        value;
-
-                }
-
-            };
-
-            container.appendChild(button);
-
-        });
-
+        button.onclick = () => {
+            container.querySelectorAll("button").forEach(btn => btn.classList.remove("selected"));
+            button.classList.add("selected");
+            if (type === "size") selectedSize = value.trim();
+            if (type === "color") selectedColor = value.trim();
+        };
+        container.appendChild(button);
+    });
 }
-
 
 window.addSelectedProduct = function addSelectedProduct() {
-
     if (!selectedProduct) return;
-
     addToCart(
-
         selectedProduct.dataset.name,
-
-        Number(
-            selectedProduct.dataset.price
-        ),
-
+        Number(selectedProduct.dataset.price),
         selectedSize,
-
         selectedColor
-
     );
-
     closeModal("productModal");
+};
 
-}
-
-
-document
-    .querySelectorAll(".product")
-    .forEach(product => {
-
-        product.addEventListener(
-            "click",
-            function(event) {
-
-                if (
-                    event.target.closest(".add-cart") ||
-                    event.target.closest(".favorite-button")
-                ) {
-
-                    return;
-
-                }
-
-                openProduct(product);
-
-            }
-        );
-
+document.querySelectorAll(".product").forEach(product => {
+    product.addEventListener("click", function(event) {
+        if (event.target.closest(".add-cart") || event.target.closest(".favorite-button")) {
+            return;
+        }
+        openProduct(product);
     });
-
+});
 
 /* ================= FAVORITES ================= */
-
 function favoriteKey(product) {
-
     return product.dataset.name;
-
 }
 
-
-window.toggleFavorite = async function toggleFavorite(event,button) {
-
+window.toggleFavorite = async function toggleFavorite(event, button) {
     event.stopPropagation();
-
-    const product =
-        button.closest(".product");
-
-    const key =
-        favoriteKey(product);
-
-    const exists =
-        localFavorites.includes(key);
-
+    const product = button.closest(".product");
+    const key = favoriteKey(product);
+    const exists = localFavorites.includes(key);
 
     if (exists) {
-
-        localFavorites =
-            localFavorites.filter(
-                x => x !== key
-            );
-
+        localFavorites = localFavorites.filter(x => x !== key);
         button.classList.remove("active");
-
         button.innerText = "♡";
-
     } else {
-
         localFavorites.push(key);
-
         button.classList.add("active");
-
         button.innerText = "♥";
-
     }
 
-
-    localStorage.setItem(
-        "kurdSheinFavorites",
-        JSON.stringify(localFavorites)
-    );
-
-
+    localStorage.setItem("kurdSheinFavorites", JSON.stringify(localFavorites));
     updateFavoriteCount();
 
-
     if (currentUser && firebaseReady) {
-
         try {
-
-            await setDoc(
-
-                doc(
-                    db,
-                    "users",
-                    currentUser.uid
-                ),
-
-                {
-                    favorites:
-                        localFavorites
-                },
-
-                {
-                    merge: true
-                }
-
-            );
-
+            await setDoc(doc(db, "users", currentUser.uid), { favorites: localFavorites }, { merge: true });
         } catch(error) {
-
             console.error(error);
-
         }
-
     }
-
-}
-
+};
 
 function updateFavoriteCount() {
-
-    document.getElementById(
-        "favoriteCount"
-    ).innerText =
-        localFavorites.length;
-
+    const count = localFavorites.length;
+    const el1 = document.getElementById("ksFavoriteCount");
+    const el2 = document.getElementById("ksMenuFavoriteCount");
+    if (el1) el1.innerText = count;
+    if (el2) el2.innerText = count;
 }
-
 
 async function loadFavorites() {
-
-    if (!currentUser || !firebaseReady) {
-
-        return;
-
-    }
-
+    if (!currentUser || !firebaseReady) return;
     try {
-
-        const snapshot =
-            await getDoc(
-                doc(
-                    db,
-                    "users",
-                    currentUser.uid
-                )
-            );
-
+        const snapshot = await getDoc(doc(db, "users", currentUser.uid));
         if (snapshot.exists()) {
-
-            const data =
-                snapshot.data();
-
-            if (
-                Array.isArray(
-                    data.favorites
-                )
-            ) {
-
-                localFavorites =
-                    data.favorites;
-
-                localStorage.setItem(
-                    "kurdSheinFavorites",
-                    JSON.stringify(localFavorites)
-                );
-
+            const data = snapshot.data();
+            if (Array.isArray(data.favorites)) {
+                localFavorites = data.favorites;
+                localStorage.setItem("kurdSheinFavorites", JSON.stringify(localFavorites));
             }
-
         }
-
     } catch(error) {
-
         console.error(error);
-
     }
-
     updateFavoriteButtons();
-
 }
-
 
 function updateFavoriteButtons() {
-
-    document
-        .querySelectorAll(".product")
-        .forEach(product => {
-
-            const button =
-                product.querySelector(
-                    ".favorite-button"
-                );
-
-            if (!button) return;
-
-            if (
-                localFavorites.includes(
-                    favoriteKey(product)
-                )
-            ) {
-
-                button.classList.add("active");
-
-                button.innerText =
-                    "♥";
-
-            } else {
-
-                button.classList.remove("active");
-
-                button.innerText =
-                    "♡";
-
-            }
-
-        });
-
+    document.querySelectorAll(".product").forEach(product => {
+        const button = product.querySelector(".favorite-button");
+        if (!button) return;
+        if (localFavorites.includes(favoriteKey(product))) {
+            button.classList.add("active");
+            button.innerText = "♥";
+        } else {
+            button.classList.remove("active");
+            button.innerText = "♡";
+        }
+    });
 }
-
 
 window.openFavorites = function() {
-
-    const list =
-        document.getElementById(
-            "favoritesList"
-        );
-
-    const products =
-        Array.from(
-            document.querySelectorAll(".product")
-        )
-        .filter(product =>
-            localFavorites.includes(
-                favoriteKey(product)
-            )
-        );
-
+    const list = document.getElementById("favoritesList");
+    const products = Array.from(document.querySelectorAll(".product")).filter(product =>
+        localFavorites.includes(favoriteKey(product))
+    );
 
     if (!products.length) {
-
-        list.innerHTML =
-            "<p style='text-align:center;color:#888;'>هیچ بەرهەمێکت بەدڵخواز نەکردووە ❤️</p>";
-
+        list.innerHTML = "<p style='text-align:center;color:#888;'>هیچ بەرهەمێکت بەدڵخواز نەکردووە ❤️</p>";
         openModal("favoritesModal");
-
         return;
-
     }
-
 
     list.innerHTML = "";
-
     products.forEach(product => {
-
-        const div =
-            document.createElement("div");
-
-        div.className =
-            "favorite-product";
-
+        const div = document.createElement("div");
+        div.className = "favorite-product";
         div.innerHTML = `
-
-            <img
-                src="${product.querySelector("img").src}"
-            >
-
+            <img src="${product.querySelector("img").src}">
             <div class="favorite-product-info">
-
-                <strong>
-                    ${product.dataset.name}
-                </strong>
-
-                <div style="color:#ffd000;">
-                    ${Number(product.dataset.price).toLocaleString()}
-                    د.ع
-                </div>
-
+                <strong>${product.dataset.name}</strong>
+                <div style="color:#ffd000;">${Number(product.dataset.price).toLocaleString()} د.ع</div>
             </div>
-
-            <button
-                class="option-button"
-                onclick="openProduct(this.closest('.favorite-product').productElement)"
-            >
-                👁
-            </button>
-
+            <button class="option-button" onclick="openProduct(this.closest('.favorite-product').productElement)">👁</button>
         `;
-
-        div.productElement =
-            product;
-
+        div.productElement = product;
         list.appendChild(div);
-
     });
 
-
     openModal("favoritesModal");
-
 };
-
 
 /* ================= ACCOUNT ================= */
-
 window.openAccount = function() {
-
     renderAccount();
-
     openModal("accountModal");
-
 };
-
 
 function renderAccount() {
-
-    const box =
-        document.getElementById(
-            "accountContent"
-        );
-
-
+    const box = document.getElementById("accountContent");
     if (!firebaseReady) {
-
-        box.innerHTML = `
-
-            <p style="color:#ff7777;text-align:center;">
-                Firebase هێشتا ڕێک نەخراوەتەوە.
-            </p>
-
-            <p style="color:#888;text-align:center;margin-top:10px;">
-                تکایە firebaseConfig لە ناو کۆدەکە پڕ بکەرەوە.
-            </p>
-
-        `;
-
+        box.innerHTML = `<p style="color:#ff7777;text-align:center;">Firebase هێشتا ڕێک نەخراوەتەوە.</p>`;
         return;
-
     }
-
 
     if (currentUser) {
-
         box.innerHTML = `
-
-            <div class="account-status">
-
-                👋 بەخێربێیت
-
-                <br>
-
-                <strong>
-                    ${currentUser.email}
-                </strong>
-
-            </div>
-
-            <button
-                class="account-menu-button"
-                onclick="openFavorites();closeModal('accountModal')"
-            >
-                ❤️ بەدڵخوازەکانم
-            </button>
-
-            <button
-                class="account-menu-button"
-                onclick="openOrders();closeModal('accountModal')"
-            >
-                📦 ئۆردەرەکانم
-            </button>
-
-            <button
-                class="account-menu-button"
-                onclick="resetPassword()"
-            >
-                🔑 گۆڕینی وشەی نهێنی
-            </button>
-
-            <button
-                class="account-menu-button"
-                onclick="logout()"
-            >
-                🚪 چوونەدەرەوە
-            </button>
-
+            <div class="account-status">👋 بەخێربێیت<br><strong>${currentUser.email}</strong></div>
+            <button class="account-menu-button" onclick="openFavorites();closeModal('accountModal')">❤️ بەدڵخوازەکانم</button>
+            <button class="account-menu-button" onclick="openOrders();closeModal('accountModal')">📦 ئۆردەرەکانم</button>
+            <button class="account-menu-button" onclick="resetPassword()">🔑 گۆڕینی وشەی نهێنی</button>
+            <button class="account-menu-button" onclick="logout()">🚪 چوونەدەرەوە</button>
         `;
-
         return;
-
     }
-
 
     box.innerHTML = `
-
-        <div class="form-group">
-
-            <label>
-                ئیمەیڵ
-            </label>
-
-            <input
-                id="authEmail"
-                type="email"
-                placeholder="example@email.com"
-            >
-
-        </div>
-
-        <div class="form-group">
-
-            <label>
-                وشەی نهێنی
-            </label>
-
-            <input
-                id="authPassword"
-                type="password"
-                placeholder="********"
-            >
-
-        </div>
-
-        <button
-            class="form-button"
-            onclick="loginUser()"
-        >
-            🔐 چوونەژوورەوە
-        </button>
-
-        <button
-            class="form-button secondary-button"
-            onclick="registerUser()"
-        >
-            👤 دروستکردنی هەژمار
-        </button>
-
-        <button
-            class="form-button secondary-button"
-            onclick="resetPassword()"
-        >
-            📧 لەبیرکردنەوەی وشەی نهێنی
-        </button>
-
+        <div class="form-group"><label>ئیمەیڵ</label><input id="authEmail" type="email" placeholder="example@email.com"></div>
+        <div class="form-group"><label>وشەی نهێنی</label><input id="authPassword" type="password" placeholder="********"></div>
+        <button class="form-button" onclick="loginUser()">🔐 چوونەژوورەوە</button>
+        <button class="form-button secondary-button" onclick="registerUser()">👤 دروستکردنی هەژمار</button>
+        <button class="form-button secondary-button" onclick="resetPassword()">📧 لەبیرکردنەوەی وشەی نهێنی</button>
     `;
-
 }
-
 
 window.registerUser = async function() {
-
-    if (!firebaseReady) {
-
-        showMessage(
-            "Firebase ڕێک نەخراوەتەوە"
-        );
-
-        return;
-
-    }
-
-
-    const email =
-        document.getElementById(
-            "authEmail"
-        ).value.trim();
-
-    const password =
-        document.getElementById(
-            "authPassword"
-        ).value;
-
-
-    if (!email || !password) {
-
-        showMessage(
-            "ئیمەیڵ و وشەی نهێنی پڕ بکەرەوە"
-        );
-
-        return;
-
-    }
-
+    if (!firebaseReady) return showMessage("Firebase ڕێک نەخراوەتەوە");
+    const email = document.getElementById("authEmail").value.trim();
+    const password = document.getElementById("authPassword").value;
+    if (!email || !password) return showMessage("ئیمەیڵ و وشەی نهێنی پڕ بکەرەوە");
 
     try {
-
-        const result =
-            await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
-
-
-        await setDoc(
-
-            doc(
-                db,
-                "users",
-                result.user.uid
-            ),
-
-            {
-                email: email,
-                favorites: [],
-                createdAt: new Date().toISOString()
-            },
-
-            {
-                merge: true
-            }
-
-        );
-
-
-        showMessage(
-            "✅ هەژمارەکەت دروستکرا"
-        );
-
+        const result = await createUserWithEmailAndPassword(auth, email, password);
+        await setDoc(doc(db, "users", result.user.uid), { email, favorites: [], createdAt: new Date().toISOString() }, { merge: true });
+        showMessage("✅ هەژمارەکەت دروستکرا");
         renderAccount();
-
     } catch(error) {
-
-        showMessage(
-            firebaseError(error.code)
-        );
-
+        showMessage(firebaseError(error.code));
     }
-
 };
-
 
 window.loginUser = async function() {
-
-    if (!firebaseReady) {
-
-        showMessage(
-            "Firebase ڕێک نەخراوەتەوە"
-        );
-
-        return;
-
-    }
-
-
-    const email =
-        document.getElementById(
-            "authEmail"
-        ).value.trim();
-
-    const password =
-        document.getElementById(
-            "authPassword"
-        ).value;
-
+    if (!firebaseReady) return showMessage("Firebase ڕێک نەخراوەتەوە");
+    const email = document.getElementById("authEmail").value.trim();
+    const password = document.getElementById("authPassword").value;
 
     try {
-
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
-        showMessage(
-            "✅ بەسەرکەوتوویی چوویتە ژوورەوە"
-        );
-
+        await signInWithEmailAndPassword(auth, email, password);
+        showMessage("✅ بەسەرکەوتوویی چوویتە ژوورەوە");
         renderAccount();
-
     } catch(error) {
-
-        showMessage(
-            firebaseError(error.code)
-        );
-
+        showMessage(firebaseError(error.code));
     }
-
 };
-
 
 window.logout = async function() {
-
     if (!auth) return;
-
     await signOut(auth);
-
-    showMessage(
-        "👋 بەسەرکەوتوویی چوویتە دەرەوە"
-    );
-
+    showMessage("👋 بەسەرکەوتوویی چوویتە دەرەوە");
     renderAccount();
-
 };
-
 
 window.resetPassword = async function() {
-
-    if (!firebaseReady) {
-
-        showMessage(
-            "Firebase ڕێک نەخراوەتەوە"
-        );
-
-        return;
-
-    }
-
-
-    let email = "";
-
-    const field =
-        document.getElementById(
-            "authEmail"
-        );
-
-    if (field) {
-
-        email =
-            field.value.trim();
-
-    }
-
-
-    if (!email && currentUser) {
-
-        email =
-            currentUser.email;
-
-    }
-
-
-    if (!email) {
-
-        showMessage(
-            "تکایە سەرەتا ئیمەیڵەکەت بنووسە"
-        );
-
-        return;
-
-    }
-
+    if (!firebaseReady) return showMessage("Firebase ڕێک نەخراوەتەوە");
+    let email = document.getElementById("authEmail")?.value.trim() || (currentUser ? currentUser.email : "");
+    if (!email) return showMessage("تکایە سەرەتا ئیمەیڵەکەت بنووسە");
 
     try {
-
-        await sendPasswordResetEmail(
-            auth,
-            email
-        );
-
-        showMessage(
-            "📧 ئیمەیڵی گۆڕینی وشەی نهێنی نێردرا"
-        );
-
+        await sendPasswordResetEmail(auth, email);
+        showMessage("📧 ئیمەیڵی گۆڕینی وشەی نهێنی نێردرا");
     } catch(error) {
-
-        showMessage(
-            firebaseError(error.code)
-        );
-
+        showMessage(firebaseError(error.code));
     }
-
 };
 
-
 function firebaseError(code) {
-
     const errors = {
-
-        "auth/email-already-in-use":
-            "ئەم ئیمەیڵە پێشتر بەکارهاتووە",
-
-        "auth/invalid-email":
-            "ئیمەیڵەکە دروست نییە",
-
-        "auth/weak-password":
-            "وشەی نهێنی زۆر لاوازە",
-
-        "auth/invalid-credential":
-            "ئیمەیڵ یان وشەی نهێنی هەڵەیە",
-
-        "auth/user-not-found":
-            "هەژمارەکە نەدۆزرایەوە",
-
-        "auth/wrong-password":
-            "وشەی نهێنی هەڵەیە"
-
+        "auth/email-already-in-use": "ئەم ئیمەیڵە پێشتر بەکارهاتووە",
+        "auth/invalid-email": "ئیمەیڵەکە دروست نییە",
+        "auth/weak-password": "وشەی نهێنی زۆر لاوازە",
+        "auth/invalid-credential": "ئیمەیڵ یان وشەی نهێنی هەڵەیە",
+        "auth/user-not-found": "هەژمارەکە نەدۆزرایەوە",
+        "auth/wrong-password": "وشەی نهێنی هەڵەیە"
     };
-
-    return errors[code] ||
-        "هەڵەیەک ڕوویدا، تکایە دووبارە هەوڵ بدەوە.";
-
+    return errors[code] || "هەڵەیەک ڕوویدا، تکایە دووبارە هەوڵ بدەوە.";
 }
-
 
 /* ================= AUTH STATE ================= */
-
 if (firebaseReady) {
-
-    onAuthStateChanged(
-        auth,
-        async user => {
-
-            currentUser = user;
-
-            if (user) {
-
-                await loadFavorites();
-
-            }
-
-            renderAccount();
-
-        }
-    );
-
+    onAuthStateChanged(auth, async user => {
+        currentUser = user;
+        if (user) await loadFavorites();
+        renderAccount();
+    });
 }
 
-
 /* ================= ORDERS ================= */
-
 window.openOrders = async function() {
-
-    const list =
-        document.getElementById(
-            "ordersList"
-        );
-
-
+    const list = document.getElementById("ordersList");
     if (!currentUser || !firebaseReady) {
-
-        list.innerHTML = `
-
-            <p style="text-align:center;color:#888;">
-                تکایە سەرەتا بچۆ ژوورەوە 👤
-            </p>
-
-        `;
-
+        list.innerHTML = `<p style="text-align:center;color:#888;">تکایە سەرەتا بچۆ ژوورەوە 👤</p>`;
         openModal("ordersModal");
-
         return;
-
     }
 
-
-    list.innerHTML =
-        "<p style='text-align:center;'>⏳ چاوەڕێ بکە...</p>";
-
+    list.innerHTML = "<p style='text-align:center;'>⏳ چاوەڕێ بکە...</p>";
     openModal("ordersModal");
 
-
     try {
-
-        const ordersQuery =
-            query(
-
-                collection(
-                    db,
-                    "users",
-                    currentUser.uid,
-                    "orders"
-                ),
-
-                orderBy(
-                    "createdAt",
-                    "desc"
-                )
-
-            );
-
-
-        const snapshot =
-            await getDocs(
-                ordersQuery
-            );
-
+        const ordersQuery = query(collection(db, "users", currentUser.uid, "orders"), orderBy("createdAt", "desc"));
+        const snapshot = await getDocs(ordersQuery);
 
         if (snapshot.empty) {
-
-            list.innerHTML =
-                "<p style='text-align:center;color:#888;'>هێشتا هیچ ئۆردەرێکت نییە 📦</p>";
-
+            list.innerHTML = "<p style='text-align:center;color:#888;'>هێشتا هیچ ئۆردەرێکت نییە 📦</p>";
             return;
-
         }
 
-
         list.innerHTML = "";
-
-
         snapshot.forEach(orderDoc => {
-
-            const order =
-                orderDoc.data();
-
-            const div =
-                document.createElement("div");
-
-            div.className =
-                "order-card";
-
-
-            const items =
-                Array.isArray(order.items)
-                ? order.items
-                : [];
-
-
+            const order = orderDoc.data();
+            const div = document.createElement("div");
+            div.className = "order-card";
+            const items = Array.isArray(order.items) ? order.items : [];
             let itemsText = "";
 
             items.forEach(item => {
-
-                itemsText +=
-                    `${item.name} × ${item.price.toLocaleString()} د.ع`;
-
-                if (item.size) {
-
-                    itemsText +=
-                        ` — ${item.size}`;
-
-                }
-
-                if (item.color) {
-
-                    itemsText +=
-                        ` — ${item.color}`;
-
-                }
-
+                itemsText += `${item.name} × ${item.price.toLocaleString()} د.ع`;
+                if (item.size) itemsText += ` — ${item.size}`;
+                if (item.color) itemsText += ` — ${item.color}`;
                 itemsText += "<br>";
-
             });
 
-
             div.innerHTML = `
-
-                <div class="order-card-title">
-
-                    📦 داواکاری
-
-                </div>
-
-                <div class="order-card-items">
-
-                    ${itemsText}
-
-                </div>
-
-                <div class="order-card-total">
-
-                    کۆی گشتی:
-                    ${Number(order.total).toLocaleString()}
-                    د.ع
-
-                </div>
-
-                <div
-                    style="
-                        color:#888;
-                        font-size:12px;
-                        margin-top:7px;
-                    "
-                >
-
-                    ${order.createdAt || ""}
-
-                </div>
-
+                <div class="order-card-title">📦 داواکاری</div>
+                <div class="order-card-items">${itemsText}</div>
+                <div class="order-card-total">کۆی گشتی: ${Number(order.total).toLocaleString()} د.ع</div>
+                <div style="color:#888;font-size:12px;margin-top:7px;">${order.createdAt || ""}</div>
             `;
-
-
             list.appendChild(div);
-
         });
-
-
     } catch(error) {
-
         console.error(error);
-
-        list.innerHTML =
-            "<p style='color:#ff7777;text-align:center;'>نەتوانرا ئۆردەرەکان بهێنرێن.</p>";
-
+        list.innerHTML = "<p style='color:#ff7777;text-align:center;'>نەتوانرا ئۆردەرەکان بهێنرێن.</p>";
     }
-
 };
-
 
 /* ================= ORDER ================= */
-
 window.startOrder = function() {
-
-    if (!cart.length) {
-
-        showMessage(
-            "🛒 سەبەتەکەت بەتاڵە"
-        );
-
-        return;
-
-    }
-
+    if (!cart.length) return showMessage("🛒 سەبەتەکەت بەتاڵە");
 
     let summary = "";
-
     let itemsText = "";
-
     let total = 0;
-
 
     cart.forEach(item => {
-
         total += Number(item.price);
-
         let options = "";
-
-        if (item.size) {
-
-            options +=
-                " | قەبارە: " +
-                item.size;
-
-        }
-
-        if (item.color) {
-
-            options +=
-                " | ڕەنگ: " +
-                item.color;
-
-        }
-
+        if (item.size) options += " | قەبارە: " + item.size;
+        if (item.color) options += " | ڕەنگ: " + item.color;
 
         summary += `
-
             <div class="order-summary-item">
-
-                <span>
-                    ${item.name}${options}
-                </span>
-
-                <span style="color:#ffd000;">
-                    ${Number(item.price).toLocaleString()}
-                    د.ع
-                </span>
-
+                <span>${item.name}${options}</span>
+                <span style="color:#ffd000;">${Number(item.price).toLocaleString()} د.ع</span>
             </div>
-
         `;
-
-
-        itemsText +=
-            `${item.name}${options} - ${Number(item.price).toLocaleString()} د.ع\n`;
-
+        itemsText += `${item.name}${options} - ${Number(item.price).toLocaleString()} د.ع\n`;
     });
 
+    summary += `<div style="text-align:center;color:#ffd000;padding-top:10px;font-weight:bold;">کۆی گشتی: ${total.toLocaleString()} د.ع</div>`;
 
-    summary += `
-
-        <div
-            style="
-                text-align:center;
-                color:#ffd000;
-                padding-top:10px;
-                font-weight:bold;
-            "
-        >
-
-            کۆی گشتی:
-            ${total.toLocaleString()}
-            د.ع
-
-        </div>
-
-    `;
-
-
-    document.getElementById(
-        "orderSummary"
-    ).innerHTML =
-        summary;
-
-
-    document.getElementById(
-        "customerItems"
-    ).value =
-        itemsText;
-
+    document.getElementById("orderSummary").innerHTML = summary;
+    document.getElementById("customerItems").value = itemsText;
 
     closeModal("cartModal");
-
     openModal("orderModal");
-
 };
-
 
 /* ================= WHATSAPP ORDER ================= */
-
 window.sendOrderToWhatsApp = async function() {
+    const name = document.getElementById("customerName").value.trim();
+    const address = document.getElementById("customerAddress").value.trim();
+    const phone = document.getElementById("customerPhone").value.trim();
 
-    const name =
-        document.getElementById(
-            "customerName"
-        ).value.trim();
-
-    const address =
-        document.getElementById(
-            "customerAddress"
-        ).value.trim();
-
-    const phone =
-        document.getElementById(
-            "customerPhone"
-        ).value.trim();
-
-
-    if (!name || !address || !phone) {
-
-        showMessage(
-            "⚠️ تکایە هەموو خانەکان پڕ بکەرەوە"
-        );
-
-        return;
-
-    }
-
-
-    if (!cart.length) {
-
-        showMessage(
-            "🛒 سەبەتەکەت بەتاڵە"
-        );
-
-        return;
-
-    }
-
+    if (!name || !address || !phone) return showMessage("⚠️ تکایە هەموو خانەکان پڕ بکەرەوە");
+    if (!cart.length) return showMessage("🛒 سەبەتەکەت بەتاڵە");
 
     let total = 0;
-
     let itemsText = "";
 
-
-    cart.forEach((item,index) => {
-
+    cart.forEach((item, index) => {
         total += Number(item.price);
-
-
-        itemsText +=
-            `${index + 1}. ${item.name}`;
-
-        if (item.size) {
-
-            itemsText +=
-                ` | قەبارە: ${item.size}`;
-
-        }
-
-        if (item.color) {
-
-            itemsText +=
-                ` | ڕەنگ: ${item.color}`;
-
-        }
-
-        itemsText +=
-            ` | ${Number(item.price).toLocaleString()} د.ع\n`;
-
+        itemsText += `${index + 1}. ${item.name}`;
+        if (item.size) itemsText += ` | قەبارە: ${item.size}`;
+        if (item.color) itemsText += ` | ڕەنگ: ${item.color}`;
+        itemsText += ` | ${Number(item.price).toLocaleString()} د.ع\n`;
     });
 
-
-    const message =
-
-`🛍️ داواکاری نوێ - KurdShein
-
-👤 ناو:
-${name}
-
-📍 ناونیشان:
-${address}
-
-📞 ژمارە:
-${phone}
-
-🛒 کەلوپەلەکان:
-${itemsText}
-
-💰 کۆی گشتی:
-${total.toLocaleString()} د.ع`;
-
-
-    /* ================= SAVE ORDER ================= */
+    const message = `🛍️ داواکاری نوێ - KurdShein\n\n👤 ناو:\n${name}\n\n📍 ناونیشان:\n${address}\n\n📞 ژمارە:\n${phone}\n\n🛒 کەلوپەلەکان:\n${itemsText}\n💰 کۆی گشتی:\n${total.toLocaleString()} د.ع`;
 
     if (currentUser && firebaseReady) {
-
         try {
-
-            await addDoc(
-
-                collection(
-                    db,
-                    "users",
-                    currentUser.uid,
-                    "orders"
-                ),
-
-                {
-
-                    customerName:
-                        name,
-
-                    customerAddress:
-                        address,
-
-                    customerPhone:
-                        phone,
-
-                    items:
-                        cart.map(item => ({
-                            name: item.name,
-                            price: Number(item.price),
-                            size: item.size || "",
-                            color: item.color || ""
-                        })),
-
-                    total:
-                        total,
-
-                    createdAt:
-                        new Date().toLocaleString()
-
-                }
-
-            );
-
+            await addDoc(collection(db, "users", currentUser.uid, "orders"), {
+                customerName: name,
+                customerAddress: address,
+                customerPhone: phone,
+                items: cart.map(item => ({
+                    name: item.name,
+                    price: Number(item.price),
+                    size: item.size || "",
+                    color: item.color || ""
+                })),
+                total: total,
+                createdAt: new Date().toLocaleString()
+            });
         } catch(error) {
-
-            console.error(
-                "Could not save order:",
-                error
-            );
-
+            console.error("Could not save order:", error);
         }
-
     }
 
-
-    /*
-    YOUR WHATSAPP NUMBER
-
-    9647517401120
-    */
-
-        const whatsappNumber =
-        "9647517401120";
-
-
-    const url =
-        "https://api.whatsapp.com/send?phone=" +
-        whatsappNumber +
-        "&text=" +
-        encodeURIComponent(message);
-
-
+    const whatsappNumber = "9647517401120";
+    const url = "https://api.whatsapp.com/send?phone=" + whatsappNumber + "&text=" + encodeURIComponent(message);
     window.location.href = url;
 
-
-
     cart = [];
-
     saveCart();
-
     updateCart();
-
     closeModal("orderModal");
 
+    document.getElementById("customerName").value = "";
+    document.getElementById("customerAddress").value = "";
+    document.getElementById("customerPhone").value = "";
 
-    document.getElementById(
-        "customerName"
-    ).value = "";
-
-    document.getElementById(
-        "customerAddress"
-    ).value = "";
-
-    document.getElementById(
-        "customerPhone"
-    ).value = "";
-
-
-    showMessage(
-        "✅ داواکارییەکەت نێردرا"
-    );
-
+    showMessage("✅ داواکارییەکەت نێردرا");
 };
 
-
-/* ================= SEARCH ================= */
-
+/* ================= SEARCH & FILTER ================= */
 window.searchProducts = function() {
-
-    const search =
-        document.getElementById(
-            "searchInput"
-        )
-        .value
-        .trim()
-        .toLowerCase();
-
-
-    document
-        .querySelectorAll(".product")
-        .forEach(product => {
-
-            const name =
-                product.dataset.name
-                .toLowerCase();
-
-
-            product.style.display =
-                (
-                    !search ||
-                    name.includes(search)
-                )
-                ? "block"
-                : "none";
-
-        });
-
-};
-
-
-document
-    .getElementById("searchInput")
-    .addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "Enter"
-            ) {
-
-                searchProducts();
-
-            }
-
-        }
-    );
-
-
-/* ================= CATEGORY ================= */
-
-window.filterProducts = function(
-    category,
-    button
-) {
-
-    document
-        .querySelectorAll(".category")
-        .forEach(btn =>
-            btn.classList.remove("active")
-        );
-
-    button.classList.add("active");
-
-
-    document
-        .querySelectorAll(".product")
-        .forEach(product => {
-
-            const categories =
-                product.dataset.category
-                .split(" ");
-
-
-            product.style.display =
-                category === "all" ||
-                categories.includes(category)
-                ? "block"
-                : "none";
-
-        });
-
-};
-
-
-/* ================= INITIALIZE ================= */
-
-updateCart();
-
-updateFavoriteCount();
-
-updateFavoriteButtons();
-
-    function openProduct(element) {
-    const name = element.getAttribute('data-name');
-    const description = element.getAttribute('data-description');
-    const images = (element.getAttribute('data-images') || '').split('|');
-    const sizes = (element.getAttribute('data-sizes') || '').split(',');
-    const colors = (element.getAttribute('data-colors') || '').split(',');
-
-    // Split prices by pipe "|"
-    const rawPrices = (element.getAttribute('data-price') || '0').split('|');
-    const prices = rawPrices.map(p => parseInt(p.trim()) || 0);
-
-    currentProductData = { name, prices, description, images, sizes, colors };
-
-    document.getElementById('detailName').textContent = name;
-    document.getElementById('detailDescription').textContent = description;
-
-    // Set default initial price
-    currentProductData.price = prices[0];
-    document.getElementById('detailPrice').textContent = prices[0].toLocaleString('ar-IQ') + ' د.ع';
-
-    // Image gallery
-    const mainImg = document.getElementById('mainProductImage');
-    mainImg.src = images[0] || '';
-
-    const thumbContainer = document.getElementById('productThumbnails');
-    thumbContainer.innerHTML = '';
-    images.forEach((imgSrc, idx) => {
-        const img = document.createElement('img');
-        img.src = imgSrc;
-        if (idx === 0) img.classList.add('selected');
-        img.onclick = () => {
-            mainImg.src = imgSrc;
-            thumbContainer.querySelectorAll('img').forEach(i => i.classList.remove('selected'));
-            img.classList.add('selected');
-        };
-        thumbContainer.appendChild(img);
+    const search = document.getElementById("searchInput").value.trim().toLowerCase();
+    document.querySelectorAll(".product").forEach(product => {
+        const name = product.dataset.name.toLowerCase();
+        product.style.display = (!search || name.includes(search)) ? "block" : "none";
     });
-
-    // Dynamic price switching per size
-    const sizeContainer = document.getElementById('sizeOptions');
-    sizeContainer.innerHTML = '';
-    selectedSize = sizes[0] || '';
-
-    sizes.forEach((s, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'option-button' + (idx === 0 ? ' selected' : '');
-        btn.textContent = s;
-
-        btn.onclick = () => {
-            sizeContainer.querySelectorAll('.option-button').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            selectedSize = s;
-
-            // Pick price matching the size index
-            const activePrice = parseInt(prices[idx]) || prices[0];
-            currentProductData.price = activePrice;
-            document.getElementById('detailPrice').textContent = activePrice.toLocaleString('ar-IQ') + ' د.ع';
-        };
-
-        sizeContainer.appendChild(btn);
-    });
-
-    // Colors setup
-    const colorContainer = document.getElementById('colorOptions');
-    colorContainer.innerHTML = '';
-    selectedColor = colors[0] || '';
-    colors.forEach((c, idx) => {
-        const btn = document.createElement('button');
-        btn.className = 'option-button color-button' + (idx === 0 ? ' selected' : '');
-        btn.textContent = c;
-        btn.onclick = () => {
-            colorContainer.querySelectorAll('.option-button').forEach(b => b.classList.remove('selected'));
-            btn.classList.add('selected');
-            selectedColor = c;
-        };
-        colorContainer.appendChild(btn);
-    });
-
-    openModal('productModal');
-}
-
-/* ===== KURDSHEIN DRAWERS ===== */
-window.toggleSideMenu=function(){
-  const d=document.getElementById("ksNavDrawer");
-  const b=document.getElementById("ksNavBackdrop");
-  if(!d||!b)return;
-  closeKurdSheinDrawer();
-  d.classList.add("show");b.classList.add("show");
-  document.body.style.overflow="hidden";
 };
-window.closeSideMenu=function(){
-  const d=document.getElementById("ksNavDrawer");
-  const b=document.getElementById("ksNavBackdrop");
-  if(!d||!b)return;
-  d.classList.remove("show");b.classList.remove("show");
-  if(!document.getElementById("ksOptionsDrawer")?.classList.contains("show"))
-    document.body.style.overflow="";
-};
-window.openKurdSheinDrawer=function(){
-  const d=document.getElementById("ksOptionsDrawer");
-  const b=document.getElementById("ksOptionsBackdrop");
-  if(!d||!b)return;
-  closeSideMenu();
-  d.classList.add("show");b.classList.add("show");
-  document.body.style.overflow="hidden";
-  if(typeof updateKsFavoriteCount==="function")updateKsFavoriteCount();
-};
-window.closeKurdSheinDrawer=function(){
-  const d=document.getElementById("ksOptionsDrawer");
-  const b=document.getElementById("ksOptionsBackdrop");
-  if(!d||!b)return;
-  d.classList.remove("show");b.classList.remove("show");
-  if(!document.getElementById("ksNavDrawer")?.classList.contains("show"))
-    document.body.style.overflow="";
-};
-window.updateKsFavoriteCount=function(){
-  const el=document.getElementById("ksFavoriteCount");
-  if(!el)return;
-  try{
-    const favs=typeof localFavorites!=="undefined"&&Array.isArray(localFavorites)
-      ? localFavorites
-      : (Array.isArray(window.localFavorites)?window.localFavorites:[]);
-    el.textContent=favs.length;
-  }catch(e){el.textContent="0";}
-};
-document.addEventListener("keydown",function(e){
-  if(e.key==="Escape"){closeSideMenu();closeKurdSheinDrawer();}
+
+document.getElementById("searchInput").addEventListener("keydown", event => {
+    if (event.key === "Enter") searchProducts();
 });
 
+window.filterProducts = function(category, button) {
+    document.querySelectorAll(".category").forEach(btn => btn.classList.remove("active"));
+    button.classList.add("active");
 
-/* ===== HAMBURGER FAVORITE COUNT ===== */
-window.updateKsMenuFavoriteCount=function(){
-  const el=document.getElementById("ksMenuFavoriteCount");
-  if(!el)return;
-  try{
-    const favs=Array.isArray(localFavorites)?localFavorites:[];
-    el.textContent=favs.length;
-  }catch(e){el.textContent="0";}
+    document.querySelectorAll(".product").forEach(product => {
+        const categories = product.dataset.category.split(" ");
+        product.style.display = (category === "all" || categories.includes(category)) ? "block" : "none";
+    });
 };
 
+/* ================= HAMBURGER & OPTIONS DRAWERS CONTROLLER ================= */
+window.toggleSideMenu = function() {
+    const d = document.getElementById("ksNavDrawer");
+    const b = document.getElementById("ksNavBackdrop");
+    if (!d || !b) return;
+    closeKurdSheinDrawer();
+    d.classList.add("show");
+    b.classList.add("show");
+    document.body.style.overflow = "hidden";
+    updateFavoriteCount();
+};
+
+window.closeSideMenu = function() {
+    const d = document.getElementById("ksNavDrawer");
+    const b = document.getElementById("ksNavBackdrop");
+    if (!d || !b) return;
+    d.classList.remove("show");
+    b.classList.remove("show");
+    if (!document.getElementById("ksOptionsDrawer")?.classList.contains("show")) {
+        document.body.style.overflow = "";
+    }
+};
+
+window.openKurdSheinDrawer = function() {
+    const d = document.getElementById("ksOptionsDrawer");
+    const b = document.getElementById("ksOptionsBackdrop");
+    if (!d || !b) return;
+    closeSideMenu();
+    d.classList.add("show");
+    b.classList.add("show");
+    document.body.style.overflow = "hidden";
+    updateFavoriteCount();
+};
+
+window.closeKurdSheinDrawer = function() {
+    const d = document.getElementById("ksOptionsDrawer");
+    const b = document.getElementById("ksOptionsBackdrop");
+    if (!d || !b) return;
+    d.classList.remove("show");
+    b.classList.remove("show");
+    if (!document.getElementById("ksNavDrawer")?.classList.contains("show")) {
+        document.body.style.overflow = "";
+    }
+};
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") {
+        closeSideMenu();
+        closeKurdSheinDrawer();
+    }
+});
+
+/* ================= INITIALIZE ================= */
+updateCart();
+updateFavoriteCount();
+updateFavoriteButtons();
 </script>
-</body></html>
+</body>
+</html>

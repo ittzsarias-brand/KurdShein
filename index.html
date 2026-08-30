@@ -22,14 +22,19 @@ footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--bord
 <div class="top-bar"><div class="top-bar-text"><span>☀</span><span data-i18n="welcome">بەخێربێیت بۆ KurdShein — کاڵای نوێ بۆ تۆ</span><span>☀</span></div></div>
 <div class="brand-row"><div class="brand"><span class="brand-mark">☀</span><span>KurdShein</span></div></div>
 <header class="main-header">
-  <div class="brand-note">هێنانەوەی کاڵا لە <strong>چین</strong> بۆ کوردستان</div>
-  <div class="search"><input id="searchInput" type="text" placeholder="گەڕان لە ناو بەرهەمەکان..." aria-label="گەڕان"><button class="search-button" onclick="searchProducts()">⌕</button></div>
-  <div class="header-actions">
-    <button class="header-button" onclick="toggleTheme()" id="themeButton" title="Dark / Light">☀️</button>
-    <button class="header-button" onclick="openFavorites()" title="دلخواز">♡<span class="favorite-count" id="favoriteCount">0</span></button>
-    <button class="header-button" onclick="openAccount()" title="هەژمار">♙</button>
-    <button class="header-button" onclick="openCartDrawer()" title="سەبەتە">🛒<span class="cart-count" id="cartCount">0</span></button>
+  <button class="menu-button" type="button" onclick="toggleSideMenu()" aria-label="مێنیو" title="مێنیو">
+    <span class="menu-icon"><span></span><span></span><span></span></span>
+  </button>
+
+  <div class="search">
+    <input id="searchInput" type="text" placeholder="گەڕان لە ناو بەرهەمەکان..." aria-label="گەڕان">
+    <button class="search-button" onclick="searchProducts()">⌕</button>
   </div>
+
+  <button class="header-button" type="button" onclick="openCartDrawer()" aria-label="بژاردەکان" title="بژاردەکان">
+    🛒
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
 </header>
 <div class="kurdistan-line"></div>
 
@@ -244,6 +249,68 @@ footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--bord
 <button class="side-menu-item" type="button" onclick="closeSideMenu();window.scrollTo({top:0,behavior:'smooth'});"><span class="side-menu-item-icon">⌂</span><span class="side-menu-item-text">سەرەتا</span></button>
 <div class="side-menu-hint">هەموو هەڵبژاردە سەرەکییەکانت لێرە کۆکراونەتەوە.</div>
 </div></aside>
+<!-- ===== PREMIUM KURDSHEIN CART OPTIONS DRAWER ===== -->
+<div class="utility-drawer-backdrop" id="utilityDrawerBackdrop" onclick="closeUtilityDrawer()"></div>
+<aside class="utility-drawer" id="utilityDrawer" aria-label="KurdShein بژاردەکان">
+  <div class="utility-drawer-header">
+    <div class="utility-drawer-brand-wrap">
+      <div class="utility-drawer-crown">♛</div>
+      <div>
+        <div class="utility-drawer-brand">Kurd<span>Shein</span></div>
+        <small class="utility-drawer-subtitle">هەموو شتێک، بە شێوەیەکی سادە</small>
+      </div>
+    </div>
+    <button class="utility-drawer-close" type="button" onclick="closeUtilityDrawer()" aria-label="داخستن">×</button>
+  </div>
+
+  <div class="utility-drawer-content">
+    <div class="utility-drawer-section-title">بژاردەکانی تۆ</div>
+
+    <button class="utility-drawer-item" type="button" onclick="toggleTheme();closeUtilityDrawer()">
+      <span class="utility-item-icon">◐</span>
+      <span class="utility-item-text">
+        <strong>ڕووناک / تاریک</strong>
+        <small>شێوەی دەرکەوتنی سایت بگۆڕە</small>
+      </span>
+      <span class="utility-item-arrow">‹</span>
+    </button>
+
+    <button class="utility-drawer-item" type="button" onclick="closeUtilityDrawer();openAccount()">
+      <span class="utility-item-icon">👤</span>
+      <span class="utility-item-text">
+        <strong>بەڕێوەبردنی هەژمار</strong>
+        <small>هەژمار، چوونەژوورەوە و زانیارییەکان</small>
+      </span>
+      <span class="utility-item-arrow">‹</span>
+    </button>
+
+    <button class="utility-drawer-item" type="button" onclick="closeUtilityDrawer();openFavorites()">
+      <span class="utility-item-icon">♡</span>
+      <span class="utility-item-text">
+        <strong>دڵخوازەکان</strong>
+        <small>بەرهەمە دڵخوازکراوەکانت</small>
+      </span>
+      <span class="utility-item-count" id="utilityFavoriteCount">0</span>
+    </button>
+
+    <div class="utility-drawer-divider"></div>
+
+    <button class="utility-drawer-item" type="button" onclick="closeUtilityDrawer();window.scrollTo({top:0,behavior:'smooth'})">
+      <span class="utility-item-icon">⌂</span>
+      <span class="utility-item-text">
+        <strong>سەرەتا</strong>
+        <small>گەڕانەوە بۆ لاپەڕەی سەرەکی</small>
+      </span>
+      <span class="utility-item-arrow">‹</span>
+    </button>
+
+    <div class="utility-drawer-footer">
+      <strong>KurdShein</strong><br>
+      هەموو مافەکان پارێزراون · بە خۆشحاڵی خزمەت دەکەین
+    </div>
+  </div>
+</aside>
+
 <div class="modal" id="productModal" onclick="closeOutside(event,'productModal')">
 <div class="modal-box product-details-box">
 <button class="close-button" onclick="closeModal('productModal')">
@@ -2419,6 +2486,34 @@ document.addEventListener("keydown", function (event) {
         };
         window[fnName].__drawerWrapped = true;
     }
+});
+
+/* ===== PREMIUM CART DRAWER CONTROLLER ===== */
+window.openCartDrawer=function(){
+  const d=document.getElementById("utilityDrawer");
+  const b=document.getElementById("utilityDrawerBackdrop");
+  if(!d||!b)return;
+  if(typeof closeSideMenu==="function")closeSideMenu();
+  d.classList.add("show");
+  b.classList.add("show");
+  document.body.style.overflow="hidden";
+  if(typeof updateUtilityFavoriteCount==="function")updateUtilityFavoriteCount();
+};
+window.closeUtilityDrawer=function(){
+  const d=document.getElementById("utilityDrawer");
+  const b=document.getElementById("utilityDrawerBackdrop");
+  if(!d||!b)return;
+  d.classList.remove("show");
+  b.classList.remove("show");
+  document.body.style.overflow="";
+};
+window.updateUtilityFavoriteCount=function(){
+  const el=document.getElementById("utilityFavoriteCount");
+  if(!el)return;
+  el.textContent=Array.isArray(window.localFavorites)?window.localFavorites.length:0;
+};
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape")closeUtilityDrawer();
 });
 
 </script>

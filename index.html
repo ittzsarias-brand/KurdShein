@@ -1325,13 +1325,15 @@ footer {
 <div class="categories">
 
    <button
-        class="category"
-        onclick="filterProducts('new' 'sale' 'men' 'women' 'kids' 'accessories' 'electronics',this)"
+        class="category active"
+        onclick="filterProducts('all',this)"
         data-i18n="all"
     >
         گشتی
+    </button>
+
     <button
-        class="category active"
+        class="category"
         onclick="filterProducts('new',this)"
         data-i18n="new"
     >
@@ -1762,7 +1764,7 @@ footer {
 
 <div
     class="product"
-    data-category="al accessories"
+    data-category="all accessories"
     data-name="مەتارەی ئاو"
     data-price="5000"
     data-description="مەتارەیەکی ئاو بۆ بەلارهێنانی رۆژانە
@@ -1785,6 +1787,7 @@ footer {
         <img
             src="IMG_1740.jpeg"
             alt=""
+            style="width:100%;height:100%;object-fit:cover;"
         >
 
     </div>
@@ -4050,6 +4053,7 @@ window.filterProducts = function(
 
 
             product.style.display =
+                category === "all" ||
                 categories.includes(category)
                 ? "block"
                 : "none";

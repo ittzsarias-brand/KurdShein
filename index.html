@@ -195,6 +195,27 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 #favoritesList .favorite-product-info{font-size:50%}
 #favoritesList button{font-size:50%;padding:4.5px}
 @media(max-width:600px){.details-description{font-size:70%}.big-add{font-size:50%;padding:7px}}
+
+/* Favorites eye button visibility fix only */
+#favoritesList .favorite-view-button{
+    display:grid !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    position:relative !important;
+    z-index:9999 !important;
+    place-items:center !important;
+    min-width:42px !important;
+    width:42px !important;
+    height:42px !important;
+    padding:0 !important;
+    font-size:22px !important;
+    line-height:1 !important;
+    color:var(--text) !important;
+    background:var(--surface-2) !important;
+    border:1px solid var(--border) !important;
+    cursor:pointer !important;
+    flex-shrink:0 !important;
+}
 </style>
 
 <style id="compact-overlay-layout">
@@ -1603,17 +1624,12 @@ window.openFavorites = function() {
           <img src="${product.querySelector("img")?.src || ""}" alt="${product.dataset.name || ""}">
           <div class="favorite-product-info"><strong>${product.dataset.name}</strong><div style="color:#ffd000;">${Number(product.dataset.price).toLocaleString()} د.ع</div></div>
           <button type="button" class="option-button favorite-view-button" aria-label="بینینی بەرهەم">👁️</button>`;
-        div.querySelector(".favorite-view-button").onclick = function(event) {
+        const viewButton = div.querySelector(".favorite-view-button");
+        viewButton.onclick = function(event) {
             event.preventDefault();
             event.stopPropagation();
-            // Open the exact product represented by this favorites row.
-            const selectedFavoriteProduct = product;
             closeModal("favoritesModal");
-            requestAnimationFrame(() => {
-                if (selectedFavoriteProduct && document.body.contains(selectedFavoriteProduct)) {
-                    window.openProduct(selectedFavoriteProduct);
-                }
-            });
+            window.openProduct(product);
         };
         list.appendChild(div);
     });

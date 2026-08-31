@@ -1460,6 +1460,17 @@ startHeroSlider();
 /* ===== Favorites ===== */
 (function(){
   const KEY = 'kurdSheinFavorites';
+  const FAVORITES_VERSION_KEY = 'kurdSheinFavoritesVersion';
+  const FAVORITES_VERSION = '2';
+
+  // Clear favorites saved by the previous broken version once.
+  // After this one-time cleanup, new favorites are kept normally.
+  try {
+    if (localStorage.getItem(FAVORITES_VERSION_KEY) !== FAVORITES_VERSION) {
+      localStorage.removeItem(KEY);
+      localStorage.setItem(FAVORITES_VERSION_KEY, FAVORITES_VERSION);
+    }
+  } catch(e) {}
 
   function getFavorites(){
     try {

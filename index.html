@@ -6,7 +6,8 @@
 <meta name="theme-color" content="#e51c2a">
 <meta name="description" content="KurdShein — هێنانەوەی کاڵا بۆ کوردستان">
 <title>KurdShein | کاڵای نوێ بۆ کوردستان</title>
-<style>
+<style id="kurdShein-organized-css">
+/* ===== CSS section 1 ===== */
 @font-face{font-family:Rabar;src:url("Rabar_037%202.ttf") format("truetype");font-display:swap}
 :root{--bg:#080a0f;--surface:#10141b;--surface-2:#171c24;--surface-3:#202631;--text:#f8fafc;--muted:#98a2b3;--border:rgba(255,255,255,.09);--red:#e51c2a;--green:#168a46;--yellow:#f7c948;--shadow:0 20px 55px rgba(0,0,0,.25)}
 body.light{--bg:#f5f7fa;--surface:#fff;--surface-2:#f2f4f7;--surface-3:#e8ebf0;--text:#111827;--muted:#667085;--border:rgba(16,24,40,.10);--shadow:0 20px 50px rgba(16,24,40,.10)}
@@ -18,13 +19,13 @@ body.light{--bg:#f5f7fa;--surface:#fff;--surface-2:#f2f4f7;--surface-3:#e8ebf0;-
 .kurdistan-line{height:3px;background:linear-gradient(90deg,#d7192a 0 33.33%,#fff 33.33% 66.66%,#159447 66.66%)}
 .hero{max-width:1420px;margin:26px auto 18px;padding:0 18px}.hero-inner{min-height:330px;border:1px solid var(--border);border-radius:28px;overflow:hidden;position:relative;background:radial-gradient(circle at 15% 20%,rgba(229,28,42,.24),transparent 35%),radial-gradient(circle at 85% 70%,rgba(22,138,70,.2),transparent 35%),linear-gradient(135deg,var(--surface),var(--surface-2));display:flex;align-items:center}.hero-copy{max-width:700px;padding:52px}.eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(229,28,42,.12);border:1px solid rgba(229,28,42,.25);color:#ff6670;padding:7px 12px;border-radius:999px;font-size:12px;margin-bottom:14px}.hero h2{font-size:clamp(30px,5vw,58px);line-height:1.2;margin-bottom:12px}.hero h2 span{color:var(--red)}.hero p{color:var(--muted);font-size:16px;line-height:1.9;max-width:600px}.hero-actions{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap}.hero-btn{border:0;border-radius:12px;padding:12px 20px;font-weight:800}.hero-btn.primary{background:var(--red);color:#fff}.hero-btn.secondary{background:var(--surface-3);color:var(--text);border:1px solid var(--border)}.hero-glow{position:absolute;left:-80px;bottom:-110px;width:330px;height:330px;border-radius:50%;background:rgba(229,28,42,.13);filter:blur(10px)}
 .trust{max-width:1384px;margin:0 auto 24px;padding:0 18px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.trust-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:15px;display:flex;gap:11px;align-items:center}.trust-icon{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--surface-2);font-size:18px}.trust-card strong{display:block;font-size:13px}.trust-card span{display:block;color:var(--muted);font-size:11px;margin-top:2px}
-.section-head{max-width:1384px;margin:30px auto 14px;padding:0 18px;display:flex;justify-content:space-between;align-items:end;gap:12px}.section-head h2{font-size:25px}.section-head p{color:var(--muted);font-size:12px;margin-top:4px}.products{max-width:1384px;width:calc(100% - 36px);margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.product{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;position:relative;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .22s}.product:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(229,28,42,.35)}.product-image{height:285px;background:var(--surface-2);position:relative;overflow:hidden}.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}.product:hover .product-image img{transform:scale(1.045)}.favorite-button{position:absolute;top:12px;left:12px;z-index:5;width:39px;height:39px;border-radius:12px;background:rgba(10,12,16,.70);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.16);color:#fff;font-size:20px;display:grid;place-items:center}.favorite-button.active{color:#ff3150}.sale,.new-badge{position:absolute;top:12px;right:12px;z-index:4;padding:6px 10px;border-radius:999px;color:#fff;font-size:11px;font-weight:800}.sale{background:var(--red)}.new-badge{background:var(--green)}.product-info{padding:15px}.product-name{font-size:16px;font-weight:800;line-height:1.5;min-height:24px}.product-rating{color:#ffc928;font:12px Arial;letter-spacing:1px;margin:5px 0}.product-description{color:var(--muted);font-size:12px;line-height:1.7;min-height:40px}.price{color:var(--yellow);font:800 17px Arial}.old-price{color:var(--muted);text-decoration:line-through;font:12px Arial;margin-right:7px}.add-cart{width:100%;margin-top:12px;padding:11px;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);color:var(--text);font-weight:800;transition:.2s}.add-cart:hover{background:var(--red);border-color:var(--red);color:#fff}
+.section-head{max-width:1384px;margin:30px auto 14px;padding:0 18px;display:flex;justify-content:space-between;align-items:end;gap:12px}.section-head h2{font-size:25px}.section-head p{color:var(--muted);font-size:12px;margin-top:4px}.products{max-width:1384px;width:calc(100% - 36px);margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.product{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;position:relative;cursor:pointer;transition:transform .22s,box-shadow .22s,border-color .22s}.product:hover{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(229,28,42,.35)}.product-image{height:285px;background:var(--surface-2);position:relative;overflow:hidden}.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}.product:hover .product-image img{transform:scale(1.045)}.favorite-button{position:absolute;top:12px;left:12px;z-index:5;width:39px;height:39px;border-radius:12px;background:rgba(10,12,16,.70);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.16);color:#fff;font-size:20px;display:grid;place-items:center}.favorite-button.active{color:#ff3150}.sale{background:var(--red)}.product-info{padding:15px}.product-name{font-size:16px;font-weight:800;line-height:1.5;min-height:24px}.product-description{color:var(--muted);font-size:12px;line-height:1.7;min-height:40px}.price{color:var(--yellow);font:800 17px Arial}.old-price{color:var(--muted);text-decoration:line-through;font:12px Arial;margin-right:7px}.add-cart{width:100%;margin-top:12px;padding:11px;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);color:var(--text);font-weight:800;transition:.2s}.add-cart:hover{background:var(--red);border-color:var(--red);color:#fff}
 .empty-products{grid-column:1/-1;text-align:center;padding:60px 20px;background:var(--surface);border:1px dashed var(--border);border-radius:18px;color:var(--muted)}
 .coming{max-width:1384px;width:calc(100% - 36px);margin:25px auto 0;padding:18px 20px;border-radius:16px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:20px}.coming strong{font-size:15px}.coming span{color:var(--muted);font-size:12px}.coming-badge{background:var(--surface-2);padding:7px 11px;border-radius:999px;font-size:11px;color:var(--muted)}
 footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--border);padding:42px max(20px,calc((100vw - 1384px)/2));display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:35px}.footer-brand{font-family:Arial;font-size:30px;font-weight:900}.footer-brand span{color:var(--red)}footer h3{font-size:14px;margin-bottom:13px}footer p,footer li{color:var(--muted);font-size:12px;line-height:2}footer ul{list-style:none}.footer-bottom{grid-column:1/-1;border-top:1px solid var(--border);padding-top:17px;color:var(--muted);font-size:11px;text-align:center}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;z-index:5000;padding:16px}.modal.show{display:flex}.modal-box{width:100%;max-width:540px;max-height:94vh;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.4);position:relative}.modal-title{text-align:center;font-size:22px;margin-bottom:18px}.close-button{position:absolute;top:13px;left:13px;width:35px;height:35px;border-radius:11px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:20px}.product-details-box{max-width:900px}.product-gallery{display:grid;grid-template-columns:1fr 92px;gap:10px;direction:ltr}.product-main-stage{position:relative;overflow:hidden;border-radius:15px;background:var(--surface-2);touch-action:pan-y}.main-product-image{width:100%;height:430px;object-fit:contain;border-radius:15px;background:var(--surface-2);display:block;user-select:none;-webkit-user-drag:none;transition:transform .28s ease,opacity .2s ease}.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:1px solid var(--border);border-radius:50%;background:rgba(0,0,0,.5);color:#fff;font-size:28px;line-height:1;cursor:pointer;z-index:2;opacity:.8}.gallery-arrow:hover{opacity:1}.gallery-prev{left:10px}.gallery-next{right:10px}.product-thumbnails{display:flex;flex-direction:column;gap:8px;max-height:430px;overflow-y:auto}.product-thumbnails img{width:82px;height:82px;object-fit:cover;border-radius:11px;border:2px solid transparent;cursor:pointer}.product-thumbnails img.selected{border-color:var(--green)}.details-content{margin-top:18px;direction:rtl}.details-content h2{margin-bottom:7px}.details-description{color:var(--muted);line-height:1.9;margin-bottom:15px}.option-title{margin:15px 0 9px;font-size:14px}.option-buttons{display:flex;flex-wrap:wrap;gap:8px}.option-button{background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:9px 14px;cursor:pointer}.option-button.selected{background:var(--green);border-color:var(--green);color:#fff}.detail-price{color:var(--yellow);font:800 22px Arial;margin:18px 0}.big-add{width:100%;background:var(--red);color:#fff;border:0;padding:14px;border-radius:11px;font-weight:800}.form-group{margin-bottom:13px}.form-group label{display:block;margin-bottom:6px;font-size:13px}.form-group input,.form-group textarea{width:100%;background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;outline:none}.form-group input:focus,.form-group textarea:focus{border-color:var(--red)}.form-group textarea{min-height:90px;resize:vertical}.form-button{width:100%;padding:13px;border:0;border-radius:10px;color:#fff;background:var(--red);font-weight:800;margin-top:7px}.secondary-button{background:var(--surface-2);border:1px solid var(--border);color:var(--text)}.cart-items{max-height:330px;overflow-y:auto;margin-bottom:15px}.cart-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px;background:var(--surface-2);border:1px solid var(--border);border-radius:11px;margin-bottom:8px}.cart-total{border-top:1px solid var(--border);padding-top:15px;text-align:center;font-size:18px;color:var(--yellow);margin-bottom:10px}.order-summary{background:var(--surface-2);border-radius:11px;padding:12px;margin-bottom:18px}.order-summary-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}.order-summary-item:last-child{border-bottom:0}.favorite-product{display:flex;align-items:center;gap:10px;background:var(--surface-2);padding:9px;border-radius:10px;margin-bottom:9px}.favorite-product img{width:65px;height:65px;border-radius:8px;object-fit:cover}.favorite-product-info{flex:1}.cart-message{position:fixed;bottom:24px;left:50%;transform:translate(-50%,120px);background:var(--surface);border:1px solid var(--border);padding:12px 20px;border-radius:999px;z-index:9000;transition:.3s;box-shadow:var(--shadow);font-size:13px}.cart-message.show{transform:translate(-50%,0)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;z-index:5000;padding:16px}.modal.show{display:flex}.modal-box{width:100%;max-width:540px;max-height:94vh;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.4);position:relative}.modal-title{text-align:center;font-size:22px;margin-bottom:18px}.close-button{position:absolute;top:13px;left:13px;width:35px;height:35px;border-radius:11px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:20px}.product-details-box{max-width:900px}.product-main-stage{position:relative;overflow:hidden;border-radius:15px;background:var(--surface-2);touch-action:pan-y}.main-product-image{width:100%;height:430px;object-fit:contain;border-radius:15px;background:var(--surface-2);display:block;user-select:none;-webkit-user-drag:none}.details-content{margin-top:18px;direction:rtl}.details-content h2{margin-bottom:7px}.details-description{color:var(--muted);line-height:1.9;margin-bottom:15px}.option-title{margin:15px 0 9px;font-size:14px}.option-buttons{display:flex;flex-wrap:wrap;gap:8px}.option-button{background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:9px 14px;cursor:pointer}.option-button.selected{background:var(--green);border-color:var(--green);color:#fff}.detail-price{color:var(--yellow);font:800 22px Arial;margin:18px 0}.big-add{width:100%;background:var(--red);color:#fff;border:0;padding:14px;border-radius:11px;font-weight:800}.form-group{margin-bottom:13px}.form-group label{display:block;margin-bottom:6px;font-size:13px}.form-group input,.form-group textarea{width:100%;background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;outline:none}.form-group input:focus,.form-group textarea:focus{border-color:var(--red)}.form-group textarea{min-height:90px;resize:vertical}.form-button{width:100%;padding:13px;border:0;border-radius:10px;color:#fff;background:var(--red);font-weight:800;margin-top:7px}.secondary-button{background:var(--surface-2);border:1px solid var(--border);color:var(--text)}.cart-items{max-height:330px;overflow-y:auto;margin-bottom:15px}.cart-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px;background:var(--surface-2);border:1px solid var(--border);border-radius:11px;margin-bottom:8px}.cart-total{border-top:1px solid var(--border);padding-top:15px;text-align:center;font-size:18px;color:var(--yellow);margin-bottom:10px}.order-summary{background:var(--surface-2);border-radius:11px;padding:12px;margin-bottom:18px}.order-summary-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}.order-summary-item:last-child{border-bottom:0}.favorite-product{display:flex;align-items:center;gap:10px;background:var(--surface-2);padding:9px;border-radius:10px;margin-bottom:9px}.favorite-product img{width:65px;height:65px;border-radius:8px;object-fit:cover}.favorite-product-info{flex:1}.cart-message{position:fixed;bottom:24px;left:50%;transform:translate(-50%,120px);background:var(--surface);border:1px solid var(--border);padding:12px 20px;border-radius:999px;z-index:9000;transition:.3s;box-shadow:var(--shadow);font-size:13px}.cart-message.show{transform:translate(-50%,0)}
 @media(max-width:1050px){.main-header{grid-template-columns:1fr auto}.brand-note{display:none}.search{grid-column:1/-1;grid-row:2}.trust{grid-template-columns:repeat(2,1fr)}.products{grid-template-columns:repeat(3,1fr)}footer{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.brand-row{padding:14px}.brand{font-size:38px}.brand-mark{width:34px;height:34px;font-size:16px}.main-header{padding:9px 12px;grid-template-columns:1fr auto;gap:9px}.header-actions{gap:5px}.header-button{width:40px;height:40px}trust{padding:0 12px;grid-template-columns:1fr 1fr}.trust-card{padding:11px}.section-head{padding:0 12px}.categories{padding:0 12px}.products,.coming{width:calc(100% - 24px)}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-image{height:205px}.product-info{padding:11px}.product-name{font-size:13px}.product-description{font-size:11px;min-height:36px}.price{font-size:14px}.add-cart{font-size:12px;padding:10px}.product-gallery{grid-template-columns:1fr}.main-product-image{height:320px}.product-thumbnails{flex-direction:row;overflow-x:auto}.product-thumbnails img{flex:0 0 72px;width:72px;height:72px}.modal-box{padding:20px 15px}.coming{align-items:flex-start;flex-direction:column}footer{grid-template-columns:1fr;padding:32px 20px}.footer-bottom{grid-column:auto}}@media(max-width:390px){.products{grid-template-columns:1fr}.product-image{height:250px}.trust{grid-template-columns:1fr}.header-actions .header-button{width:38px;height:38px}}
+@media(max-width:700px){.brand-row{padding:14px}.brand{font-size:38px}.brand-mark{width:34px;height:34px;font-size:16px}.main-header{padding:9px 12px;grid-template-columns:1fr auto;gap:9px}.header-actions{gap:5px}.header-button{width:40px;height:40px}trust{padding:0 12px;grid-template-columns:1fr 1fr}.trust-card{padding:11px}.section-head{padding:0 12px}.categories{padding:0 12px}.products,.coming{width:calc(100% - 24px)}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-image{height:205px}.product-info{padding:11px}.product-name{font-size:13px}.product-description{font-size:11px;min-height:36px}.price{font-size:14px}.add-cart{font-size:12px;padding:10px}.main-product-image{height:320px}.modal-box{padding:20px 15px}.coming{align-items:flex-start;flex-direction:column}footer{grid-template-columns:1fr;padding:32px 20px}.footer-bottom{grid-column:auto}}@media(max-width:390px){.products{grid-template-columns:1fr}.product-image{height:250px}.trust{grid-template-columns:1fr}.header-actions .header-button{width:38px;height:38px}}
 
 /* ===== KURDSHEIN CLEAN HEADER ===== */
 .ks-main-header{
@@ -163,9 +164,9 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
 
 /* ===== KURDSHEIN V2 SHOPPING UPGRADES ===== */
-.stock-line{display:flex;align-items:center;gap:7px;margin-top:7px;font-size:11px}.stock-dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block}.stock-low .stock-dot{background:var(--yellow)}.stock-out{color:#ff6670}.stock-out .stock-dot{background:var(--red)}.discount-pill{position:absolute;top:12px;right:12px;z-index:4;background:var(--red);color:#fff;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900}.product.sold-out{opacity:.72}.product.sold-out .product-image img{filter:grayscale(.35)}.product.sold-out .add-cart{background:var(--surface-3);color:var(--muted);cursor:not-allowed}.recent-section{max-width:1384px;margin:32px auto 10px}.recent-products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:0 18px}.recent-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:.2s}.recent-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.recent-card img{width:100%;height:180px;object-fit:cover;display:block;background:var(--surface-2)}.recent-card-body{padding:11px}.recent-card-name{font-size:13px;font-weight:800;line-height:1.5}.recent-card-price{color:var(--yellow);font:800 13px Arial;margin-top:5px}.clear-recent{border:1px solid var(--border);background:var(--surface-2);color:var(--muted);border-radius:10px;padding:8px 12px;font-size:11px}.checkout-select{width:100%;background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;outline:none}.checkout-select:focus{border-color:var(--red)}.coupon-row{display:flex;gap:8px;margin:12px 0}.coupon-row input{flex:1;min-width:0;background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;outline:none}.coupon-row input:focus{border-color:var(--yellow)}.coupon-button{border:0;border-radius:10px;background:var(--yellow);color:#111;padding:0 16px;font-weight:900}.checkout-totals{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px}.checkout-total-row{display:flex;justify-content:space-between;padding:5px 0;color:var(--muted);font-size:13px}.checkout-total-row.grand{border-top:1px solid var(--border);margin-top:6px;padding-top:10px;color:var(--text);font-size:16px;font-weight:900}.checkout-total-row.discount{color:#6ee7a0}.image-lightbox{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:12000;display:none;align-items:center;justify-content:center;padding:55px 70px}.image-lightbox.show{display:flex}.image-lightbox img{max-width:min(92vw,1100px);max-height:86vh;object-fit:contain;transition:transform .25s;cursor:zoom-in;border-radius:10px}.image-lightbox img.zoomed{transform:scale(1.65);cursor:zoom-out}.lightbox-close,.lightbox-prev,.lightbox-next{position:absolute;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;display:grid;place-items:center;border-radius:50%;z-index:2}.lightbox-close{top:18px;left:18px;width:44px;height:44px;font-size:27px}.lightbox-prev,.lightbox-next{top:50%;transform:translateY(-50%);width:48px;height:48px;font-size:35px}.lightbox-prev{right:18px}.lightbox-next{left:18px}.lightbox-counter{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:#fff;border-radius:999px;padding:7px 13px;font:12px Arial}.product-gallery .main-product-image{cursor:zoom-in}.recent-empty{grid-column:1/-1;color:var(--muted);text-align:center;padding:25px}
+.stock-line{display:flex;align-items:center;gap:7px;margin-top:7px;font-size:11px}.stock-dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block}.stock-low .stock-dot{background:var(--yellow)}.stock-out{color:#ff6670}.stock-out .stock-dot{background:var(--red)}.discount-pill{position:absolute;top:12px;right:12px;z-index:4;background:var(--red);color:#fff;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:900}.product.sold-out{opacity:.72}.product.sold-out .product-image img{filter:grayscale(.35)}.product.sold-out .add-cart{background:var(--surface-3);color:var(--muted);cursor:not-allowed}.recent-section{max-width:1384px;margin:32px auto 10px}.recent-products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;padding:0 18px}.recent-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:.2s}.recent-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.recent-card img{width:100%;height:180px;object-fit:cover;display:block;background:var(--surface-2)}.recent-card-body{padding:11px}.recent-card-name{font-size:13px;font-weight:800;line-height:1.5}.recent-card-price{color:var(--yellow);font:800 13px Arial;margin-top:5px}.clear-recent{border:1px solid var(--border);background:var(--surface-2);color:var(--muted);border-radius:10px;padding:8px 12px;font-size:11px}.checkout-select{width:100%;background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;outline:none}.checkout-select:focus{border-color:var(--red)}.coupon-row{display:flex;gap:8px;margin:12px 0}.coupon-row input{flex:1;min-width:0;background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;outline:none}.coupon-row input:focus{border-color:var(--yellow)}.coupon-button{border:0;border-radius:10px;background:var(--yellow);color:#111;padding:0 16px;font-weight:900}.checkout-totals{background:var(--surface-2);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:12px}.checkout-total-row{display:flex;justify-content:space-between;padding:5px 0;color:var(--muted);font-size:13px}.checkout-total-row.grand{border-top:1px solid var(--border);margin-top:6px;padding-top:10px;color:var(--text);font-size:16px;font-weight:900}.checkout-total-row.discount{color:#6ee7a0}.recent-empty{grid-column:1/-1;color:var(--muted);text-align:center;padding:25px}
 @media(max-width:1050px){.recent-products{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:700px){.recent-products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 12px}.recent-card img{height:150px}.coupon-row{flex-direction:column}.coupon-button{height:42px}.image-lightbox{padding:50px 12px}.lightbox-prev,.lightbox-next{width:40px;height:40px;font-size:28px}.lightbox-prev{right:8px}.lightbox-next{left:8px}}
+@media(max-width:700px){.recent-products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:0 12px}.recent-card img{height:150px}.coupon-row{flex-direction:column}.coupon-button{height:42px}}
 
 .categories{max-width:1384px;margin:0 auto 20px;padding:0 18px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
 .categories::-webkit-scrollbar{display:none}
@@ -215,9 +216,8 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     cursor:pointer !important;
     flex-shrink:0 !important;
 }
-</style>
 
-<style id="compact-overlay-layout">
+/* ===== CSS section 2 ===== */
 /* ===== COMPACT PRODUCT / CART / SETTINGS VIEWS ===== */
 .modal-box{
   max-width: 680px !important;
@@ -231,13 +231,8 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 .main-product-image{
   height: 300px !important;
 }
-.product-thumbnails{
-  max-height: 300px !important;
-}
-.product-thumbnails img{
-  width: 64px !important;
-  height: 64px !important;
-}
+
+
 .details-content{
   margin-top: 12px !important;
 }
@@ -361,13 +356,8 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   .main-product-image{
     height: 230px !important;
   }
-  .product-thumbnails{
-    max-height: none !important;
-  }
-  .product-thumbnails img{
-    width: 55px !important;
-    height: 55px !important;
-  }
+  
+  
   .details-content h2{
     font-size: 17px !important;
   }
@@ -390,9 +380,8 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     width: min(320px, 82vw) !important;
   }
 }
-</style>
 
-<style id="ks-readable-responsive-ui">
+/* ===== CSS section 3 ===== */
 /* ===== READABLE + RESPONSIVE PRODUCT / FAVORITES / SETTINGS / ACCOUNT UI ===== */
 
 /* Product detail popup */
@@ -407,21 +396,12 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   width:min(820px, calc(100vw - 32px));
   max-width:820px;
 }
-.product-gallery{
-  grid-template-columns:minmax(0,1fr) 76px;
-  gap:12px;
-}
+
 .main-product-image{
   height:330px;
 }
-.product-thumbnails{
-  max-height:330px;
-  gap:8px;
-}
-.product-thumbnails img{
-  width:68px;
-  height:68px;
-}
+
+
 .details-content{
   margin-top:14px;
 }
@@ -566,9 +546,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   .main-product-image{
     height:290px;
   }
-  .product-thumbnails{
-    max-height:290px;
-  }
+  
 }
 
 /* Phone */
@@ -586,24 +564,12 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     border-radius:18px !important;
   }
 
-  .product-gallery{
-    grid-template-columns:1fr;
-    gap:8px;
-  }
+  
   .main-product-image{
     height:min(43vh,250px) !important;
   }
-  .product-thumbnails{
-    flex-direction:row;
-    max-height:none !important;
-    overflow-x:auto;
-    padding-bottom:2px;
-  }
-  .product-thumbnails img{
-    flex:0 0 58px;
-    width:58px !important;
-    height:58px !important;
-  }
+  
+  
 
   .details-content{
     margin-top:10px;
@@ -678,9 +644,8 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     font-size:12px !important;
   }
 }
-</style>
 
-<style id="ks-final-fixes">
+/* ===== CSS section 4 ===== */
 /* 1) Keep the product-card "داوا کردن" button small, as before. */
 .product .add-cart{
   width:100% !important;
@@ -693,26 +658,13 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   border-radius:8px !important;
 }
 
-/* 2) Make popup/gallery arrows clearly visible and clickable. */
+
 .product-main-stage{
   position:relative !important;
 }
-.gallery-arrow{
-  display:grid !important;
-  place-items:center !important;
-  z-index:20 !important;
-  width:42px !important;
-  height:42px !important;
-  padding:0 !important;
-  background:rgba(0,0,0,.62) !important;
-  color:#fff !important;
-  border:2px solid rgba(255,255,255,.35) !important;
-  font-size:30px !important;
-  line-height:1 !important;
-  pointer-events:auto !important;
-}
-.gallery-prev{left:10px !important;right:auto !important}
-.gallery-next{right:10px !important;left:auto !important}
+
+
+
 
 /* 3) Always show the X close buttons above popup content. */
 .modal-box{
@@ -749,12 +701,10 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   border-color:var(--red) !important;
 }
 
-/* Keep the product image away from the close button. */
-.product-details-box .product-gallery{
-  padding-top:2px;
-}
 
-/* On small screens, make arrows and close button easy to tap. */
+.product-details-box 
+
+/* On small screens, make the product popup easy to use. */
 @media(max-width:600px){
   .product .add-cart{
     min-height:34px !important;
@@ -762,13 +712,9 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     padding:5px 7px !important;
     font-size:9px !important;
   }
-  .gallery-arrow{
-    width:38px !important;
-    height:38px !important;
-    font-size:27px !important;
-  }
-  .gallery-prev{left:7px !important}
-  .gallery-next{right:7px !important}
+  
+  
+  
   .modal .close-button{
     top:8px !important;
     left:8px !important;
@@ -776,9 +722,8 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     height:38px !important;
   }
 }
-</style>
 
-<style id="requested-store-fixes">
+/* ===== CSS section 5 ===== */
 .close-button{display:grid !important;place-items:center !important;z-index:9999 !important;opacity:1 !important;visibility:visible !important;background:var(--surface-2) !important;color:var(--text) !important;border:2px solid rgba(255,255,255,.28) !important;box-shadow:0 5px 18px rgba(0,0,0,.35) !important}
 .detail-quantity-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px}.detail-quantity-label{font-size:13px;font-weight:800;white-space:nowrap}.detail-quantity-control{display:flex;align-items:center;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);overflow:hidden;height:44px}.detail-qty-btn{width:42px;height:44px;border:0;background:transparent;color:var(--text);font-size:21px;font-weight:900}.detail-qty-btn:hover{background:var(--surface-3);color:var(--yellow)}#detailQuantity{width:45px;height:44px;border:0;border-left:1px solid var(--border);border-right:1px solid var(--border);background:transparent;color:var(--text);text-align:center;font-weight:900;outline:0}.detail-quantity-row .big-add{flex:1;margin:0}.favorite-product .favorite-view-button{display:grid;place-items:center;min-width:42px;height:42px;font-size:20px}.cart-item-premium{display:grid !important;grid-template-columns:58px minmax(0,1fr) auto;gap:12px !important}.cart-item-image{width:58px;height:58px;border-radius:13px;object-fit:cover;background:var(--surface-3);border:1px solid var(--border)}.cart-header-summary{display:flex;justify-content:space-between;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:11px 13px;margin-bottom:12px;font-size:12px;color:var(--muted)}.cart-header-summary strong{color:var(--text);font-size:14px}.cart-item-main{min-width:0}
 @media(max-width:600px){.detail-quantity-row{flex-wrap:wrap}.detail-quantity-row .big-add{width:100%;flex-basis:100%}.cart-item-premium{grid-template-columns:50px minmax(0,1fr)}.cart-item-actions{grid-column:1/-1;justify-content:flex-start}.cart-item-image{width:50px;height:50px}}
@@ -891,14 +836,12 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
  <button class="category" onclick="filterProducts('electronics',this)" data-i18n="electronics">ئەلکترۆنی</button>
 </div>
 <div class="products" id="products">
-  <div class="product" data-category="all new electronics" data-colors="رەنگاورەنگRGBلیدی" data-description="١. ئامێری بڵاوکردنەوەی بۆن لە براندی تێکوی  ٢. بۆ ماڵان و ناو سەیارە بەکاردێت  ٣.بە دڵی خۆت ئەتوانی بۆنی تێبکەیت  ٤. لیدی ئارجیبیە و ئۆتۆماتیکی رەنگەکان ئەگۆرێت" data-images="IMG_9186.jpeg|IMG_9187.jpeg|IMG_9188.jpeg|IMG_9189.jpeg|IMG_9190.jpeg|IMG_9191.jpeg" data-name="ئامێری بۆن بڵاوکردنەوە" data-price="5000" data-stock="12" data-sizes="One Size">
+  <div class="product" data-category="all new electronics" data-colors="رەنگاورەنگRGBلیدی" data-description="١. ئامێری بڵاوکردنەوەی بۆن لە براندی تێکوی  ٢. بۆ ماڵان و ناو سەیارە بەکاردێت  ٣.بە دڵی خۆت ئەتوانی بۆنی تێبکەیت  ٤. لیدی ئارجیبیە و ئۆتۆماتیکی رەنگەکان ئەگۆرێت" data-name="ئامێری بۆن بڵاوکردنەوە" data-price="5000" data-stock="12" data-sizes="One Size">
     <div class="product-image">
-      <div class="new-badge">نوێ</div>
       <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
       <img alt="" src="IMG_9186.jpeg"/>
     </div>
     <div class="product-info">
-      <div class="product-rating">★★★★★</div>
       <div class="product-name">جیهازی بۆن</div>
       <div class="product-description">بۆ سەیارە و ماڵ</div>
       <div class="price">٥٠٠٠ د.ع</div>
@@ -906,14 +849,12 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     </div>
   </div>
 
-  <div class="product" data-category="all new electronics" data-colors="RGB-IC" data-description="١.لیدێک بۆ جوانکردنی ژوور  ٢. کۆنترۆلی خۆی لەگەل دایە  ٣. ⁠بەرنامەی تایبەت بەخۆی هەیە" data-images="IMG_9196.jpeg|IMG_9205.jpeg|IMG_9206.jpeg|IMG_9207.jpeg" data-name="لیدی نیۆن" data-price="12000" data-stock="3" data-sizes="2M,3M,5M,10M">
+  <div class="product" data-category="all new electronics" data-colors="RGB-IC" data-description="١.لیدێک بۆ جوانکردنی ژوور  ٢. کۆنترۆلی خۆی لەگەل دایە  ٣. ⁠بەرنامەی تایبەت بەخۆی هەیە" data-name="لیدی نیۆن" data-price="12000" data-stock="3" data-sizes="2M,3M,5M,10M">
     <div class="product-image">
-      <div class="new-badge">نوێ</div>
       <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
       <img alt="" src="IMG_9205.jpeg"/>
     </div>
     <div class="product-info">
-      <div class="product-rating">★★★★★</div>
       <div class="product-name">لیدی نیۆن</div>
       <div class="product-description">کۆنترۆل + بەرنامەی موبایل</div>
       <div class="price">١٢,٠٠٠ د.ع</div>
@@ -921,14 +862,13 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     </div>
   </div>
 
-  <div class="product" data-category="all sale electronics" data-colors="ڕەش،سپی" data-description="١. یەکێک لە جوانترین بابەتەکانی ژوور. ٢. کۆنترۆلی خۆی لەگەڵدایە. ٣. پەیوەندی بە مۆبایل دەبێت." data-images="IMG_9235.jpeg|IMG_9236.jpeg" data-name="گالاکسی پرۆجێکتەر" data-price="13000" data-stock="2" data-old-price="20000" data-sizes="قیاس گەورە">
+  <div class="product" data-category="all sale electronics" data-colors="ڕەش،سپی" data-description="١. یەکێک لە جوانترین بابەتەکانی ژوور. ٢. کۆنترۆلی خۆی لەگەڵدایە. ٣. پەیوەندی بە مۆبایل دەبێت." data-name="گالاکسی پرۆجێکتەر" data-price="13000" data-stock="2" data-old-price="20000" data-sizes="قیاس گەورە">
     <div class="product-image">
       <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
       <div class="sale">داشکاندن</div>
       <img src="IMG_9235.jpeg"/>
     </div>
     <div class="product-info">
-      <div class="product-rating">★★★★★</div>
       <div class="product-name">گالاکسی پرۆجێکتەر</div>
       <div class="product-description">جوانکاری ژوور</div>
       <div>
@@ -939,14 +879,12 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     </div>
   </div>
 
-  <div class="product" data-category="all new accessories" data-colors="ڕەش,شین,پەمەیی,سەوز" data-description="جانتای جوانی رۆژانە و قوتابخانە  ." data-images="IMG_9245.png|IMG_9246.jpeg|IMG_9247.jpeg|IMG_9248.jpeg" data-name="جانتای ژنان" data-price="14000" data-stock="7" data-sizes=" یەک قەبارە">
+  <div class="product" data-category="all new accessories" data-colors="ڕەش,شین,پەمەیی,سەوز" data-description="جانتای جوانی رۆژانە و قوتابخانە  ." data-name="جانتای ژنان" data-price="14000" data-stock="7" data-sizes=" یەک قەبارە">
     <div class="product-image">
-      <div class="new-badge">نوێ</div>
       <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
       <img alt="" src="IMG_9245.png"/>
     </div>
     <div class="product-info">
-      <div class="product-rating">★★★★★</div>
       <div class="product-name">جانتای پشتی</div>
       <div class="product-description">قوتابخانە و رۆژانە</div>
       <div class="price">١٥,٠٠٠ د.ع</div>
@@ -954,13 +892,12 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     </div>
   </div>
 
-  <div class="product" data-category="all kids" data-colors="سەرەوە مۆر,خوارەوە سپی" data-description="جلوبەرگی منداڵان بە شێوەیەکی ئاسوودە و جوان." data-images="IMG_9254.jpeg|IMG_9255.jpeg|IMG_9256.jpeg" data-name="جلوبەرگی منداڵان" data-price="9000" data-stock="6" data-sizes="١ساڵ تا ٢ ساڵ">
+  <div class="product" data-category="all kids" data-colors="سەرەوە مۆر,خوارەوە سپی" data-description="جلوبەرگی منداڵان بە شێوەیەکی ئاسوودە و جوان." data-name="جلوبەرگی منداڵان" data-price="9000" data-stock="6" data-sizes="١ساڵ تا ٢ ساڵ">
     <div class="product-image">
       <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
       <img alt="" src="IMG_9254.jpeg"/>
     </div>
     <div class="product-info">
-      <div class="product-rating">★★★★★</div>
       <div class="product-name">جلوبەرگی منداڵان</div>
       <div class="product-description">جلوبەرگی منداڵان</div>
       <div class="price">٩,٠٠٠ د.ع</div>
@@ -968,13 +905,12 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     </div>
   </div>
 
-  <div class="product" data-category="all electronics" data-colors="ڕەش,سپی" data-description=" براندی ئەتاک شارک هێدفۆنی بلوتوس بە کوالیتی بەرز و دەنگی ڕوون." data-images="IMG_9258.jpeg|IMG_9259.jpeg|IMG_9260.jpeg" data-name="هێدفۆنی ئەتاک شارک | Attack Shark Headphones" data-price="18000" data-stock="5" data-sizes="بێ سایز">
+  <div class="product" data-category="all electronics" data-colors="ڕەش,سپی" data-description=" براندی ئەتاک شارک هێدفۆنی بلوتوس بە کوالیتی بەرز و دەنگی ڕوون." data-name="هێدفۆنی ئەتاک شارک | Attack Shark Headphones" data-price="18000" data-stock="5" data-sizes="بێ سایز">
     <div class="product-image">
       <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
       <img alt="" src="IMG_9258.jpeg"/>
     </div>
     <div class="product-info">
-      <div class="product-rating">★★★★★</div>
       <div class="product-name">براندی ئەتاکشارک-Attack Shark</div>
       <div class="product-description">هێدفۆنی گەیمینگ</div>
       <div class="price">١٨,٠٠٠ د.ع</div>
@@ -982,13 +918,12 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     </div>
   </div>
 
-  <div class="product" data-category="all accessories" data-colors="رەش,پەمەیی" data-description="مەتارەیەکی ئاو بۆ بەلارهێنانی رۆژانە  ٥٠٠ مل ئاو دەگرێت و شتێکی ناسکە  بە دوو رەنگ بەردەستە" data-images="IMG_1740.jpeg|IMG_1741.jpeg " data-name="مەتارەی ئاو" data-price="5000" data-stock="9" data-sizes="500ml">
+  <div class="product" data-category="all accessories" data-colors="رەش,پەمەیی" data-description="مەتارەیەکی ئاو بۆ بەلارهێنانی رۆژانە  ٥٠٠ مل ئاو دەگرێت و شتێکی ناسکە  بە دوو رەنگ بەردەستە" data-name="مەتارەی ئاو" data-price="5000" data-stock="9" data-sizes="500ml">
     <div class="product-image">
       <button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
       <img alt="" src="IMG_1740.jpeg"/>
     </div>
     <div class="product-info">
-      <div class="product-rating">★★★★★</div>
       <div class="product-name">مەتارەی ئاو</div>
       <div class="product-description">مەتارەیەکی جوان بۆ کاری رۆژانە</div>
       <div class="price">٥،٠٠٠ د.ع</div>
@@ -1010,14 +945,9 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <div class="modal" id="productModal" onclick="closeOutside(event,'productModal')">
   <div class="modal-box product-details-box">
     <button class="close-button" onclick="closeModal('productModal')">×</button>
-    <div class="product-gallery">
-      <div class="product-main-stage" id="productMainStage">
-        <button class="gallery-arrow gallery-prev" type="button" aria-label="Previous photo" onclick="galleryStep(-1);event.stopPropagation()">‹</button>
-        <img alt="" class="main-product-image" id="mainProductImage" src="" onclick="openImageLightbox()" draggable="false"/>
-        <button class="gallery-arrow gallery-next" type="button" aria-label="Next photo" onclick="galleryStep(1);event.stopPropagation()">›</button>
+    <div class="product-main-stage">
+        <img id="mainProductImage" src="" alt="" draggable="false"/>
       </div>
-      <div class="product-thumbnails" id="productThumbnails"></div>
-    </div>
     <div class="details-content">
       <h2 id="detailName"></h2>
       <p class="details-description" id="detailDescription"></p>
@@ -1041,14 +971,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
       </div>
     </div>
   </div>
-</div>
-
-<div class="image-lightbox" id="imageLightbox" onclick="closeImageLightbox(event)">
-  <button class="lightbox-close" type="button" onclick="closeImageLightbox()">×</button>
-  <button class="lightbox-prev" type="button" onclick="galleryStep(-1);event.stopPropagation()">‹</button>
-  <img id="lightboxImage" src="" alt="" onclick="toggleImageZoom(event)">
-  <button class="lightbox-next" type="button" onclick="galleryStep(1);event.stopPropagation()">›</button>
-  <div class="lightbox-counter" id="lightboxCounter">1 / 1</div>
 </div>
 
 <div class="modal" id="cartModal" onclick="closeOutside(event,'cartModal')">
@@ -1112,8 +1034,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   </div>
 </div>
 
-<div class="cart-message" id="message">✅</div>
-
 <script>
 /* ================= GLOBAL DATA ================= */
 let cart = JSON.parse(localStorage.getItem("kurdSheinCart") || "[]");
@@ -1122,9 +1042,7 @@ let selectedSize = "";
 let selectedColor = "";
 let detailQuantity = 1;
 let appliedCoupon = null;
-let galleryImages = [];
-let galleryIndex = 0;
-let deliveryFees = { Erbil: 3000, Sulaymaniyah: 4000, Duhok: 4000, Other: 5000 };
+const deliveryFee = 5000;
 const couponCodes = { KURD10: 0.10, NEW5: 0.05 };
 
 /* ================= THEME ================= */
@@ -1169,15 +1087,6 @@ function getCartCount() {
     return cart.reduce((sum, item) => sum + (Number(item.quantity) || 1), 0);
 }
 
-function showMessage(text) {
-    const message = document.getElementById("message");
-    message.innerText = text;
-    message.classList.add("show");
-    setTimeout(() => {
-        message.classList.remove("show");
-    }, 1800);
-}
-
 function addToCart(name, price, size="", color="", stock=10, quantity=1, image="") {
     normalizeCart();
     const qty = Math.max(1, Number(quantity) || 1);
@@ -1185,7 +1094,6 @@ function addToCart(name, price, size="", color="", stock=10, quantity=1, image="
     const requested = cart.find(item => cartItemKey(item) === cartItemKey({name, price, size, color}));
     const currentQty = requested ? Number(requested.quantity) || 0 : 0;
     if (currentQty + qty > maxStock) {
-        return showMessage("⚠️ ئەم ژمارەیە لە کۆگادا بەردەست نییە");
     }
     if (requested) {
         requested.quantity = currentQty + qty;
@@ -1195,7 +1103,6 @@ function addToCart(name, price, size="", color="", stock=10, quantity=1, image="
     }
     saveCart();
     updateCart();
-    showMessage("✅ کاڵاکە زیادکرا بۆ سەبەتە");
 }
 
 window.addToCart = addToCart;
@@ -1303,30 +1210,10 @@ window.openProduct = function openProduct(product) {
     const quantityInput = document.getElementById("detailQuantity");
     if (quantityInput) quantityInput.value = "1";
 
-    const images = (product.dataset.images || "").split("|").map(x => x.trim()).filter(Boolean);
-    galleryImages = images;
-    galleryIndex = 0;
     rememberRecentlyViewed(product);
     const main = document.getElementById("mainProductImage");
-    main.src = images[0] || "";
-
-    const thumbnails = document.getElementById("productThumbnails");
-    thumbnails.innerHTML = "";
-
-    document.querySelectorAll(".gallery-arrow").forEach(btn => {
-        btn.style.display = images.length > 1 ? "block" : "none";
-    });
-
-    images.slice(0, 6).forEach((src, index) => {
-        const img = document.createElement("img");
-        img.src = src;
-        if (index === 0) img.classList.add("selected");
-        img.onclick = () => {
-            galleryIndex = index;
-            updateGalleryImage();
-        };
-        thumbnails.appendChild(img);
-    });
+    const productImage = product.querySelector(".product-image img");
+    if (main) main.src = productImage?.src || "";
 
     document.getElementById("detailName").innerText = product.dataset.name;
     document.getElementById("detailDescription").innerText = product.dataset.description;
@@ -1339,41 +1226,7 @@ window.openProduct = function openProduct(product) {
     document.getElementById("detailColorArea").style.display = "block";
 
     openModal("productModal");
-};
-
-function updateGalleryImage() {
-    const main = document.getElementById("mainProductImage");
-    if (!main || !galleryImages.length) return;
-    galleryIndex = (galleryIndex + galleryImages.length) % galleryImages.length;
-    main.src = galleryImages[galleryIndex];
-    const thumbnails = document.getElementById("productThumbnails");
-    thumbnails.querySelectorAll("img").forEach((img, i) => img.classList.toggle("selected", i === galleryIndex));
 }
-
-window.galleryStep = function galleryStep(step) {
-    if (!galleryImages.length) return;
-    galleryIndex += step;
-    updateGalleryImage();
-};
-
-(function enableGallerySwipe() {
-    const stage = document.getElementById("productMainStage");
-    if (!stage) return;
-    let startX = 0, startY = 0;
-    stage.addEventListener("touchstart", function(event) {
-        if (!event.touches.length) return;
-        startX = event.touches[0].clientX;
-        startY = event.touches[0].clientY;
-    }, {passive:true});
-    stage.addEventListener("touchend", function(event) {
-        if (!event.changedTouches.length) return;
-        const dx = event.changedTouches[0].clientX - startX;
-        const dy = event.changedTouches[0].clientY - startY;
-        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.2) {
-            galleryStep(dx < 0 ? 1 : -1);
-        }
-    }, {passive:true});
-})();
 
 function createOptions(containerId, data, type) {
     const container = document.getElementById(containerId);
@@ -1406,12 +1259,12 @@ window.addSelectedProduct = function addSelectedProduct() {
     if (!selectedProduct) return;
     const hasSize = !!selectedProduct.dataset.sizes;
     const hasColor = !!selectedProduct.dataset.colors;
-    if (hasSize && !selectedSize) return showMessage("⚠️ تکایە قەبارە هەڵبژێرە");
-    if (hasColor && !selectedColor) return showMessage("⚠️ تکایە ڕەنگ هەڵبژێرە");
+    if (hasSize && !selectedSize)
+    if (hasColor && !selectedColor)
     const input = document.getElementById("detailQuantity");
     detailQuantity = Math.max(1, Number(input?.value) || 1);
     const stock = Number(selectedProduct.dataset.stock) || 10;
-    if (detailQuantity > stock) return showMessage("⚠️ ئەم ژمارەیە لە کۆگادا بەردەست نییە");
+    if (detailQuantity > stock)
     addToCart(selectedProduct.dataset.name, Number(selectedProduct.dataset.price), selectedSize, selectedColor, stock, detailQuantity, selectedProduct.querySelector("img")?.src || "");
     closeModal("productModal");
 };
@@ -1429,15 +1282,13 @@ document.querySelectorAll(".product").forEach(product => {
 window.applyCoupon = function() {
     const input = document.getElementById("couponInput");
     const code = input.value.trim().toUpperCase();
-    if (!code) { appliedCoupon = null; updateCheckoutTotals(); return showMessage("⚠️ کۆدی داشکاندن بنووسە"); }
+    if (!code) { appliedCoupon = null; updateCheckoutTotals(); }
     if (!couponCodes[code]) {
         appliedCoupon = null;
         updateCheckoutTotals();
-        return showMessage("❌ ئەم کۆدە دروست نییە");
     }
     appliedCoupon = { code, rate: couponCodes[code] };
     updateCheckoutTotals();
-    showMessage(`🎟️ کۆدەکە جێبەجێکرا: ${Math.round(couponCodes[code] * 100)}% داشکاندن`);
 };
 
 window.updateCheckoutTotals = function() {
@@ -1445,24 +1296,14 @@ window.updateCheckoutTotals = function() {
     if (!box) return;
     const subtotal = getCartTotal();
     const city = document.getElementById("customerCity")?.value || "Erbil";
-    const delivery = deliveryFees[city] || 5000;
+    const delivery = deliveryFee;
     const discount = appliedCoupon ? Math.round(subtotal * appliedCoupon.rate) : 0;
     const total = Math.max(0, subtotal + delivery - discount);
     box.innerHTML = `
       <div class="checkout-total-row"><span>کۆی کاڵاکان</span><strong>${subtotal.toLocaleString()} د.ع</strong></div>
       <div class="checkout-total-row"><span>گەیاندن</span><strong>${delivery.toLocaleString()} د.ع</strong></div>
-      ${discount ? `<div class="checkout-total-row discount"><span>داشکاندن (${appliedCoupon.code})</span><strong>-${discount.toLocaleString()} د.ع</strong></div>` : ""}
+      ${discount ? `<div class="checkout-total-row discount"><strong>-${discount.toLocaleString()} د.ع</strong></div>` : ""}
       <div class="checkout-total-row grand"><span>کۆی گشتی</span><strong>${total.toLocaleString()} د.ع</strong></div>`;
-};
-
-window.toggleImageZoom = function(event) {
-    event.stopPropagation();
-    document.getElementById("lightboxImage").classList.toggle("zoomed");
-};
-window.closeImageLightbox = function(event) {
-    if (event && event.target !== document.getElementById("imageLightbox")) return;
-    document.getElementById("imageLightbox").classList.remove("show");
-    document.body.style.overflow = "";
 };
 
 /* ================= SEARCH & FILTER ================= */
@@ -1527,7 +1368,6 @@ window.closeSideMenu = function() {
 
 document.addEventListener("keydown", function(e) {
     if (e.key === "Escape") {
-        closeImageLightbox();
         closeSideMenu();
         closeKurdSheinDrawer();
     }

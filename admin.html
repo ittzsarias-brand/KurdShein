@@ -54,8 +54,7 @@ let editingId=null;
 const $=id=>document.getElementById(id);
 const fields=['pName','pCategory','pPrice','pOldPrice','pStock','pSizes','pColors','pDescription','pImages','pRating','pNew'];
 function status(text){$('saveStatus').textContent=text}
-function imageList(value){return String(value||'').split(/
-|\|/).map(x=>x.trim()).filter(Boolean)}
+function imageList(value){return String(value||'').split(/\n|\|/).map(x=>x.trim()).filter(Boolean)}
 function collectForm(){const images=imageList($('pImages').value);return {name:$('pName').value.trim(),category:$('pCategory').value.trim(),price:Number($('pPrice').value)||0,oldPrice:Number($('pOldPrice').value)||0,stock:Number($('pStock').value)||0,sizes:$('pSizes').value.trim(),colors:$('pColors').value.trim(),description:$('pDescription').value.trim(),images,rating:Number($('pRating').value)||5,isNew:$('pNew').value==='yes',updatedAt:serverTimestamp()}}
 function resetForm(){editingId=null;fields.forEach(id=>{if(id==='pStock')$(id).value=10;else if(id==='pRating')$(id).value=5;else if(id==='pNew')$(id).value='yes';else $(id).value=''});$('formTitle').textContent='➕ زیادکردنی بەرهەم';$('saveBtn').textContent='زیادکردنی بەرهەم';$('cancelBtn').classList.add('hidden');status('ئامادەیە.')}
 function fillForm(p,id){editingId=id;$('pName').value=p.name||'';$('pCategory').value=p.category||'';$('pPrice').value=p.price??'';$('pOldPrice').value=p.oldPrice||'';$('pStock').value=p.stock??0;$('pSizes').value=p.sizes||'';$('pColors').value=p.colors||'';$('pDescription').value=p.description||'';$('pImages').value=(p.images||[]).join('|');$('pRating').value=p.rating??5;$('pNew').value=p.isNew?'yes':'no';$('formTitle').textContent='✏️ دەستکاریی بەرهەم';$('saveBtn').textContent='پاشەکەوتکردنی گۆڕانکاری';$('cancelBtn').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})}

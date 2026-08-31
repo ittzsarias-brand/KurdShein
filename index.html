@@ -173,7 +173,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 .category:hover{border-color:var(--red)}
 .category.active{background:var(--red);border-color:var(--red);color:#fff}
 
-
 /* ===== KURDSHEIN HERO BANNER SLIDER ===== */
 .hero-slider{position:relative;overflow:hidden;border-radius:28px}
 .hero-slide{display:none;animation:heroSlideIn .55s ease both}
@@ -392,7 +391,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   }
 }
 </style>
-
 
 <style id="ks-readable-responsive-ui">
 /* ===== READABLE + RESPONSIVE PRODUCT / FAVORITES / SETTINGS / ACCOUNT UI ===== */
@@ -682,7 +680,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 }
 </style>
 
-
 <style id="ks-final-fixes">
 /* 1) Keep the product-card "داوا کردن" button small, as before. */
 .product .add-cart{
@@ -781,18 +778,10 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 }
 </style>
 
-
 <style id="requested-store-fixes">
 .close-button{display:grid !important;place-items:center !important;z-index:9999 !important;opacity:1 !important;visibility:visible !important;background:var(--surface-2) !important;color:var(--text) !important;border:2px solid rgba(255,255,255,.28) !important;box-shadow:0 5px 18px rgba(0,0,0,.35) !important}
 .detail-quantity-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px}.detail-quantity-label{font-size:13px;font-weight:800;white-space:nowrap}.detail-quantity-control{display:flex;align-items:center;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);overflow:hidden;height:44px}.detail-qty-btn{width:42px;height:44px;border:0;background:transparent;color:var(--text);font-size:21px;font-weight:900}.detail-qty-btn:hover{background:var(--surface-3);color:var(--yellow)}#detailQuantity{width:45px;height:44px;border:0;border-left:1px solid var(--border);border-right:1px solid var(--border);background:transparent;color:var(--text);text-align:center;font-weight:900;outline:0}.detail-quantity-row .big-add{flex:1;margin:0}.favorite-product .favorite-view-button{display:grid;place-items:center;min-width:42px;height:42px;font-size:20px}.cart-item-premium{display:grid !important;grid-template-columns:58px minmax(0,1fr) auto;gap:12px !important}.cart-item-image{width:58px;height:58px;border-radius:13px;object-fit:cover;background:var(--surface-3);border:1px solid var(--border)}.cart-header-summary{display:flex;justify-content:space-between;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:11px 13px;margin-bottom:12px;font-size:12px;color:var(--muted)}.cart-header-summary strong{color:var(--text);font-size:14px}.cart-item-main{min-width:0}
 @media(max-width:600px){.detail-quantity-row{flex-wrap:wrap}.detail-quantity-row .big-add{width:100%;flex-basis:100%}.cart-item-premium{grid-template-columns:50px minmax(0,1fr)}.cart-item-actions{grid-column:1/-1;justify-content:flex-start}.cart-item-image{width:50px;height:50px}}
-</style>
-<style id="banner-and-button-fixes">
-/* Smooth automatic banner slider */
-.banner-track{
-  transition:transform .75s cubic-bezier(.22,.61,.36,1) !important;
-  will-change:transform;
-}
 </style>
 </head>
 <body>
@@ -860,42 +849,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   </div>
 </aside>
 
-<!-- ===== KURDSHEIN CART ICON OPTIONS DRAWER ===== -->
-<div class="ks-options-backdrop" id="ksOptionsBackdrop" onclick="closeKurdSheinDrawer()"></div>
-<aside class="ks-options-drawer" id="ksOptionsDrawer" aria-label="بژاردەکانی KurdShein">
-  <div class="ks-options-head">
-    <div class="ks-options-brand-wrap">
-      <div class="ks-crown">♛</div>
-      <div>
-        <div class="ks-options-brand">Kurd<span>Shein</span></div>
-        <div class="ks-options-sub">بژاردەکانی تۆ</div>
-      </div>
-    </div>
-    <button class="ks-close" type="button" onclick="closeKurdSheinDrawer()">×</button>
-  </div>
-
-  <div class="ks-options-body">
-    <div class="ks-drawer-label">بژاردەکان</div>
-
-    <button class="ks-option" type="button" onclick="toggleTheme();closeKurdSheinDrawer()">
-      <span class="ks-option-icon">◐</span>
-      <span class="ks-option-copy"><strong>ڕووناک / تاریک</strong><small>گۆڕینی شێوەی دەرکەوتنی سایت</small></span>
-      <span class="ks-option-arrow">‹</span>
-    </button>
-
-    <button class="ks-option" type="button" onclick="closeKurdSheinDrawer();openFavorites()">
-      <span class="ks-option-icon">♡</span>
-      <span class="ks-option-copy"><strong>دڵخوازەکان</strong><small>بەرهەمە دڵخوازکراوەکانت</small></span>
-      <span class="ks-fav-count" id="ksFavoriteCount">0</span>
-    </button>
-  </div>
-
-  <div class="ks-options-footer">
-    <strong>KurdShein</strong>
-    <span>تجربەیەکی سادە و مۆدێرن بۆ کڕین</span>
-  </div>
-</aside>
-
 <section class="hero" aria-label="KurdShein banners">
   <div class="hero-slider" id="heroSlider">
     <div class="hero-slide active">
@@ -905,8 +858,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
           <div class="eyebrow">✦ کۆمەڵەی نوێی KurdShein</div>
           <h2>هەڵبژاردەی <span>جوان</span>، داواکاریی ئاسان.</h2>
           <p>هەڵبژاردنی بابەتی شیاو لەسەر تۆ، هێنانەوەی بۆ بەردەرگای ماڵت لەسەر ئێمە</p>
-          <div class="hero-actions">
-          </div>
         </div>
       </div>
     </div>
@@ -918,8 +869,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
           <div class="eyebrow">✦ بانەری دووەم</div>
           <h2>کڕینی راستەوخۆ ئێستا بەردەستە</h2>
           <p>ئەم بابەتانەی لە کوردستان بەردەستە دەتوانیت راستەوخۆ بیان کڕیت</p>
-          <div class="hero-actions">
-          </div>
         </div>
       </div>
     </div>
@@ -1048,7 +997,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   </div>
 </div>
 
-
 <div class="coming">
   <div><strong>بەرهەمی زیاتر لە ڕێگادایە</strong><br><span>بەردەوامین لە زیادکردنی بەرهەمی نوێ بۆ KurdShein.</span></div>
   <div class="coming-badge">COMING SOON</div>
@@ -1169,7 +1117,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <script>
 /* ================= GLOBAL DATA ================= */
 let cart = JSON.parse(localStorage.getItem("kurdSheinCart") || "[]");
-let localFavorites = JSON.parse(localStorage.getItem("kurdSheinFavorites") || "[]");
 let selectedProduct = null;
 let selectedSize = "";
 let selectedColor = "";
@@ -1478,49 +1425,6 @@ document.querySelectorAll(".product").forEach(product => {
     });
 });
 
-/* ================= FAVORITES ================= */
-function favoriteKey(product) {
-    return product.dataset.name;
-}
-
-window.toggleFavorite = async function toggleFavorite(event, button) {
-    event.stopPropagation();
-    const product = button.closest(".product");
-    const key = favoriteKey(product);
-    const exists = localFavorites.includes(key);
-
-    if (exists) {
-        localFavorites = localFavorites.filter(x => x !== key);
-        button.classList.remove("active");
-        button.innerText = "♡";
-    } else {
-        localFavorites.push(key);
-        button.classList.add("active");
-        button.innerText = "♥";
-    }
-
-    localStorage.setItem("kurdSheinFavorites", JSON.stringify(localFavorites));
-    updateFavoriteCount();
-    updateFavoriteButtons();
-
-    const whatsappNumber = "9647517401120";
-    const url = "https://api.whatsapp.com/send?phone=" + whatsappNumber + "&text=" + encodeURIComponent(message);
-    window.location.href = url;
-
-    cart = [];
-    saveCart();
-    updateCart();
-    closeModal("orderModal");
-
-    document.getElementById("customerName").value = "";
-    document.getElementById("customerAddress").value = "";
-    document.getElementById("customerPhone").value = "";
-    document.getElementById("customerNote").value = "";
-    appliedCoupon = null;
-
-    showMessage("✅ داواکارییەکەت نێردرا");
-};
-
 /* ================= CHECKOUT / COUPONS ================= */
 window.applyCoupon = function() {
     const input = document.getElementById("couponInput");
@@ -1551,25 +1455,6 @@ window.updateCheckoutTotals = function() {
       <div class="checkout-total-row grand"><span>کۆی گشتی</span><strong>${total.toLocaleString()} د.ع</strong></div>`;
 };
 
-/* ================= FAVORITES SECTION ================= */
-
-window.toggleFavoriteFromSection = async function(event, product) {
-    if (!product) return;
-    const key = favoriteKey(product);
-    if (!localFavorites.includes(key)) return;
-
-    localFavorites = localFavorites.filter(x => x !== key);
-    localStorage.setItem("kurdSheinFavorites", JSON.stringify(localFavorites));
-    updateFavoriteCount();
-    updateFavoriteButtons();
-};
-
-window.clearFavoriteSection = async function() {
-    localFavorites = [];
-    localStorage.setItem("kurdSheinFavorites", JSON.stringify(localFavorites));
-    updateFavoriteCount();
-    updateFavoriteButtons();
-};
 window.toggleImageZoom = function(event) {
     event.stopPropagation();
     document.getElementById("lightboxImage").classList.toggle("zoomed");
@@ -1637,31 +1522,7 @@ window.closeSideMenu = function() {
     if (!d || !b) return;
     d.classList.remove("show");
     b.classList.remove("show");
-    if (!document.getElementById("ksOptionsDrawer")?.classList.contains("show")) {
-        document.body.style.overflow = "";
-    }
-};
-
-window.openKurdSheinDrawer = function() {
-    const d = document.getElementById("ksOptionsDrawer");
-    const b = document.getElementById("ksOptionsBackdrop");
-    if (!d || !b) return;
-    closeSideMenu();
-    d.classList.add("show");
-    b.classList.add("show");
-    document.body.style.overflow = "hidden";
-    updateFavoriteCount();
-};
-
-window.closeKurdSheinDrawer = function() {
-    const d = document.getElementById("ksOptionsDrawer");
-    const b = document.getElementById("ksOptionsBackdrop");
-    if (!d || !b) return;
-    d.classList.remove("show");
-    b.classList.remove("show");
-    if (!document.getElementById("ksNavDrawer")?.classList.contains("show")) {
-        document.body.style.overflow = "";
-    }
+    document.body.style.overflow = "";
 };
 
 document.addEventListener("keydown", function(e) {
@@ -1689,140 +1550,101 @@ window.showHeroSlide = function(index) {
     });
 
     clearInterval(heroSlideTimer);
-    heroSlideTimer = ;
+    heroSlideTimer = setInterval(() => showHeroSlide(heroSlideIndex + 1), 2000);
 };
 
 function startHeroSlider() {
     showHeroSlide(0);
 }
 
-
 /* ================= INITIALIZE ================= */
 normalizeCart();
 saveCart();
-initializeProductData();
 updateCart();
-updateFavoriteCount();
-updateFavoriteButtons();
 startHeroSlider();
 </script>
-
 <script>
-/* ===== KurdShein banner auto-slide ===== */
+/* ===== Favorites ===== */
 (function(){
-  const track = document.querySelector('.banner-track');
-  if(!track) return;
-  const slides = Array.from(track.children);
-  if(slides.length < 2) return;
-
-  let index = 0;
-  let timer;
-
-  function goToBanner(i){
-    index = (i + slides.length) % slides.length;
-    track.style.transform = `translateX(${index * 100}%)`;
-  }
-
-  function start(){
-    clearInterval(timer);
-    timer = setInterval(() => goToBanner(index + 1), 2000);
-  }
-
-  // Keep the slider moving even if the page is resized.
-  window.addEventListener('resize', () => goToBanner(index));
-  start();
-
-  track.addEventListener('mouseenter', () => clearInterval(timer));
-  track.addEventListener('mouseleave', start);
-})();
-</script>
-
-
-<script>
-/* ===== KurdShein favorites ===== */
-(function(){
-  const KEY = 'kurdshein_favorites_v1';
+  const KEY = 'kurdSheinFavorites';
 
   function getFavorites(){
-    try { return JSON.parse(localStorage.getItem(KEY) || '[]'); }
-    catch(e){ return []; }
+    try {
+      const raw = JSON.parse(localStorage.getItem(KEY) || '[]');
+      if (!Array.isArray(raw)) return [];
+      return raw.map(p => typeof p === 'string' ? { id:p, name:p, price:'', category:'', image:'', description:'' } : p);
+    } catch(e) { return []; }
   }
+
   function saveFavorites(list){
     localStorage.setItem(KEY, JSON.stringify(list));
   }
 
   function productData(card){
     if(!card) return null;
+    const name = card.dataset.name || card.querySelector('.product-name')?.textContent?.trim() || '';
+    const image = card.dataset.image || card.querySelector('img')?.src || '';
     return {
-      id: card.dataset.id || card.dataset.productId || card.querySelector('[data-product-id]')?.dataset.productId || '',
-      name: card.dataset.name || card.querySelector('.product-name')?.textContent?.trim() || '',
-      price: card.dataset.price || '',
+      id: card.dataset.id || card.dataset.productId || card.querySelector('[data-product-id]')?.dataset.productId || (name + '|' + image),
+      name,
+      price: card.dataset.price || card.querySelector('.price')?.textContent?.trim() || '',
       category: card.dataset.category || '',
-      image: card.dataset.image || card.querySelector('img')?.src || '',
-      description: card.dataset.description || ''
+      image,
+      description: card.dataset.description || card.querySelector('.product-description')?.textContent?.trim() || ''
     };
   }
 
-  window.toggleFavorite = function(button){
-    const card = button.closest('.product');
-    if(!card) return;
-
-    const product = productData(card);
-    if(!product.id) {
-      product.id = product.name + '|' + product.image;
-    }
-
-    let list = getFavorites();
-    const existing = list.findIndex(x => x.id === product.id);
-
-    if(existing >= 0){
-      list.splice(existing, 1);
-      button.classList.remove('active');
-      button.setAttribute('aria-pressed','false');
-    }else{
-      list.push(product);
-      button.classList.add('active');
-      button.setAttribute('aria-pressed','true');
-    }
-
-    saveFavorites(list);
-    if(typeof renderFavorites === 'function') renderFavorites();
-    if(typeof renderFavoritesList === 'function') renderFavoritesList();
+  window.updateFavoriteCount = function(){
+    const count = getFavorites().length;
+    document.querySelectorAll('#ksMenuFavoriteCount, #ksFavoriteCount').forEach(el => el.textContent = count);
   };
 
   window.renderFavorites = function(){
     const list = getFavorites();
     document.querySelectorAll('.product').forEach(card => {
       const p = productData(card);
-      const id = p.id || (p.name + '|' + p.image);
-      const btn = card.querySelector('.favorite-btn, .heart-button, [onclick*="Favorite"], [onclick*="favorite"]');
-      if(btn){
-        const active = list.some(x => x.id === id);
-        btn.classList.toggle('active', active);
-        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
-      }
+      const btn = card.querySelector('.favorite-button');
+      if (!btn) return;
+      const active = list.some(x => x.id === p.id);
+      btn.classList.toggle('active', active);
+      btn.textContent = active ? '♥' : '♡';
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
     });
+    updateFavoriteCount();
+  };
+
+  window.updateFavoriteButtons = window.renderFavorites;
+
+  window.toggleFavorite = function(event, button){
+    if (event) event.stopPropagation();
+    const card = button?.closest('.product');
+    if(!card) return;
+    const product = productData(card);
+    let list = getFavorites();
+    const index = list.findIndex(x => x.id === product.id);
+    if(index >= 0) list.splice(index, 1);
+    else list.push(product);
+    saveFavorites(list);
+    renderFavorites();
+    renderFavoritesList();
   };
 
   window.openFavorites = function(){
     const modal = document.getElementById('favoritesModal');
-    if(modal){
-      if(typeof renderFavoritesList === 'function') renderFavoritesList();
-      modal.classList.add('open');
-      modal.style.display = 'flex';
-    }
+    if(!modal) return;
+    renderFavoritesList();
+    modal.classList.add('open');
+    modal.style.display = 'flex';
   };
 
   window.renderFavoritesList = function(){
     const box = document.getElementById('favoritesList');
     if(!box) return;
-
     const list = getFavorites();
     if(!list.length){
-      box.innerHTML = '<div style="padding:25px;text-align:center;color:var(--muted)">هیچ بەرهەمێک لە دلخوازەکان نییە ❤️</div>';
+      box.innerHTML = '<div style="padding:25px;text-align:center;color:var(--muted)">هیچ بەرهەمێک لە دڵخوازەکان نییە ❤️</div>';
       return;
     }
-
     box.innerHTML = list.map((p,i) => `
       <div class="favorite-product" style="display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
         <img src="${escapeHtml(p.image)}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:12px">
@@ -1831,89 +1653,36 @@ startHeroSlider();
           <div style="color:var(--muted);font-size:12px">${escapeHtml(p.price)}</div>
         </div>
         <button type="button" class="favorite-view-button" aria-label="بینینی بەرهەم" onclick="openFavoriteProduct(${i})">👁️</button>
-      </div>
-    `).join('');
+      </div>`).join('');
   };
 
   window.openFavoriteProduct = function(i){
-    const list = getFavorites();
-    const p = list[i];
+    const p = getFavorites()[i];
     if(!p) return;
-
-    // Prefer the exact live product card, so the full existing product-description
-    // system is used rather than creating a second description UI.
-    const cards = Array.from(document.querySelectorAll('.product'));
-    const card = cards.find(c => {
-      const d = productData(c);
-      const id = d.id || (d.name + '|' + d.image);
-      return id === p.id;
-    });
-
+    const card = Array.from(document.querySelectorAll('.product')).find(c => productData(c).id === p.id);
+    closeModal('favoritesModal');
     if(card && typeof openProduct === 'function'){
-      closeModal('favoritesModal');
       openProduct(card);
       return;
     }
-
-    // Fallback if the product is not currently rendered.
-    closeModal('favoritesModal');
     const modal = document.getElementById('productModal');
-    if(modal){
-      modal.classList.add('open');
-      modal.style.display = 'flex';
-      const n = document.getElementById('detailName');
-      const d = document.getElementById('detailDescription');
-      const img = document.getElementById('mainProductImage');
-      if(n) n.textContent = p.name;
-      if(d) d.textContent = p.description || '';
-      if(img && p.image) img.src = p.image;
-    }
+    if(!modal) return;
+    modal.classList.add('open');
+    modal.style.display = 'flex';
+    const n = document.getElementById('detailName');
+    const d = document.getElementById('detailDescription');
+    const img = document.getElementById('mainProductImage');
+    if(n) n.textContent = p.name;
+    if(d) d.textContent = p.description || '';
+    if(img && p.image) img.src = p.image;
   };
 
-  window.escapeHtml = window.escapeHtml || function(s){
-    return String(s ?? '').replace(/[&<>"']/g, m => ({
-      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-    }[m]));
+  window.escapeHtml = function(s){
+    return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   };
 
   document.addEventListener('DOMContentLoaded', renderFavorites);
 })();
 </script>
-
-
-<script>
-/* ===== KurdShein product/cart button safety ===== */
-document.addEventListener('click', function(e){
-  const orderBtn = e.target.closest('.product .add-cart, .product [data-action="order"], .product button');
-  if(orderBtn && /داوا\s*کردن|داواکردن/.test(orderBtn.textContent || '')){
-    e.preventDefault();
-    e.stopPropagation();
-    const card = orderBtn.closest('.product');
-    if(card && typeof openProduct === 'function') openProduct(card);
-  }
-});
-
-/* Make the top cart button open the existing cart modal/panel. */
-(function(){
-  function bindCart(){
-    const buttons = document.querySelectorAll(
-      '.cart-button, .cart-icon, [aria-label*="cart" i], [aria-label*="سەبەت" i], [aria-label*="کارت" i]'
-    );
-    buttons.forEach(btn => {
-      if(btn.dataset.cartBound === '1') return;
-      btn.dataset.cartBound = '1';
-      btn.addEventListener('click', function(e){
-        if(typeof openCart === 'function'){
-          e.preventDefault();
-          openCart();
-        }
-      });
-    });
-  }
-  document.addEventListener('DOMContentLoaded', bindCart);
-  setTimeout(bindCart, 300);
-})();
-</script>
-
 </body>
 </html>

@@ -12,6 +12,22 @@
 @font-face{font-family:Rabar;src:url("Rabar_037%202.ttf") format("truetype");font-display:swap}
 :root{--bg:#080a0f;--surface:#10141b;--surface-2:#171c24;--surface-3:#202631;--text:#f8fafc;--muted:#98a2b3;--border:rgba(255,255,255,.09);--red:#e51c2a;--green:#168a46;--yellow:#f7c948;--shadow:0 20px 55px rgba(0,0,0,.25)}
 body.light{--bg:#f5f7fa;--surface:#fff;--surface-2:#f2f4f7;--surface-3:#e8ebf0;--text:#111827;--muted:#667085;--border:rgba(16,24,40,.10);--shadow:0 20px 50px rgba(16,24,40,.10)}
+/* ===== KURDSHEIN APPEARANCE THEMES ===== */
+body.pink{--bg:#12090f;--surface:#1b0f17;--surface-2:#26131f;--surface-3:#321b2a;--text:#fff7fb;--muted:#c9a8b8;--border:rgba(255,154,202,.14);--red:#ff4f9a;--green:#d94f9a;--yellow:#ffd166;--shadow:0 20px 55px rgba(255,79,154,.16)}
+body.blue{--bg:#07101d;--surface:#0d1928;--surface-2:#122338;--surface-3:#19304a;--text:#f5fbff;--muted:#9db2c7;--border:rgba(78,170,255,.15);--red:#3198ff;--green:#2ec4b6;--yellow:#6dc5ff;--shadow:0 20px 55px rgba(49,152,255,.16)}
+body.pink .top-bar{background:linear-gradient(90deg,#9b215e,#24121d 50%,#d94f9a)}
+body.blue .top-bar{background:linear-gradient(90deg,#1455a0,#0d1724 50%,#1976d2)}
+body.pink .kurdistan-line,body.blue .kurdistan-line{background:linear-gradient(90deg,#d7192a 0 33.33%,#fff 33.33% 66.66%,#159447 66.66%)}
+.appearance-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.appearance-button{min-height:58px;border:1px solid var(--border);border-radius:13px;background:var(--surface-2);color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11px;font-weight:800;transition:.2s}
+.appearance-button:hover{transform:translateY(-2px);border-color:var(--red)}
+.appearance-button.active{border-color:var(--red);box-shadow:0 0 0 2px color-mix(in srgb,var(--red) 18%,transparent);background:var(--surface-3)}
+.appearance-swatch{width:18px;height:18px;border-radius:50%;border:1px solid rgba(255,255,255,.35)}
+.appearance-swatch.dark{background:linear-gradient(135deg,#080a0f,#e51c2a)}
+.appearance-swatch.light{background:linear-gradient(135deg,#fff,#e51c2a)}
+.appearance-swatch.pink{background:linear-gradient(135deg,#1b0f17,#ff4f9a)}
+.appearance-swatch.blue{background:linear-gradient(135deg,#0d1928,#3198ff)}
+@media(max-width:600px){.appearance-picker{grid-template-columns:repeat(3,1fr)}}
 *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:Rabar,Arial,sans-serif;min-height:100vh;transition:background .25s,color .25s}button,input,textarea{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}
 .top-bar{height:34px;background:linear-gradient(90deg,#b91522,#15171b 50%,#128243);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px}.top-bar-text{display:flex;align-items:center;gap:9px}.top-bar-text span:first-child,.top-bar-text span:last-child{font-size:11px;color:#ffd45a}
 .brand-row{background:var(--surface);border-bottom:1px solid var(--border);padding:18px 24px 15px;text-align:center}.brand{display:inline-flex;align-items:center;gap:11px;font-family:Arial,sans-serif;font-size:clamp(34px,6vw,66px);font-weight:950;letter-spacing:-3px;line-height:.9}.brand-mark{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#e51c2a 0 33%,#fff 33% 66%,#168a46 66%);color:#ffd45a;font-size:20px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
@@ -587,14 +603,23 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 </div>
 <div class="ks-drawer-body">
 <div class="ks-drawer-label">بژاردەکان</div>
-<button class="ks-option" onclick="toggleTheme();closeSideMenu()" type="button">
-<span class="ks-option-icon">◐</span>
-<span class="ks-option-copy">
-<strong>ڕووناک / تاریک</strong>
-<small>گۆڕینی شێوەی دەرکەوتنی سایت</small>
-</span>
-<span class="ks-option-arrow">‹</span>
-</button>
+<div class="ks-option" style="display:block;cursor:default">
+  <div style="display:flex;align-items:center;gap:9px">
+    <span class="ks-option-icon">◐</span>
+    <span class="ks-option-copy">
+      <strong>دەرکەوتنی سایت</strong>
+      <small>شێوەی دڵخوازت هەڵبژێرە</small>
+    </span>
+  </div>
+  <div class="appearance-picker" aria-label="Appearance selector">
+    <button class="appearance-button" type="button" data-theme-choice="dark" onclick="setTheme('dark')"><span class="appearance-swatch dark"></span>تاریک</button>
+    <button class="appearance-button" type="button" data-theme-choice="light" onclick="setTheme('light')"><span class="appearance-swatch light"></span>ڕووناک</button>
+    <button class="appearance-button" type="button" data-theme-choice="pink" onclick="setTheme('pink')"><span class="appearance-swatch pink"></span>پەمەیی</button>
+  </div>
+  <div class="appearance-picker" style="grid-template-columns:1fr;margin-top:8px">
+    <button class="appearance-button" type="button" data-theme-choice="blue" onclick="setTheme('blue')"><span class="appearance-swatch blue"></span>شین</button>
+  </div>
+</div>
 <button class="ks-option" onclick="closeSideMenu();openFavorites()" type="button">
 <span class="ks-option-icon">♡</span>
 <span class="ks-option-copy">
@@ -850,16 +875,35 @@ const deliveryFees = { Erbil: 3000, Sulaymaniyah: 4000, Duhok: 4000, Other: 5000
 const couponCodes = { KURD10: 0.10, NEW5: 0.05 };
 
 /* ================= THEME ================= */
-let savedTheme = localStorage.getItem("kurdSheinTheme");
-if (savedTheme === "light") {
-    document.body.classList.add("light");
+const THEME_NAMES = ["dark", "light", "pink", "blue"];
+
+function applyTheme(theme) {
+    const safeTheme = THEME_NAMES.includes(theme) ? theme : "dark";
+    document.body.classList.remove("light", "pink", "blue");
+    if (safeTheme !== "dark") document.body.classList.add(safeTheme);
+    localStorage.setItem("kurdSheinTheme", safeTheme);
+    document.querySelectorAll("[data-theme-choice]").forEach(button => {
+        const active = button.dataset.themeChoice === safeTheme;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) {
+        meta.setAttribute("content", safeTheme === "pink" ? "#ff4f9a" : safeTheme === "blue" ? "#3198ff" : safeTheme === "light" ? "#f5f7fa" : "#080a0f");
+    }
 }
 
-window.toggleTheme = function toggleTheme() {
-    document.body.classList.toggle("light");
-    const isLight = document.body.classList.contains("light");
-    localStorage.setItem("kurdSheinTheme", isLight ? "light" : "dark");
+window.setTheme = function(theme) {
+    applyTheme(theme);
 };
+
+window.toggleTheme = function toggleTheme() {
+    const current = localStorage.getItem("kurdSheinTheme") || "dark";
+    const next = current === "dark" ? "light" : "dark";
+    applyTheme(next);
+};
+
+applyTheme(localStorage.getItem("kurdSheinTheme") || "dark");
 
 /* ================= CART ================= */
 function normalizeCart() {

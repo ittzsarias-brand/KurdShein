@@ -221,6 +221,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 @media(prefers-reduced-motion:reduce){.hero-slide{transition:none;transform:none}.hero-slider{min-height:330px}}
 
 /* Favorites eye button visibility fix only */
+#favoritesList .favorite-product{position:relative !important;}
 #favoritesList .favorite-view-button{
     display:grid !important;
     visibility:visible !important;
@@ -703,7 +704,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <div class="products" id="products">
 <div class="product" data-category="all new electronics" data-colors="رەنگاورەنگRGBلیدی" data-description="١. ئامێری بڵاوکردنەوەی بۆن لە براندی تێکوی  ٢. بۆ ماڵان و ناو سەیارە بەکاردێت  ٣.بە دڵی خۆت ئەتوانی بۆنی تێبکەیت  ٤. لیدی ئارجیبیە و ئۆتۆماتیکی رەنگەکان ئەگۆرێت" data-name="ئامێری بۆن بڵاوکردنەوە" data-price="5000" data-sizes="One Size" data-stock="12">
 <div class="product-image">
-<button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+<button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <img alt="ئامێری بۆن بڵاوکردنەوە" decoding="async" loading="eager" src="IMG_9186.jpeg"/>
 </div>
 <div class="product-info">
@@ -715,7 +716,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 </div>
 <div class="product" data-category="all new electronics" data-colors="RGB-IC" data-description="١.لیدێک بۆ جوانکردنی ژوور  ٢. کۆنترۆلی خۆی لەگەل دایە  ٣. ⁠بەرنامەی تایبەت بەخۆی هەیە" data-name="لیدی نیۆن" data-price="12000" data-sizes="2M,3M,5M,10M" data-stock="3">
 <div class="product-image">
-<button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+<button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <img alt="لیدی نیۆن" decoding="async" loading="lazy" src="IMG_9205.jpeg"/>
 </div>
 <div class="product-info">
@@ -727,7 +728,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 </div>
 <div class="product" data-category="all sale electronics" data-colors="ڕەش،سپی" data-description="١. یەکێک لە جوانترین بابەتەکانی ژوور. ٢. کۆنترۆلی خۆی لەگەڵدایە. ٣. پەیوەندی بە مۆبایل دەبێت." data-name="گالاکسی پرۆجێکتەر" data-old-price="20000" data-price="13000" data-sizes="قیاس گەورە" data-stock="2">
 <div class="product-image">
-<button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+<button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <div class="sale">داشکاندن</div>
 <img alt="گالاکسی پرۆجێکتەر" decoding="async" loading="lazy" src="IMG_9235.jpeg"/>
 </div>
@@ -743,7 +744,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 </div>
 <div class="product" data-category="all new accessories" data-colors="ڕەش,شین,پەمەیی,سەوز" data-description="جانتای جوانی رۆژانە و قوتابخانە  ." data-name="جانتای ژنان" data-price="15000" data-sizes=" یەک قەبارە" data-stock="7">
 <div class="product-image">
-<button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+<button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <img alt="جانتای ژنان" decoding="async" loading="lazy" src="IMG_9245.png"/>
 </div>
 <div class="product-info">
@@ -755,7 +756,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 </div>
 <div class="product" data-category="all kids" data-colors="سەرەوە مۆر,خوارەوە سپی" data-description="جلوبەرگی منداڵان بە شێوەیەکی ئاسوودە و جوان." data-name="جلوبەرگی منداڵان" data-price="9000" data-sizes="١ساڵ تا ٢ ساڵ" data-stock="6">
 <div class="product-image">
-<button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+<button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <img alt="جلوبەرگی منداڵان" decoding="async" loading="lazy" src="IMG_9254.jpeg"/>
 </div>
 <div class="product-info">
@@ -767,7 +768,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 </div>
 <div class="product" data-category="all electronics" data-colors="ڕەش,سپی" data-description=" براندی ئەتاک شارک هێدفۆنی بلوتوس بە کوالیتی بەرز و دەنگی ڕوون." data-name="هێدفۆنی ئەتاک شارک | Attack Shark Headphones" data-price="18000" data-sizes="بێ سایز" data-stock="5">
 <div class="product-image">
-<button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+<button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <img alt="هێدفۆنی ئەتاک شارک | Attack Shark Headphones" decoding="async" loading="lazy" src="IMG_9258.jpeg"/>
 </div>
 <div class="product-info">
@@ -779,7 +780,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 </div>
 <div class="product" data-category="all accessories" data-colors="رەش,پەمەیی" data-description="مەتارەیەکی ئاو بۆ بەلارهێنانی رۆژانە  ٥٠٠ مل ئاو دەگرێت و شتێکی ناسکە  بە دوو رەنگ بەردەستە" data-name="مەتارەی ئاو" data-price="5000" data-sizes="500ml" data-stock="9">
 <div class="product-image">
-<button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button>
+<button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <img alt="مەتارەی ئاو" decoding="async" loading="lazy" src="IMG_1740.jpeg"/>
 </div>
 <div class="product-info">
@@ -1524,8 +1525,10 @@ startHeroSlider();
   window.openFavorites = function(){
     const modal = document.getElementById('favoritesModal');
     if(!modal) return;
+    renderFavorites();
     renderFavoritesList();
     modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
   };
 
   window.renderFavoritesList = function(){
@@ -1550,28 +1553,51 @@ startHeroSlider();
   window.openFavoriteProduct = function(i){
     const p = getFavorites()[i];
     if(!p) return;
-    const card = Array.from(document.querySelectorAll('.product')).find(c => productData(c).id === p.id);
+
+    const cards = Array.from(document.querySelectorAll('.product'));
+    const card = cards.find(c => productData(c).id === p.id) ||
+                 cards.find(c => (c.dataset.name || '').trim() === String(p.name || '').trim());
+
     closeModal('favoritesModal');
-    if(card && typeof openProduct === 'function'){
-      openProduct(card);
+
+    if(card){
+      if(typeof openProduct === 'function') openProduct(card);
       return;
     }
+
+    // Fallback: still show the saved favorite's product information.
+    selectedProduct = null;
+    selectedSize = '';
+    selectedColor = '';
+    detailQuantity = 1;
+
     const modal = document.getElementById('productModal');
-    if(!modal) return;
-    modal.classList.add('show');
     const n = document.getElementById('detailName');
     const d = document.getElementById('detailDescription');
     const img = document.getElementById('mainProductImage');
-    if(n) n.textContent = p.name;
+    const price = document.getElementById('detailPrice');
+    const sizeArea = document.getElementById('detailSizeArea');
+    const colorArea = document.getElementById('detailColorArea');
+
+    if(!modal) return;
+    if(n) n.textContent = p.name || '';
     if(d) d.textContent = p.description || '';
-    if(img && p.image) img.src = p.image;
+    if(img) img.src = p.image || '';
+    if(price) price.textContent = p.price || '';
+    if(sizeArea) sizeArea.style.display = 'none';
+    if(colorArea) colorArea.style.display = 'none';
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
   };
 
   window.escapeHtml = function(s){
     return String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   };
 
-  document.addEventListener('DOMContentLoaded', renderFavorites);
+  document.addEventListener('DOMContentLoaded', function(){
+    renderFavorites();
+    renderFavoritesList();
+  });
 })();
 </script>
 </body>

@@ -13,21 +13,40 @@
 :root{--bg:#080a0f;--surface:#10141b;--surface-2:#171c24;--surface-3:#202631;--text:#f8fafc;--muted:#98a2b3;--border:rgba(255,255,255,.09);--red:#e51c2a;--green:#168a46;--yellow:#f7c948;--shadow:0 20px 55px rgba(0,0,0,.25)}
 body.light{--bg:#f5f7fa;--surface:#fff;--surface-2:#f2f4f7;--surface-3:#e8ebf0;--text:#111827;--muted:#667085;--border:rgba(16,24,40,.10);--shadow:0 20px 50px rgba(16,24,40,.10)}
 /* ===== KURDSHEIN APPEARANCE THEMES ===== */
-body.pink{--bg:#12090f;--surface:#1b0f17;--surface-2:#26131f;--surface-3:#321b2a;--text:#fff7fb;--muted:#c9a8b8;--border:rgba(255,154,202,.14);--red:#ff4f9a;--green:#d94f9a;--yellow:#ffd166;--shadow:0 20px 55px rgba(255,79,154,.16)}
-body.blue{--bg:#07101d;--surface:#0d1928;--surface-2:#122338;--surface-3:#19304a;--text:#f5fbff;--muted:#9db2c7;--border:rgba(78,170,255,.15);--red:#3198ff;--green:#2ec4b6;--yellow:#6dc5ff;--shadow:0 20px 55px rgba(49,152,255,.16)} body.green{--bg:#07120b;--surface:#0d1c12;--surface-2:#13291a;--surface-3:#1c3a24;--text:#f4fff6;--muted:#a7c2ad;--border:rgba(74,222,128,.16);--red:#22c55e;--green:#4ade80;--yellow:#a3e635;--shadow:0 20px 55px rgba(34,197,94,.16)} body.yellow{--bg:#151105;--surface:#211b08;--surface-2:#2d250b;--surface-3:#403510;--text:#fffdf2;--muted:#c9bd91;--border:rgba(250,204,21,.18);--red:#eab308;--green:#84cc16;--yellow:#facc15;--shadow:0 20px 55px rgba(234,179,8,.16)}
-body.pink .top-bar{background:linear-gradient(90deg,#9b215e,#24121d 50%,#d94f9a)}
-body.blue .top-bar{background:linear-gradient(90deg,#1455a0,#0d1724 50%,#1976d2)}
-body.pink .kurdistan-line,body.blue .kurdistan-line,body.green .kurdistan-line,body.yellow .kurdistan-line{background:linear-gradient(90deg,#d7192a 0 33.33%,#fff 33.33% 66.66%,#159447 66.66%)}
-.appearance-picker{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+body.light{--bg:#f5f7fa;--surface:#fff;--surface-2:#f2f4f7;--surface-3:#e8ebf0;--text:#111827;--muted:#667085;--border:rgba(16,24,40,.10);--shadow:0 20px 50px rgba(16,24,40,.10)}
+body.pink-light{--bg:#fff5fa;--surface:#fffaff;--surface-2:#ffe8f3;--surface-3:#ffd3e7;--text:#4a1530;--muted:#9b5d7b;--border:rgba(219,39,119,.16);--red:#e83e8c;--green:#c02673;--yellow:#d97706;--shadow:0 20px 55px rgba(232,62,140,.13)}
+body.pink-dark{--bg:#12090f;--surface:#1b0f17;--surface-2:#26131f;--surface-3:#321b2a;--text:#fff7fb;--muted:#c9a8b8;--border:rgba(255,154,202,.14);--red:#ff4f9a;--green:#d94f9a;--yellow:#ffd166;--shadow:0 20px 55px rgba(255,79,154,.16)}
+body.blue-light{--bg:#f1f8ff;--surface:#ffffff;--surface-2:#e1f0ff;--surface-3:#cce4ff;--text:#102a43;--muted:#58708a;--border:rgba(49,152,255,.18);--red:#2588e8;--green:#159f9a;--yellow:#d49b00;--shadow:0 20px 55px rgba(49,152,255,.13)}
+body.blue-dark{--bg:#07101d;--surface:#0d1928;--surface-2:#122338;--surface-3:#19304a;--text:#f5fbff;--muted:#9db2c7;--border:rgba(78,170,255,.15);--red:#3198ff;--green:#2ec4b6;--yellow:#6dc5ff;--shadow:0 20px 55px rgba(49,152,255,.16)}
+body.green-light{--bg:#f1fff5;--surface:#ffffff;--surface-2:#e0f7e7;--surface-3:#c8efd3;--text:#12351d;--muted:#5c8066;--border:rgba(34,197,94,.17);--red:#16a34a;--green:#15803d;--yellow:#a16207;--shadow:0 20px 55px rgba(34,197,94,.13)}
+body.green-dark{--bg:#07120b;--surface:#0d1c12;--surface-2:#13291a;--surface-3:#1c3a24;--text:#f4fff6;--muted:#a7c2ad;--border:rgba(74,222,128,.16);--red:#22c55e;--green:#4ade80;--yellow:#a3e635;--shadow:0 20px 55px rgba(34,197,94,.16)}
+body.yellow-light{--bg:#fffdf0;--surface:#ffffff;--surface-2:#fff6c7;--surface-3:#ffed91;--text:#3d3205;--muted:#7b6b2e;--border:rgba(234,179,8,.20);--red:#d99a00;--green:#65a30d;--yellow:#ca8a04;--shadow:0 20px 55px rgba(234,179,8,.14)}
+body.yellow-dark{--bg:#151105;--surface:#211b08;--surface-2:#2d250b;--surface-3:#403510;--text:#fffdf2;--muted:#c9bd91;--border:rgba(250,204,21,.18);--red:#eab308;--green:#84cc16;--yellow:#facc15;--shadow:0 20px 55px rgba(234,179,8,.16)}
+body.pink-light .top-bar{background:linear-gradient(90deg,#f5a8c8,#fff 50%,#e83e8c)}
+body.pink-dark .top-bar{background:linear-gradient(90deg,#9b215e,#24121d 50%,#d94f9a)}
+body.blue-light .top-bar{background:linear-gradient(90deg,#8fc8ff,#fff 50%,#2588e8)}
+body.blue-dark .top-bar{background:linear-gradient(90deg,#1455a0,#0d1724 50%,#1976d2)}
+body.green-light .top-bar{background:linear-gradient(90deg,#91e0aa,#fff 50%,#16a34a)}
+body.green-dark .top-bar{background:linear-gradient(90deg,#146c32,#0d1c12 50%,#22c55e)}
+body.yellow-light .top-bar{background:linear-gradient(90deg,#ffe47a,#fff 50%,#d99a00)}
+body.yellow-dark .top-bar{background:linear-gradient(90deg,#8b7200,#211b08 50%,#eab308)}
+body.light .top-bar{background:linear-gradient(90deg,#e9eef5,#fff 50%,#cbd5e1)}
+.appearance-picker{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;direction:ltr}
 .appearance-button{min-height:58px;border:1px solid var(--border);border-radius:13px;background:var(--surface-2);color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:11px;font-weight:800;transition:.2s}
 .appearance-button:hover{transform:translateY(-2px);border-color:var(--red)}
 .appearance-button.active{border-color:var(--red);box-shadow:0 0 0 2px color-mix(in srgb,var(--red) 18%,transparent);background:var(--surface-3)}
 .appearance-swatch{width:18px;height:18px;border-radius:50%;border:1px solid rgba(255,255,255,.35)}
 .appearance-swatch.dark{background:linear-gradient(135deg,#080a0f,#e51c2a)}
-.appearance-swatch.light{background:linear-gradient(135deg,#fff,#e51c2a)}
-.appearance-swatch.pink{background:linear-gradient(135deg,#1b0f17,#ff4f9a)}
-.appearance-swatch.blue{background:linear-gradient(135deg,#0d1928,#3198ff)} .appearance-swatch.green{background:linear-gradient(135deg,#0d1c12,#22c55e)} .appearance-swatch.yellow{background:linear-gradient(135deg,#211b08,#facc15)}
-@media(max-width:600px){.appearance-picker{grid-template-columns:repeat(3,1fr)}}
+.appearance-swatch.light{background:linear-gradient(135deg,#fff,#dbe4ee)}
+.appearance-swatch.pink-light{background:linear-gradient(135deg,#fff5fa,#f5a8c8)}
+.appearance-swatch.pink-dark{background:linear-gradient(135deg,#1b0f17,#ff4f9a)}
+.appearance-swatch.blue-light{background:linear-gradient(135deg,#fff,#8fc8ff)}
+.appearance-swatch.blue-dark{background:linear-gradient(135deg,#0d1928,#3198ff)}
+.appearance-swatch.green-light{background:linear-gradient(135deg,#fff,#91e0aa)}
+.appearance-swatch.green-dark{background:linear-gradient(135deg,#0d1c12,#22c55e)}
+.appearance-swatch.yellow-light{background:linear-gradient(135deg,#fff,#ffe47a)}
+.appearance-swatch.yellow-dark{background:linear-gradient(135deg,#211b08,#facc15)}
+@media(max-width:600px){.appearance-picker{grid-template-columns:1fr 1fr}}
 *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--text);font-family:Rabar,Arial,sans-serif;min-height:100vh;transition:background .25s,color .25s}button,input,textarea{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}
 .top-bar{height:34px;background:linear-gradient(90deg,#b91522,#15171b 50%,#128243);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px}.top-bar-text{display:flex;align-items:center;gap:9px}.top-bar-text span:first-child,.top-bar-text span:last-child{font-size:11px;color:#ffd45a}
 .brand-row{background:var(--surface);border-bottom:1px solid var(--border);padding:18px 24px 15px;text-align:center}.brand{display:inline-flex;align-items:center;gap:11px;font-family:Arial,sans-serif;font-size:clamp(34px,6vw,66px);font-weight:950;letter-spacing:-3px;line-height:.9}.brand-mark{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,#e51c2a 0 33%,#fff 33% 66%,#168a46 66%);color:#ffd45a;font-size:20px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
@@ -611,13 +630,21 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
       <small>شێوەی دڵخوازت هەڵبژێرە</small>
     </span>
   </div>
-  <div class="appearance-picker" aria-label="Appearance selector">
-    <button class="appearance-button" type="button" data-theme-choice="dark" onclick="setTheme('dark')"><span class="appearance-swatch dark"></span>تاریک</button>
+<div class="appearance-picker" aria-label="Appearance selector">
     <button class="appearance-button" type="button" data-theme-choice="light" onclick="setTheme('light')"><span class="appearance-swatch light"></span>ڕووناک</button>
-    <button class="appearance-button" type="button" data-theme-choice="pink" onclick="setTheme('pink')"><span class="appearance-swatch pink"></span>پەمەیی</button>
-  </div>
-  <div class="appearance-picker" style="grid-template-columns:1fr;margin-top:8px">
-    <button class="appearance-button" type="button" data-theme-choice="blue" onclick="setTheme('blue')"><span class="appearance-swatch blue"></span>شین</button> <button class="appearance-button" type="button" data-theme-choice="green" onclick="setTheme('green')"><span class="appearance-swatch green"></span>سەوز</button> <button class="appearance-button" type="button" data-theme-choice="yellow" onclick="setTheme('yellow')"><span class="appearance-swatch yellow"></span>زەرد</button>
+    <button class="appearance-button" type="button" data-theme-choice="dark" onclick="setTheme('dark')"><span class="appearance-swatch dark"></span>تاریک</button>
+
+    <button class="appearance-button" type="button" data-theme-choice="pink-light" onclick="setTheme('pink-light')"><span class="appearance-swatch pink-light"></span>پەمەیی</button>
+    <button class="appearance-button" type="button" data-theme-choice="pink-dark" onclick="setTheme('pink-dark')"><span class="appearance-swatch pink-dark"></span>پەمەیی</button>
+
+    <button class="appearance-button" type="button" data-theme-choice="blue-light" onclick="setTheme('blue-light')"><span class="appearance-swatch blue-light"></span>شین</button>
+    <button class="appearance-button" type="button" data-theme-choice="blue-dark" onclick="setTheme('blue-dark')"><span class="appearance-swatch blue-dark"></span>شین</button>
+
+    <button class="appearance-button" type="button" data-theme-choice="green-light" onclick="setTheme('green-light')"><span class="appearance-swatch green-light"></span>سەوز</button>
+    <button class="appearance-button" type="button" data-theme-choice="green-dark" onclick="setTheme('green-dark')"><span class="appearance-swatch green-dark"></span>سەوز</button>
+
+    <button class="appearance-button" type="button" data-theme-choice="yellow-light" onclick="setTheme('yellow-light')"><span class="appearance-swatch yellow-light"></span>زەرد</button>
+    <button class="appearance-button" type="button" data-theme-choice="yellow-dark" onclick="setTheme('yellow-dark')"><span class="appearance-swatch yellow-dark"></span>زەرد</button>
   </div>
 </div>
 <button class="ks-option" onclick="closeSideMenu();openFavorites()" type="button">
@@ -875,11 +902,11 @@ const deliveryFees = { Erbil: 3000, Sulaymaniyah: 4000, Duhok: 4000, Other: 5000
 const couponCodes = { KURD10: 0.10, NEW5: 0.05 };
 
 /* ================= THEME ================= */
-const THEME_NAMES = ["dark", "light", "pink", "blue", "green", "yellow"];
+const THEME_NAMES = ["dark", "light", "pink-light", "pink-dark", "blue-light", "blue-dark", "green-light", "green-dark", "yellow-light", "yellow-dark"];
 
 function applyTheme(theme) {
     const safeTheme = THEME_NAMES.includes(theme) ? theme : "dark";
-    document.body.classList.remove("light", "pink", "blue", "green", "yellow");
+    document.body.classList.remove("light", "pink-light", "pink-dark", "blue-light", "blue-dark", "green-light", "green-dark", "yellow-light", "yellow-dark");
     if (safeTheme !== "dark") document.body.classList.add(safeTheme);
     localStorage.setItem("kurdSheinTheme", safeTheme);
     document.querySelectorAll("[data-theme-choice]").forEach(button => {
@@ -889,7 +916,14 @@ function applyTheme(theme) {
     });
     const meta = document.querySelector('meta[name="theme-color"]');
     if (meta) {
-        meta.setAttribute("content", safeTheme === "pink" ? "#ff4f9a" : safeTheme === "blue" ? "#3198ff" : safeTheme === "green" ? "#22c55e" : safeTheme === "yellow" ? "#facc15" : safeTheme === "light" ? "#f5f7fa" : "#080a0f");
+        const themeColors = {
+            dark: "#080a0f", light: "#f5f7fa",
+            "pink-light": "#e83e8c", "pink-dark": "#ff4f9a",
+            "blue-light": "#2588e8", "blue-dark": "#3198ff",
+            "green-light": "#16a34a", "green-dark": "#22c55e",
+            "yellow-light": "#d99a00", "yellow-dark": "#facc15"
+        };
+        meta.setAttribute("content", themeColors[safeTheme] || "#080a0f");
     }
 }
 

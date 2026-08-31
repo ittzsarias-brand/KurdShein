@@ -2173,6 +2173,48 @@ function startHeroSlider() {
     showHeroSlide(0);
 }
 
+
+/* ================= ADMIN FIRESTORE PRODUCTS ================= */
+async function loadAdminProducts() {
+    if (!firebaseReady || !db) return;
+    try {
+        const snapshot = await getDocs(collection(db, "products"));
+        const container = document.getElementById("products");
+        if (!container) return;
+        snapshot.forEach(docSnap => {
+            const p = docSnap.data();
+            const images = Array.isArray(p.images) ? p.images.filter(Boolean) : [];
+            if (!p.name || !images.length) return;
+            if (document.querySelector(`.product[data-admin-id="${docSnap.id}"]`)) return;
+            const categories = String(p.category || "all").trim();
+            const isNew = p.isNew ? "<div class=\"new-badge\">نوێ</div>" : "";
+            const oldPrice = Number(p.oldPrice || 0);
+            const price = Number(p.price || 0);
+            const oldHtml = oldPrice > price ? `<span class=\"old-price\">${oldPrice.toLocaleString()}</span>` : "";
+            const colors = String(p.colors || "").replace(/"/g, "&quot;");
+            const sizes = String(p.sizes || "").replace(/"/g, "&quot;");
+            const safeName = String(p.name || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
+            const safeDesc = String(p.description || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
+            const card = document.createElement("div");
+            card.className = "product";
+            card.dataset.adminId = docSnap.id;
+            card.dataset.category = categories;
+            card.dataset.colors = colors;
+            card.dataset.description = safeDesc;
+            card.dataset.images = images.join("|");
+            card.dataset.name = safeName;
+            card.dataset.price = price;
+            card.dataset.stock = Number(p.stock || 0);
+            card.dataset.sizes = sizes;
+            if (oldPrice > price) card.dataset.oldPrice = oldPrice;
+            card.innerHTML = `<div class="product-image">${isNew}<button class="favorite-button" onclick="toggleFavorite(event,this)">♡</button><img alt="" src="${images[0]}"></div><div class="product-info"><div class="product-rating">★★★★★</div><div class="product-name">${safeName}</div><div class="product-description">${safeDesc}</div><div><span class="price">${price.toLocaleString()} د.ع</span>${oldHtml}</div><button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button></div>`;
+            container.prepend(card);
+        });
+        initializeProductData();
+        applyProductFilters();
+    } catch (error) { console.error("Admin products could not be loaded:", error); }
+}
+
 /* ================= INITIALIZE ================= */
 normalizeCart();
 saveCart();
@@ -2184,6 +2226,7 @@ updateFavoriteCount();
 updateFavoriteButtons();
 renderFavoritesSection();
 startHeroSlider();
+    loadAdminProducts();
 </script>
 <script>
 /* ===== PRODUCT MENU SAFETY FALLBACK =====

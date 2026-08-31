@@ -787,6 +787,13 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 .detail-quantity-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px}.detail-quantity-label{font-size:13px;font-weight:800;white-space:nowrap}.detail-quantity-control{display:flex;align-items:center;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);overflow:hidden;height:44px}.detail-qty-btn{width:42px;height:44px;border:0;background:transparent;color:var(--text);font-size:21px;font-weight:900}.detail-qty-btn:hover{background:var(--surface-3);color:var(--yellow)}#detailQuantity{width:45px;height:44px;border:0;border-left:1px solid var(--border);border-right:1px solid var(--border);background:transparent;color:var(--text);text-align:center;font-weight:900;outline:0}.detail-quantity-row .big-add{flex:1;margin:0}.favorite-product .favorite-view-button{display:grid;place-items:center;min-width:42px;height:42px;font-size:20px}.cart-item-premium{display:grid !important;grid-template-columns:58px minmax(0,1fr) auto;gap:12px !important}.cart-item-image{width:58px;height:58px;border-radius:13px;object-fit:cover;background:var(--surface-3);border:1px solid var(--border)}.cart-header-summary{display:flex;justify-content:space-between;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:11px 13px;margin-bottom:12px;font-size:12px;color:var(--muted)}.cart-header-summary strong{color:var(--text);font-size:14px}.cart-item-main{min-width:0}
 @media(max-width:600px){.detail-quantity-row{flex-wrap:wrap}.detail-quantity-row .big-add{width:100%;flex-basis:100%}.cart-item-premium{grid-template-columns:50px minmax(0,1fr)}.cart-item-actions{grid-column:1/-1;justify-content:flex-start}.cart-item-image{width:50px;height:50px}}
 </style>
+<style id="banner-and-button-fixes">
+/* Smooth automatic banner slider */
+.banner-track{
+  transition:transform .75s cubic-bezier(.22,.61,.36,1) !important;
+  will-change:transform;
+}
+</style>
 </head>
 <body>
 
@@ -1682,9 +1689,7 @@ window.showHeroSlide = function(index) {
     });
 
     clearInterval(heroSlideTimer);
-    heroSlideTimer = setInterval(() => {
-        showHeroSlide(heroSlideIndex + 1);
-    }, 3000);
+    heroSlideTimer = ;
 };
 
 function startHeroSlider() {
@@ -1701,5 +1706,214 @@ updateFavoriteCount();
 updateFavoriteButtons();
 startHeroSlider();
 </script>
+
+<script>
+/* ===== KurdShein banner auto-slide ===== */
+(function(){
+  const track = document.querySelector('.banner-track');
+  if(!track) return;
+  const slides = Array.from(track.children);
+  if(slides.length < 2) return;
+
+  let index = 0;
+  let timer;
+
+  function goToBanner(i){
+    index = (i + slides.length) % slides.length;
+    track.style.transform = `translateX(${index * 100}%)`;
+  }
+
+  function start(){
+    clearInterval(timer);
+    timer = setInterval(() => goToBanner(index + 1), 2000);
+  }
+
+  // Keep the slider moving even if the page is resized.
+  window.addEventListener('resize', () => goToBanner(index));
+  start();
+
+  track.addEventListener('mouseenter', () => clearInterval(timer));
+  track.addEventListener('mouseleave', start);
+})();
+</script>
+
+
+<script>
+/* ===== KurdShein favorites ===== */
+(function(){
+  const KEY = 'kurdshein_favorites_v1';
+
+  function getFavorites(){
+    try { return JSON.parse(localStorage.getItem(KEY) || '[]'); }
+    catch(e){ return []; }
+  }
+  function saveFavorites(list){
+    localStorage.setItem(KEY, JSON.stringify(list));
+  }
+
+  function productData(card){
+    if(!card) return null;
+    return {
+      id: card.dataset.id || card.dataset.productId || card.querySelector('[data-product-id]')?.dataset.productId || '',
+      name: card.dataset.name || card.querySelector('.product-name')?.textContent?.trim() || '',
+      price: card.dataset.price || '',
+      category: card.dataset.category || '',
+      image: card.dataset.image || card.querySelector('img')?.src || '',
+      description: card.dataset.description || ''
+    };
+  }
+
+  window.toggleFavorite = function(button){
+    const card = button.closest('.product');
+    if(!card) return;
+
+    const product = productData(card);
+    if(!product.id) {
+      product.id = product.name + '|' + product.image;
+    }
+
+    let list = getFavorites();
+    const existing = list.findIndex(x => x.id === product.id);
+
+    if(existing >= 0){
+      list.splice(existing, 1);
+      button.classList.remove('active');
+      button.setAttribute('aria-pressed','false');
+    }else{
+      list.push(product);
+      button.classList.add('active');
+      button.setAttribute('aria-pressed','true');
+    }
+
+    saveFavorites(list);
+    if(typeof renderFavorites === 'function') renderFavorites();
+    if(typeof renderFavoritesList === 'function') renderFavoritesList();
+  };
+
+  window.renderFavorites = function(){
+    const list = getFavorites();
+    document.querySelectorAll('.product').forEach(card => {
+      const p = productData(card);
+      const id = p.id || (p.name + '|' + p.image);
+      const btn = card.querySelector('.favorite-btn, .heart-button, [onclick*="Favorite"], [onclick*="favorite"]');
+      if(btn){
+        const active = list.some(x => x.id === id);
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      }
+    });
+  };
+
+  window.openFavorites = function(){
+    const modal = document.getElementById('favoritesModal');
+    if(modal){
+      if(typeof renderFavoritesList === 'function') renderFavoritesList();
+      modal.classList.add('open');
+      modal.style.display = 'flex';
+    }
+  };
+
+  window.renderFavoritesList = function(){
+    const box = document.getElementById('favoritesList');
+    if(!box) return;
+
+    const list = getFavorites();
+    if(!list.length){
+      box.innerHTML = '<div style="padding:25px;text-align:center;color:var(--muted)">هیچ بەرهەمێک لە دلخوازەکان نییە ❤️</div>';
+      return;
+    }
+
+    box.innerHTML = list.map((p,i) => `
+      <div class="favorite-product" style="display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)">
+        <img src="${escapeHtml(p.image)}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:12px">
+        <div style="min-width:0">
+          <div style="font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHtml(p.name)}</div>
+          <div style="color:var(--muted);font-size:12px">${escapeHtml(p.price)}</div>
+        </div>
+        <button type="button" class="favorite-view-button" aria-label="بینینی بەرهەم" onclick="openFavoriteProduct(${i})">👁️</button>
+      </div>
+    `).join('');
+  };
+
+  window.openFavoriteProduct = function(i){
+    const list = getFavorites();
+    const p = list[i];
+    if(!p) return;
+
+    // Prefer the exact live product card, so the full existing product-description
+    // system is used rather than creating a second description UI.
+    const cards = Array.from(document.querySelectorAll('.product'));
+    const card = cards.find(c => {
+      const d = productData(c);
+      const id = d.id || (d.name + '|' + d.image);
+      return id === p.id;
+    });
+
+    if(card && typeof openProduct === 'function'){
+      closeModal('favoritesModal');
+      openProduct(card);
+      return;
+    }
+
+    // Fallback if the product is not currently rendered.
+    closeModal('favoritesModal');
+    const modal = document.getElementById('productModal');
+    if(modal){
+      modal.classList.add('open');
+      modal.style.display = 'flex';
+      const n = document.getElementById('detailName');
+      const d = document.getElementById('detailDescription');
+      const img = document.getElementById('mainProductImage');
+      if(n) n.textContent = p.name;
+      if(d) d.textContent = p.description || '';
+      if(img && p.image) img.src = p.image;
+    }
+  };
+
+  window.escapeHtml = window.escapeHtml || function(s){
+    return String(s ?? '').replace(/[&<>"']/g, m => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[m]));
+  };
+
+  document.addEventListener('DOMContentLoaded', renderFavorites);
+})();
+</script>
+
+
+<script>
+/* ===== KurdShein product/cart button safety ===== */
+document.addEventListener('click', function(e){
+  const orderBtn = e.target.closest('.product .add-cart, .product [data-action="order"], .product button');
+  if(orderBtn && /داوا\s*کردن|داواکردن/.test(orderBtn.textContent || '')){
+    e.preventDefault();
+    e.stopPropagation();
+    const card = orderBtn.closest('.product');
+    if(card && typeof openProduct === 'function') openProduct(card);
+  }
+});
+
+/* Make the top cart button open the existing cart modal/panel. */
+(function(){
+  function bindCart(){
+    const buttons = document.querySelectorAll(
+      '.cart-button, .cart-icon, [aria-label*="cart" i], [aria-label*="سەبەت" i], [aria-label*="کارت" i]'
+    );
+    buttons.forEach(btn => {
+      if(btn.dataset.cartBound === '1') return;
+      btn.dataset.cartBound = '1';
+      btn.addEventListener('click', function(e){
+        if(typeof openCart === 'function'){
+          e.preventDefault();
+          openCart();
+        }
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', bindCart);
+  setTimeout(bindCart, 300);
+})();
+</script>
+
 </body>
 </html>

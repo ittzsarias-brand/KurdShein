@@ -129,7 +129,7 @@ footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--bord
 .ks-options-backdrop.show,.ks-nav-backdrop.show{opacity:1;visibility:visible}
 
 .ks-options-drawer,.ks-nav-drawer{
-  position:fixed;top:0;right:0;height:100dvh;
+  position:fixed;top:0;right:0;height:100dvh;max-height:100dvh;
   width:min(420px,92vw);
   background:
     radial-gradient(circle at 90% 0%,rgba(247,201,72,.14),transparent 30%),
@@ -165,7 +165,7 @@ footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--bord
   box-shadow:0 8px 22px rgba(247,201,72,.24);
 }
 .ks-options-sub,.ks-nav-subtitle{color:var(--muted);font-size:10px;margin-top:3px}
-.ks-options-body,.ks-drawer-body{padding:20px 16px;overflow:auto}
+.ks-options-body,.ks-drawer-body{padding:20px 16px;overflow-y:auto;overflow-x:hidden;flex:1 1 auto;min-height:0;-webkit-overflow-scrolling:touch}
 .ks-drawer-label{color:var(--muted);font-size:11px;margin:0 5px 11px}
 .ks-option,.ks-nav-item{
   width:100%;min-height:76px;margin-bottom:10px;padding:12px;
@@ -926,6 +926,37 @@ body{overflow-x:hidden;touch-action:pan-y}button:focus-visible,input:focus-visib
 html { zoom: 0.8; }
 /* Order tracking is intentionally smaller */
 .order-tracking, .order-tracking-section, #orderTracking, .customer-order-tracking, .order-status-tracking { zoom: 0.875; }
+
+/* ===== MOBILE DRAWER FULL HEIGHT FIX ===== */
+@media(max-width:600px){
+  .ks-nav-drawer,.ks-options-drawer{
+    top:0 !important;
+    bottom:0 !important;
+    height:100dvh !important;
+    max-height:100dvh !important;
+    width:min(350px,88vw) !important;
+    display:flex !important;
+    flex-direction:column !important;
+    overflow:hidden !important;
+  }
+  .ks-nav-drawer .ks-drawer-head,.ks-options-drawer .ks-options-head{
+    flex:0 0 auto !important;
+  }
+  .ks-nav-drawer .ks-drawer-body,.ks-options-drawer .ks-options-body{
+    flex:1 1 0 !important;
+    min-height:0 !important;
+    height:auto !important;
+    max-height:none !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+    -webkit-overflow-scrolling:touch !important;
+    overscroll-behavior:contain !important;
+    padding-bottom:18px !important;
+  }
+  .ks-nav-drawer .ks-menu-footer,.ks-options-drawer .ks-options-footer{
+    flex:0 0 auto !important;
+  }
+}
 </style>
 <script>
 /* Prevent accidental browser zoom on mobile/double-tap. */

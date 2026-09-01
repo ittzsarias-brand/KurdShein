@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-01T17:45:05.592Z",
+  "updatedAt": "2026-09-01T17:46:06.339Z",
   "products": [
     {
       "id": "product-1",
@@ -208,25 +208,25 @@
       "active": true
     },
     {
-      "id": "product-1788284622064",
-      "name": "Test 1",
-      "displayName": "Test 1",
-      "description": "1Test",
-      "displayDescription": "1Test",
+      "id": "product-1788284716017",
+      "name": "Test2",
+      "displayName": "Test2",
+      "description": "Test",
+      "displayDescription": "Test",
       "price": 10,
       "oldPrice": 20,
       "category": [
         "all"
       ],
       "colors": [
-        "black"
+        "rash"
       ],
       "sizes": [
-        "big"
+        "Small"
       ],
       "stock": 10,
       "images": [
-        "IMG_1234.jpeg",
+        "IMG_1235.jpeg",
         "IMG_1234.jpeg"
       ],
       "mainImage": "IMG_1234.jpeg",

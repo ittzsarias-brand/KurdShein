@@ -434,6 +434,14 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 
 /* Phone */
 @media(max-width:600px){
+  .main-product-image{
+    width:100% !important;
+    height:min(43vh,250px) !important;
+    max-width:100% !important;
+    object-fit:contain !important;
+    object-position:center !important;
+  }
+
   .modal{
     padding:8px !important;
     align-items:center !important;
@@ -449,9 +457,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 
   
   .main-product-image{
-    height:190px !important;
-    max-height:190px !important;
-    object-fit:contain !important;
+    height:min(43vh,250px) !important;
   }
   
   
@@ -465,12 +471,8 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   .details-description{
     font-size:13px !important;
     line-height:1.8 !important;
-    max-height:none !important;
-    overflow:visible !important;
-    height:auto !important;
-    display:block !important;
-    white-space:pre-wrap !important;
-    word-break:break-word !important;
+    max-height:150px;
+    overflow:auto;
   }
   .option-title{
     font-size:12px;
@@ -524,15 +526,10 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
     padding:13px !important;
   }
   .main-product-image{
-    height:165px !important;
-    max-height:165px !important;
-    object-fit:contain !important;
+    height:210px !important;
   }
   .details-description{
     font-size:12px !important;
-    max-height:none !important;
-    overflow:visible !important;
-    height:auto !important;
   }
   .big-add{
     font-size:12px !important;
@@ -621,6 +618,47 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 .close-button{display:grid !important;place-items:center !important;z-index:9999 !important;opacity:1 !important;visibility:visible !important;background:var(--surface-2) !important;color:var(--text) !important;border:2px solid rgba(255,255,255,.28) !important;box-shadow:0 5px 18px rgba(0,0,0,.35) !important}
 .detail-quantity-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px}.detail-quantity-label{font-size:13px;font-weight:800;white-space:nowrap}.detail-quantity-control{display:flex;align-items:center;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);overflow:hidden;height:44px}.detail-qty-btn{width:42px;height:44px;border:0;background:transparent;color:var(--text);font-size:21px;font-weight:900}.detail-qty-btn:hover{background:var(--surface-3);color:var(--yellow)}#detailQuantity{width:45px;height:44px;border:0;border-left:1px solid var(--border);border-right:1px solid var(--border);background:transparent;color:var(--text);text-align:center;font-weight:900;outline:0}.detail-quantity-row .big-add{flex:1;margin:0}.favorite-product .favorite-view-button{display:grid;place-items:center;min-width:42px;height:42px;font-size:20px}.cart-item-premium{display:grid !important;grid-template-columns:58px minmax(0,1fr) auto;gap:12px !important}.cart-item-image{width:58px;height:58px;border-radius:13px;object-fit:cover;background:var(--surface-3);border:1px solid var(--border)}.cart-header-summary{display:flex;justify-content:space-between;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:11px 13px;margin-bottom:12px;font-size:12px;color:var(--muted)}.cart-header-summary strong{color:var(--text);font-size:14px}.cart-item-main{min-width:0}
 @media(max-width:600px){.detail-quantity-row{flex-wrap:wrap}.detail-quantity-row .big-add{width:100%;flex-basis:100%}.cart-item-premium{grid-template-columns:50px minmax(0,1fr)}.cart-item-actions{grid-column:1/-1;justify-content:flex-start}.cart-item-image{width:50px;height:50px}}
+
+/* ===== FINAL PRODUCT DESCRIPTION IMAGE FIX ===== */
+.product-details-box .product-main-stage{
+  width:100% !important;
+  overflow:hidden !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.product-details-box .main-product-image{
+  display:block !important;
+  width:100% !important;
+  height:auto !important;
+  max-width:100% !important;
+  max-height:430px !important;
+  object-fit:contain !important;
+  object-position:center center !important;
+  transform:none !important;
+  margin:0 auto !important;
+}
+@media(max-width:600px){
+  .product-details-box .product-main-stage{
+    min-height:0 !important;
+  }
+  .product-details-box .main-product-image{
+    width:100% !important;
+    height:auto !important;
+    max-width:100% !important;
+    max-height:250px !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    transform:none !important;
+  }
+}
+@media(max-width:390px){
+  .product-details-box .main-product-image{
+    max-height:210px !important;
+  }
+}
+/* ===== END PRODUCT DESCRIPTION IMAGE FIX ===== */
+
 </style>
 </head>
 <body>
@@ -840,7 +878,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <div class="modal-box product-details-box">
 <button class="close-button" onclick="closeModal('productModal')">×</button>
 <div class="product-main-stage">
-<img alt="" draggable="false" id="mainProductImage" src=""/>
+<img alt="" class="main-product-image" draggable="false" id="mainProductImage" src=""/>
 </div>
 <div class="details-content">
 <h2 id="detailName"></h2>

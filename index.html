@@ -1278,12 +1278,21 @@ window.addSelectedProduct = function addSelectedProduct() {
     if (!selectedProduct) return;
     const hasSize = !!selectedProduct.dataset.sizes;
     const hasColor = !!selectedProduct.dataset.colors;
-    if (hasSize && !selectedSize)
-    if (hasColor && !selectedColor)
+    if (hasSize && !selectedSize) {
+        alert("تکایە قەبارە هەڵبژێرە");
+        return;
+    }
+    if (hasColor && !selectedColor) {
+        alert("تکایە ڕەنگ هەڵبژێرە");
+        return;
+    }
     const input = document.getElementById("detailQuantity");
     detailQuantity = Math.max(1, Number(input?.value) || 1);
     const stock = Number(selectedProduct.dataset.stock) || 10;
-    if (detailQuantity > stock)
+    if (detailQuantity > stock) {
+        alert("بڕی داواکراو لە ستۆک زیاترە");
+        return;
+    }
     addToCart(selectedProduct.dataset.name, Number(selectedProduct.dataset.price), selectedSize, selectedColor, stock, detailQuantity, selectedProduct.querySelector("img")?.src || "");
     closeModal("productModal");
 };

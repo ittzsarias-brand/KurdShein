@@ -807,6 +807,19 @@ document.addEventListener("dblclick", function(e){ e.preventDefault(); }, {passi
 document.addEventListener("gesturestart", function(e){ e.preventDefault(); }, {passive:false});
 document.addEventListener("gesturechange", function(e){ e.preventDefault(); }, {passive:false});
 </script>
+
+/* ===== CUSTOMER AUTH VISIBILITY FIX ===== */
+#customerAccountContent .customer-auth-panel,
+#customerAccountContent .customer-auth-panel .form-group,
+#customerAccountContent .customer-auth-panel .form-button {
+  display:block !important;
+  visibility:visible !important;
+  opacity:1 !important;
+}
+#customerAccountContent .customer-auth-panel .form-button {
+  width:100% !important;
+  min-height:44px !important;
+}
 </head>
 <body>
 <div class="top-bar">
@@ -2299,66 +2312,50 @@ async function renderCustomerAccount() {
   const box = document.getElementById("customerAccountContent");
   if (!box) return;
 
-  if (!customerUser) {
-    box.innerHTML = `
-      <div class="customer-account-note">
-        هەژمارێک دروست بکە بۆ ئەوەی زانیارییەکانت و مێژووی ئۆردەرەکانت لە هەموو جارێکدا هەڵبگیرێن.
-      </div>
+  // ALWAYS keep the authentication controls visible. They must not depend on
+  // Firebase Auth finishing initialization first.
+  let profile = {};
+  if (customerUser) {
+    try { profile = await loadCustomerProfile(); } catch (e) { console.error("Profile load:", e); }
+  }
 
+  box.innerHTML = `
+    <div class="customer-account-note">
+      ${customerUser ? "دەتوانیت هەژمارەکەت بەڕێوە ببەیت یان هەژمارێکی تر بەکاربهێنیت." : "هەژمارێک دروست بکە بۆ ئەوەی زانیارییەکانت و مێژووی ئۆردەرەکانت هەڵبگیرێن."}
+    </div>
+
+    <div class="customer-auth-panel" style="display:block !important;visibility:visible !important;opacity:1 !important">
       <div class="form-group">
         <label>ناوی تەواو</label>
         <input id="customerRegisterName" type="text" placeholder="ناوی تەواو">
       </div>
-
       <div class="form-group">
         <label>ژمارەی تەلەفۆن</label>
         <input id="customerRegisterPhone" type="tel" placeholder="07xxxxxxxxx">
       </div>
-
       <div class="form-group">
         <label>ئیمەیڵ</label>
         <input id="customerAuthEmail" type="email" autocomplete="email" placeholder="example@email.com">
       </div>
-
       <div class="form-group">
         <label>وشەی نهێنی</label>
         <input id="customerAuthPassword" type="password" autocomplete="new-password" placeholder="لانیکەم 6 پیت">
       </div>
-
-      <button class="form-button" onclick="registerCustomer()">👤 دروستکردنی هەژمار</button>
-      <button class="form-button secondary-button" onclick="loginCustomer()">🔐 چوونەژوورەوە</button>
-      <button class="form-button secondary-button" onclick="resetCustomerPassword()">📧 لەبیرکردنەوەی وشەی نهێنی</button>
-    `;
-    return;
-  }
-
-  const profile = await loadCustomerProfile();
-  box.innerHTML = `
-    <div class="customer-account-status">
-      <div>👋 بەخێربێیت</div>
-      <strong>${customerEsc(profile.name || customerUser.email || "کڕیار")}</strong>
-      <div style="color:var(--muted);font-size:11px">${customerEsc(customerUser.email || "")}</div>
+      <button class="form-button" style="display:block !important;visibility:visible !important" type="button" onclick="window.registerCustomer && window.registerCustomer()">👤 دروستکردنی هەژمار</button>
+      <button class="form-button secondary-button" style="display:block !important;visibility:visible !important" type="button" onclick="window.loginCustomer && window.loginCustomer()">🔐 چوونەژوورەوە</button>
+      <button class="form-button secondary-button" style="display:block !important;visibility:visible !important" type="button" onclick="window.resetCustomerPassword && window.resetCustomerPassword()">📧 لەبیرکردنەوەی وشەی نهێنی</button>
     </div>
 
-    <div class="customer-profile-grid">
-      <div class="form-group">
-        <label>ناو</label>
-        <input id="customerProfileName" value="${customerEsc(profile.name || "")}" placeholder="ناوی تەواو">
+    ${customerUser ? `
+      <div class="customer-account-status" style="margin-top:16px">
+        <div>👋 بەخێربێیت</div>
+        <strong>${customerEsc(profile.name || customerUser.email || "کڕیار")}</strong>
+        <div style="color:var(--muted);font-size:11px">${customerEsc(customerUser.email || "")}</div>
       </div>
-      <div class="form-group">
-        <label>تەلەفۆن</label>
-        <input id="customerProfilePhone" value="${customerEsc(profile.phone || "")}" placeholder="07xxxxxxxxx">
-      </div>
-      <div class="form-group" style="grid-column:1/-1">
-        <label>ناونیشانی پێشگریمانە</label>
-        <textarea id="customerProfileAddress" placeholder="ناونیشانی تەواو">${customerEsc(profile.address || "")}</textarea>
-      </div>
-    </div>
-
-    <button class="form-button" onclick="saveCustomerProfile()">💾 پاشەکەوتکردنی زانیاری</button>
-    <button class="customer-account-menu" onclick="openCustomerOrders()">📦 ئۆردەرەکانم</button>
-    <button class="customer-account-menu" onclick="resetCustomerPassword()">🔑 گۆڕینی وشەی نهێنی</button>
-    <button class="customer-account-menu" onclick="logoutCustomer()">🚪 چوونەدەرەوە</button>
+      <button class="customer-account-menu" onclick="window.openCustomerOrders()">📦 ئۆردەرەکانم</button>
+      <button class="customer-account-menu" onclick="window.saveCustomerProfile()">💾 پاشەکەوتکردنی زانیاری</button>
+      <button class="customer-account-menu" onclick="window.logoutCustomer()">🚪 چوونەدەرەوە</button>
+    ` : ""}
   `;
 }
 

@@ -240,38 +240,39 @@ textarea{min-height:105px;resize:vertical;line-height:1.7}
 </head>
 
 <body>
-<div class="app-shell">
+<div id="loginScreen" class="modal show">
+  <div class="modal-box password-box">
+    <div class="brand-mark" style="margin-bottom:14px">K</div>
+    <h2>🔐 KurdShein Admin</h2>
+    <p class="password-note">بۆ چوونەژوورەوە، ئیمەیڵ و وشەی نهێنی ئەدمین بنووسە.</p>
+    <div class="field"><label>Email</label><input id="loginEmail" type="email" autocomplete="username" placeholder="admin@example.com"></div>
+    <div class="field" style="margin-top:12px"><label>Password</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')loginAdmin()"></div>
+    <div id="loginError" class="password-error"></div>
+    <div class="modal-actions">
+      <button class="primary" onclick="loginAdmin()">چوونەژوورەوە</button>
+    </div>
+  </div>
+</div>
+
+<div class="app-shell" id="appShell" style="display:none">
   <aside class="sidebar">
     <div class="sidebar-brand">
       <div class="brand-mark">K</div>
       <div><h1>KurdShein</h1><small>ADMIN CONSOLE</small></div>
     </div>
-
     <div class="sidebar-section">
       <div class="sidebar-label">Management</div>
-      <button class="nav-item active" type="button">
-        <span class="nav-icon">⌂</span><span>داشبۆردی فرۆشگا</span>
-      </button>
-      <button class="nav-item" type="button" onclick="openAdd()">
-        <span class="nav-icon">＋</span><span>بەرهەمی نوێ</span>
-      </button>
-      <button class="nav-item" type="button" onclick="loadProducts()">
-        <span class="nav-icon">↻</span><span>نوێکردنەوەی داتا</span>
-      </button>
+      <button class="nav-item active" type="button"><span class="nav-icon">⌂</span><span>داشبۆردی فرۆشگا</span></button>
+      <button class="nav-item" type="button" onclick="openAdd()"><span class="nav-icon">＋</span><span>بەرهەمی نوێ</span></button>
+      <button class="nav-item" type="button" onclick="loadProducts()"><span class="nav-icon">↻</span><span>نوێکردنەوەی داتا</span></button>
     </div>
-
     <div class="sidebar-section">
-      <div class="sidebar-label">Publishing</div>
-      <button class="nav-item" type="button" onclick="publishProducts()">
-        <span class="nav-icon">✓</span><span>بڵاوکردنەوە بۆ سایت</span>
-      </button>
-      <button class="nav-item" type="button" onclick="downloadJSON()">
-        <span class="nav-icon">↓</span><span>داگرتنی JSON</span>
-      </button>
+      <div class="sidebar-label">Firebase</div>
+      <button class="nav-item" type="button" onclick="loadProducts()"><span class="nav-icon">🔥</span><span>Firestore</span></button>
+      <button class="nav-item" type="button" onclick="logoutAdmin()"><span class="nav-icon">↪</span><span>چوونەدەرەوە</span></button>
     </div>
-
     <div class="sidebar-bottom">
-      <div class="sidebar-status"><span class="status-dot"></span> سیستەمی بەڕێوەبردن چالاکە<br>GitHub publishing ready</div>
+      <div class="sidebar-status"><span class="status-dot"></span> Firebase Admin چالاکە<br>Collection: <strong>product</strong></div>
     </div>
   </aside>
 
@@ -281,21 +282,14 @@ textarea{min-height:105px;resize:vertical;line-height:1.7}
       <div class="topbar-title"><strong>KurdShein Admin</strong> &nbsp; / &nbsp; بەڕێوەبردنی کاتەلۆگ</div>
       <div class="topbar-actions">
         <button class="btn gray" onclick="loadProducts()">↻ <span class="desktop-only">نوێکردنەوە</span></button>
-        <button class="btn green" onclick="publishProducts()">✓ <span>بڵاوکردنەوە</span></button>
+        <button class="btn green" onclick="logoutAdmin()">↪ <span>دەرچوون</span></button>
       </div>
     </header>
 
     <section class="content">
       <div class="page-head">
-        <div>
-          <div class="eyebrow">Store Management</div>
-          <h2>بەڕێوەبردنی فرۆشگا</h2>
-          <p>هەموو بەرهەمەکان، نرخ، ستۆک و دۆخی پیشاندان لە یەک داشبۆرد.</p>
-        </div>
-        <div class="page-actions">
-          <button class="btn gray" onclick="loadProducts()">↻ نوێکردنەوە</button>
-          <button class="btn gold" onclick="openAdd()">＋ بەرهەمی نوێ</button>
-        </div>
+        <div><div class="eyebrow">Firebase Store Management</div><h2>بەڕێوەبردنی فرۆشگا</h2><p>بەرهەمەکان ڕاستەوخۆ لە Firestore ـەوە بەڕێوە دەبرێن.</p></div>
+        <div class="page-actions"><button class="btn gray" onclick="loadProducts()">↻ نوێکردنەوە</button><button class="btn gold" onclick="openAdd()">＋ بەرهەمی نوێ</button></div>
       </div>
 
       <div class="stats">
@@ -305,304 +299,107 @@ textarea{min-height:105px;resize:vertical;line-height:1.7}
         <div class="stat"><div class="stat-icon">$</div><div><div class="stat-value" id="catalogCount">0</div><div class="stat-label">کۆی کاتەلۆگ</div></div></div>
       </div>
 
-      <div class="toolbar">
-        <input id="search" class="search" placeholder="گەڕان بە ناوی بەرهەم..." oninput="renderProducts()">
-        <button class="btn gray" onclick="downloadJSON()">↓ JSON</button>
-      </div>
-
+      <div class="toolbar"><input id="search" class="search" placeholder="گەڕان بە DisplayName..." oninput="renderProducts()"><button class="btn gray" onclick="downloadJSON()">↓ JSON</button></div>
       <div id="products" class="products"></div>
     </section>
   </main>
-</div>
-
-<div id="passwordModal" class="modal">
-  <div class="modal-box password-box">
-    <h2>🔐 پشتڕاستکردنەوەی ئەدمین</h2>
-    <p class="password-note">بۆ بڵاوکردنەوەی گۆڕانکارییەکان بۆ GitHub، وشەی نهێنیی ئەدمین بنووسە. وشەکە تەنها لەم سێشنەدا لە memory ـدا دەمێنێتەوە.</p>
-    <div class="field"><label>Admin Password</label><input id="adminPasswordInput" type="password" autocomplete="current-password" placeholder="وشەی نهێنی..." onkeydown="if(event.key==='Enter')confirmPassword()"></div>
-    <div id="passwordError" class="password-error">وشەی نهێنی هەڵەیە.</div>
-    <div class="modal-actions">
-      <button class="primary" onclick="confirmPassword()">پشتڕاستکردنەوە و بڵاوکردنەوە</button>
-      <button class="gray" onclick="closePasswordModal()">گەڕانەوە</button>
-    </div>
-  </div>
 </div>
 
 <div id="productModal" class="modal">
   <div class="modal-box">
     <h2 id="modalTitle">➕ بەرهەمی نوێ</h2>
     <div class="form-grid">
-      <div class="field"><label>ID</label><input id="id"></div>
-      <div class="field"><label>ناوی بەرهەم</label><input id="name"></div>
-      <div class="field"><label>Display Name</label><input id="displayName"></div>
-      <div class="field"><label>نرخ</label><input id="price" type="number" min="0"></div>
-      <div class="field"><label>نرخی کۆن / Sale</label><input id="oldPrice" type="number" min="0"></div>
-      <div class="field"><label>Stock</label><input id="stock" type="number" min="0"></div>
-      <div class="field full"><label>Category</label><input id="category" placeholder="all, new, men"></div>
-      <div class="field full"><label>Colors</label><input id="colors" placeholder="ڕەش, سپی, سوور"></div>
-      <div class="field full"><label>Sizes</label><input id="sizes" placeholder="S, M, L, XL"></div>
-      <div class="field full"><label>Main Image</label><input id="mainImage" placeholder="IMG_1234.jpeg"></div>
-      <div class="field full"><label>Images</label><textarea id="images" placeholder="IMG_1234.jpeg, IMG_1235.jpeg"></textarea></div>
-      <div class="field full"><label>وەسف</label><textarea id="description"></textarea></div>
-      <div class="field full"><label>Display Description</label><textarea id="displayDescription"></textarea></div>
-      <div class="field"><label>Active</label><select id="active"><option value="true">بەردەست / پیشاندان</option><option value="false">ناچالاک / شاراوە</option></select></div>
+      <div class="field"><label>ID</label><input id="ID" placeholder="e.g. 1"></div>
+      <div class="field"><label>DisplayName</label><input id="DisplayName" placeholder="ناوی پیشاندان"></div>
+      <div class="field"><label>Price</label><input id="Price" type="number" min="0"></div>
+      <div class="field"><label>OldPrice</label><input id="OldPrice" type="number" min="0"></div>
+      <div class="field"><label>Category</label><input id="Category" placeholder="گشتی📦, پیاوان🤵🏻‍♂️"></div>
+      <div class="field"><label>Stock</label><input id="Stock" type="number" min="0"></div>
+      <div class="field"><label>Active</label><select id="Active"><option value="true">true</option><option value="false">false</option></select></div>
+      <div class="field"><label>Size</label><input id="Size" placeholder="Medium, Large"></div>
+      <div class="field full"><label>Colors</label><input id="Colors" placeholder="Black, White"></div>
+      <div class="field full"><label>DisplayDescription</label><textarea id="DisplayDescription" placeholder="دەربارەی بەرهەم..."></textarea></div>
+      <div class="field full"><label>DescriptionDescription</label><textarea id="DescriptionDescription" placeholder="وەسفی تەواوی بەرهەم..."></textarea></div>
+      <div class="field full"><label>DisplayImage</label><input id="DisplayImage" placeholder="IMG_1234.jpeg"></div>
+      <div class="field full"><label>DescriptionMultiImage</label><textarea id="DescriptionMultiImage" placeholder="IMG_1234.jpeg, IMG_1235.jpeg"></textarea></div>
     </div>
-    <div class="modal-actions">
-      <button class="primary" onclick="saveProduct()">💾 پاشەکەوتکردن</button>
-      <button class="gray" onclick="closeModal()">گەڕانەوە</button>
-    </div>
+    <div class="modal-actions"><button class="primary" onclick="saveProduct()">💾 پاشەکەوتکردن</button><button class="gray" onclick="closeModal()">گەڕانەوە</button></div>
   </div>
 </div>
-<script>
-"use strict";
-
-let products = [];
-let editingIndex = -1;
-
-async function loadProducts(){
-  try{
-    const response=await fetch("https://raw.githubusercontent.com/ittzsarias-brand/KurdShein/main/products.json?cache="+Date.now(),{cache:"no-store",headers:{"Accept":"application/json"}});
-    if(!response.ok) throw new Error("products.json HTTP "+response.status);
-    const data=await response.json();
-    const loadedProducts=Array.isArray(data)?data:data?.products;
-    if(!Array.isArray(loadedProducts)) throw new Error("Invalid products.json format");
-    products=loadedProducts; renderProducts(); updateStats(); showToast("بەرهەمەکان نوێکرانەوە ✓");
-  }catch(error){
-    document.getElementById("products").innerHTML="<div class='card'><h3>❌ هەڵە</h3><p>نەتوانرا products.json لە GitHub بخوێندرێتەوە.</p><p style='color:#777;font-size:12px'>"+escapeHtml(error.message)+"</p></div>";
-  }
-}
-function renderProducts(){
-  const container = document.getElementById("products");
-  const query = document.getElementById("search").value.trim().toLowerCase();
-
-  const filtered = products
-    .map((product,index)=>({product,index}))
-    .filter(({product})=>{
-      if(!query) return true;
-      return String(product.name || "").toLowerCase().includes(query);
-    });
-
-  if(!filtered.length){
-    container.innerHTML =
-      "<div class='empty-state'><strong>هیچ بەرهەمێک نەدۆزرایەوە.</strong><span>گەڕانەکەت بگۆڕە یان بەرهەمێکی نوێ زیاد بکە.</span></div>";
-    return;
-  }
-
-  container.innerHTML = filtered.map(({product,index})=>{
-    const image =
-      product.mainImage ||
-      (Array.isArray(product.images) ? product.images[0] : "");
-
-    const active = product.active !== false;
-    const stock = Number(product.stock || 0);
-    const price = Number(product.price || 0).toLocaleString();
-    const oldPrice = product.oldPrice != null && Number(product.oldPrice) > 0
-      ? Number(product.oldPrice).toLocaleString()
-      : "";
-    const category = Array.isArray(product.category)
-      ? product.category.filter(Boolean).slice(0,3).join(" • ")
-      : "";
-    const stockLabel = stock <= 3 ? "ستۆکی کەم" : "ستۆک";
-    const stockClass = stock <= 3 ? " style='color:#b36a00;font-weight:800'" : "";
-
-    return `
-      <article class="card">
-        <div class="card-image-wrap">
-          <img src="${escapeAttr(image || "")}" alt="${escapeAttr(product.name || "")}" onerror="this.style.opacity='.2'">
-          <div class="card-image-fade"></div>
-          <span class="product-number">#${escapeHtml(product.id || index + 1)}</span>
-        </div>
-
-        <h3>${escapeHtml(product.name || "بێ ناو")}</h3>
-
-        <div class="meta">
-          <div class="price-line">
-            <span class="price">${price} د.ع</span>
-            ${oldPrice ? `<span class="old-price">${oldPrice} د.ع</span>` : ""}
-          </div>
-          <div class="stock"${stockClass}>📦 ${stockLabel}: ${stock}</div>
-          ${category ? `<div>🏷️ ${escapeHtml(category)}</div>` : ""}
-        </div>
-
-        <span class="status ${active ? "active" : "inactive"}">
-          ${active ? "● چالاک" : "● ناچالاک"}
-        </span>
-
-        <div class="actions">
-          <button class="primary" onclick="openEdit(${index})">✏️ دەستکاری</button>
-          <button class="red" onclick="deleteProduct(${index})">🗑️ سڕینەوە</button>
-        </div>
-      </article>
-    `;
-  }).join("");
-}
-
-function openAdd(){
-
-  editingIndex = -1;
-
-  document.getElementById("modalTitle").textContent =
-    "➕ بەرهەمی نوێ";
-
-  clearForm();
-
-  document.getElementById("id").value =
-    "product-" + Date.now();
-
-  document.getElementById("active").value = "true";
-
-  document.getElementById("productModal").classList.add("show");
-}
-
-function openEdit(index){
-
-  editingIndex = index;
-
-  const p = products[index];
-
-  document.getElementById("modalTitle").textContent =
-    "✏️ دەستکاری بەرهەم";
-
-  document.getElementById("id").value = p.id || "";
-  document.getElementById("name").value = p.name || "";
-  document.getElementById("displayName").value = p.displayName || p.name || "";
-  document.getElementById("price").value = p.price ?? "";
-  document.getElementById("oldPrice").value = p.oldPrice ?? "";
-  document.getElementById("stock").value = p.stock ?? "";
-
-  document.getElementById("category").value =
-    Array.isArray(p.category) ? p.category.join(", ") : "";
-
-  document.getElementById("colors").value =
-    Array.isArray(p.colors) ? p.colors.join(", ") : "";
-
-  document.getElementById("sizes").value =
-    Array.isArray(p.sizes) ? p.sizes.join(", ") : "";
-
-  document.getElementById("mainImage").value =
-    p.mainImage || "";
-
-  document.getElementById("images").value =
-    Array.isArray(p.images) ? p.images.join(", ") : "";
-
-  document.getElementById("description").value =
-    p.description || "";
-
-  document.getElementById("displayDescription").value =
-    p.displayDescription || "";
-
-  document.getElementById("active").value =
-    p.active === false ? "false" : "true";
-
-  document.getElementById("productModal").classList.add("show");
-}
-
-function saveProduct(){
-  const id=document.getElementById("id").value.trim(),name=document.getElementById("name").value.trim(),mainImage=document.getElementById("mainImage").value.trim();
-  if(!id||!name||!mainImage){alert("ID، ناوی بەرهەم و Main Image پڕ بکەرەوە.");return;}
-  const split=id=>document.getElementById(id).value.split(",").map(x=>x.trim()).filter(Boolean);
-  const images=split("images"),categories=split("category"),colors=split("colors"),sizes=split("sizes");
-  const product={id,name,displayName:document.getElementById("displayName").value.trim()||name,description:document.getElementById("description").value,displayDescription:document.getElementById("displayDescription").value,price:Number(document.getElementById("price").value)||0,oldPrice:document.getElementById("oldPrice").value===""?null:Number(document.getElementById("oldPrice").value)||0,category:categories.length?categories:["all"],colors,sizes,stock:Math.max(0,Number(document.getElementById("stock").value)||0),images:images.length?images:[mainImage],mainImage,active:document.getElementById("active").value==="true"};
-  if(editingIndex===-1) products.push(product); else products[editingIndex]=product;
-  closeModal();renderProducts();updateStats();publishProducts();
-}
-function deleteProduct(index){
-  const product=products[index];
-  if(!confirm("دڵنیایت دەتەوێت ئەم بەرهەمە بسڕیتەوە؟\n\n"+(product.name||"")))return;
-  products.splice(index,1);renderProducts();updateStats();publishProducts();
-}
-function downloadJSON(){
-
-  const json = JSON.stringify(products,null,2);
-
-  const blob = new Blob(
-    [json],
-    {type:"application/json;charset=utf-8"}
-  );
-
-  const url = URL.createObjectURL(blob);
-
-  const a = document.createElement("a");
-
-  a.href = url;
-  a.download = "products.json";
-
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-
-  URL.revokeObjectURL(url);
-}
-
-let adminPasswordSession="";
-let publishAfterPassword=false;
-function updateStats(){
-  const total=products.length,active=products.filter(p=>p&&p.active!==false).length,low=products.filter(p=>Number(p&&p.stock||0)<=3).length;
-  ["totalProducts","activeProducts","lowStockProducts","catalogCount"].forEach((id,i)=>{const e=document.getElementById(id);if(e)e.textContent=[total,active,low,total][i]});
-}
-function showToast(message){const t=document.getElementById("toast");if(!t)return;t.textContent=message;t.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove("show"),2500)}
-function openPasswordModal(){document.getElementById("passwordError").style.display="none";document.getElementById("adminPasswordInput").value="";document.getElementById("passwordModal").classList.add("show");setTimeout(()=>document.getElementById("adminPasswordInput").focus(),50)}
-function closePasswordModal(){document.getElementById("passwordModal").classList.remove("show");publishAfterPassword=false}
-async function confirmPassword(){const v=document.getElementById("adminPasswordInput").value;if(!v){document.getElementById("passwordError").textContent="وشەی نهێنی بنووسە.";document.getElementById("passwordError").style.display="block";return}adminPasswordSession=v;document.getElementById("passwordModal").classList.remove("show");if(publishAfterPassword){publishAfterPassword=false;await sendProductsToGitHub()}}
-async function publishProducts(){if(!products.length){alert("هیچ بەرهەمێک نییە بۆ بڵاوکردنەوە.");return}if(!adminPasswordSession){publishAfterPassword=true;openPasswordModal();return}await sendProductsToGitHub()}
-async function sendProductsToGitHub(){
-  showToast("لە بڵاوکردنەوەدایە...");
-  try{
-    const response=await fetch("/.netlify/functions/update-products",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({products,adminPassword:adminPasswordSession})});
-    const result=await response.json().catch(()=>({}));
-    if(!response.ok){if(response.status===401){adminPasswordSession="";document.getElementById("passwordError").textContent="وشەی نهێنی هەڵەیە.";publishAfterPassword=true;openPasswordModal();return}throw new Error(result.error||"GitHub update failed")}
-    showToast("بڵاوکرایەوە بۆ GitHub ✓");
-  }catch(error){showToast("❌ بڵاوکردنەوە سەرکەوتوو نەبوو");alert("بڵاوکردنەوە سەرکەوتوو نەبوو.\n\n"+error.message)}
-}
-
-function clearForm(){
-
-  [
-    "id",
-    "name",
-    "displayName",
-    "price",
-    "oldPrice",
-    "stock",
-    "category",
-    "colors",
-    "sizes",
-    "mainImage",
-    "images",
-    "description",
-    "displayDescription"
-  ].forEach(id=>{
-    document.getElementById(id).value = "";
-  });
-
-  document.getElementById("active").value = "true";
-}
-
-function closeModal(){
-  document.getElementById("productModal").classList.remove("show");
-}
-
-function escapeHtml(value){
-
-  return String(value ?? "").replace(
-    /[&<>"']/g,
-    char=>({
-      "&":"&amp;",
-      "<":"&lt;",
-      ">":"&gt;",
-      '"':"&quot;",
-      "'":"&#039;"
-    }[char])
-  );
-}
-
-function escapeAttr(value){
-  return escapeHtml(value);
-}
-
-loadProducts();
-</script>
 
 <div id="toast" class="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+const firebaseConfig={apiKey:"AIzaSyCC_gLPdruLlmCZJRiWWHjbrWlFvrhbfUA",authDomain:"kurdshein-4bf9a.firebaseapp.com",projectId:"kurdshein-4bf9a",storageBucket:"kurdshein-4bf9a.firebasestorage.app",messagingSenderId:"220960680097",appId:"1:220960680097:web:6cc4a238266e9e816368e0",measurementId:"G-T5R7YJ9TQS"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+const PRODUCT_COLLECTION="product";
+let products=[];
+let editingDocId=null;
+
+const $=id=>document.getElementById(id);
+const splitList=value=>String(value||"").split(",").map(x=>x.trim()).filter(Boolean);
+const imageList=value=>String(value||"").split(",").map(x=>x.trim()).filter(Boolean);
+function showToast(message){const t=$("toast");t.textContent=message;t.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove("show"),2500)}
+function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function escapeAttr(value){return escapeHtml(value)}
+
+window.loginAdmin=async function(){
+  const email=$("loginEmail").value.trim(),password=$("loginPassword").value;
+  const err=$("loginError");err.style.display="none";
+  if(!email||!password){err.textContent="Email و Password پڕ بکەرەوە.";err.style.display="block";return}
+  try{await signInWithEmailAndPassword(auth,email,password);showToast("بەخێربێیت ✓")}catch(e){err.textContent="چوونەژوورەوە سەرکەوتوو نەبوو.";err.style.display="block"}
+};
+window.logoutAdmin=async function(){await signOut(auth)};
+
+onAuthStateChanged(auth,user=>{
+  if(user){$("loginScreen").classList.remove("show");$("appShell").style.display="flex";loadProducts()}
+  else{$("appShell").style.display="none";$("loginScreen").classList.add("show")}
+});
+
+async function loadProducts(){
+  $("products").innerHTML="<div class='empty-state'><strong>چاوەڕێی داتا...</strong></div>";
+  try{
+    const snap=await getDocs(collection(db,PRODUCT_COLLECTION));
+    products=snap.docs.map(d=>({docId:d.id,...d.data()}));
+    renderProducts();updateStats();showToast("داتا لە Firestore ـەوە نوێکرایەوە ✓");
+  }catch(error){$("products").innerHTML="<div class='empty-state'><strong>❌ هەڵەی Firestore</strong><span>دڵنیابە لە collection ـی product و Rules.</span></div>"}
+}
+window.loadProducts=loadProducts;
+
+function renderProducts(){
+  const q=$("search").value.trim().toLowerCase();
+  const filtered=products.map((product,index)=>({product,index})).filter(({product})=>!q||String(product.DisplayName||"").toLowerCase().includes(q));
+  if(!filtered.length){$("products").innerHTML="<div class='empty-state'><strong>هیچ بەرهەمێک نەدۆزرایەوە.</strong><span>بەرهەمێکی نوێ زیاد بکە.</span></div>";return}
+  $("products").innerHTML=filtered.map(({product,index})=>{
+    const imgs=imageList(product.DescriptionMultiImage),image=product.DisplayImage||imgs[0]||"";
+    const active=product.Active!==false;
+    const stock=Number(product.Stock||0),price=Number(product.Price||0).toLocaleString(),old=Number(product.OldPrice||0)>0?Number(product.OldPrice).toLocaleString():"";
+    const cat=Array.isArray(product.Category)?product.Category.join(" • "):String(product.Category||"");
+    return `<article class="card"><div class="card-image-wrap"><img src="${escapeAttr(image)}" alt="${escapeAttr(product.DisplayName||"")}" onerror="this.style.opacity='.2'"><div class="card-image-fade"></div><span class="product-number">#${escapeHtml(product.ID||index+1)}</span></div><h3>${escapeHtml(product.DisplayName||"بێ ناو")}</h3><div class="meta"><div class="price-line"><span class="price">${price} د.ع</span>${old?`<span class="old-price">${old} د.ع</span>`:""}</div><div class="stock">📦 ستۆک: ${stock}</div>${cat?`<div>🏷️ ${escapeHtml(cat)}</div>`:""}</div><span class="status ${active?"active":"inactive"}">${active?"● چالاک":"● ناچالاک"}</span><div class="actions"><button class="primary" onclick="openEdit(${index})">✏️ دەستکاری</button><button class="red" onclick="deleteProduct(${index})">🗑️ سڕینەوە</button></div></article>`;
+  }).join("");
+}
+window.renderProducts=renderProducts;
+
+function clearForm(){["ID","DisplayName","Price","OldPrice","Category","Stock","Size","Colors","DisplayDescription","DescriptionDescription","DisplayImage","DescriptionMultiImage"].forEach(id=>$(id).value="");$("Stock").value="0";$("Active").value="true"}
+window.openAdd=function(){editingDocId=null;$("modalTitle").textContent="➕ بەرهەمی نوێ";clearForm();$("productModal").classList.add("show")};
+window.openEdit=function(index){const p=products[index];editingDocId=p.docId;$("modalTitle").textContent="✏️ دەستکاری بەرهەم";$("ID").value=p.ID||"";$("DisplayName").value=p.DisplayName||"";$("Price").value=p.Price??"";$("OldPrice").value=p.OldPrice??"";$("Category").value=Array.isArray(p.Category)?p.Category.join(", "):(p.Category||"");$("Stock").value=p.Stock??0;$("Active").value=p.Active===false?"false":"true";$("Size").value=Array.isArray(p.Size)?p.Size.join(", "):(p.Size||"");$("Colors").value=Array.isArray(p.Colors)?p.Colors.join(", "):(p.Colors||"");$("DisplayDescription").value=p.DisplayDescription||"";$("DescriptionDescription").value=p.DescriptionDescription||"";$("DisplayImage").value=p.DisplayImage||"";$("DescriptionMultiImage").value=Array.isArray(p.DescriptionMultiImage)?p.DescriptionMultiImage.join(", "):(p.DescriptionMultiImage||"");$("productModal").classList.add("show")};
+window.closeModal=function(){$("productModal").classList.remove("show")};
+
+window.saveProduct=async function(){
+  const product={ID:$("ID").value.trim(),DisplayName:$("DisplayName").value.trim(),DisplayDescription:$("DisplayDescription").value.trim(),DescriptionDescription:$("DescriptionDescription").value.trim(),Price:Number($("Price").value)||0,OldPrice:$("OldPrice").value===""?null:Number($("OldPrice").value)||0,DisplayImage:$("DisplayImage").value.trim(),DescriptionMultiImage:$("DescriptionMultiImage").value.trim(),Size:$("Size").value.trim(),Colors:$("Colors").value.trim(),Category:splitList($("Category").value),Stock:Math.max(0,Number($("Stock").value)||0),Active:$("Active").value==="true"};
+  if(!product.ID||!product.DisplayName||!product.DisplayImage){alert("ID، DisplayName و DisplayImage پێویستن.");return}
+  try{
+    if(editingDocId) await updateDoc(doc(db,PRODUCT_COLLECTION,editingDocId),product); else await addDoc(collection(db,PRODUCT_COLLECTION),product);
+    closeModal();await loadProducts();showToast("بەرهەم بە سەرکەوتوویی پاشەکەوتکرا ✓");
+  }catch(e){alert("نەتوانرا بەرهەم پاشەکەوت بکرێت. دڵنیابە لە Firebase Rules.")}
+};
+window.deleteProduct=async function(index){const p=products[index];if(!confirm("دڵنیایت دەتەوێت ئەم بەرهەمە بسڕیتەوە؟\n\n"+(p.DisplayName||"")))return;try{await deleteDoc(doc(db,PRODUCT_COLLECTION,p.docId));await loadProducts();showToast("بەرهەم سڕایەوە ✓")}catch(e){alert("نەتوانرا بەرهەم بسڕدرێتەوە.")}};
+function updateStats(){const total=products.length,active=products.filter(p=>p.Active!==false).length,low=products.filter(p=>Number(p.Stock||0)<=3).length;$("totalProducts").textContent=total;$("activeProducts").textContent=active;$("lowStockProducts").textContent=low;$("catalogCount").textContent=total}
+function downloadJSON(){const clean=products.map(({docId,...p})=>p);const blob=new Blob([JSON.stringify(clean,null,2)],{type:"application/json;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="products.json";a.click();URL.revokeObjectURL(url)}
+</script>
 </body>
 </html>

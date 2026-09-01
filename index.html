@@ -59,7 +59,23 @@ body.light .top-bar{background:linear-gradient(90deg,#e9eef5,#fff 50%,#cbd5e1)}
 .empty-products{grid-column:1/-1;text-align:center;padding:60px 20px;background:var(--surface);border:1px dashed var(--border);border-radius:18px;color:var(--muted)}
 .coming{max-width:1384px;width:calc(100% - 36px);margin:25px auto 0;padding:18px 20px;border-radius:16px;background:var(--surface);border:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:20px}.coming strong{font-size:15px}.coming span{color:var(--muted);font-size:12px}.coming-badge{background:var(--surface-2);padding:7px 11px;border-radius:999px;font-size:11px;color:var(--muted)}
 footer{margin-top:70px;background:var(--surface);border-top:1px solid var(--border);padding:42px max(20px,calc((100vw - 1384px)/2));display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:35px}.footer-brand{font-family:Arial;font-size:30px;font-weight:900}.footer-brand span{color:var(--red)}footer h3{font-size:14px;margin-bottom:13px}footer p,footer li{color:var(--muted);font-size:12px;line-height:2}footer ul{list-style:none}.footer-bottom{grid-column:1/-1;border-top:1px solid var(--border);padding-top:17px;color:var(--muted);font-size:11px;text-align:center}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;z-index:5000;padding:16px}.modal.show{display:flex}.modal-box{width:100%;max-width:540px;max-height:94vh;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.4);position:relative}.modal-title{text-align:center;font-size:22px;margin-bottom:18px}.close-button{position:absolute;top:13px;left:13px;width:35px;height:35px;border-radius:11px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:20px}.product-details-box{max-width:900px}.product-main-stage{position:relative;overflow:hidden;border-radius:15px;background:var(--surface-2);touch-action:pan-y}.main-product-image{width:100%;height:430px;object-fit:contain;border-radius:15px;background:var(--surface-2);display:block;user-select:none;-webkit-user-drag:none}.details-content{margin-top:18px;direction:rtl}.details-content h2{margin-bottom:7px}.details-description{color:var(--muted);line-height:1.9;margin-bottom:15px}.option-title{margin:15px 0 9px;font-size:14px}.option-buttons{display:flex;flex-wrap:wrap;gap:8px}.option-button{background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:9px 14px;cursor:pointer}.option-button.selected{background:var(--green);border-color:var(--green);color:#fff}.detail-price{color:var(--yellow);font:800 22px Arial;margin:18px 0}.big-add{width:100%;background:var(--red);color:#fff;border:0;padding:14px;border-radius:11px;font-weight:800}.form-group{margin-bottom:13px}.form-group label{display:block;margin-bottom:6px;font-size:13px}.form-group input,.form-group textarea{width:100%;background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;outline:none}.form-group input:focus,.form-group textarea:focus{border-color:var(--red)}.form-group textarea{min-height:90px;resize:vertical}.form-button{width:100%;padding:13px;border:0;border-radius:10px;color:#fff;background:var(--red);font-weight:800;margin-top:7px}.secondary-button{background:var(--surface-2);border:1px solid var(--border);color:var(--text)}.cart-items{max-height:330px;overflow-y:auto;margin-bottom:15px}.cart-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px;background:var(--surface-2);border:1px solid var(--border);border-radius:11px;margin-bottom:8px}.cart-total{border-top:1px solid var(--border);padding-top:15px;text-align:center;font-size:18px;color:var(--yellow);margin-bottom:10px}.order-summary{background:var(--surface-2);border-radius:11px;padding:12px;margin-bottom:18px}.order-summary-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}.order-summary-item:last-child{border-bottom:0}.favorite-product{display:flex;align-items:center;gap:10px;background:var(--surface-2);padding:9px;border-radius:10px;margin-bottom:9px}.favorite-product img{width:65px;height:65px;border-radius:8px;object-fit:cover}.favorite-product-info{flex:1}.cart-message{position:fixed;bottom:24px;left:50%;transform:translate(-50%,120px);background:var(--surface);border:1px solid var(--border);padding:12px 20px;border-radius:999px;z-index:9000;transition:.3s;box-shadow:var(--shadow);font-size:13px}.cart-message.show{transform:translate(-50%,0)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;z-index:5000;padding:16px}.modal.show{display:flex}.modal-box{width:100%;max-width:540px;max-height:94vh;overflow-y:auto;background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:24px;box-shadow:0 25px 80px rgba(0,0,0,.4);position:relative}.modal-title{text-align:center;font-size:22px;margin-bottom:18px}.close-button{position:absolute;top:13px;left:13px;width:35px;height:35px;border-radius:11px;border:1px solid var(--border);background:var(--surface-2);color:var(--text);font-size:20px}.product-details-box{max-width:900px}.product-main-stage{position:relative;overflow:hidden;border-radius:15px;background:var(--surface-2);touch-action:pan-y}.main-product-image{width:100%;height:430px;object-fit:contain;border-radius:15px;background:var(--surface-2);display:block;user-select:none;-webkit-user-drag:none}.details-content{margin-top:18px;direction:rtl}.details-content h2{margin-bottom:7px}.details-description{color:var(--muted);line-height:1.9;margin-bottom:15px}.option-title{margin:15px 0 9px;font-size:14px}.option-buttons{display:flex;flex-wrap:wrap;gap:8px}.option-button{background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:9px;padding:9px 14px;cursor:pointer}.option-button.selected{background:var(--green);border-color:var(--green);color:#fff}.detail-price{color:var(--yellow);font:800 22px Arial;margin:18px 0}.big-add{width:100%;background:var(--red);color:#fff;border:0;padding:14px;border-radius:11px;font-weight:800}.form-group{margin-bottom:13px}.form-group label{display:block;margin-bottom:6px;font-size:13px}.form-group input,.form-group textarea{width:100%;background:var(--surface-2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;outline:none}.form-group input:focus,.form-group textarea:focus{border-color:var(--red)}.form-group textarea{min-height:90px;resize:vertical}.form-button{width:100%;padding:13px;border:0;border-radius:10px;color:#fff;background:var(--red);font-weight:800;margin-top:7px}.secondary-button{background:var(--surface-2);border:1px solid var(--border);color:var(--text)}.cart-items{max-height:330px;overflow-y:auto;margin-bottom:15px}.cart-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:13px;background:var(--surface-2);border:1px solid var(--border);border-radius:11px;margin-bottom:8px}.cart-total{border-top:1px solid var(--border);padding-top:15px;text-align:center;font-size:18px;color:var(--yellow);margin-bottom:10px}.order-summary{background:var(--surface-2);border-radius:11px;padding:12px;margin-bottom:18px}.order-summary-item{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)}.order-summary-item:last-child{border-bottom:0}.favorite-product{display:flex;align-items:center;gap:10px;background:var(--surface-2);padding:9px;border-radius:10px;margin-bottom:9px}.favorite-product img{width:65px;height:65px;border-radius:8px;object-fit:cover}.favorite-product-info{flex:1}
+.customer-account-box{max-width:620px}
+.customer-account-status{background:var(--surface-2);border:1px solid var(--border);border-radius:15px;padding:14px;margin-bottom:12px;line-height:1.8}
+.customer-account-status strong{font-size:15px}
+.customer-account-menu{width:100%;text-align:right;background:var(--surface-2);border:1px solid var(--border);color:var(--text);border-radius:13px;padding:13px;margin-top:8px;font-weight:800}
+.customer-account-menu:hover{border-color:var(--red);background:var(--surface-3)}
+.customer-account-note{text-align:center;color:var(--muted);font-size:12px;line-height:1.8;margin:8px 0 14px}
+.customer-order-card{background:var(--surface-2);border:1px solid var(--border);border-radius:15px;padding:13px;margin-bottom:10px}
+.customer-order-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:9px}
+.customer-order-number{font-weight:900}
+.customer-order-items{color:var(--muted);font-size:12px;line-height:1.8}
+.customer-order-total{margin-top:9px;font-weight:900;color:var(--yellow)}
+.customer-order-meta{color:var(--muted);font-size:10px;margin-top:6px}
+.customer-order-status{font-size:10px;padding:5px 8px;border-radius:999px;background:rgba(49,152,255,.12);color:#75b9ff;white-space:nowrap}
+.customer-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+@media(max-width:600px){.customer-profile-grid{grid-template-columns:1fr}}
+.cart-message{position:fixed;bottom:24px;left:50%;transform:translate(-50%,120px);background:var(--surface);border:1px solid var(--border);padding:12px 20px;border-radius:999px;z-index:9000;transition:.3s;box-shadow:var(--shadow);font-size:13px}.cart-message.show{transform:translate(-50%,0)}
 @media(max-width:1050px){.main-header{grid-template-columns:1fr auto}.brand-note{display:none}.search{grid-column:1/-1;grid-row:2}.trust{grid-template-columns:repeat(2,1fr)}.products{grid-template-columns:repeat(3,1fr)}footer{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:700px){.brand-row{padding:14px}.brand{font-size:38px}.brand-mark{width:34px;height:34px;font-size:16px}.main-header{padding:9px 12px;grid-template-columns:1fr auto;gap:9px}.header-actions{gap:5px}.header-button{width:40px;height:40px}.trust{padding:0 12px;grid-template-columns:1fr 1fr}.trust-card{padding:11px}.section-head{padding:0 12px}.categories{padding:0 12px}.products,.coming{width:calc(100% - 24px)}.products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-image{height:205px}.product-info{padding:11px}.product-name{font-size:13px}.product-description{font-size:11px;min-height:36px}.price{font-size:14px}.add-cart{font-size:12px;padding:10px}.main-product-image{height:320px}.modal-box{padding:20px 15px}.coming{align-items:flex-start;flex-direction:column}footer{grid-template-columns:1fr;padding:32px 20px}.footer-bottom{grid-column:auto}}@media(max-width:390px){.products{grid-template-columns:1fr}.product-image{height:250px}.trust{grid-template-columns:1fr}.header-actions .header-button{width:38px;height:38px}}
 
@@ -784,6 +800,13 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 </span>
 <span class="ks-fav-count" id="ksMenuFavoriteCount">0</span>
 </button>
+<button class="ks-option" onclick="closeSideMenu();openCustomerAccount()" type="button">
+<span class="ks-option-icon">👤</span>
+<span class="ks-option-copy">
+<strong>هەژماری من</strong>
+<small>هەژمار و مێژووی ئۆردەرەکانت</small>
+</span>
+</button>
 </div>
 <div class="ks-menu-footer">
 <strong>KurdShein</strong>
@@ -1024,6 +1047,21 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <div id="favoritesList"></div>
 </div>
 </div>
+<div class="modal" id="customerAccountModal" onclick="closeOutside(event,'customerAccountModal')">
+<div class="modal-box customer-account-box">
+<button class="close-button" onclick="closeModal('customerAccountModal')">×</button>
+<h2 class="modal-title">👤 هەژماری من</h2>
+<div id="customerAccountContent"></div>
+</div>
+</div>
+
+<div class="modal" id="customerOrdersModal" onclick="closeOutside(event,'customerOrdersModal')">
+<div class="modal-box customer-account-box">
+<button class="close-button" onclick="closeModal('customerOrdersModal')">×</button>
+<h2 class="modal-title">📦 ئۆردەرەکانم</h2>
+<div id="customerOrdersList"></div>
+</div>
+</div>
 <script>
 /* ================= GLOBAL DATA ================= */
 let cart = JSON.parse(localStorage.getItem("kurdSheinCart") || "[]");
@@ -1236,6 +1274,12 @@ window.startOrder = function() {
         alert("سەبەتەکەت بەتاڵە. تکایە سەرەتا بەرهەم زیاد بکە.");
         return;
     }
+    if (!window.getKurdSheinCustomerUser || !window.getKurdSheinCustomerUser()) {
+        closeModal("cartModal");
+        alert("تکایە سەرەتا هەژمارێک دروست بکە یان بچۆ ژوورەوە بۆ ئەوەی ئۆردەرەکانت لە «ئۆردەرەکانم» هەڵبگیرێن.");
+        window.openCustomerAccount();
+        return;
+    }
     closeModal("cartModal");
     renderOrderSummary();
     openModal("orderModal");
@@ -1282,8 +1326,15 @@ window.submitOrderToAdmin = async function() {
 
         const orderNumber = `KS-${new Date().toISOString().slice(0,10).replace(/-/g,"")}-${Math.random().toString(36).slice(2,7).toUpperCase()}`;
 
+        const customerUser = window.getKurdSheinCustomerUser ? window.getKurdSheinCustomerUser() : null;
+        if (!customerUser) {
+            throw new Error("CUSTOMER_LOGIN_REQUIRED");
+        }
+
         await window.saveKurdSheinOrder({
             orderNumber,
+            userId: customerUser.uid,
+            customerEmail: customerUser.email || "",
             customerName: name,
             customerPhone: phone,
             city,
@@ -2089,6 +2140,339 @@ async function loadStoreProductsFromFirestore() {
 }
 
 loadStoreProductsFromFirestore();
+</script>
+
+
+<script type="module">
+/* ================= CUSTOMER ACCOUNTS =================
+   Uses the same Firebase project as the storefront/admin.
+   Auth: Firebase Authentication
+   Profile: users/{uid}
+   Orders: orders/{orderId} with userId = Firebase Auth UID
+========================================================= */
+import { getApps, getApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+  sendPasswordResetEmail
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  addDoc,
+  query,
+  where,
+  getDocs,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+const customerApp = getApps().length ? getApp() : null;
+const customerAuth = getAuth(customerApp);
+const customerDb = getFirestore(customerApp);
+
+let customerUser = null;
+
+window.getKurdSheinCustomerUser = () => customerUser;
+
+const customerEsc = value => String(value ?? "").replace(/[&<>"']/g, ch => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"
+}[ch]));
+
+const customerMoney = value => Number(value || 0).toLocaleString("en-US") + " د.ع";
+
+const customerStatus = status => ({
+  pending:"چاوەڕوان",
+  confirmed:"پشتڕاستکراوە",
+  processing:"لە کاردایە",
+  shipped:"نێردراوە",
+  delivered:"گەیشتووە",
+  cancelled:"هەڵوەشێنراوە"
+}[status] || "چاوەڕوان");
+
+function customerDate(value) {
+  try {
+    const d = value?.toDate ? value.toDate() : new Date(value);
+    return isNaN(d) ? "—" : d.toLocaleString("ku-IQ", {dateStyle:"medium", timeStyle:"short"});
+  } catch {
+    return "—";
+  }
+}
+
+async function loadCustomerProfile() {
+  if (!customerUser) return {};
+  const snap = await getDoc(doc(customerDb, "users", customerUser.uid));
+  return snap.exists() ? snap.data() : {};
+}
+
+window.openCustomerAccount = async function() {
+  await renderCustomerAccount();
+  openModal("customerAccountModal");
+};
+
+async function renderCustomerAccount() {
+  const box = document.getElementById("customerAccountContent");
+  if (!box) return;
+
+  if (!customerUser) {
+    box.innerHTML = `
+      <div class="customer-account-note">
+        هەژمارێک دروست بکە بۆ ئەوەی زانیارییەکانت و مێژووی ئۆردەرەکانت لە هەموو جارێکدا هەڵبگیرێن.
+      </div>
+
+      <div class="form-group">
+        <label>ناوی تەواو</label>
+        <input id="customerRegisterName" type="text" placeholder="ناوی تەواو">
+      </div>
+
+      <div class="form-group">
+        <label>ژمارەی تەلەفۆن</label>
+        <input id="customerRegisterPhone" type="tel" placeholder="07xxxxxxxxx">
+      </div>
+
+      <div class="form-group">
+        <label>ئیمەیڵ</label>
+        <input id="customerAuthEmail" type="email" autocomplete="email" placeholder="example@email.com">
+      </div>
+
+      <div class="form-group">
+        <label>وشەی نهێنی</label>
+        <input id="customerAuthPassword" type="password" autocomplete="new-password" placeholder="لانیکەم 6 پیت">
+      </div>
+
+      <button class="form-button" onclick="registerCustomer()">👤 دروستکردنی هەژمار</button>
+      <button class="form-button secondary-button" onclick="loginCustomer()">🔐 چوونەژوورەوە</button>
+      <button class="form-button secondary-button" onclick="resetCustomerPassword()">📧 لەبیرکردنەوەی وشەی نهێنی</button>
+    `;
+    return;
+  }
+
+  const profile = await loadCustomerProfile();
+  box.innerHTML = `
+    <div class="customer-account-status">
+      <div>👋 بەخێربێیت</div>
+      <strong>${customerEsc(profile.name || customerUser.email || "کڕیار")}</strong>
+      <div style="color:var(--muted);font-size:11px">${customerEsc(customerUser.email || "")}</div>
+    </div>
+
+    <div class="customer-profile-grid">
+      <div class="form-group">
+        <label>ناو</label>
+        <input id="customerProfileName" value="${customerEsc(profile.name || "")}" placeholder="ناوی تەواو">
+      </div>
+      <div class="form-group">
+        <label>تەلەفۆن</label>
+        <input id="customerProfilePhone" value="${customerEsc(profile.phone || "")}" placeholder="07xxxxxxxxx">
+      </div>
+      <div class="form-group" style="grid-column:1/-1">
+        <label>ناونیشانی پێشگریمانە</label>
+        <textarea id="customerProfileAddress" placeholder="ناونیشانی تەواو">${customerEsc(profile.address || "")}</textarea>
+      </div>
+    </div>
+
+    <button class="form-button" onclick="saveCustomerProfile()">💾 پاشەکەوتکردنی زانیاری</button>
+    <button class="customer-account-menu" onclick="openCustomerOrders()">📦 ئۆردەرەکانم</button>
+    <button class="customer-account-menu" onclick="resetCustomerPassword()">🔑 گۆڕینی وشەی نهێنی</button>
+    <button class="customer-account-menu" onclick="logoutCustomer()">🚪 چوونەدەرەوە</button>
+  `;
+}
+
+window.registerCustomer = async function() {
+  const name = document.getElementById("customerRegisterName")?.value.trim() || "";
+  const phone = document.getElementById("customerRegisterPhone")?.value.trim() || "";
+  const email = document.getElementById("customerAuthEmail")?.value.trim() || "";
+  const password = document.getElementById("customerAuthPassword")?.value || "";
+
+  if (!name || !email || !password) {
+    alert("تکایە ناو، ئیمەیڵ و وشەی نهێنی پڕ بکەرەوە.");
+    return;
+  }
+
+  try {
+    const result = await createUserWithEmailAndPassword(customerAuth, email, password);
+    customerUser = result.user;
+
+    await setDoc(doc(customerDb, "users", customerUser.uid), {
+      name,
+      phone,
+      email,
+      address: "",
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp()
+    }, {merge:true});
+
+    await renderCustomerAccount();
+    alert("✅ هەژمارەکەت بە سەرکەوتوویی دروستکرا.");
+  } catch (error) {
+    console.error(error);
+    alert(customerAuthError(error.code));
+  }
+};
+
+window.loginCustomer = async function() {
+  const email = document.getElementById("customerAuthEmail")?.value.trim() || "";
+  const password = document.getElementById("customerAuthPassword")?.value || "";
+
+  if (!email || !password) {
+    alert("تکایە ئیمەیڵ و وشەی نهێنی پڕ بکەرەوە.");
+    return;
+  }
+
+  try {
+    await signInWithEmailAndPassword(customerAuth, email, password);
+    alert("✅ بە سەرکەوتوویی چوویتە ژوورەوە.");
+  } catch (error) {
+    console.error(error);
+    alert(customerAuthError(error.code));
+  }
+};
+
+window.saveCustomerProfile = async function() {
+  if (!customerUser) return;
+  const name = document.getElementById("customerProfileName")?.value.trim() || "";
+  const phone = document.getElementById("customerProfilePhone")?.value.trim() || "";
+  const address = document.getElementById("customerProfileAddress")?.value.trim() || "";
+
+  if (!name) {
+    alert("تکایە ناوت پڕ بکەرەوە.");
+    return;
+  }
+
+  try {
+    await setDoc(doc(customerDb, "users", customerUser.uid), {
+      name, phone, address,
+      email: customerUser.email || "",
+      updatedAt: serverTimestamp()
+    }, {merge:true});
+
+    alert("✅ زانیارییەکانت پاشەکەوت کران.");
+    await renderCustomerAccount();
+  } catch (error) {
+    console.error(error);
+    alert("پاشەکەوتکردنی زانیارییەکان سەرکەوتوو نەبوو.");
+  }
+};
+
+window.resetCustomerPassword = async function() {
+  const email = customerUser?.email || document.getElementById("customerAuthEmail")?.value.trim() || "";
+  if (!email) {
+    alert("تکایە سەرەتا ئیمەیڵەکەت بنووسە.");
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(customerAuth, email);
+    alert("📧 لینکی گۆڕینی وشەی نهێنی بۆ ئیمەیڵەکەت نێردرا.");
+  } catch (error) {
+    console.error(error);
+    alert(customerAuthError(error.code));
+  }
+};
+
+window.logoutCustomer = async function() {
+  try {
+    await signOut(customerAuth);
+    closeModal("customerAccountModal");
+    closeModal("customerOrdersModal");
+    alert("👋 بە سەرکەوتوویی چوویتە دەرەوە.");
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+window.openCustomerOrders = async function() {
+  if (!customerUser) {
+    closeModal("customerAccountModal");
+    window.openCustomerAccount();
+    return;
+  }
+
+  closeModal("customerAccountModal");
+  openModal("customerOrdersModal");
+
+  const list = document.getElementById("customerOrdersList");
+  list.innerHTML = `<div class="empty-cart"><strong>⏳ چاوەڕێ بکە...</strong></div>`;
+
+  try {
+    // We filter by userId and sort locally, so no composite Firestore index is needed.
+    const snap = await getDocs(query(
+      collection(customerDb, "orders"),
+      where("userId", "==", customerUser.uid)
+    ));
+
+    const orders = snap.docs
+      .map(d => ({id:d.id, ...d.data()}))
+      .sort((a,b) => {
+        const ad = a.createdAt?.toDate ? a.createdAt.toDate().getTime() : new Date(a.createdAt || 0).getTime();
+        const bd = b.createdAt?.toDate ? b.createdAt.toDate().getTime() : new Date(b.createdAt || 0).getTime();
+        return bd - ad;
+      });
+
+    if (!orders.length) {
+      list.innerHTML = `<div class="empty-cart"><strong>هێشتا هیچ ئۆردەرێکت نییە 📦</strong><span>کاتێک یەکەم داواکارییەکەت بنێریت، لێرە دەردەکەوێت.</span></div>`;
+      return;
+    }
+
+    list.innerHTML = orders.map(order => {
+      const items = Array.isArray(order.items) ? order.items : [];
+      const itemText = items.map(item =>
+        `${customerEsc(item.name || "بەرهەم")} × ${Number(item.quantity || 1).toLocaleString()}`
+      ).join("، ");
+
+      return `
+        <div class="customer-order-card">
+          <div class="customer-order-head">
+            <span class="customer-order-number">📦 ${customerEsc(order.orderNumber || order.id.slice(0,8))}</span>
+            <span class="customer-order-status">${customerEsc(customerStatus(order.status))}</span>
+          </div>
+          <div class="customer-order-items">${itemText || "بەرهەمەکان دیار نیین"}</div>
+          <div class="customer-order-total">کۆی گشتی: ${customerMoney(order.total)}</div>
+          <div class="customer-order-meta">
+            ${customerEsc(order.city || "")} · ${customerEsc(customerDate(order.createdAt))}
+          </div>
+        </div>
+      `;
+    }).join("");
+  } catch (error) {
+    console.error(error);
+    list.innerHTML = `<div class="empty-cart"><strong>نەتوانرا ئۆردەرەکان بار بکرێن.</strong><span>تکایە ڕێکخستنەکانی Firestore بپشکنە.</span></div>`;
+  }
+};
+
+function customerAuthError(code) {
+  return ({
+    "auth/email-already-in-use":"ئەم ئیمەیڵە پێشتر بەکارهاتووە.",
+    "auth/invalid-email":"ئیمەیڵەکە دروست نییە.",
+    "auth/weak-password":"وشەی نهێنی دەبێت لانیکەم ٦ پیت بێت.",
+    "auth/invalid-credential":"ئیمەیڵ یان وشەی نهێنی هەڵەیە.",
+    "auth/user-not-found":"ئەم هەژمارەیە نەدۆزرایەوە.",
+    "auth/wrong-password":"وشەی نهێنی هەڵەیە."
+  }[code] || "هەڵەیەک ڕوویدا. تکایە دووبارە هەوڵ بدەوە.");
+}
+
+onAuthStateChanged(customerAuth, async user => {
+  customerUser = user || null;
+
+  if (customerUser) {
+    try {
+      const profile = await loadCustomerProfile();
+      // Pre-fill checkout fields from the customer's saved profile.
+      const name = document.getElementById("customerName");
+      const phone = document.getElementById("customerPhone");
+      const address = document.getElementById("customerAddress");
+      if (name && !name.value) name.value = profile.name || "";
+      if (phone && !phone.value) phone.value = profile.phone || "";
+      if (address && !address.value) address.value = profile.address || "";
+    } catch (e) {
+      console.error(e);
+    }
+  }
+});
 </script>
 
 </body>

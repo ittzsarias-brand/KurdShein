@@ -463,8 +463,12 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   .details-description{
     font-size:13px !important;
     line-height:1.8 !important;
-    max-height:150px;
-    overflow:auto;
+    max-height:none !important;
+    overflow:visible !important;
+    height:auto !important;
+    display:block !important;
+    white-space:pre-wrap !important;
+    word-break:break-word !important;
   }
   .option-title{
     font-size:12px;
@@ -522,6 +526,9 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   }
   .details-description{
     font-size:12px !important;
+    max-height:none !important;
+    overflow:visible !important;
+    height:auto !important;
   }
   .big-add{
     font-size:12px !important;

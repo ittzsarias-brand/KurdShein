@@ -934,8 +934,13 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <div class="modal" id="productModal" onclick="closeOutside(event,'productModal')">
 <div class="modal-box product-details-box">
 <button class="close-button" onclick="closeModal('productModal')">×</button>
-<div class="product-main-stage">
+<div class="product-gallery">
+<div class="product-main-stage" id="productMainStage">
+<button class="gallery-arrow gallery-prev" id="galleryPrev" type="button" aria-label="وێنەی پێشوو" onclick="galleryStep(-1);event.stopPropagation()">‹</button>
 <img alt="" class="main-product-image" draggable="false" id="mainProductImage" src=""/>
+<button class="gallery-arrow gallery-next" id="galleryNext" type="button" aria-label="وێنەی دواتر" onclick="galleryStep(1);event.stopPropagation()">›</button>
+</div>
+<div class="product-thumbnails" id="productThumbnails" aria-label="وێنەکانی بەرهەم"></div>
 </div>
 <div class="details-content">
 <h2 id="detailName"></h2>

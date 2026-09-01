@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-01T17:46:06.339Z",
+  "updatedAt": "2026-09-01T17:54:45.282Z",
   "products": [
     {
       "id": "product-1",
@@ -209,8 +209,8 @@
     },
     {
       "id": "product-1788284716017",
-      "name": "Test2",
-      "displayName": "Test2",
+      "name": "Test1",
+      "displayName": "Test1",
       "description": "Test",
       "displayDescription": "Test",
       "price": 10,
@@ -229,7 +229,7 @@
         "IMG_1235.jpeg",
         "IMG_1234.jpeg"
       ],
-      "mainImage": "IMG_1234.jpeg",
+      "mainImage": "https://share.google/rzrBW6m5lqgSuQob4",
       "active": true
     }
   ]

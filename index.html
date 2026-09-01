@@ -618,6 +618,9 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 .close-button{display:grid !important;place-items:center !important;z-index:9999 !important;opacity:1 !important;visibility:visible !important;background:var(--surface-2) !important;color:var(--text) !important;border:2px solid rgba(255,255,255,.28) !important;box-shadow:0 5px 18px rgba(0,0,0,.35) !important}
 .detail-quantity-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px}.detail-quantity-label{font-size:13px;font-weight:800;white-space:nowrap}.detail-quantity-control{display:flex;align-items:center;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);overflow:hidden;height:44px}.detail-qty-btn{width:42px;height:44px;border:0;background:transparent;color:var(--text);font-size:21px;font-weight:900}.detail-qty-btn:hover{background:var(--surface-3);color:var(--yellow)}#detailQuantity{width:45px;height:44px;border:0;border-left:1px solid var(--border);border-right:1px solid var(--border);background:transparent;color:var(--text);text-align:center;font-weight:900;outline:0}.detail-quantity-row .big-add{flex:1;margin:0}.favorite-product .favorite-view-button{display:grid;place-items:center;min-width:42px;height:42px;font-size:20px}.cart-item-premium{display:grid !important;grid-template-columns:58px minmax(0,1fr) auto;gap:12px !important}.cart-item-image{width:58px;height:58px;border-radius:13px;object-fit:cover;background:var(--surface-3);border:1px solid var(--border)}.cart-header-summary{display:flex;justify-content:space-between;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:11px 13px;margin-bottom:12px;font-size:12px;color:var(--muted)}.cart-header-summary strong{color:var(--text);font-size:14px}.cart-item-main{min-width:0}
 @media(max-width:600px){.detail-quantity-row{flex-wrap:wrap}.detail-quantity-row .big-add{width:100%;flex-basis:100%}.cart-item-premium{grid-template-columns:50px minmax(0,1fr)}.cart-item-actions{grid-column:1/-1;justify-content:flex-start}.cart-item-image{width:50px;height:50px}}
+/* ================= PROFESSIONAL CART ================= */
+.cart-topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:4px}.cart-topbar .modal-title{margin-bottom:3px;text-align:right}.cart-topbar .cart-subtitle{text-align:right;margin:0}.cart-clear-button{border:1px solid var(--border);background:transparent;color:var(--muted);border-radius:10px;padding:8px 11px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}.cart-clear-button:hover{color:var(--red);border-color:var(--red);background:rgba(229,28,42,.06)}#cartModal .modal-box{max-width:680px;padding:22px}#cartModal .cart-items{max-height:430px;padding:2px 2px 4px;margin:12px 0 0}.cart-item-premium{background:var(--surface-2);border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.04);transition:border-color .2s,transform .2s,box-shadow .2s}.cart-item-premium:hover{border-color:rgba(229,28,42,.28);transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.07)}.cart-item-main{direction:rtl;text-align:right}.cart-item-main strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cart-options{display:flex;justify-content:flex-start;gap:6px;direction:rtl}.cart-options span{background:var(--surface-3);border:1px solid var(--border);border-radius:7px;padding:3px 6px}.cart-item-actions{direction:ltr}.qty-button:disabled{opacity:.35;cursor:not-allowed}.cart-checkout-panel{border-top:1px solid var(--border);margin-top:9px;padding-top:13px}.cart-total-row{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;padding:4px 0}.cart-total-row strong{color:var(--text);font-family:Arial,sans-serif}.cart-grand-total{margin-top:4px;padding:11px 0 13px;font-size:17px;font-weight:900}.cart-grand-total strong{color:var(--yellow);font-size:21px}.cart-actions{display:grid;grid-template-columns:1fr 1.35fr;gap:9px}.cart-actions button{min-height:46px}.cart-continue-button{border:1px solid var(--border);background:var(--surface-2);color:var(--text);border-radius:10px;font-weight:800;cursor:pointer}.cart-continue-button:hover{border-color:var(--yellow);transform:translateY(-1px)}.cart-checkout-button{margin-top:0;display:flex;align-items:center;justify-content:center;gap:10px}.cart-checkout-button span{font-size:18px}.empty-cart{min-height:300px;border:1px dashed var(--border);border-radius:16px;background:var(--surface-2)}
+@media(max-width:600px){#cartModal{padding:0;align-items:flex-end}#cartModal .modal-box{max-width:none;width:100%;max-height:90vh;border-radius:26px 26px 0 0;padding:20px 14px 14px}.cart-topbar{padding:0 3px}.cart-clear-button{padding:7px 9px}.cart-item-premium{grid-template-columns:52px minmax(0,1fr);padding:12px}.cart-item-actions{grid-column:1/-1;justify-content:flex-end}.cart-checkout-panel{padding-bottom:env(safe-area-inset-bottom)}.cart-actions{grid-template-columns:1fr 1.25fr}.cart-items{scrollbar-width:none}}
 
 /* ===== FINAL PRODUCT DESCRIPTION IMAGE FIX ===== */
 .product-details-box .product-main-stage{
@@ -969,10 +972,22 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <div class="modal" id="cartModal" onclick="closeOutside(event,'cartModal')">
 <div class="modal-box">
 <button class="close-button" onclick="closeModal('cartModal')">×</button>
-<h2 class="modal-title">🛒 سەبەتەکەت</h2><p class="cart-subtitle">بەرهەمە هەڵبژێردراوەکانت لێرەیە</p>
+<div class="cart-topbar">
+<div>
+<h2 class="modal-title">🛒 سەبەتەکەت</h2>
+<p class="cart-subtitle">بەرهەمە هەڵبژێردراوەکانت لێرەیە</p>
+</div>
+<button class="cart-clear-button" id="clearCartButton" onclick="clearCart()" type="button">پاککردنەوە</button>
+</div>
 <div class="cart-items" id="cartItems"></div>
-<div class="cart-total" id="cartTotal">کۆی گشتی: ٠ د.ع</div>
-<button class="form-button" onclick="startOrder()">✅ تەواوکردنی داواکاری</button>
+<div class="cart-checkout-panel">
+<div class="cart-total-row"><span>کۆی کاڵاکان</span><strong id="cartSubtotal">٠ د.ع</strong></div>
+<div class="cart-total-row cart-grand-total"><span>کۆی گشتی</span><strong id="cartTotal">٠ د.ع</strong></div>
+<div class="cart-actions">
+<button class="cart-continue-button" onclick="closeModal('cartModal')" type="button">← بەردەوامبوون لە کڕین</button>
+<button class="form-button cart-checkout-button" onclick="startOrder()" type="button">تەواوکردنی داواکاری <span>→</span></button>
+</div>
+</div>
 </div>
 </div>
 <div class="modal" id="orderModal" onclick="closeOutside(event,'orderModal')">
@@ -1155,10 +1170,13 @@ function updateCart() {
 
     if (!cart.length) {
         box.innerHTML = `<div class="empty-cart"><div class="empty-cart-icon">🛒</div><strong>سەبەتەکەت بەتاڵە</strong><span>بەرهەمێک زیاد بکە بۆ دەستپێکردن</span></div>`;
-        document.getElementById("cartTotal").innerText = "کۆی گشتی: ٠ د.ع";
+        document.getElementById("cartTotal").innerText = "٠ د.ع";
+        document.getElementById("cartSubtotal").innerText = "٠ د.ع";
+        document.getElementById("clearCartButton").style.display = "none";
         modalBox?.querySelector(".cart-header-summary")?.remove();
         return;
     }
+    document.getElementById("clearCartButton").style.display = "block";
 
     if (modalBox && !modalBox.querySelector(".cart-header-summary")) {
         const summary = document.createElement("div");
@@ -1197,8 +1215,16 @@ function updateCart() {
             </div>`;
         box.appendChild(div);
     });
-    document.getElementById("cartTotal").innerText = "کۆی گشتی: " + total.toLocaleString() + " د.ع";
+    document.getElementById("cartSubtotal").innerText = total.toLocaleString() + " د.ع";
+    document.getElementById("cartTotal").innerText = total.toLocaleString() + " د.ع";
 }
+window.clearCart = function() {
+    if (!cart.length) return;
+    if (!confirm("دڵنیایت دەتەوێت هەموو بەرهەمەکانی سەبەتە بسڕیتەوە؟")) return;
+    cart = [];
+    saveCart();
+    updateCart();
+};
 window.removeFromCart = function(index) {
     cart.splice(index, 1);
     saveCart();

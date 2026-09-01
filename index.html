@@ -1036,7 +1036,16 @@ document.addEventListener("gesturechange", function(e){ e.preventDefault(); }, {
 <div class="modal-box customer-account-box">
 <button class="close-button" onclick="window.closeModal('customerAccountModal')">×</button>
 <h2 class="modal-title">👤 هەژماری من</h2>
-<div id="customerAccountContent"></div>
+<div id="customerAccountContent">
+  <div class="customer-account-note">هەژمارێک دروست بکە بۆ ئەوەی زانیارییەکانت و مێژووی ئۆردەرەکانت هەڵبگیرێن.</div>
+  <div class="form-group"><label>ناوی تەواو</label><input id="customerRegisterName" type="text" placeholder="ناوی تەواو"></div>
+  <div class="form-group"><label>ژمارەی تەلەفۆن</label><input id="customerRegisterPhone" type="tel" placeholder="07xxxxxxxxx"></div>
+  <div class="form-group"><label>ئیمەیڵ</label><input id="customerAuthEmail" type="email" autocomplete="email" placeholder="example@email.com"></div>
+  <div class="form-group"><label>وشەی نهێنی</label><input id="customerAuthPassword" type="password" autocomplete="new-password" placeholder="لانیکەم 6 پیت"></div>
+  <button class="form-button" type="button" onclick="window.registerCustomer && window.registerCustomer()">👤 دروستکردنی هەژمار</button>
+  <button class="form-button secondary-button" type="button" onclick="window.loginCustomer && window.loginCustomer()">🔐 چوونەژوورەوە</button>
+  <button class="form-button secondary-button" type="button" onclick="window.resetCustomerPassword && window.resetCustomerPassword()">📧 لەبیرکردنەوەی وشەی نهێنی</button>
+</div>
 </div>
 </div>
 
@@ -2263,6 +2272,21 @@ window.openCustomerAccount = async function() {
   const modal = document.getElementById("customerAccountModal");
   if (modal) window.openModal("customerAccountModal");
   try {
+    if (!customerUser) {
+      // Keep the sign-up/sign-in form visible even while Firebase Auth initializes.
+      const box = document.getElementById("customerAccountContent");
+      if (box && !box.querySelector("#customerAuthEmail")) {
+        box.innerHTML = `
+          <div class="customer-account-note">هەژمارێک دروست بکە بۆ ئەوەی زانیارییەکانت و مێژووی ئۆردەرەکانت هەڵبگیرێن.</div>
+          <div class="form-group"><label>ناوی تەواو</label><input id="customerRegisterName" type="text" placeholder="ناوی تەواو"></div>
+          <div class="form-group"><label>ژمارەی تەلەفۆن</label><input id="customerRegisterPhone" type="tel" placeholder="07xxxxxxxxx"></div>
+          <div class="form-group"><label>ئیمەیڵ</label><input id="customerAuthEmail" type="email" autocomplete="email" placeholder="example@email.com"></div>
+          <div class="form-group"><label>وشەی نهێنی</label><input id="customerAuthPassword" type="password" autocomplete="new-password" placeholder="لانیکەم 6 پیت"></div>
+          <button class="form-button" type="button" onclick="window.registerCustomer && window.registerCustomer()">👤 دروستکردنی هەژمار</button>
+          <button class="form-button secondary-button" type="button" onclick="window.loginCustomer && window.loginCustomer()">🔐 چوونەژوورەوە</button>
+          <button class="form-button secondary-button" type="button" onclick="window.resetCustomerPassword && window.resetCustomerPassword()">📧 لەبیرکردنەوەی وشەی نهێنی</button>`;
+      }
+    }
     await renderCustomerAccount();
   } catch (error) {
     console.error("Customer account render error:", error);
@@ -2340,7 +2364,7 @@ async function renderCustomerAccount() {
 
 window.registerCustomer = async function() {
   const auth = customerAuth;
-  if (!auth) { alert("Firebase Authentication بەردەست نییە. تکایە Email/Password چالاک بکە."); return; }
+  if (!auth) { alert("Firebase Authentication بار نەکراوە. پەڕەکە refresh بکە و دووبارە هەوڵ بدەوە."); return; }
   const name = document.getElementById("customerRegisterName")?.value.trim() || "";
   const phone = document.getElementById("customerRegisterPhone")?.value.trim() || "";
   const email = document.getElementById("customerAuthEmail")?.value.trim() || "";
@@ -2374,7 +2398,7 @@ window.registerCustomer = async function() {
 
 window.loginCustomer = async function() {
   const auth = customerAuth;
-  if (!auth) { alert("Firebase Authentication بەردەست نییە. تکایە Email/Password چالاک بکە."); return; }
+  if (!auth) { alert("Firebase Authentication بار نەکراوە. پەڕەکە refresh بکە و دووبارە هەوڵ بدەوە."); return; }
   const email = document.getElementById("customerAuthEmail")?.value.trim() || "";
   const password = document.getElementById("customerAuthPassword")?.value || "";
 

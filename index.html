@@ -659,6 +659,42 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 }
 /* ===== END PRODUCT DESCRIPTION IMAGE FIX ===== */
 
+
+/* ===== PREMIUM SELECTION WARNING ALERTS ===== */
+.ks-warning-alert{
+  position:fixed;top:24px;left:50%;z-index:12000;
+  width:min(420px,calc(100vw - 28px));
+  padding:14px 16px;direction:rtl;
+  display:flex;align-items:center;gap:12px;
+  background:color-mix(in srgb,var(--surface) 94%,transparent);
+  color:var(--text);border:1px solid color-mix(in srgb,var(--yellow) 52%,var(--border));
+  border-radius:16px;box-shadow:0 18px 55px rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.03) inset;
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  opacity:0;visibility:hidden;transform:translate(-50%,-18px) scale(.97);
+  transition:opacity .28s ease,transform .28s cubic-bezier(.22,.8,.22,1),visibility .28s;
+  pointer-events:none;
+}
+.ks-warning-alert.show{opacity:1;visibility:visible;transform:translate(-50%,0) scale(1)}
+.ks-warning-icon{
+  width:42px;height:42px;flex:0 0 42px;border-radius:13px;
+  display:grid;place-items:center;font-size:21px;
+  color:#111;background:linear-gradient(145deg,#ffe18a,#f7c948);
+  box-shadow:0 7px 20px rgba(247,201,72,.22);
+}
+.ks-warning-copy{min-width:0;flex:1}
+.ks-warning-title{font-size:14px;font-weight:900;line-height:1.5}
+.ks-warning-text{margin-top:2px;color:var(--muted);font-size:11px;line-height:1.6}
+.ks-warning-progress{position:absolute;right:0;bottom:0;height:3px;width:100%;background:var(--yellow);border-radius:0 0 16px 16px;transform-origin:right center}
+.ks-warning-alert.show .ks-warning-progress{animation:ksWarningProgress 2.8s linear forwards}
+@keyframes ksWarningProgress{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.ks-option-warning{animation:ksOptionWarning .45s ease}
+@keyframes ksOptionWarning{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}50%{transform:translateX(4px)}75%{transform:translateX(-2px)}}
+@media(max-width:600px){
+  .ks-warning-alert{top:12px;width:calc(100vw - 22px);padding:12px 13px;border-radius:15px}
+  .ks-warning-icon{width:38px;height:38px;flex-basis:38px;font-size:19px}
+  .ks-warning-title{font-size:13px}.ks-warning-text{font-size:10px}
+}
+
 </style>
 </head>
 <body>
@@ -1335,17 +1371,57 @@ document.getElementById("detailQuantity")?.addEventListener("input", function() 
     this.value = detailQuantity;
 });
 
+window.showSelectionWarning = function showSelectionWarning(type) {
+    const isColor = type === "color";
+    const message = isColor ? "رەنگ هەلبژێرە" : "قەبارە هەلبژێرە";
+    const helper = isColor ? "تکایە یەکێک لە ڕەنگەکان هەڵبژێرە بۆ بەردەوامبوون." : "تکایە قەبارەی بەرهەمەکە هەڵبژێرە بۆ بەردەوامبوون.";
+    const areaId = isColor ? "detailColorArea" : "detailSizeArea";
+
+    let alertBox = document.getElementById("ksWarningAlert");
+    if (!alertBox) {
+        alertBox = document.createElement("div");
+        alertBox.id = "ksWarningAlert";
+        alertBox.className = "ks-warning-alert";
+        alertBox.setAttribute("role", "alert");
+        alertBox.innerHTML = `
+          <span class="ks-warning-icon">⚠</span>
+          <span class="ks-warning-copy">
+            <strong class="ks-warning-title"></strong>
+            <span class="ks-warning-text"></span>
+          </span>
+          <span class="ks-warning-progress"></span>`;
+        document.body.appendChild(alertBox);
+    }
+
+    alertBox.querySelector(".ks-warning-title").textContent = message;
+    alertBox.querySelector(".ks-warning-text").textContent = helper;
+    alertBox.classList.remove("show");
+    void alertBox.offsetWidth;
+    alertBox.classList.add("show");
+
+    const area = document.getElementById(areaId);
+    if (area) {
+        area.classList.remove("ks-option-warning");
+        void area.offsetWidth;
+        area.classList.add("ks-option-warning");
+        setTimeout(() => area.classList.remove("ks-option-warning"), 500);
+    }
+
+    clearTimeout(window.ksWarningTimer);
+    window.ksWarningTimer = setTimeout(() => alertBox.classList.remove("show"), 2800);
+};
+
 window.addSelectedProduct = function addSelectedProduct() {
     if (!selectedProduct) return;
 
     const hasSize = !!selectedProduct.dataset.sizes;
     const hasColor = !!selectedProduct.dataset.colors;
     if (hasSize && !selectedSize) {
-        alert("تکایە قەبارە هەڵبژێرە.");
+        showSelectionWarning("size");
         return;
     }
     if (hasColor && !selectedColor) {
-        alert("تکایە ڕەنگ هەڵبژێرە.");
+        showSelectionWarning("color");
         return;
     }
 

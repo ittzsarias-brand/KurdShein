@@ -593,6 +593,8 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 }
 
 
+.product-details-box 
+
 /* On small screens, make the product popup easy to use. */
 @media(max-width:600px){
   .product .add-cart{
@@ -616,32 +618,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 .close-button{display:grid !important;place-items:center !important;z-index:9999 !important;opacity:1 !important;visibility:visible !important;background:var(--surface-2) !important;color:var(--text) !important;border:2px solid rgba(255,255,255,.28) !important;box-shadow:0 5px 18px rgba(0,0,0,.35) !important}
 .detail-quantity-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px}.detail-quantity-label{font-size:13px;font-weight:800;white-space:nowrap}.detail-quantity-control{display:flex;align-items:center;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);overflow:hidden;height:44px}.detail-qty-btn{width:42px;height:44px;border:0;background:transparent;color:var(--text);font-size:21px;font-weight:900}.detail-qty-btn:hover{background:var(--surface-3);color:var(--yellow)}#detailQuantity{width:45px;height:44px;border:0;border-left:1px solid var(--border);border-right:1px solid var(--border);background:transparent;color:var(--text);text-align:center;font-weight:900;outline:0}.detail-quantity-row .big-add{flex:1;margin:0}.favorite-product .favorite-view-button{display:grid;place-items:center;min-width:42px;height:42px;font-size:20px}.cart-item-premium{display:grid !important;grid-template-columns:58px minmax(0,1fr) auto;gap:12px !important}.cart-item-image{width:58px;height:58px;border-radius:13px;object-fit:cover;background:var(--surface-3);border:1px solid var(--border)}.cart-header-summary{display:flex;justify-content:space-between;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:11px 13px;margin-bottom:12px;font-size:12px;color:var(--muted)}.cart-header-summary strong{color:var(--text);font-size:14px}.cart-item-main{min-width:0}
 @media(max-width:600px){.detail-quantity-row{flex-wrap:wrap}.detail-quantity-row .big-add{width:100%;flex-basis:100%}.cart-item-premium{grid-template-columns:50px minmax(0,1fr)}.cart-item-actions{grid-column:1/-1;justify-content:flex-start}.cart-item-image{width:50px;height:50px}}
-/* ================= PROFESSIONAL CART ================= */
-.cart-topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:4px}.cart-topbar .modal-title{margin-bottom:3px;text-align:right}.cart-topbar .cart-subtitle{text-align:right;margin:0}.cart-clear-button{border:1px solid var(--border);background:transparent;color:var(--muted);border-radius:10px;padding:8px 11px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}.cart-clear-button:hover{color:var(--red);border-color:var(--red);background:rgba(229,28,42,.06)}#cartModal .modal-box{max-width:680px;padding:22px}#cartModal .cart-items{max-height:430px;padding:2px 2px 4px;margin:12px 0 0}.cart-item-premium{background:var(--surface-2);border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.04);transition:border-color .2s,transform .2s,box-shadow .2s}.cart-item-premium:hover{border-color:rgba(229,28,42,.28);transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.07)}.cart-item-main{direction:rtl;text-align:right}.cart-item-main strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cart-options{display:flex;justify-content:flex-start;gap:6px;direction:rtl}.cart-options span{background:var(--surface-3);border:1px solid var(--border);border-radius:7px;padding:3px 6px}.cart-item-actions{direction:ltr}.qty-button:disabled{opacity:.35;cursor:not-allowed}.cart-checkout-panel{border-top:1px solid var(--border);margin-top:9px;padding-top:13px}.cart-total-row{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;padding:4px 0}.cart-total-row strong{color:var(--text);font-family:Arial,sans-serif}.cart-grand-total{margin-top:4px;padding:11px 0 13px;font-size:17px;font-weight:900}.cart-grand-total strong{color:var(--yellow);font-size:21px}.cart-actions{display:grid;grid-template-columns:1fr 1.35fr;gap:9px}.cart-actions button{min-height:46px}.cart-continue-button{border:1px solid var(--border);background:var(--surface-2);color:var(--text);border-radius:10px;font-weight:800;cursor:pointer}.cart-continue-button:hover{border-color:var(--yellow);transform:translateY(-1px)}.cart-checkout-button{margin-top:0;display:flex;align-items:center;justify-content:center;gap:10px}.cart-checkout-button span{font-size:18px}.empty-cart{min-height:300px;border:1px dashed var(--border);border-radius:16px;background:var(--surface-2)}
-@media(max-width:600px){
-#cartModal{padding:0;align-items:flex-end}
-#cartModal .modal-box{max-width:none;width:100%;max-height:96dvh;height:auto;border-radius:24px 24px 0 0;padding:18px 12px calc(12px + env(safe-area-inset-bottom));overflow-y:auto}
-#cartModal .modal-title{font-size:20px}
-#cartModal .cart-subtitle{font-size:11px}
-#cartModal .cart-items{max-height:52dvh;overflow-y:auto;margin-top:10px;padding:1px}
-.cart-topbar{padding:0 3px}
-.cart-clear-button{padding:7px 9px}
-.cart-item-premium{display:grid;grid-template-columns:58px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;column-gap:10px;row-gap:9px;padding:11px;border-radius:14px}
-.cart-item-image{grid-column:1;grid-row:1;width:58px;height:58px}
-.cart-item-main{grid-column:2;grid-row:1;min-width:0}
-.cart-item-main strong{font-size:14px}
-.cart-options{font-size:10px}
-.cart-line-price{font-size:13px}
-.cart-item-actions{grid-column:1/-1;grid-row:2;justify-content:flex-end;width:100%;padding-top:1px;border-top:1px solid var(--border)}
-.qty-button,.remove-cart{width:34px;height:34px}
-.cart-checkout-panel{padding-top:11px;padding-bottom:env(safe-area-inset-bottom);background:var(--surface)}
-.cart-total-row{font-size:12px}
-.cart-grand-total{font-size:16px;padding:8px 0 10px}
-.cart-grand-total strong{font-size:19px}
-.cart-actions{grid-template-columns:1fr 1.25fr;gap:7px}
-.cart-actions button{min-height:44px;font-size:12px}
-.cart-items{scrollbar-width:none}
-}
 
 /* ===== FINAL PRODUCT DESCRIPTION IMAGE FIX ===== */
 .product-details-box .product-main-stage{
@@ -740,101 +716,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 }
 @media(max-width:390px){.main-product-image{height:210px}}
 /* ===== END PRODUCT DESCRIPTION MULTI-IMAGE GALLERY FIX ===== */
-</style>
-
-<style id="ks-cross-browser-compatibility">
-/* ===== KURDSHEIN CROSS-BROWSER / RESPONSIVE STABILITY ===== */
-html{
-  width:100%;
-  min-width:0;
-  -webkit-text-size-adjust:100%;
-  text-size-adjust:100%;
-  -webkit-tap-highlight-color:transparent;
-}
-body{
-  width:100%;
-  min-width:0;
-  min-height:100vh;
-  min-height:100dvh;
-  overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
-}
-img{
-  max-width:100%;
-  -ms-interpolation-mode:bicubic;
-}
-button,
-input,
-textarea,
-select{
-  -webkit-appearance:none;
-  appearance:none;
-  -webkit-border-radius:0;
-  border-radius:0;
-}
-button{
-  -webkit-user-select:none;
-  user-select:none;
-  -webkit-touch-callout:none;
-}
-input,
-textarea,
-select{
-  font-size:16px;
-}
-.search input,
-.form-group input,
-.form-group textarea,
-.checkout-select,
-.coupon-row input{
-  -webkit-appearance:none;
-  appearance:none;
-  -webkit-border-radius:10px;
-  border-radius:10px;
-}
-.search input{
-  -webkit-border-radius:0;
-  border-radius:0;
-}
-.modal{
-  min-height:100vh;
-  min-height:100dvh;
-}
-.ks-options-drawer,
-.ks-nav-drawer{
-  height:100vh;
-  height:100dvh;
-  max-height:100vh;
-  max-height:100dvh;
-}
-@supports (height:100dvh){
-  .ks-options-drawer,
-  .ks-nav-drawer{height:100dvh;max-height:100dvh}
-}
-@supports not (color:color-mix(in srgb, black 50%, white)){
-  .main-header{background:var(--surface)}
-  .ks-warning-alert{background:var(--surface)}
-}
-@media(max-width:700px){
-  html,body{width:100%;max-width:100%;overflow-x:hidden}
-  .hero,.section-head,.categories,.products,.coming,.recent-section,.trust{max-width:100%}
-  .hero{padding-left:12px;padding-right:12px}
-  .hero-slider{width:100%;max-width:100%}
-  .hero-inner{min-width:0}
-  .hero-copy{padding:30px 24px}
-  .product,
-  .recent-card{min-width:0}
-  .product-image img,
-  .recent-card img,
-  .favorite-product img,
-  .cart-item-image{display:block}
-}
-@media(max-width:390px){
-  .hero-copy{padding:25px 18px}
-}
-@media(orientation:landscape) and (max-height:500px){
-  .modal-box{max-height:92vh;max-height:92dvh}
-}
 </style>
 </head>
 <body>
@@ -1088,22 +969,10 @@ select{
 <div class="modal" id="cartModal" onclick="closeOutside(event,'cartModal')">
 <div class="modal-box">
 <button class="close-button" onclick="closeModal('cartModal')">×</button>
-<div class="cart-topbar">
-<div>
-<h2 class="modal-title">🛒 سەبەتەکەت</h2>
-<p class="cart-subtitle">بەرهەمە هەڵبژێردراوەکانت لێرەیە</p>
-</div>
-<button class="cart-clear-button" id="clearCartButton" onclick="clearCart()" type="button">پاککردنەوە</button>
-</div>
+<h2 class="modal-title">🛒 سەبەتەکەت</h2><p class="cart-subtitle">بەرهەمە هەڵبژێردراوەکانت لێرەیە</p>
 <div class="cart-items" id="cartItems"></div>
-<div class="cart-checkout-panel">
-<div class="cart-total-row"><span>کۆی کاڵاکان</span><strong id="cartSubtotal">٠ د.ع</strong></div>
-<div class="cart-total-row cart-grand-total"><span>کۆی گشتی</span><strong id="cartTotal">٠ د.ع</strong></div>
-<div class="cart-actions">
-<button class="cart-continue-button" onclick="closeModal('cartModal')" type="button">← بەردەوامبوون لە کڕین</button>
-<button class="form-button cart-checkout-button" onclick="startOrder()" type="button">تەواوکردنی داواکاری <span>→</span></button>
-</div>
-</div>
+<div class="cart-total" id="cartTotal">کۆی گشتی: ٠ د.ع</div>
+<button class="form-button" onclick="startOrder()">✅ تەواوکردنی داواکاری</button>
 </div>
 </div>
 <div class="modal" id="orderModal" onclick="closeOutside(event,'orderModal')">
@@ -1141,6 +1010,10 @@ select{
 <button class="coupon-button" onclick="applyCoupon()" type="button">جێبەجێکردن</button>
 </div>
 <div class="checkout-totals" id="checkoutTotals"></div>
+<div class="form-group">
+<label>بابەتەکان</label>
+<textarea id="customerItems" readonly=""></textarea>
+</div>
 <button class="form-button" onclick="sendOrderToWhatsApp()">📱 ناردن بۆ ئەدمین لە WhatsApp</button>
 </div>
 </div>
@@ -1282,13 +1155,10 @@ function updateCart() {
 
     if (!cart.length) {
         box.innerHTML = `<div class="empty-cart"><div class="empty-cart-icon">🛒</div><strong>سەبەتەکەت بەتاڵە</strong><span>بەرهەمێک زیاد بکە بۆ دەستپێکردن</span></div>`;
-        document.getElementById("cartTotal").innerText = "٠ د.ع";
-        document.getElementById("cartSubtotal").innerText = "٠ د.ع";
-        document.getElementById("clearCartButton").style.display = "none";
+        document.getElementById("cartTotal").innerText = "کۆی گشتی: ٠ د.ع";
         modalBox?.querySelector(".cart-header-summary")?.remove();
         return;
     }
-    document.getElementById("clearCartButton").style.display = "block";
 
     if (modalBox && !modalBox.querySelector(".cart-header-summary")) {
         const summary = document.createElement("div");
@@ -1327,16 +1197,8 @@ function updateCart() {
             </div>`;
         box.appendChild(div);
     });
-    document.getElementById("cartSubtotal").innerText = total.toLocaleString() + " د.ع";
-    document.getElementById("cartTotal").innerText = total.toLocaleString() + " د.ع";
+    document.getElementById("cartTotal").innerText = "کۆی گشتی: " + total.toLocaleString() + " د.ع";
 }
-window.clearCart = function() {
-    if (!cart.length) return;
-    if (!confirm("دڵنیایت دەتەوێت هەموو بەرهەمەکانی سەبەتە بسڕیتەوە؟")) return;
-    cart = [];
-    saveCart();
-    updateCart();
-};
 window.removeFromCart = function(index) {
     cart.splice(index, 1);
     saveCart();
@@ -2009,148 +1871,189 @@ startHeroSlider();
 })();
 </script>
 
-<script id="kurdSheinProductsDataLoader">
-/* ================= GITHUB PRODUCT DATA LOADER =================
-   Product data is stored in products.json at the repository root.
-   The existing product cards remain as a safe fallback if the file
-   cannot be loaded (for example when index.html is opened directly
-   from the device instead of through a web host).
-*/
-(function(){
-  "use strict";
+<script type="module">
+/* ================= FIRESTORE STORE CONNECTION =================
+   The storefront reads products from the same Firebase project used
+   by admin.html. The existing storefront UI/functionality is kept.
+================================================================= */
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
-  const PRODUCTS_URL = "products.json";
-  const productsGrid = document.getElementById("products");
-  if (!productsGrid) return;
+const kurdSheinFirebaseConfig = {
+  apiKey: "AIzaSyAZPy_1tQTNlCP3GKZZJ01S7RLfrecaznE",
+  authDomain: "kurdsheinadmin.firebaseapp.com",
+  projectId: "kurdsheinadmin",
+  storageBucket: "kurdsheinadmin.firebasestorage.app",
+  messagingSenderId: "297215544882",
+  appId: "1:297215544882:web:7b01257fb9ad78b825362b",
+  measurementId: "G-NQC7VSG986"
+};
 
-  function esc(value){
-    return String(value ?? "").replace(/[&<>"']/g, ch => ({
-      "&":"&amp;", "<":"&lt;", ">":"&gt;", "\"":"&quot;", "'":"&#39;"
-    }[ch]));
-  }
+const kurdSheinApp = initializeApp(kurdSheinFirebaseConfig);
+const kurdSheinDb = getFirestore(kurdSheinApp);
+const KURDSHEIN_PRODUCT_COLLECTION = "product";
 
-  function normalizeProduct(product, index){
-    if (!product || typeof product !== "object") return null;
-    const images = Array.isArray(product.images)
-      ? product.images.map(v => String(v || "").trim()).filter(Boolean)
-      : [];
-    const categories = Array.isArray(product.category)
-      ? product.category.map(v => String(v || "").trim()).filter(Boolean)
-      : [];
-    const colors = Array.isArray(product.colors)
-      ? product.colors.map(v => String(v || "").trim()).filter(Boolean)
-      : [];
-    const sizes = Array.isArray(product.sizes)
-      ? product.sizes.map(v => String(v || "").trim()).filter(Boolean)
-      : [];
+function storeEscape(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", "\"":"&quot;", "'":"&#39;"
+  }[ch]));
+}
 
-    const mainImage = String(product.mainImage || images[0] || "").trim();
-    if (!product.id || !product.name || !mainImage) return null;
+function storeList(value) {
+  if (Array.isArray(value)) return value.map(v => String(v).trim()).filter(Boolean);
+  return String(value ?? "")
+    .split(/[,\n|]/)
+    .map(v => v.trim())
+    .filter(Boolean);
+}
 
-    return {
-      id: String(product.id),
-      name: String(product.name),
-      displayName: String(product.displayName ?? product.name),
-      description: String(product.description ?? ""),
-      displayDescription: String(product.displayDescription ?? ""),
-      price: Number(product.price) || 0,
-      oldPrice: product.oldPrice == null || product.oldPrice === "" ? null : (Number(product.oldPrice) || 0),
-      category: categories.length ? categories : ["all"],
-      colors,
-      sizes,
-      stock: Math.max(0, Number(product.stock) || 0),
-      images: images.length ? images : [mainImage],
-      mainImage,
-      active: product.active !== false
-    };
-  }
+function storeImages(product) {
+  const main = String(product.DisplayImage || product.DescriptionImage || "").trim();
+  const multi = storeList(product.DescriptionMultiImage || product.DescriptionImages || product.DescriptionImageList);
+  const images = [main, ...multi].filter(Boolean);
+  return [...new Set(images)];
+}
 
-  function renderProducts(list){
-    const fragment = document.createDocumentFragment();
-    let rendered = 0;
+function storeCategories(value) {
+  const raw = storeList(value).join(" ").toLowerCase();
+  const categories = ["all"];
 
-    list.forEach((product, index) => {
-      const p = normalizeProduct(product, index);
-      if (!p || !p.active) return;
+  const has = (...words) => words.some(word => raw.includes(word));
 
-      const card = document.createElement("div");
-      card.className = "product";
-      card.dataset.id = p.id;
-      card.dataset.productId = p.id;
-      card.dataset.category = p.category.join(" ");
-      card.dataset.colors = p.colors.join(",");
-      card.dataset.description = p.description;
-      card.dataset.name = p.name;
-      card.dataset.price = String(p.price);
-      card.dataset.sizes = p.sizes.join(",");
-      card.dataset.stock = String(p.stock);
-      card.dataset.images = p.images.join("|");
-      card.dataset.image = p.mainImage;
-      if (p.oldPrice != null) card.dataset.oldPrice = String(p.oldPrice);
+  if (has("new", "نوێ")) categories.push("new");
+  if (has("sale", "داشکاندن", "discount")) categories.push("sale");
+  if (has("men", "پیاوان")) categories.push("men");
+  if (has("women", "ئافرەتان", "ژن")) categories.push("women");
+  if (has("kids", "منداڵان")) categories.push("kids");
+  if (has("accessories", "ئەکسسوارات", "اکسسوار")) categories.push("accessories");
+  if (has("electronics", "ئەلکترۆنی", "ئەلیکترۆنی")) categories.push("electronics");
 
-      const hasSale = p.oldPrice != null && p.oldPrice > p.price;
-      const soldOut = p.stock <= 0;
-      card.innerHTML = `
-        <div class="product-image">
-          <button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
-          ${hasSale ? '<div class="sale">داشکاندن</div>' : ''}
-          <img alt="${esc(p.name)}" decoding="async" loading="lazy" src="${esc(p.mainImage)}"/>
-        </div>
-        <div class="product-info">
-          <div class="product-name">${esc(p.displayName)}</div>
-          <div class="product-description">${esc(p.displayDescription)}</div>
-          <div>
-            <span class="price">${p.price.toLocaleString()} د.ع</span>
-            ${hasSale ? `<span class="old-price">${p.oldPrice.toLocaleString()} د.ع</span>` : ''}
-          </div>
-          <div class="stock-line ${soldOut ? 'stock-out' : (p.stock <= 3 ? 'stock-low' : '')}">
-            <span class="stock-dot"></span>
-            <span>${soldOut ? 'بەردەست نییە' : `بەردەستە: ${p.stock.toLocaleString()} دانە`}</span>
-          </div>
-          <button class="add-cart" ${soldOut ? 'disabled' : ''} onclick="event.stopPropagation();openProduct(this.closest('.product'))">${soldOut ? 'بەردەست نییە' : 'داوا کردن🛒'}</button>
-        </div>`;
-
-      card.addEventListener("click", function(event){
-        if (event.target.closest(".add-cart") || event.target.closest(".favorite-button")) return;
-        openProduct(card);
-      });
-
-      fragment.appendChild(card);
-      rendered++;
-    });
-
-    if (!rendered) return false;
-    productsGrid.replaceChildren(fragment);
-
-    if (typeof applyProductFilters === "function") applyProductFilters();
-    if (typeof renderFavorites === "function") renderFavorites();
-    if (typeof renderFavoritesList === "function") renderFavoritesList();
-    return true;
-  }
-
-  async function loadProducts(){
-    try {
-      const response = await fetch(PRODUCTS_URL, {
-        method: "GET",
-        cache: "no-store",
-        headers: { "Accept": "application/json" }
-      });
-      if (!response.ok) throw new Error("products.json HTTP " + response.status);
-      const data = await response.json();
-      if (!data || !Array.isArray(data.products)) throw new Error("Invalid product database");
-      renderProducts(data.products);
-    } catch (error) {
-      /* Keep the original HTML products working as the fallback. */
-      console.warn("KurdShein product database could not be loaded; using built-in products.", error);
+  // If the admin has entered a direct category key, preserve it too.
+  for (const item of storeList(value)) {
+    const key = item.toLowerCase().trim();
+    if (["all","new","sale","men","women","kids","accessories","electronics"].includes(key)) {
+      if (!categories.includes(key)) categories.push(key);
     }
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", loadProducts, { once:true });
-  } else {
-    loadProducts();
+  return categories.join(" ");
+}
+
+function renderFirestoreProducts(rawProducts) {
+  const container = document.getElementById("products");
+  if (!container) return;
+
+  const products = rawProducts
+    .map((data, index) => ({
+      ...data,
+      __docId: data.__docId || "",
+      __index: index
+    }))
+    .filter(product => product.Active !== false);
+
+  if (!products.length) {
+    container.innerHTML = "";
+    const noResults = document.getElementById("noResults");
+    if (noResults) noResults.hidden = false;
+    return;
   }
-})();
+
+  container.innerHTML = products.map((product, index) => {
+    const images = storeImages(product);
+    const image = images[0] || "";
+    const name = String(product.DisplayName || "بێ ناو");
+    const displayDescription = String(product.DisplayDescription || "");
+    const fullDescription = String(product.DescriptionDescription || product.DisplayDescription || "");
+    const price = Number(product.Price) || 0;
+    const oldPrice = Number(product.OldPrice) || 0;
+    const stock = Math.max(0, Number(product.Stock) || 0);
+    const sizes = storeList(product.Size).join(",");
+    const colors = storeList(product.Colors || product.Color).join(",");
+    const categories = storeCategories(product.Category);
+
+    const imageAttrs = images.map(storeEscape).join("|");
+    const saleMarkup = oldPrice > price && price > 0
+      ? `<div class="sale">داشکاندن</div><div class="discount-pill">-${Math.round((1 - price / oldPrice) * 100)}%</div>`
+      : "";
+    const oldMarkup = oldPrice > price
+      ? `<span class="old-price">${oldPrice.toLocaleString()} د.ع</span>`
+      : "";
+
+    return `
+      <div class="product"
+        data-id="${storeEscape(product.ID || product.__docId || index + 1)}"
+        data-product-id="${storeEscape(product.__docId || "")}"
+        data-category="${storeEscape(categories)}"
+        data-colors="${storeEscape(colors)}"
+        data-description="${storeEscape(fullDescription)}"
+        data-name="${storeEscape(name)}"
+        data-price="${price}"
+        data-old-price="${oldPrice > price ? oldPrice : ""}"
+        data-sizes="${storeEscape(sizes)}"
+        data-stock="${stock}"
+        data-images="${imageAttrs}">
+        <div class="product-image">
+          <button class="favorite-button" type="button"
+            aria-label="زیادکردن بۆ دڵخوازەکان"
+            aria-pressed="false"
+            onclick="toggleFavorite(event,this)">♡</button>
+          ${saleMarkup}
+          <img alt="${storeEscape(name)}" decoding="async" loading="lazy" src="${storeEscape(image)}"/>
+        </div>
+        <div class="product-info">
+          <div class="product-name">${storeEscape(name)}</div>
+          <div class="product-description">${storeEscape(displayDescription)}</div>
+          <div>
+            <span class="price">${price.toLocaleString()} د.ع</span>
+            ${oldMarkup}
+          </div>
+          <div class="stock-line ${stock <= 3 && stock > 0 ? "stock-low" : ""} ${stock <= 0 ? "stock-out" : ""}">
+            <span class="stock-dot"></span>
+            <span>${stock > 0 ? `بەردەستە: ${stock.toLocaleString()} دانە` : "بەردەست نییە"}</span>
+          </div>
+          <button class="add-cart" ${stock <= 0 ? "disabled" : ""}
+            onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
+        </div>
+      </div>`;
+  }).join("");
+
+  // The original click handlers were attached to the old hard-coded cards.
+  // Use one delegated handler so dynamically loaded Firestore cards work too.
+  if (!container.dataset.firestoreClickBound) {
+    container.dataset.firestoreClickBound = "1";
+    container.addEventListener("click", event => {
+      const product = event.target.closest(".product");
+      if (!product || event.target.closest(".add-cart") || event.target.closest(".favorite-button")) return;
+      openProduct(product);
+    });
+  }
+
+  if (typeof window.renderFavorites === "function") window.renderFavorites();
+  if (typeof window.renderFavoritesList === "function") window.renderFavoritesList();
+  if (typeof window.updateCart === "function") window.updateCart();
+  if (typeof window.applyProductFilters === "function") window.applyProductFilters();
+}
+
+async function loadStoreProductsFromFirestore() {
+  const container = document.getElementById("products");
+  try {
+    const snapshot = await getDocs(collection(kurdSheinDb, KURDSHEIN_PRODUCT_COLLECTION));
+    const products = snapshot.docs.map(docSnap => ({
+      ...docSnap.data(),
+      __docId: docSnap.id
+    }));
+    renderFirestoreProducts(products);
+    console.info(`KurdShein: loaded ${products.length} product(s) from Firestore.`);
+  } catch (error) {
+    console.error("KurdShein Firestore error:", error);
+    // Keep the existing HTML products visible if Firestore is temporarily unavailable.
+    if (container) {
+      container.dataset.firestoreError = error.code || "unknown";
+    }
+  }
+}
+
+loadStoreProductsFromFirestore();
 </script>
 
 </body>

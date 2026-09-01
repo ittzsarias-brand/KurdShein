@@ -144,6 +144,7 @@ button:active{transform:translateY(0)}
 .card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}
 .card:hover img{transform:scale(1.035)}
 .card-image-fade{position:absolute;inset:auto 0 0;height:55px;background:linear-gradient(transparent,rgba(0,0,0,.28));pointer-events:none}
+.field-note{font-size:11px;font-weight:500;opacity:.6;margin-inline-start:6px}.helper{font-size:12px;line-height:1.6;opacity:.65;margin-top:7px}.image-preview{margin-top:10px;width:110px;height:110px;border-radius:12px;overflow:hidden;background:var(--surface-3);border:1px solid var(--border)}.image-preview img{width:100%;height:100%;object-fit:cover}
 .product-number{
   position:absolute;top:9px;left:9px;background:rgba(17,24,39,.82);backdrop-filter:blur(7px);
   color:#fff;border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:5px 8px;font:700 9px Inter;
@@ -320,8 +321,10 @@ textarea{min-height:105px;resize:vertical;line-height:1.7}
       <div class="field full"><label>Colors</label><input id="Colors" placeholder="Black, White"></div>
       <div class="field full"><label>DisplayDescription</label><textarea id="DisplayDescription" placeholder="دەربارەی بەرهەم..."></textarea></div>
       <div class="field full"><label>DescriptionDescription</label><textarea id="DescriptionDescription" placeholder="وەسفی تەواوی بەرهەم..."></textarea></div>
-      <div class="field full"><label>DisplayImage</label><input id="DisplayImage" placeholder="IMG_1234.jpeg"></div>
-      <div class="field full"><label>DescriptionMultiImage</label><textarea id="DescriptionMultiImage" placeholder="IMG_1234.jpeg, IMG_1235.jpeg"></textarea></div>
+      <div class="field full"><label>DisplayImage <span class="field-note">Image URL</span></label><input id="DisplayImage" placeholder="https://.../product-main.jpg" oninput="previewMainImage()"><div id="mainImagePreview" class="image-preview" hidden></div></div>
+      <div class="field full"><label>DescriptionMultiImage <span class="field-note">Multiple image URLs</span></label><textarea id="DescriptionMultiImage" placeholder="https://.../image-1.jpg
+https://.../image-2.jpg
+https://.../image-3.jpg"></textarea><div class="helper">یەک لینک لە هەر هێڵێک. Firebase Storage پێویست نییە؛ تەنها URL ـی وێنەکان لێرە دابنێ.</div></div>
     </div>
     <div class="modal-actions"><button class="primary" onclick="saveProduct()">💾 پاشەکەوتکردن</button><button class="gray" onclick="closeModal()">گەڕانەوە</button></div>
   </div>
@@ -342,7 +345,7 @@ let editingDocId=null;
 
 const $=id=>document.getElementById(id);
 const splitList=value=>String(value||"").split(",").map(x=>x.trim()).filter(Boolean);
-const imageList=value=>String(value||"").split(",").map(x=>x.trim()).filter(Boolean);
+const imageList=value=>Array.isArray(value)?value.map(x=>String(x).trim()).filter(Boolean):String(value||"").split(/[\n,]+/).map(x=>x.trim()).filter(Boolean);
 function showToast(message){const t=$("toast");t.textContent=message;t.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove("show"),2500)}
 function escapeHtml(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
 function escapeAttr(value){return escapeHtml(value)}
@@ -384,13 +387,14 @@ function renderProducts(){
 }
 window.renderProducts=renderProducts;
 
+function previewMainImage(){const url=$("DisplayImage").value.trim(),box=$("mainImagePreview");if(!url){box.hidden=true;box.innerHTML="";return}box.hidden=false;box.innerHTML=`<img src="${escapeAttr(url)}" alt="preview" onerror="this.parentElement.hidden=true">`}
 function clearForm(){["ID","DisplayName","Price","OldPrice","Category","Stock","Size","Colors","DisplayDescription","DescriptionDescription","DisplayImage","DescriptionMultiImage"].forEach(id=>$(id).value="");$("Stock").value="0";$("Active").value="true"}
-window.openAdd=function(){editingDocId=null;$("modalTitle").textContent="➕ بەرهەمی نوێ";clearForm();$("productModal").classList.add("show")};
-window.openEdit=function(index){const p=products[index];editingDocId=p.docId;$("modalTitle").textContent="✏️ دەستکاری بەرهەم";$("ID").value=p.ID||"";$("DisplayName").value=p.DisplayName||"";$("Price").value=p.Price??"";$("OldPrice").value=p.OldPrice??"";$("Category").value=Array.isArray(p.Category)?p.Category.join(", "):(p.Category||"");$("Stock").value=p.Stock??0;$("Active").value=p.Active===false?"false":"true";$("Size").value=Array.isArray(p.Size)?p.Size.join(", "):(p.Size||"");$("Colors").value=Array.isArray(p.Colors)?p.Colors.join(", "):(p.Colors||"");$("DisplayDescription").value=p.DisplayDescription||"";$("DescriptionDescription").value=p.DescriptionDescription||"";$("DisplayImage").value=p.DisplayImage||"";$("DescriptionMultiImage").value=Array.isArray(p.DescriptionMultiImage)?p.DescriptionMultiImage.join(", "):(p.DescriptionMultiImage||"");$("productModal").classList.add("show")};
+window.openAdd=function(){editingDocId=null;$("modalTitle").textContent="➕ بەرهەمی نوێ";clearForm();previewMainImage();$("productModal").classList.add("show")};
+window.openEdit=function(index){const p=products[index];editingDocId=p.docId;$("modalTitle").textContent="✏️ دەستکاری بەرهەم";$("ID").value=p.ID||"";$("DisplayName").value=p.DisplayName||"";$("Price").value=p.Price??"";$("OldPrice").value=p.OldPrice??"";$("Category").value=Array.isArray(p.Category)?p.Category.join(", "):(p.Category||"");$("Stock").value=p.Stock??0;$("Active").value=p.Active===false?"false":"true";$("Size").value=Array.isArray(p.Size)?p.Size.join(", "):(p.Size||"");$("Colors").value=Array.isArray(p.Colors)?p.Colors.join(", "):(p.Colors||"");$("DisplayDescription").value=p.DisplayDescription||"";$("DescriptionDescription").value=p.DescriptionDescription||"";$("DisplayImage").value=p.DisplayImage||"";$("DescriptionMultiImage").value=imageList(p.DescriptionMultiImage).join("\n");previewMainImage();$("productModal").classList.add("show")};
 window.closeModal=function(){$("productModal").classList.remove("show")};
 
 window.saveProduct=async function(){
-  const product={ID:$("ID").value.trim(),DisplayName:$("DisplayName").value.trim(),DisplayDescription:$("DisplayDescription").value.trim(),DescriptionDescription:$("DescriptionDescription").value.trim(),Price:Number($("Price").value)||0,OldPrice:$("OldPrice").value===""?null:Number($("OldPrice").value)||0,DisplayImage:$("DisplayImage").value.trim(),DescriptionMultiImage:$("DescriptionMultiImage").value.trim(),Size:$("Size").value.trim(),Colors:$("Colors").value.trim(),Category:splitList($("Category").value),Stock:Math.max(0,Number($("Stock").value)||0),Active:$("Active").value==="true"};
+  const product={ID:$("ID").value.trim(),DisplayName:$("DisplayName").value.trim(),DisplayDescription:$("DisplayDescription").value.trim(),DescriptionDescription:$("DescriptionDescription").value.trim(),Price:Number($("Price").value)||0,OldPrice:$("OldPrice").value===""?null:Number($("OldPrice").value)||0,DisplayImage:$("DisplayImage").value.trim(),DescriptionMultiImage:imageList($("DescriptionMultiImage").value),Size:$("Size").value.trim(),Colors:$("Colors").value.trim(),Category:splitList($("Category").value),Stock:Math.max(0,Number($("Stock").value)||0),Active:$("Active").value==="true"};
   if(!product.ID||!product.DisplayName||!product.DisplayImage){alert("ID، DisplayName و DisplayImage پێویستن.");return}
   try{
     if(editingDocId) await updateDoc(doc(db,PRODUCT_COLLECTION,editingDocId),product); else await addDoc(collection(db,PRODUCT_COLLECTION),product);

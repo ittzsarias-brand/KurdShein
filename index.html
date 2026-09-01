@@ -945,10 +945,18 @@ body{overflow-x:hidden;touch-action:pan-y}button:focus-visible,input:focus-visib
       }
     }
 
-/* KurdShein page scale */
-html { zoom: 0.8; }
-/* Order tracking is intentionally smaller */
-.order-tracking, .order-tracking-section, #orderTracking, .customer-order-tracking, .order-status-tracking { zoom: 0.875; }
+/* ===== STOREFRONT VIEW SCALE ===== */
+/* Show the storefront at 70% view while keeping interactive drawers full-size. */
+body {
+  zoom: 0.7;
+  width: 142.857142%;
+}
+.ks-nav-drawer,
+.ks-options-drawer {
+  zoom: 1.42857143;
+}
+/* Order tracking stays at the requested compact 70% size. */
+.order-tracking, .order-tracking-section, #orderTracking, .customer-order-tracking, .order-status-tracking { zoom: 0.7; }
 
 /* ===== MOBILE DRAWER FULL HEIGHT FIX ===== */
 @media(max-width:600px){
@@ -2819,3 +2827,12 @@ function customerAuthError(code) {
 
 </body>
 </html>
+
+<style id="ks-mobile-70-final">
+@media(max-width:600px){
+  html,body{width:100%;min-height:100%;}
+  body{min-height:100dvh;transform:none!important;zoom:1!important;}
+  .ks-page-scale{transform:scale(.7);transform-origin:top center;}
+  .ks-options-drawer,.ks-nav-drawer{height:100dvh!important;max-height:100dvh!important;}
+}
+</style>

@@ -369,7 +369,12 @@ async function loadProducts(){
     const snap=await getDocs(collection(db,PRODUCT_COLLECTION));
     products=snap.docs.map(d=>({docId:d.id,...d.data()}));
     renderProducts();updateStats();showToast("داتا لە Firestore ـەوە نوێکرایەوە ✓");
-  }catch(error){$("products").innerHTML="<div class='empty-state'><strong>❌ هەڵەی Firestore</strong><span>دڵنیابە لە collection ـی product و Rules.</span></div>"}
+  }catch(error){
+    console.error("Firestore load error:",error);
+    const code=error?.code||"unknown";
+    const message=error?.message||String(error);
+    $("products").innerHTML=`<div class="empty-state"><strong>❌ هەڵەی Firestore</strong><span><b>Code:</b> ${escapeHtml(code)}</span><span><b>Message:</b> ${escapeHtml(message)}</span><span>ئەم زانیارییە بنێرە بۆ من تا هۆکاری ڕاستەقینەی هەڵەکە دیاری بکەین.</span></div>`;
+  }
 }
 window.loadProducts=loadProducts;
 
@@ -399,9 +404,12 @@ window.saveProduct=async function(){
   try{
     if(editingDocId) await updateDoc(doc(db,PRODUCT_COLLECTION,editingDocId),product); else await addDoc(collection(db,PRODUCT_COLLECTION),product);
     closeModal();await loadProducts();showToast("بەرهەم بە سەرکەوتوویی پاشەکەوتکرا ✓");
-  }catch(e){alert("نەتوانرا بەرهەم پاشەکەوت بکرێت. دڵنیابە لە Firebase Rules.")}
+  }catch(e){
+    console.error("Firestore save error:",e);
+    alert("نەتوانرا بەرهەم پاشەکەوت بکرێت.\n\nCode: "+(e?.code||"unknown")+"\nMessage: "+(e?.message||String(e)));
+  }
 };
-window.deleteProduct=async function(index){const p=products[index];if(!confirm("دڵنیایت دەتەوێت ئەم بەرهەمە بسڕیتەوە؟\n\n"+(p.DisplayName||"")))return;try{await deleteDoc(doc(db,PRODUCT_COLLECTION,p.docId));await loadProducts();showToast("بەرهەم سڕایەوە ✓")}catch(e){alert("نەتوانرا بەرهەم بسڕدرێتەوە.")}};
+window.deleteProduct=async function(index){const p=products[index];if(!confirm("دڵنیایت دەتەوێت ئەم بەرهەمە بسڕیتەوە؟\n\n"+(p.DisplayName||"")))return;try{await deleteDoc(doc(db,PRODUCT_COLLECTION,p.docId));await loadProducts();showToast("بەرهەم سڕایەوە ✓")}catch(e){console.error("Firestore delete error:",e);alert("نەتوانرا بەرهەم بسڕدرێتەوە.\n\nCode: "+(e?.code||"unknown")+"\nMessage: "+(e?.message||String(e)))}};
 function updateStats(){const total=products.length,active=products.filter(p=>p.Active!==false).length,low=products.filter(p=>Number(p.Stock||0)<=3).length;$("totalProducts").textContent=total;$("activeProducts").textContent=active;$("lowStockProducts").textContent=low;$("catalogCount").textContent=total}
 function downloadJSON(){const clean=products.map(({docId,...p})=>p);const blob=new Blob([JSON.stringify(clean,null,2)],{type:"application/json;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="products.json";a.click();URL.revokeObjectURL(url)}
 </script>

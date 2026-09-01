@@ -619,25 +619,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 .detail-quantity-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px}.detail-quantity-label{font-size:13px;font-weight:800;white-space:nowrap}.detail-quantity-control{display:flex;align-items:center;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);overflow:hidden;height:44px}.detail-qty-btn{width:42px;height:44px;border:0;background:transparent;color:var(--text);font-size:21px;font-weight:900}.detail-qty-btn:hover{background:var(--surface-3);color:var(--yellow)}#detailQuantity{width:45px;height:44px;border:0;border-left:1px solid var(--border);border-right:1px solid var(--border);background:transparent;color:var(--text);text-align:center;font-weight:900;outline:0}.detail-quantity-row .big-add{flex:1;margin:0}.favorite-product .favorite-view-button{display:grid;place-items:center;min-width:42px;height:42px;font-size:20px}.cart-item-premium{display:grid !important;grid-template-columns:58px minmax(0,1fr) auto;gap:12px !important}.cart-item-image{width:58px;height:58px;border-radius:13px;object-fit:cover;background:var(--surface-3);border:1px solid var(--border)}.cart-header-summary{display:flex;justify-content:space-between;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:11px 13px;margin-bottom:12px;font-size:12px;color:var(--muted)}.cart-header-summary strong{color:var(--text);font-size:14px}.cart-item-main{min-width:0}
 @media(max-width:600px){.detail-quantity-row{flex-wrap:wrap}.detail-quantity-row .big-add{width:100%;flex-basis:100%}.cart-item-premium{grid-template-columns:50px minmax(0,1fr)}.cart-item-actions{grid-column:1/-1;justify-content:flex-start}.cart-item-image{width:50px;height:50px}}
 
-/* ===== PRODUCT DESCRIPTION MULTI-IMAGE GALLERY ===== */
-.product-main-stage{position:relative;}
-.gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid var(--border);border-radius:50%;background:rgba(0,0,0,.48);color:#fff;font-size:30px;line-height:1;display:grid;place-items:center;z-index:4;cursor:pointer;backdrop-filter:blur(6px);}
-.gallery-nav:hover{background:var(--red);border-color:var(--red);}
-.gallery-prev{left:10px;}
-.gallery-next{right:10px;}
-.product-image-gallery{display:flex;gap:9px;overflow-x:auto;padding:10px 2px 2px;scrollbar-width:thin;}
-.product-image-gallery:empty{display:none;}
-.gallery-thumb{flex:0 0 68px;width:68px;height:68px;padding:0;border:2px solid var(--border);border-radius:11px;background:var(--surface-2);overflow:hidden;cursor:pointer;}
-.gallery-thumb img{display:block;width:100%;height:100%;object-fit:cover;}
-.gallery-thumb.active{border-color:var(--red);}
-@media(max-width:600px){
-  .gallery-nav{width:36px;height:36px;font-size:25px;}
-  .gallery-prev{left:7px}.gallery-next{right:7px}
-  .product-image-gallery{gap:7px;padding-top:8px;}
-  .gallery-thumb{flex-basis:58px;width:58px;height:58px;border-radius:9px;}
-}
-/* ===== END PRODUCT DESCRIPTION MULTI-IMAGE GALLERY ===== */
-
 /* ===== FINAL PRODUCT DESCRIPTION IMAGE FIX ===== */
 .product-details-box .product-main-stage{
   width:100% !important;
@@ -714,6 +695,27 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   .ks-warning-title{font-size:13px}.ks-warning-text{font-size:10px}
 }
 
+</style>
+
+<style id="ks-product-gallery-fix">
+/* ===== PRODUCT DESCRIPTION MULTI-IMAGE GALLERY FIX ===== */
+.product-gallery{display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:10px;direction:ltr}
+.product-main-stage{position:relative;overflow:hidden;border-radius:15px;background:var(--surface-2);touch-action:pan-y}
+.main-product-image{width:100%;height:430px;object-fit:contain;border-radius:15px;background:var(--surface-2);display:block;user-select:none;-webkit-user-drag:none}
+.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:1px solid var(--border);border-radius:50%;background:rgba(0,0,0,.5);color:#fff;font-size:28px;line-height:1;cursor:pointer;z-index:2;opacity:.85}
+.gallery-arrow:hover{opacity:1}
+.gallery-prev{left:10px}.gallery-next{right:10px}
+.product-thumbnails{display:flex;flex-direction:column;gap:8px;max-height:430px;overflow-y:auto;padding:1px}
+.product-thumbnails img{width:82px;height:82px;object-fit:cover;border-radius:11px;border:2px solid transparent;cursor:pointer;background:var(--surface-2);display:block}
+.product-thumbnails img.selected{border-color:var(--green)}
+@media(max-width:700px){
+ .product-gallery{grid-template-columns:1fr;gap:8px}
+ .main-product-image{height:320px}
+ .product-thumbnails{flex-direction:row;max-height:none;overflow-x:auto;overflow-y:hidden}
+ .product-thumbnails img{flex:0 0 72px;width:72px;height:72px}
+}
+@media(max-width:390px){.main-product-image{height:210px}}
+/* ===== END PRODUCT DESCRIPTION MULTI-IMAGE GALLERY FIX ===== */
 </style>
 </head>
 <body>
@@ -828,7 +830,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <button class="category" data-i18n="electronics" onclick="filterProducts('electronics',this)">ئەلکترۆنی</button>
 </div>
 <div class="products" id="products">
-<div class="product" data-category="all new electronics" data-colors="رەنگاورەنگRGBلیدی" data-description="١. ئامێری بڵاوکردنەوەی بۆن لە براندی تێکوی  ٢. بۆ ماڵان و ناو سەیارە بەکاردێت  ٣.بە دڵی خۆت ئەتوانی بۆنی تێبکەیت  ٤. لیدی ئارجیبیە و ئۆتۆماتیکی رەنگەکان ئەگۆرێت" data-name="ئامێری بۆن بڵاوکردنەوە" data-price="5000" data-sizes="One Size" data-stock="12">
+<div class="product" data-category="all new electronics" data-colors="رەنگاورەنگRGBلیدی" data-description="١. ئامێری بڵاوکردنەوەی بۆن لە براندی تێکوی  ٢. بۆ ماڵان و ناو سەیارە بەکاردێت  ٣.بە دڵی خۆت ئەتوانی بۆنی تێبکەیت  ٤. لیدی ئارجیبیە و ئۆتۆماتیکی رەنگەکان ئەگۆرێت" data-name="ئامێری بۆن بڵاوکردنەوە" data-price="5000" data-sizes="One Size" data-stock="12" data-images="IMG_9186.jpeg|IMG_9187.jpeg|IMG_9188.jpeg|IMG_9189.jpeg|IMG_9190.jpeg|IMG_9191.jpeg">
 <div class="product-image">
 <button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <img alt="ئامێری بۆن بڵاوکردنەوە" decoding="async" loading="eager" src="IMG_9186.jpeg"/>
@@ -840,7 +842,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
 </div>
 </div>
-<div class="product" data-category="all new electronics" data-colors="RGB-IC" data-description="١.لیدێک بۆ جوانکردنی ژوور  ٢. کۆنترۆلی خۆی لەگەل دایە  ٣. ⁠بەرنامەی تایبەت بەخۆی هەیە" data-name="لیدی نیۆن" data-price="12000" data-sizes="2M,3M,5M,10M" data-stock="3">
+<div class="product" data-category="all new electronics" data-colors="RGB-IC" data-description="١.لیدێک بۆ جوانکردنی ژوور  ٢. کۆنترۆلی خۆی لەگەل دایە  ٣. ⁠بەرنامەی تایبەت بەخۆی هەیە" data-name="لیدی نیۆن" data-price="12000" data-sizes="2M,3M,5M,10M" data-stock="3" data-images="IMG_9196.jpeg|IMG_9205.jpeg|IMG_9206.jpeg|IMG_9207.jpeg">
 <div class="product-image">
 <button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <img alt="لیدی نیۆن" decoding="async" loading="lazy" src="IMG_9205.jpeg"/>
@@ -852,7 +854,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
 </div>
 </div>
-<div class="product" data-category="all sale electronics" data-colors="ڕەش،سپی" data-description="١. یەکێک لە جوانترین بابەتەکانی ژوور. ٢. کۆنترۆلی خۆی لەگەڵدایە. ٣. پەیوەندی بە مۆبایل دەبێت." data-name="گالاکسی پرۆجێکتەر" data-old-price="20000" data-price="13000" data-sizes="قیاس گەورە" data-stock="2">
+<div class="product" data-category="all sale electronics" data-colors="ڕەش،سپی" data-description="١. یەکێک لە جوانترین بابەتەکانی ژوور. ٢. کۆنترۆلی خۆی لەگەڵدایە. ٣. پەیوەندی بە مۆبایل دەبێت." data-name="گالاکسی پرۆجێکتەر" data-old-price="20000" data-price="13000" data-sizes="قیاس گەورە" data-stock="2" data-images="IMG_9235.jpeg|IMG_9236.jpeg">
 <div class="product-image">
 <button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <div class="sale">داشکاندن</div>
@@ -868,7 +870,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
 </div>
 </div>
-<div class="product" data-category="all new accessories" data-colors="ڕەش,شین,پەمەیی,سەوز" data-description="جانتای جوانی رۆژانە و قوتابخانە  ." data-name="جانتای ژنان" data-price="15000" data-sizes=" یەک قەبارە" data-stock="7">
+<div class="product" data-category="all new accessories" data-colors="ڕەش,شین,پەمەیی,سەوز" data-description="جانتای جوانی رۆژانە و قوتابخانە  ." data-name="جانتای ژنان" data-price="15000" data-sizes=" یەک قەبارە" data-stock="7" data-images="IMG_9245.png|IMG_9246.jpeg|IMG_9247.jpeg|IMG_9248.jpeg">
 <div class="product-image">
 <button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <img alt="جانتای ژنان" decoding="async" loading="lazy" src="IMG_9245.png"/>
@@ -880,7 +882,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
 </div>
 </div>
-<div class="product" data-category="all kids" data-colors="سەرەوە مۆر,خوارەوە سپی" data-description="جلوبەرگی منداڵان بە شێوەیەکی ئاسوودە و جوان." data-name="جلوبەرگی منداڵان" data-price="9000" data-sizes="١ساڵ تا ٢ ساڵ" data-stock="6">
+<div class="product" data-category="all kids" data-colors="سەرەوە مۆر,خوارەوە سپی" data-description="جلوبەرگی منداڵان بە شێوەیەکی ئاسوودە و جوان." data-name="جلوبەرگی منداڵان" data-price="9000" data-sizes="١ساڵ تا ٢ ساڵ" data-stock="6" data-images="IMG_9254.jpeg|IMG_9255.jpeg|IMG_9256.jpeg">
 <div class="product-image">
 <button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <img alt="جلوبەرگی منداڵان" decoding="async" loading="lazy" src="IMG_9254.jpeg"/>
@@ -892,7 +894,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
 </div>
 </div>
-<div class="product" data-category="all electronics" data-colors="ڕەش,سپی" data-description=" براندی ئەتاک شارک هێدفۆنی بلوتوس بە کوالیتی بەرز و دەنگی ڕوون." data-name="هێدفۆنی ئەتاک شارک | Attack Shark Headphones" data-price="18000" data-sizes="بێ سایز" data-stock="5">
+<div class="product" data-category="all electronics" data-colors="ڕەش,سپی" data-description=" براندی ئەتاک شارک هێدفۆنی بلوتوس بە کوالیتی بەرز و دەنگی ڕوون." data-name="هێدفۆنی ئەتاک شارک | Attack Shark Headphones" data-price="18000" data-sizes="بێ سایز" data-stock="5" data-images="IMG_9258.jpeg|IMG_9259.jpeg|IMG_9260.jpeg">
 <div class="product-image">
 <button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <img alt="هێدفۆنی ئەتاک شارک | Attack Shark Headphones" decoding="async" loading="lazy" src="IMG_9258.jpeg"/>
@@ -904,7 +906,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <button class="add-cart" onclick="event.stopPropagation();openProduct(this.closest('.product'))">داوا کردن🛒</button>
 </div>
 </div>
-<div class="product" data-category="all accessories" data-colors="رەش,پەمەیی" data-description="مەتارەیەکی ئاو بۆ بەلارهێنانی رۆژانە  ٥٠٠ مل ئاو دەگرێت و شتێکی ناسکە  بە دوو رەنگ بەردەستە" data-name="مەتارەی ئاو" data-price="5000" data-sizes="500ml" data-stock="9">
+<div class="product" data-category="all accessories" data-colors="رەش,پەمەیی" data-description="مەتارەیەکی ئاو بۆ بەلارهێنانی رۆژانە  ٥٠٠ مل ئاو دەگرێت و شتێکی ناسکە  بە دوو رەنگ بەردەستە" data-name="مەتارەی ئاو" data-price="5000" data-sizes="500ml" data-stock="9" data-images="IMG_1740.jpeg|IMG_1741.jpeg">
 <div class="product-image">
 <button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
 <img alt="مەتارەی ئاو" decoding="async" loading="lazy" src="IMG_1740.jpeg"/>
@@ -934,10 +936,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <button class="close-button" onclick="closeModal('productModal')">×</button>
 <div class="product-main-stage">
 <img alt="" class="main-product-image" draggable="false" id="mainProductImage" src=""/>
-<button class="gallery-nav gallery-prev" id="galleryPrev" type="button" aria-label="وێنەی پێشوو">‹</button>
-<button class="gallery-nav gallery-next" id="galleryNext" type="button" aria-label="وێنەی دواتر">›</button>
 </div>
-<div class="product-image-gallery" id="productImageGallery" aria-label="وێنەکانی بەرهەم"></div>
 <div class="details-content">
 <h2 id="detailName"></h2>
 <p class="details-description" id="detailDescription"></p>
@@ -1026,6 +1025,8 @@ let cart = JSON.parse(localStorage.getItem("kurdSheinCart") || "[]");
 let selectedProduct = null;
 let selectedSize = "";
 let selectedColor = "";
+let galleryImages = [];
+let galleryIndex = 0;
 let detailQuantity = 1;
 let appliedCoupon = null;
 const deliveryFees = { Erbil: 3000, Sulaymaniyah: 4000, Duhok: 4000, Other: 5000 };
@@ -1339,82 +1340,97 @@ window.openProduct = function openProduct(product) {
     selectedSize = "";
     selectedColor = "";
     detailQuantity = 1;
+
     const quantityInput = document.getElementById("detailQuantity");
     if (quantityInput) quantityInput.value = "1";
 
+    const images = (product.dataset.images || product.querySelector(".product-image img")?.src || "")
+        .split("|").map(x => x.trim()).filter(Boolean);
+    galleryImages = images;
+    galleryIndex = 0;
     rememberRecentlyViewed(product);
+
     const main = document.getElementById("mainProductImage");
-    const productImage = product.querySelector(".product-image img");
-    const gallery = document.getElementById("productImageGallery");
-    const imageSources = [];
+    if (main) {
+        main.src = galleryImages[0] || "";
+        main.alt = product.dataset.name || "";
+    }
 
-    // Preserve every image already attached to the product, including images
-    // supplied through data-images / data-gallery by future product updates.
-    const declaredImages = [product.dataset.images, product.dataset.gallery]
-        .filter(Boolean)
-        .flatMap(value => String(value).split(/[,|\n]+/).map(v => v.trim()).filter(Boolean));
-    product.querySelectorAll("img").forEach(img => {
-        if (img.src && !imageSources.includes(img.src)) imageSources.push(img.src);
-    });
-    declaredImages.forEach(src => {
-        try {
-            const absolute = new URL(src, document.baseURI).href;
-            if (!imageSources.includes(absolute)) imageSources.push(absolute);
-        } catch(e) {
-            if (!imageSources.includes(src)) imageSources.push(src);
-        }
-    });
-
-    let galleryIndex = 0;
-    const renderGallery = () => {
-        if (!main || !gallery) return;
-        gallery.innerHTML = "";
-        imageSources.forEach((src, index) => {
-            const button = document.createElement("button");
-            button.type = "button";
-            button.className = "gallery-thumb" + (index === galleryIndex ? " active" : "");
-            button.setAttribute("aria-label", `وێنەی ${index + 1}`);
+    const thumbnails = document.getElementById("productThumbnails");
+    if (thumbnails) {
+        thumbnails.innerHTML = "";
+        galleryImages.forEach((src, index) => {
             const img = document.createElement("img");
             img.src = src;
-            img.alt = product.dataset.name || "وێنەی بەرهەم";
-            img.loading = index === 0 ? "eager" : "lazy";
-            button.appendChild(img);
-            button.onclick = () => { galleryIndex = index; updateGallery(); };
-            gallery.appendChild(button);
+            img.alt = `${product.dataset.name || ""} - ${index + 1}`;
+            img.loading = "lazy";
+            if (index === 0) img.classList.add("selected");
+            img.addEventListener("click", event => {
+                event.stopPropagation();
+                galleryIndex = index;
+                updateGalleryImage();
+            });
+            thumbnails.appendChild(img);
         });
-        updateGallery();
-    };
-    const updateGallery = () => {
-        if (!main || !imageSources.length) return;
-        galleryIndex = (galleryIndex + imageSources.length) % imageSources.length;
-        main.src = imageSources[galleryIndex];
-        main.alt = product.dataset.name || "وێنەی بەرهەم";
-        gallery?.querySelectorAll(".gallery-thumb").forEach((thumb, index) => {
-            thumb.classList.toggle("active", index === galleryIndex);
-        });
-        const active = gallery?.querySelector(".gallery-thumb.active");
-        active?.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});
-    };
-    renderGallery();
-    const prev = document.getElementById("galleryPrev");
-    const next = document.getElementById("galleryNext");
-    if (prev) prev.onclick = (event) => { event.stopPropagation(); galleryIndex--; updateGallery(); };
-    if (next) next.onclick = (event) => { event.stopPropagation(); galleryIndex++; updateGallery(); };
-    if (prev) prev.style.display = imageSources.length > 1 ? "grid" : "none";
-    if (next) next.style.display = imageSources.length > 1 ? "grid" : "none";
+    }
 
-    document.getElementById("detailName").innerText = product.dataset.name;
-    document.getElementById("detailDescription").innerText = product.dataset.description;
-    document.getElementById("detailPrice").innerText = Number(product.dataset.price).toLocaleString() + " د.ع";
+    document.querySelectorAll(".gallery-arrow").forEach(btn => {
+        btn.style.display = galleryImages.length > 1 ? "grid" : "none";
+    });
+
+    document.getElementById("detailName").innerText = product.dataset.name || "";
+    document.getElementById("detailDescription").innerText = product.dataset.description || "";
+    document.getElementById("detailPrice").innerText = Number(product.dataset.price || 0).toLocaleString() + " د.ع";
 
     createOptions("sizeOptions", product.dataset.sizes, "size");
     createOptions("colorOptions", product.dataset.colors, "color");
 
-    document.getElementById("detailSizeArea").style.display = "block";
-    document.getElementById("detailColorArea").style.display = "block";
+    document.getElementById("detailSizeArea").style.display = product.dataset.sizes ? "block" : "none";
+    document.getElementById("detailColorArea").style.display = product.dataset.colors ? "block" : "none";
 
     openModal("productModal");
+};
+
+function updateGalleryImage() {
+    const main = document.getElementById("mainProductImage");
+    if (!main || !galleryImages.length) return;
+    galleryIndex = (galleryIndex + galleryImages.length) % galleryImages.length;
+    main.src = galleryImages[galleryIndex];
+
+    const thumbnails = document.getElementById("productThumbnails");
+    if (thumbnails) {
+        thumbnails.querySelectorAll("img").forEach((img, i) => {
+            img.classList.toggle("selected", i === galleryIndex);
+        });
+        const selectedThumb = thumbnails.querySelector("img.selected");
+        selectedThumb?.scrollIntoView({block:"nearest", inline:"nearest"});
+    }
 }
+
+window.galleryStep = function galleryStep(step) {
+    if (!galleryImages.length || galleryImages.length < 2) return;
+    galleryIndex += Number(step) || 0;
+    updateGalleryImage();
+};
+
+(function enableProductGallerySwipe(){
+    const stage = document.getElementById("productMainStage");
+    if (!stage || stage.dataset.gallerySwipeBound === "1") return;
+    stage.dataset.gallerySwipeBound = "1";
+    let startX = 0;
+    let startY = 0;
+    stage.addEventListener("touchstart", e => {
+        const t=e.changedTouches[0];
+        startX=t.clientX; startY=t.clientY;
+    }, {passive:true});
+    stage.addEventListener("touchend", e => {
+        const t=e.changedTouches[0];
+        const dx=t.clientX-startX, dy=t.clientY-startY;
+        if (Math.abs(dx)>45 && Math.abs(dx)>Math.abs(dy) && galleryImages.length>1) {
+            galleryStep(dx<0 ? 1 : -1);
+        }
+    }, {passive:true});
+})();
 
 function createOptions(containerId, data, type) {
     const container = document.getElementById(containerId);

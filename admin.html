@@ -280,11 +280,16 @@ async function loadProducts(){
 
     const data = await response.json();
 
-    if(!Array.isArray(data)){
-      throw new Error("products.json دەبێت Array بێت");
+    // Accept both formats:
+    // 1) [ ...products... ]
+    // 2) { "version": 1, "updatedAt": null, "products": [ ... ] }
+    const loadedProducts = Array.isArray(data) ? data : data?.products;
+
+    if(!Array.isArray(loadedProducts)){
+      throw new Error("products.json دەبێت Array یان object ـێکی هەبێت کە products تێیدا Array بێت");
     }
 
-    products = data;
+    products = loadedProducts;
     renderProducts();
 
   }catch(error){

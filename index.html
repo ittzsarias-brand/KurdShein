@@ -1915,5 +1915,68 @@ startHeroSlider();
   });
 })();
 </script>
+
+<script type="module" id="kurdSheinFirestore">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+const firebaseConfig = {"apiKey": "AIzaSyCC_gLPdruLlmCZJRiWWHjbrWlFvrhbfUA", "authDomain": "kurdshein-website.firebaseapp.com", "projectId": "kurdshein-website", "storageBucket": "kurdshein-website.firebasestorage.app", "messagingSenderId": "149237326182", "appId": "1:149237326182:web:fa56f5d4afdc9542c0a8a7", "measurementId": "G-MFGJRN584L"};
+const firebaseApp = initializeApp(firebaseConfig, "kurdSheinStore");
+const firestore = getFirestore(firebaseApp);
+const fallbackProducts = [{"id": "product-1", "name": "ئامێری بۆن بڵاوکردنەوە", "category": "all new electronics", "price": 5000, "oldPrice": 0, "stock": 12, "sizes": "One Size", "colors": "رەنگاورەنگRGBلیدی", "description": "١. ئامێری بڵاوکردنەوەی بۆن لە براندی تێکوی  ٢. بۆ ماڵان و ناو سەیارە بەکاردێت  ٣.بە دڵی خۆت ئەتوانی بۆنی تێبکەیت  ٤. لیدی ئارجیبیە و ئۆتۆماتیکی رەنگەکان ئەگۆرێت", "images": ["IMG_9186.jpeg", "IMG_9187.jpeg", "IMG_9188.jpeg", "IMG_9189.jpeg", "IMG_9190.jpeg", "IMG_9191.jpeg"], "shortDescription": "بۆ سەیارە و ماڵ"}, {"id": "product-2", "name": "لیدی نیۆن", "category": "all new electronics", "price": 12000, "oldPrice": 0, "stock": 3, "sizes": "2M,3M,5M,10M", "colors": "RGB-IC", "description": "١.لیدێک بۆ جوانکردنی ژوور  ٢. کۆنترۆلی خۆی لەگەل دایە  ٣. ⁠بەرنامەی تایبەت بەخۆی هەیە", "images": ["IMG_9196.jpeg", "IMG_9205.jpeg", "IMG_9206.jpeg", "IMG_9207.jpeg"], "shortDescription": "کۆنترۆل + بەرنامەی موبایل"}, {"id": "product-3", "name": "گالاکسی پرۆجێکتەر", "category": "all sale electronics", "price": 13000, "oldPrice": 20000, "stock": 2, "sizes": "قیاس گەورە", "colors": "ڕەش،سپی", "description": "١. یەکێک لە جوانترین بابەتەکانی ژوور. ٢. کۆنترۆلی خۆی لەگەڵدایە. ٣. پەیوەندی بە مۆبایل دەبێت.", "images": ["IMG_9235.jpeg", "IMG_9236.jpeg"], "shortDescription": "جوانکاری ژوور"}, {"id": "product-4", "name": "جانتای ژنان", "category": "all new accessories", "price": 15000, "oldPrice": 0, "stock": 7, "sizes": " یەک قەبارە", "colors": "ڕەش,شین,پەمەیی,سەوز", "description": "جانتای جوانی رۆژانە و قوتابخانە  .", "images": ["IMG_9245.png", "IMG_9246.jpeg", "IMG_9247.jpeg", "IMG_9248.jpeg"], "shortDescription": "قوتابخانە و رۆژانە"}, {"id": "product-5", "name": "جلوبەرگی منداڵان", "category": "all kids", "price": 9000, "oldPrice": 0, "stock": 6, "sizes": "١ساڵ تا ٢ ساڵ", "colors": "سەرەوە مۆر,خوارەوە سپی", "description": "جلوبەرگی منداڵان بە شێوەیەکی ئاسوودە و جوان.", "images": ["IMG_9254.jpeg", "IMG_9255.jpeg", "IMG_9256.jpeg"], "shortDescription": "جلوبەرگی منداڵان"}, {"id": "product-6", "name": "هێدفۆنی ئەتاک شارک | Attack Shark Headphones", "category": "all electronics", "price": 18000, "oldPrice": 0, "stock": 5, "sizes": "بێ سایز", "colors": "ڕەش,سپی", "description": " براندی ئەتاک شارک هێدفۆنی بلوتوس بە کوالیتی بەرز و دەنگی ڕوون.", "images": ["IMG_9258.jpeg", "IMG_9259.jpeg", "IMG_9260.jpeg"], "shortDescription": "هێدفۆنی گەیمینگ"}, {"id": "product-7", "name": "مەتارەی ئاو", "category": "all accessories", "price": 5000, "oldPrice": 0, "stock": 9, "sizes": "500ml", "colors": "رەش,پەمەیی", "description": "مەتارەیەکی ئاو بۆ بەلارهێنانی رۆژانە  ٥٠٠ مل ئاو دەگرێت و شتێکی ناسکە  بە دوو رەنگ بەردەستە", "images": ["IMG_1740.jpeg", "IMG_1741.jpeg"], "shortDescription": "مەتارەیەکی جوان بۆ کاری رۆژانە"}];
+
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>\"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));
+}
+function normalizeImages(value) {
+  if (Array.isArray(value)) return value.map(String).map(x=>x.trim()).filter(Boolean);
+  return String(value || '').split('|').map(x=>x.trim()).filter(Boolean);
+}
+function formatIQD(value) {
+  return Number(value || 0).toLocaleString('en-US') + ' د.ع';
+}
+function renderFirestoreProducts(items) {
+  const grid = document.getElementById('products');
+  if (!grid) return;
+  const products = items.slice().sort((a,b) => String(a.id||'').localeCompare(String(b.id||''), undefined, {numeric:true}));
+  grid.innerHTML = products.map((p, index) => {
+    const images = normalizeImages(p.images);
+    const firstImage = images[0] || '';
+    const price = Number(p.price || 0);
+    const oldPrice = Number(p.oldPrice || 0);
+    const stock = Math.max(0, Number(p.stock || 0));
+    const soldOut = stock <= 0;
+    const sale = oldPrice > price && price > 0;
+    const shortDescription = p.shortDescription || p.description || '';
+    return `<div class="product${soldOut ? ' sold-out' : ''}" data-id="${escapeHtml(p.id || ('product-'+index))}" data-category="${escapeHtml(p.category || 'all')}" data-colors="${escapeHtml(p.colors || '')}" data-description="${escapeHtml(p.description || '')}" data-name="${escapeHtml(p.name || '')}" data-old-price="${oldPrice}" data-price="${price}" data-sizes="${escapeHtml(p.sizes || '')}" data-stock="${stock}" data-images="${escapeHtml(images.join('|'))}">
+      <div class="product-image">
+        <button class="favorite-button" type="button" aria-label="زیادکردن بۆ دڵخوازەکان" aria-pressed="false" onclick="toggleFavorite(event,this)">♡</button>
+        ${sale ? '<div class="sale">داشکاندن</div>' : ''}
+        <img alt="${escapeHtml(p.name || '')}" decoding="async" loading="lazy" src="${escapeHtml(firstImage)}"/>
+      </div>
+      <div class="product-info">
+        <div class="product-name">${escapeHtml(p.name || '')}</div>
+        <div class="product-description">${escapeHtml(shortDescription)}</div>
+        <div>${sale ? `<span class="price">${formatIQD(price)}</span> <span class="old-price">${formatIQD(oldPrice)}</span>` : `<span class="price">${formatIQD(price)}</span>`}</div>
+        <button class="add-cart" ${soldOut ? 'disabled' : ''} onclick="event.stopPropagation();openProduct(this.closest('.product'))">${soldOut ? 'بەرهەم نەماوە' : 'داوا کردن🛒'}</button>
+      </div>
+    </div>`;
+  }).join('');
+  if (typeof window.applyProductFilters === 'function') window.applyProductFilters();
+}
+
+let firestoreReceivedData = false;
+try {
+  onSnapshot(collection(firestore, 'products'), snapshot => {
+    firestoreReceivedData = true;
+    renderFirestoreProducts(snapshot.docs.map(d => ({ id:d.id, ...d.data() })));
+  }, error => {
+    console.warn('KurdShein Firestore read failed; keeping local catalog.', error);
+    if (!firestoreReceivedData) renderFirestoreProducts(fallbackProducts);
+  });
+} catch (error) {
+  console.warn('KurdShein Firestore initialization failed; keeping local catalog.', error);
+}
+</script>
 </body>
 </html>

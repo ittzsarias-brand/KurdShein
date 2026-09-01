@@ -3,7 +3,7 @@
 <html dir="rtl" lang="ku">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" name="viewport"/>
 <meta content="#e51c2a" name="theme-color"/>
 <meta content="KurdShein — هێنانەوەی کاڵا بۆ کوردستان" name="description"/>
 <title>KurdShein | کاڵای نوێ بۆ کوردستان</title>
@@ -801,6 +801,12 @@ body{overflow-x:hidden;touch-action:pan-y}button:focus-visible,input:focus-visib
       }
     }
 </style>
+<script>
+/* Prevent accidental browser zoom on mobile/double-tap. */
+document.addEventListener("dblclick", function(e){ e.preventDefault(); }, {passive:false});
+document.addEventListener("gesturestart", function(e){ e.preventDefault(); }, {passive:false});
+document.addEventListener("gesturechange", function(e){ e.preventDefault(); }, {passive:false});
+</script>
 </head>
 <body>
 <div class="top-bar">
@@ -1255,7 +1261,6 @@ window.startOrder = async function() {
         alert("سەبەتەکەت بەتاڵە. تکایە سەرەتا بەرهەم زیاد بکە.");
         return;
     }
-    await window.ensureKurdSheinCustomerAuth();
     if (!window.getKurdSheinCustomerUser || !window.getKurdSheinCustomerUser()) {
         window.closeModal("cartModal");
         alert("تکایە سەرەتا هەژمارێک دروست بکە یان بچۆ ژوورەوە بۆ ئەوەی ئۆردەرەکانت لە «ئۆردەرەکانم» هەڵبگیرێن.");
@@ -1291,7 +1296,6 @@ window.submitOrderToAdmin = async function() {
     }
 
     try {
-        await window.ensureKurdSheinCustomerAuth();
         const delivery = deliveryFees[city] ?? deliveryFees.Other;
         const subtotal = getCartTotal();
         const discount = appliedCoupon ? Math.round(subtotal * appliedCoupon.rate) : 0;
@@ -2174,6 +2178,7 @@ loadStoreProductsFromFirestore();
    Orders: orders/{orderId} with userId = Firebase Auth UID
 ========================================================= */
 import { getApps, getApp, initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail, signOut } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 import {
   getFirestore,
   doc,
@@ -2200,41 +2205,27 @@ const customerFirebaseConfig = {
 const customerApp = getApps().length ? getApp() : initializeApp(customerFirebaseConfig);
 const customerDb = getFirestore(customerApp);
 
-let customerAuth = null;
+let customerAuth = getAuth(customerApp);
 let customerUser = null;
-let customerAuthReady = null;
-let customerAuthApi = null;
 
-window.ensureKurdSheinCustomerAuth = async function() {
-  if (customerAuth) return customerAuth;
-  if (!customerAuthReady) {
-    customerAuthReady = import("https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js")
-      .then(async auth => {
-        customerAuthApi = auth;
-        customerAuth = auth.getAuth(customerApp);
-        auth.onAuthStateChanged(customerAuth, async user => {
-          customerUser = user || null;
-          if (customerUser) {
-            try {
-              const profile = await loadCustomerProfile();
-              const name = document.getElementById("customerName");
-              const phone = document.getElementById("customerPhone");
-              const address = document.getElementById("customerAddress");
-              if (name && !name.value) name.value = profile.name || "";
-              if (phone && !phone.value) phone.value = profile.phone || "";
-              if (address && !address.value) address.value = profile.address || "";
-            } catch (e) { console.error("Profile load:", e); }
-          }
-          if (typeof renderCustomerAccount === "function" && document.getElementById("customerAccountModal")?.classList.contains("show")) {
-            try { await renderCustomerAccount(); } catch (e) { console.error("Account render:", e); }
-          }
-        });
-        return customerAuth;
-      })
-      .catch(error => { customerAuthReady = null; throw error; });
+onAuthStateChanged(customerAuth, async user => {
+  customerUser = user || null;
+  if (customerUser) {
+    try {
+      const profile = await loadCustomerProfile();
+      const name = document.getElementById("customerName");
+      const phone = document.getElementById("customerPhone");
+      const address = document.getElementById("customerAddress");
+      if (name && !name.value) name.value = profile.name || "";
+      if (phone && !phone.value) phone.value = profile.phone || "";
+      if (address && !address.value) address.value = profile.address || "";
+    } catch (e) { console.error("Profile load:", e); }
   }
-  return customerAuthReady;
-};
+  const modal = document.getElementById("customerAccountModal");
+  if (modal?.classList.contains("show")) {
+    try { await renderCustomerAccount(); } catch (e) { console.error("Account render:", e); }
+  }
+});
 
 window.getKurdSheinCustomerUser = () => customerUser;
 
@@ -2270,15 +2261,13 @@ async function loadCustomerProfile() {
 
 window.openCustomerAccount = async function() {
   const modal = document.getElementById("customerAccountModal");
-  const box = document.getElementById("customerAccountContent");
   if (modal) window.openModal("customerAccountModal");
-  if (box) box.innerHTML = `<div class="empty-cart"><strong>⏳ چاوەڕێ بکە...</strong></div>`;
   try {
-    await window.ensureKurdSheinCustomerAuth();
     await renderCustomerAccount();
   } catch (error) {
-    console.error("Customer account error:", error);
-    if (box) box.innerHTML = `<div class="empty-cart"><strong>هەژماری من نەکراوە.</strong><span>تکایە Firebase Authentication و Email/Password بپشکنە.</span><button class="form-button" onclick="openCustomerAccount()">دووبارە هەوڵ بدەوە</button></div>`;
+    console.error("Customer account render error:", error);
+    const box = document.getElementById("customerAccountContent");
+    if (box) box.innerHTML = `<div class="empty-cart"><strong>هەژماری من نەکراوە.</strong><span>تکایە دووبارە هەوڵ بدەوە.</span></div>`;
   }
 };
 
@@ -2350,7 +2339,8 @@ async function renderCustomerAccount() {
 }
 
 window.registerCustomer = async function() {
-  const auth = await window.ensureKurdSheinCustomerAuth();
+  const auth = customerAuth;
+  if (!auth) { alert("Firebase Authentication بەردەست نییە. تکایە Email/Password چالاک بکە."); return; }
   const name = document.getElementById("customerRegisterName")?.value.trim() || "";
   const phone = document.getElementById("customerRegisterPhone")?.value.trim() || "";
   const email = document.getElementById("customerAuthEmail")?.value.trim() || "";
@@ -2362,7 +2352,7 @@ window.registerCustomer = async function() {
   }
 
   try {
-    const result = await customerAuthApi.createUserWithEmailAndPassword(auth, email, password);
+    const result = await createUserWithEmailAndPassword(auth, email, password);
     customerUser = result.user;
 
     await setDoc(doc(customerDb, "users", customerUser.uid), {
@@ -2383,7 +2373,8 @@ window.registerCustomer = async function() {
 };
 
 window.loginCustomer = async function() {
-  const auth = await window.ensureKurdSheinCustomerAuth();
+  const auth = customerAuth;
+  if (!auth) { alert("Firebase Authentication بەردەست نییە. تکایە Email/Password چالاک بکە."); return; }
   const email = document.getElementById("customerAuthEmail")?.value.trim() || "";
   const password = document.getElementById("customerAuthPassword")?.value || "";
 
@@ -2393,7 +2384,7 @@ window.loginCustomer = async function() {
   }
 
   try {
-    await customerAuthApi.signInWithEmailAndPassword(auth, email, password);
+    await signInWithEmailAndPassword(auth, email, password);
     alert("✅ بە سەرکەوتوویی چوویتە ژوورەوە.");
   } catch (error) {
     console.error(error);
@@ -2428,7 +2419,7 @@ window.saveCustomerProfile = async function() {
 };
 
 window.resetCustomerPassword = async function() {
-  const auth = await window.ensureKurdSheinCustomerAuth();
+  const auth = customerAuth;
   const email = customerUser?.email || document.getElementById("customerAuthEmail")?.value.trim() || "";
   if (!email) {
     alert("تکایە سەرەتا ئیمەیڵەکەت بنووسە.");
@@ -2436,7 +2427,7 @@ window.resetCustomerPassword = async function() {
   }
 
   try {
-    await customerAuthApi.sendPasswordResetEmail(auth, email);
+    await sendPasswordResetEmail(auth, email);
     alert("📧 لینکی گۆڕینی وشەی نهێنی بۆ ئیمەیڵەکەت نێردرا.");
   } catch (error) {
     console.error(error);
@@ -2446,8 +2437,7 @@ window.resetCustomerPassword = async function() {
 
 window.logoutCustomer = async function() {
   try {
-    const auth = await window.ensureKurdSheinCustomerAuth();
-    await customerAuthApi.signOut(auth);
+    await signOut(customerAuth);
     window.closeModal("customerAccountModal");
     window.closeModal("customerOrdersModal");
     alert("👋 بە سەرکەوتوویی چوویتە دەرەوە.");

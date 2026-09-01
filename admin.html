@@ -166,7 +166,8 @@ textarea{min-height:100px;resize:vertical}
       placeholder="گەڕان بە ناوی بەرهەم..."
       oninput="renderProducts()"
     >
-    <button class="green" onclick="downloadJSON()">💾 داگرتنی products.json</button>
+    <button class="green" onclick="publishProducts()">💾 نوێکردنەوەی products.json</button>
+    <button class="gray" onclick="downloadJSON()">⬇️ داگرتنی products.json</button>
     <button class="gray" onclick="loadProducts()">🔄 نوێکردنەوە</button>
   </div>
 
@@ -496,6 +497,45 @@ function saveProduct(){
 
   closeModal();
   renderProducts();
+}
+
+async function publishProducts(){
+
+  if(!products.length){
+    alert("هیچ بەرهەمێک نییە بۆ بڵاوکردنەوە.");
+    return;
+  }
+
+  const adminPassword = prompt("وشەی نهێنی Admin بنووسە:");
+  if(adminPassword === null) return;
+
+  if(!adminPassword){
+    alert("وشەی نهێنی Admin پێویستە.");
+    return;
+  }
+
+  try{
+    const response = await fetch("/.netlify/functions/update-products", {
+      method:"POST",
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify({
+        products: products,
+        adminPassword: adminPassword
+      })
+    });
+
+    const result = await response.json().catch(()=>({}));
+
+    if(!response.ok){
+      throw new Error(result.error || "نەتوانرا products.json نوێ بکرێتەوە.");
+    }
+
+    alert("✅ products.json بە سەرکەوتوویی نوێکرایەوە.");
+  }catch(error){
+    alert("❌ هەڵە: " + error.message);
+  }
 }
 
 function deleteProduct(index){

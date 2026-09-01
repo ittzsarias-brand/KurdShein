@@ -337,7 +337,15 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/fireba
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
-const firebaseConfig={apiKey:"AIzaSyCC_gLPdruLlmCZJRiWWHjbrWlFvrhbfUA",authDomain:"kurdshein-4bf9a.firebaseapp.com",projectId:"kurdshein-4bf9a",storageBucket:"kurdshein-4bf9a.firebasestorage.app",messagingSenderId:"220960680097",appId:"1:220960680097:web:6cc4a238266e9e816368e0",measurementId:"G-T5R7YJ9TQS"};
+const firebaseConfig={
+  apiKey:"AIzaSyAZPy_1tQTNlCP3GKZZJ01S7RLfrecaznE",
+  authDomain:"kurdsheinadmin.firebaseapp.com",
+  projectId:"kurdsheinadmin",
+  storageBucket:"kurdsheinadmin.firebasestorage.app",
+  messagingSenderId:"297215544882",
+  appId:"1:297215544882:web:7b01257fb9ad78b825362b",
+  measurementId:"G-NQC7VSG986"
+};
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
 const PRODUCT_COLLECTION="product";
 let products=[];

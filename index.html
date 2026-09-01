@@ -748,6 +748,27 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
   grid-column:1 / -1;
 }
 </style>
+<style>
+    /* KURDSHEIN PERFORMANCE OPTIMIZATION */
+    img {
+      content-visibility: auto;
+    }
+
+    .products {
+      contain: layout paint style;
+    }
+
+    .product img {
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    .products-loading {
+      min-height: 180px;
+      display: grid;
+      place-items: center;
+    }
+</style>
 </head>
 <body>
 <div class="top-bar">
@@ -1151,7 +1172,7 @@ function updateCart() {
         const image = item.image || matchedProduct?.querySelector("img")?.src || "";
         if (!item.image && image) item.image = image;
         div.innerHTML = `
-            <img class="cart-item-image" src="${escapeHtmlValue(image)}" alt="${escapeHtmlValue(item.name)}" loading="lazy" decoding="async">
+            <img class="cart-item-image" src="${escapeHtmlValue(image)}" alt="${escapeHtmlValue(item.name)}" loading="lazy" decoding="async" decoding="async">
             <div class="cart-item-main">
                 <strong>${escapeHtmlValue(item.name)}</strong>
                 <small class="cart-options">${escapeHtmlValue(options || "هەڵبژاردەکان دیاریکراون")}</small>
@@ -2014,7 +2035,7 @@ function renderFirestoreProducts(rawProducts) {
             aria-pressed="false"
             onclick="toggleFavorite(event,this)">♡</button>
           ${saleMarkup}
-          <img alt="${storeEscape(name)}" decoding="async" loading="lazy" src="${storeEscape(image)}"/>
+          <img alt="${storeEscape(name)}" decoding="async" loading="lazy" decoding="async" src="${storeEscape(image)}"/>
         </div>
         <div class="product-info">
           <div class="product-name">${storeEscape(name)}</div>

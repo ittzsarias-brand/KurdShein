@@ -620,7 +620,30 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 @media(max-width:600px){.detail-quantity-row{flex-wrap:wrap}.detail-quantity-row .big-add{width:100%;flex-basis:100%}.cart-item-premium{grid-template-columns:50px minmax(0,1fr)}.cart-item-actions{grid-column:1/-1;justify-content:flex-start}.cart-item-image{width:50px;height:50px}}
 /* ================= PROFESSIONAL CART ================= */
 .cart-topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:4px}.cart-topbar .modal-title{margin-bottom:3px;text-align:right}.cart-topbar .cart-subtitle{text-align:right;margin:0}.cart-clear-button{border:1px solid var(--border);background:transparent;color:var(--muted);border-radius:10px;padding:8px 11px;font-size:11px;font-weight:800;cursor:pointer;white-space:nowrap}.cart-clear-button:hover{color:var(--red);border-color:var(--red);background:rgba(229,28,42,.06)}#cartModal .modal-box{max-width:680px;padding:22px}#cartModal .cart-items{max-height:430px;padding:2px 2px 4px;margin:12px 0 0}.cart-item-premium{background:var(--surface-2);border:1px solid var(--border);box-shadow:0 4px 16px rgba(0,0,0,.04);transition:border-color .2s,transform .2s,box-shadow .2s}.cart-item-premium:hover{border-color:rgba(229,28,42,.28);transform:translateY(-1px);box-shadow:0 8px 24px rgba(0,0,0,.07)}.cart-item-main{direction:rtl;text-align:right}.cart-item-main strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cart-options{display:flex;justify-content:flex-start;gap:6px;direction:rtl}.cart-options span{background:var(--surface-3);border:1px solid var(--border);border-radius:7px;padding:3px 6px}.cart-item-actions{direction:ltr}.qty-button:disabled{opacity:.35;cursor:not-allowed}.cart-checkout-panel{border-top:1px solid var(--border);margin-top:9px;padding-top:13px}.cart-total-row{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:13px;padding:4px 0}.cart-total-row strong{color:var(--text);font-family:Arial,sans-serif}.cart-grand-total{margin-top:4px;padding:11px 0 13px;font-size:17px;font-weight:900}.cart-grand-total strong{color:var(--yellow);font-size:21px}.cart-actions{display:grid;grid-template-columns:1fr 1.35fr;gap:9px}.cart-actions button{min-height:46px}.cart-continue-button{border:1px solid var(--border);background:var(--surface-2);color:var(--text);border-radius:10px;font-weight:800;cursor:pointer}.cart-continue-button:hover{border-color:var(--yellow);transform:translateY(-1px)}.cart-checkout-button{margin-top:0;display:flex;align-items:center;justify-content:center;gap:10px}.cart-checkout-button span{font-size:18px}.empty-cart{min-height:300px;border:1px dashed var(--border);border-radius:16px;background:var(--surface-2)}
-@media(max-width:600px){#cartModal{padding:0;align-items:flex-end}#cartModal .modal-box{max-width:none;width:100%;max-height:90vh;border-radius:26px 26px 0 0;padding:20px 14px 14px}.cart-topbar{padding:0 3px}.cart-clear-button{padding:7px 9px}.cart-item-premium{grid-template-columns:52px minmax(0,1fr);padding:12px}.cart-item-actions{grid-column:1/-1;justify-content:flex-end}.cart-checkout-panel{padding-bottom:env(safe-area-inset-bottom)}.cart-actions{grid-template-columns:1fr 1.25fr}.cart-items{scrollbar-width:none}}
+@media(max-width:600px){
+#cartModal{padding:0;align-items:flex-end}
+#cartModal .modal-box{max-width:none;width:100%;max-height:96dvh;height:auto;border-radius:24px 24px 0 0;padding:18px 12px calc(12px + env(safe-area-inset-bottom));overflow-y:auto}
+#cartModal .modal-title{font-size:20px}
+#cartModal .cart-subtitle{font-size:11px}
+#cartModal .cart-items{max-height:52dvh;overflow-y:auto;margin-top:10px;padding:1px}
+.cart-topbar{padding:0 3px}
+.cart-clear-button{padding:7px 9px}
+.cart-item-premium{display:grid;grid-template-columns:58px minmax(0,1fr);grid-template-rows:auto auto;align-items:center;column-gap:10px;row-gap:9px;padding:11px;border-radius:14px}
+.cart-item-image{grid-column:1;grid-row:1;width:58px;height:58px}
+.cart-item-main{grid-column:2;grid-row:1;min-width:0}
+.cart-item-main strong{font-size:14px}
+.cart-options{font-size:10px}
+.cart-line-price{font-size:13px}
+.cart-item-actions{grid-column:1/-1;grid-row:2;justify-content:flex-end;width:100%;padding-top:1px;border-top:1px solid var(--border)}
+.qty-button,.remove-cart{width:34px;height:34px}
+.cart-checkout-panel{padding-top:11px;padding-bottom:env(safe-area-inset-bottom);background:var(--surface)}
+.cart-total-row{font-size:12px}
+.cart-grand-total{font-size:16px;padding:8px 0 10px}
+.cart-grand-total strong{font-size:19px}
+.cart-actions{grid-template-columns:1fr 1.25fr;gap:7px}
+.cart-actions button{min-height:44px;font-size:12px}
+.cart-items{scrollbar-width:none}
+}
 
 /* ===== FINAL PRODUCT DESCRIPTION IMAGE FIX ===== */
 .product-details-box .product-main-stage{
@@ -1025,10 +1048,6 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <button class="coupon-button" onclick="applyCoupon()" type="button">جێبەجێکردن</button>
 </div>
 <div class="checkout-totals" id="checkoutTotals"></div>
-<div class="form-group">
-<label>بابەتەکان</label>
-<textarea id="customerItems" readonly=""></textarea>
-</div>
 <button class="form-button" onclick="sendOrderToWhatsApp()">📱 ناردن بۆ ئەدمین لە WhatsApp</button>
 </div>
 </div>

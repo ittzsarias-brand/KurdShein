@@ -677,6 +677,39 @@ body{overflow-x:hidden;touch-action:pan-y}button:focus-visible,input:focus-visib
 /* ===== END PRODUCT DESCRIPTION IMAGE FIX ===== */
 
 
+/* ===== PREMIUM SITE ALERT SYSTEM ===== */
+.ks-site-alert{
+  position:fixed;top:22px;left:50%;z-index:13000;
+  width:min(460px,calc(100vw - 24px));
+  padding:14px 15px;direction:rtl;display:flex;align-items:flex-start;gap:12px;
+  background:color-mix(in srgb,var(--surface) 96%,transparent);color:var(--text);
+  border:1px solid color-mix(in srgb,var(--border) 90%,transparent);
+  border-radius:18px;box-shadow:0 20px 65px rgba(0,0,0,.34),0 0 0 1px rgba(255,255,255,.035) inset;
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  opacity:0;visibility:hidden;transform:translate(-50%,-22px) scale(.97);
+  transition:opacity .25s ease,transform .25s cubic-bezier(.22,.8,.22,1),visibility .25s;
+  pointer-events:none;
+}
+.ks-site-alert.show{opacity:1;visibility:visible;transform:translate(-50%,0) scale(1);pointer-events:auto}
+.ks-site-alert.success{border-color:color-mix(in srgb,#22c55e 48%,var(--border))}
+.ks-site-alert.error{border-color:color-mix(in srgb,#ef4444 48%,var(--border))}
+.ks-site-alert.info{border-color:color-mix(in srgb,#38bdf8 48%,var(--border))}
+.ks-site-alert.warning{border-color:color-mix(in srgb,var(--yellow) 52%,var(--border))}
+.ks-site-alert-icon{width:42px;height:42px;flex:0 0 42px;border-radius:13px;display:grid;place-items:center;font-size:21px;background:rgba(255,255,255,.08)}
+.ks-site-alert-copy{min-width:0;flex:1}
+.ks-site-alert-title{font-size:14px;font-weight:900;line-height:1.45}
+.ks-site-alert-text{margin-top:3px;color:var(--muted);font-size:11px;line-height:1.6;white-space:pre-line}
+.ks-site-alert-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}
+.ks-site-alert-action,.ks-site-alert-close{border:0;border-radius:11px;padding:9px 12px;font-family:inherit;font-weight:900;cursor:pointer}
+.ks-site-alert-action{background:var(--primary,#ef1b2d);color:#fff}
+.ks-site-alert-close{background:rgba(255,255,255,.08);color:var(--text)}
+.ks-site-alert-x{border:0;background:transparent;color:var(--muted);font-size:20px;line-height:1;cursor:pointer;padding:2px 4px}
+@media(max-width:600px){
+  .ks-site-alert{top:12px;width:calc(100vw - 20px);padding:12px;border-radius:16px}
+  .ks-site-alert-icon{width:38px;height:38px;flex-basis:38px;font-size:19px}
+  .ks-site-alert-title{font-size:13px}.ks-site-alert-text{font-size:10px}
+}
+
 /* ===== PREMIUM SELECTION WARNING ALERTS ===== */
 .ks-warning-alert{
   position:fixed;top:24px;left:50%;z-index:12000;
@@ -1060,6 +1093,70 @@ document.addEventListener("gesturechange", function(e){ e.preventDefault(); }, {
 </div>
 </div>
 <script>
+/* ================= SITE ALERT SYSTEM ================= */
+window.showKurdSheinAlert = function(message, options = {}) {
+  const opts = typeof options === "string" ? { type: options } : options;
+  const type = opts.type || "info";
+  const title = opts.title || ({success:"سەرکەوتوو",error:"هەڵە",warning:"ئاگاداری",info:"زانیاری"}[type] || "زانیاری");
+  const icon = opts.icon || ({success:"✅",error:"❌",warning:"⚠️",info:"ℹ️"}[type] || "ℹ️");
+  let box = document.getElementById("ksSiteAlert");
+  if (!box) {
+    box = document.createElement("div");
+    box.id = "ksSiteAlert";
+    box.className = "ks-site-alert";
+    box.setAttribute("role", "alert");
+    box.innerHTML = `
+      <span class="ks-site-alert-icon"></span>
+      <div class="ks-site-alert-copy">
+        <div class="ks-site-alert-title"></div>
+        <div class="ks-site-alert-text"></div>
+        <div class="ks-site-alert-actions"></div>
+      </div>
+      <button class="ks-site-alert-x" type="button" aria-label="داخستن">×</button>`;
+    document.body.appendChild(box);
+    box.querySelector(".ks-site-alert-x").addEventListener("click", () => window.hideKurdSheinAlert());
+  }
+  clearTimeout(window.ksSiteAlertTimer);
+  box.className = `ks-site-alert ${type}`;
+  box.querySelector(".ks-site-alert-icon").textContent = icon;
+  box.querySelector(".ks-site-alert-title").textContent = title;
+  box.querySelector(".ks-site-alert-text").textContent = String(message ?? "");
+  const actions = box.querySelector(".ks-site-alert-actions");
+  actions.innerHTML = "";
+  if (opts.actionText && typeof opts.onAction === "function") {
+    const action = document.createElement("button");
+    action.type = "button";
+    action.className = "ks-site-alert-action";
+    action.textContent = opts.actionText;
+    action.addEventListener("click", async () => {
+      try { await opts.onAction(); } finally { window.hideKurdSheinAlert(); }
+    });
+    actions.appendChild(action);
+  }
+  if (opts.showClose !== false) {
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "ks-site-alert-close";
+    close.textContent = "داخستن";
+    close.addEventListener("click", () => window.hideKurdSheinAlert());
+    actions.appendChild(close);
+  }
+  void box.offsetWidth;
+  box.classList.add("show");
+  if (!opts.actionText) {
+    window.ksSiteAlertTimer = setTimeout(() => window.hideKurdSheinAlert(), opts.duration || 3200);
+  }
+};
+window.hideKurdSheinAlert = function() {
+  const box = document.getElementById("ksSiteAlert");
+  if (box) box.classList.remove("show");
+  clearTimeout(window.ksSiteAlertTimer);
+};
+// Replace browser pop-up alerts with the site's mobile-friendly alert UI.
+window.alert = function(message) {
+  window.showKurdSheinAlert(message, { type: "info" });
+};
+
 /* ================= GLOBAL DATA ================= */
 let cart = JSON.parse(localStorage.getItem("kurdSheinCart") || "[]");
 let selectedProduct = null;
@@ -1358,7 +1455,15 @@ window.submitOrderToAdmin = async function() {
         document.getElementById("couponInput").value = "";
         appliedCoupon = null;
         window.closeModal("orderModal");
-        alert("داواکارییەکەت بە سەرکەوتوویی نێردرا. ئێستا لەلایەن ئەدمینەوە پشکنین دەکرێت.");
+        window.showKurdSheinAlert("داواکارییەکەت نێردرا و لە سیستەمی ئەدمین تۆمارکرا. دەتوانیت دۆخی ئۆردەرەکەت لە ئۆردەرەکانت ببینیت.", {
+            type: "success",
+            title: "داواکاری بە سەرکەوتوویی نێردرا!",
+            icon: "📦",
+            actionText: "📦 بینینی دۆخی ئۆردەرەکانم",
+            onAction: async () => {
+                window.openCustomerOrders();
+            }
+        });
     } catch (error) {
         console.error("KurdShein order save error:", error);
         alert("ناردنی داواکاری سەرکەوتوو نەبوو. تکایە دووبارە هەوڵ بدەرەوە.");
@@ -2397,7 +2502,9 @@ window.loginCustomer = async function() {
   }
 
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    customerUser = result.user;
+    await renderCustomerAccount();
     alert("✅ بە سەرکەوتوویی چوویتە ژوورەوە.");
   } catch (error) {
     console.error(error);

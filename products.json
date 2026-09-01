@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-01T17:40:22.158Z",
+  "updatedAt": "2026-09-01T17:41:57.560Z",
   "products": [
     {
       "id": "product-1",
@@ -21,7 +21,7 @@
       "sizes": [
         "One Size"
       ],
-      "stock": 12,
+      "stock": 5,
       "images": [
         "IMG_9186.jpeg",
         "IMG_9187.jpeg",

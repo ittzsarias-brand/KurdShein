@@ -1773,6 +1773,7 @@ applyProductFilters();
 startHeroSlider();
 </script>
 <script>
+window.applyProductFilters = applyProductFilters;
 /* ===== Favorites ===== */
 (function(){
   const KEY = 'kurdSheinFavorites';
@@ -2180,8 +2181,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 const customerApp = getApps().length ? getApp() : null;
-if (!customerApp) throw new Error("KurdShein Firebase app was not initialized.");
-const customerAuth = getAuth(customerApp);
+const customerAuth = customerApp ? getAuth(customerApp) : null;
 const customerDb = getFirestore(customerApp);
 
 let customerUser = null;
@@ -2219,16 +2219,8 @@ async function loadCustomerProfile() {
 }
 
 window.openCustomerAccount = async function() {
-  try {
-    await renderCustomerAccount();
-    if (typeof window.openModal !== "function") {
-      throw new Error("openModal is not available.");
-    }
-    window.openModal("customerAccountModal");
-  } catch (error) {
-    console.error("Customer account error:", error);
-    alert("هەژماری من نەکراوە. تکایە پەڕەکە refresh بکە.");
-  }
+  await renderCustomerAccount();
+  window.openModal("customerAccountModal");
 };
 
 async function renderCustomerAccount() {

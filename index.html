@@ -769,6 +769,38 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
       place-items: center;
     }
 </style>
+<style>
+    /* KURDSHEIN PERFORMANCE V2 */
+    html {
+      text-rendering: optimizeSpeed;
+    }
+
+    .products {
+      contain: layout style;
+    }
+
+    .product {
+      contain: layout paint;
+      content-visibility: auto;
+      contain-intrinsic-size: 360px;
+    }
+
+    .product img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+      }
+    }
+</style>
 </head>
 <body>
 <div class="top-bar">
@@ -1172,7 +1204,7 @@ function updateCart() {
         const image = item.image || matchedProduct?.querySelector("img")?.src || "";
         if (!item.image && image) item.image = image;
         div.innerHTML = `
-            <img class="cart-item-image" src="${escapeHtmlValue(image)}" alt="${escapeHtmlValue(item.name)}" loading="lazy" decoding="async" decoding="async">
+            <img class="cart-item-image" src="${escapeHtmlValue(image)}" alt="${escapeHtmlValue(item.name)}" loading="lazy" decoding="async">
             <div class="cart-item-main">
                 <strong>${escapeHtmlValue(item.name)}</strong>
                 <small class="cart-options">${escapeHtmlValue(options || "هەڵبژاردەکان دیاریکراون")}</small>
@@ -1624,7 +1656,17 @@ function normalizeSearchText(value) {
     return String(value || "").toLowerCase().normalize("NFKC").replace(/[،,.;:!?؟\-_/|]+/g, " ").replace(/\s+/g, " ").trim();
 }
 
-function applyProductFilters() {
+let KS_FILTER_FRAME = 0;
+    function scheduleProductFilters() {
+      cancelAnimationFrame(KS_FILTER_FRAME);
+      KS_FILTER_FRAME = requestAnimationFrame(() => {
+        if (typeof window.applyProductFilters === "function") {
+          window.applyProductFilters();
+        }
+      });
+    }
+
+    function applyProductFilters() {
     const input = document.getElementById("searchInput");
     const search = normalizeSearchText(input?.value || "");
     const terms = search ? search.split(" ").filter(Boolean) : [];
@@ -1976,7 +2018,12 @@ function storeCategories(value) {
   return categories.join(" ");
 }
 
-function renderFirestoreProducts(rawProducts) {
+const KS_DOM = {
+      products: document.getElementById("products"),
+      noResults: document.getElementById("noResults")
+    };
+
+    function renderFirestoreProducts(rawProducts) {
   const container = document.getElementById("products");
   if (!container) return;
 
@@ -2035,7 +2082,7 @@ function renderFirestoreProducts(rawProducts) {
             aria-pressed="false"
             onclick="toggleFavorite(event,this)">♡</button>
           ${saleMarkup}
-          <img alt="${storeEscape(name)}" decoding="async" loading="lazy" decoding="async" src="${storeEscape(image)}"/>
+          <img alt="${storeEscape(name)}" loading="lazy" decoding="async" src="${storeEscape(image)}"/>
         </div>
         <div class="product-info">
           <div class="product-name">${storeEscape(name)}</div>
@@ -2068,7 +2115,7 @@ function renderFirestoreProducts(rawProducts) {
   if (typeof window.renderFavorites === "function") window.renderFavorites();
   if (typeof window.renderFavoritesList === "function") window.renderFavoritesList();
   if (typeof window.updateCart === "function") window.updateCart();
-  if (typeof window.applyProductFilters === "function") window.applyProductFilters();
+  if (typeof window.scheduleProductFilters === "function") window.scheduleProductFilters();
 }
 
 async function loadStoreProductsFromFirestore() {
@@ -2133,6 +2180,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 const customerApp = getApps().length ? getApp() : null;
+if (!customerApp) throw new Error("KurdShein Firebase app was not initialized.");
 const customerAuth = getAuth(customerApp);
 const customerDb = getFirestore(customerApp);
 

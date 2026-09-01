@@ -1,211 +1,207 @@
-{
-  "version": 1,
-  "updatedAt": null,
-  "products": [
-    {
-      "id": "product-1",
-      "name": "ئامێری بۆن بڵاوکردنەوە",
-      "price": 5000,
-      "oldPrice": null,
-      "category": [
-        "all",
-        "new",
-        "electronics"
-      ],
-      "description": "١. ئامێری بڵاوکردنەوەی بۆن لە براندی تێکوی  ٢. بۆ ماڵان و ناو سەیارە بەکاردێت  ٣.بە دڵی خۆت ئەتوانی بۆنی تێبکەیت  ٤. لیدی ئارجیبیە و ئۆتۆماتیکی رەنگەکان ئەگۆرێت",
-      "displayName": "جیهازی بۆن",
-      "displayDescription": "بۆ سەیارە و ماڵ",
-      "colors": [
-        "رەنگاورەنگRGBلیدی"
-      ],
-      "sizes": [
-        "One Size"
-      ],
-      "stock": 12,
-      "images": [
-        "IMG_9186.jpeg",
-        "IMG_9187.jpeg",
-        "IMG_9188.jpeg",
-        "IMG_9189.jpeg",
-        "IMG_9190.jpeg",
-        "IMG_9191.jpeg"
-      ],
-      "mainImage": "IMG_9186.jpeg",
-      "active": true
-    },
-    {
-      "id": "product-2",
-      "name": "لیدی نیۆن",
-      "price": 12000,
-      "oldPrice": null,
-      "category": [
-        "all",
-        "new",
-        "electronics"
-      ],
-      "description": "١.لیدێک بۆ جوانکردنی ژوور  ٢. کۆنترۆلی خۆی لەگەل دایە  ٣. ⁠بەرنامەی تایبەت بەخۆی هەیە",
-      "displayName": "لیدی نیۆن",
-      "displayDescription": "کۆنترۆل + بەرنامەی موبایل",
-      "colors": [
-        "RGB-IC"
-      ],
-      "sizes": [
-        "2M",
-        "3M",
-        "5M",
-        "10M"
-      ],
-      "stock": 3,
-      "images": [
-        "IMG_9196.jpeg",
-        "IMG_9205.jpeg",
-        "IMG_9206.jpeg",
-        "IMG_9207.jpeg"
-      ],
-      "mainImage": "IMG_9205.jpeg",
-      "active": true
-    },
-    {
-      "id": "product-3",
-      "name": "گالاکسی پرۆجێکتەر",
-      "price": 13000,
-      "oldPrice": 20000,
-      "category": [
-        "all",
-        "sale",
-        "electronics"
-      ],
-      "description": "١. یەکێک لە جوانترین بابەتەکانی ژوور. ٢. کۆنترۆلی خۆی لەگەڵدایە. ٣. پەیوەندی بە مۆبایل دەبێت.",
-      "displayName": "گالاکسی پرۆجێکتەر",
-      "displayDescription": "جوانکاری ژوور",
-      "colors": [
-        "ڕەش،سپی"
-      ],
-      "sizes": [
-        "قیاس گەورە"
-      ],
-      "stock": 2,
-      "images": [
-        "IMG_9235.jpeg",
-        "IMG_9236.jpeg"
-      ],
-      "mainImage": "IMG_9235.jpeg",
-      "active": true
-    },
-    {
-      "id": "product-4",
-      "name": "جانتای ژنان",
-      "price": 15000,
-      "oldPrice": null,
-      "category": [
-        "all",
-        "new",
-        "accessories"
-      ],
-      "description": "جانتای جوانی رۆژانە و قوتابخانە  .",
-      "displayName": "جانتای پشتی",
-      "displayDescription": "قوتابخانە و رۆژانە",
-      "colors": [
-        "ڕەش",
-        "شین",
-        "پەمەیی",
-        "سەوز"
-      ],
-      "sizes": [
-        "یەک قەبارە"
-      ],
-      "stock": 7,
-      "images": [
-        "IMG_9245.png",
-        "IMG_9246.jpeg",
-        "IMG_9247.jpeg",
-        "IMG_9248.jpeg"
-      ],
-      "mainImage": "IMG_9245.png",
-      "active": true
-    },
-    {
-      "id": "product-5",
-      "name": "جلوبەرگی منداڵان",
-      "price": 9000,
-      "oldPrice": null,
-      "category": [
-        "all",
-        "kids"
-      ],
-      "description": "جلوبەرگی منداڵان بە شێوەیەکی ئاسوودە و جوان.",
-      "displayName": "جلوبەرگی منداڵان",
-      "displayDescription": "جلوبەرگی منداڵان",
-      "colors": [
-        "سەرەوە مۆر",
-        "خوارەوە سپی"
-      ],
-      "sizes": [
-        "١ساڵ تا ٢ ساڵ"
-      ],
-      "stock": 6,
-      "images": [
-        "IMG_9254.jpeg",
-        "IMG_9255.jpeg",
-        "IMG_9256.jpeg"
-      ],
-      "mainImage": "IMG_9254.jpeg",
-      "active": true
-    },
-    {
-      "id": "product-6",
-      "name": "هێدفۆنی ئەتاک شارک | Attack Shark Headphones",
-      "price": 18000,
-      "oldPrice": null,
-      "category": [
-        "all",
-        "electronics"
-      ],
-      "description": " براندی ئەتاک شارک هێدفۆنی بلوتوس بە کوالیتی بەرز و دەنگی ڕوون.",
-      "displayName": "براندی ئەتاکشارک-Attack Shark",
-      "displayDescription": "هێدفۆنی گەیمینگ",
-      "colors": [
-        "ڕەش",
-        "سپی"
-      ],
-      "sizes": [
-        "بێ سایز"
-      ],
-      "stock": 5,
-      "images": [
-        "IMG_9258.jpeg",
-        "IMG_9259.jpeg",
-        "IMG_9260.jpeg"
-      ],
-      "mainImage": "IMG_9258.jpeg",
-      "active": true
-    },
-    {
-      "id": "product-7",
-      "name": "مەتارەی ئاو",
-      "price": 5000,
-      "oldPrice": null,
-      "category": [
-        "all",
-        "accessories"
-      ],
-      "description": "مەتارەیەکی ئاو بۆ بەلارهێنانی رۆژانە  ٥٠٠ مل ئاو دەگرێت و شتێکی ناسکە  بە دوو رەنگ بەردەستە",
-      "displayName": "مەتارەی ئاو",
-      "displayDescription": "مەتارەیەکی جوان بۆ کاری رۆژانە",
-      "colors": [
-        "رەش",
-        "پەمەیی"
-      ],
-      "sizes": [
-        "500ml"
-      ],
-      "stock": 9,
-      "images": [
-        "IMG_1740.jpeg",
-        "IMG_1741.jpeg"
-      ],
-      "mainImage": "IMG_1740.jpeg",
-      "active": true
-    }
-  ]
-}
+[
+  {
+    "id": "product-1",
+    "name": "ئامێری بۆن بڵاوکردنەوە",
+    "displayName": "جیهازی بۆن",
+    "description": "١. ئامێری بڵاوکردنەوەی بۆن لە براندی تێکوی  ٢. بۆ ماڵان و ناو سەیارە بەکاردێت  ٣.بە دڵی خۆت ئەتوانی بۆنی تێبکەیت  ٤. لیدی ئارجیبیە و ئۆتۆماتیکی رەنگەکان ئەگۆرێت",
+    "displayDescription": "بۆ سەیارە و ماڵ",
+    "price": 4000,
+    "oldPrice": null,
+    "category": [
+      "all",
+      "new",
+      "electronics"
+    ],
+    "colors": [
+      "رەنگاورەنگRGBلیدی"
+    ],
+    "sizes": [
+      "One Size"
+    ],
+    "stock": 12,
+    "images": [
+      "IMG_9186.jpeg",
+      "IMG_9187.jpeg",
+      "IMG_9188.jpeg",
+      "IMG_9189.jpeg",
+      "IMG_9190.jpeg",
+      "IMG_9191.jpeg"
+    ],
+    "mainImage": "IMG_9186.jpeg",
+    "active": true
+  },
+  {
+    "id": "product-2",
+    "name": "لیدی نیۆن",
+    "price": 12000,
+    "oldPrice": null,
+    "category": [
+      "all",
+      "new",
+      "electronics"
+    ],
+    "description": "١.لیدێک بۆ جوانکردنی ژوور  ٢. کۆنترۆلی خۆی لەگەل دایە  ٣. ⁠بەرنامەی تایبەت بەخۆی هەیە",
+    "displayName": "لیدی نیۆن",
+    "displayDescription": "کۆنترۆل + بەرنامەی موبایل",
+    "colors": [
+      "RGB-IC"
+    ],
+    "sizes": [
+      "2M",
+      "3M",
+      "5M",
+      "10M"
+    ],
+    "stock": 3,
+    "images": [
+      "IMG_9196.jpeg",
+      "IMG_9205.jpeg",
+      "IMG_9206.jpeg",
+      "IMG_9207.jpeg"
+    ],
+    "mainImage": "IMG_9205.jpeg",
+    "active": true
+  },
+  {
+    "id": "product-3",
+    "name": "گالاکسی پرۆجێکتەر",
+    "price": 13000,
+    "oldPrice": 20000,
+    "category": [
+      "all",
+      "sale",
+      "electronics"
+    ],
+    "description": "١. یەکێک لە جوانترین بابەتەکانی ژوور. ٢. کۆنترۆلی خۆی لەگەڵدایە. ٣. پەیوەندی بە مۆبایل دەبێت.",
+    "displayName": "گالاکسی پرۆجێکتەر",
+    "displayDescription": "جوانکاری ژوور",
+    "colors": [
+      "ڕەش،سپی"
+    ],
+    "sizes": [
+      "قیاس گەورە"
+    ],
+    "stock": 2,
+    "images": [
+      "IMG_9235.jpeg",
+      "IMG_9236.jpeg"
+    ],
+    "mainImage": "IMG_9235.jpeg",
+    "active": true
+  },
+  {
+    "id": "product-4",
+    "name": "جانتای ژنان",
+    "price": 15000,
+    "oldPrice": null,
+    "category": [
+      "all",
+      "new",
+      "accessories"
+    ],
+    "description": "جانتای جوانی رۆژانە و قوتابخانە  .",
+    "displayName": "جانتای پشتی",
+    "displayDescription": "قوتابخانە و رۆژانە",
+    "colors": [
+      "ڕەش",
+      "شین",
+      "پەمەیی",
+      "سەوز"
+    ],
+    "sizes": [
+      "یەک قەبارە"
+    ],
+    "stock": 7,
+    "images": [
+      "IMG_9245.png",
+      "IMG_9246.jpeg",
+      "IMG_9247.jpeg",
+      "IMG_9248.jpeg"
+    ],
+    "mainImage": "IMG_9245.png",
+    "active": true
+  },
+  {
+    "id": "product-5",
+    "name": "جلوبەرگی منداڵان",
+    "price": 9000,
+    "oldPrice": null,
+    "category": [
+      "all",
+      "kids"
+    ],
+    "description": "جلوبەرگی منداڵان بە شێوەیەکی ئاسوودە و جوان.",
+    "displayName": "جلوبەرگی منداڵان",
+    "displayDescription": "جلوبەرگی منداڵان",
+    "colors": [
+      "سەرەوە مۆر",
+      "خوارەوە سپی"
+    ],
+    "sizes": [
+      "١ساڵ تا ٢ ساڵ"
+    ],
+    "stock": 6,
+    "images": [
+      "IMG_9254.jpeg",
+      "IMG_9255.jpeg",
+      "IMG_9256.jpeg"
+    ],
+    "mainImage": "IMG_9254.jpeg",
+    "active": true
+  },
+  {
+    "id": "product-6",
+    "name": "هێدفۆنی ئەتاک شارک | Attack Shark Headphones",
+    "price": 18000,
+    "oldPrice": null,
+    "category": [
+      "all",
+      "electronics"
+    ],
+    "description": " براندی ئەتاک شارک هێدفۆنی بلوتوس بە کوالیتی بەرز و دەنگی ڕوون.",
+    "displayName": "براندی ئەتاکشارک-Attack Shark",
+    "displayDescription": "هێدفۆنی گەیمینگ",
+    "colors": [
+      "ڕەش",
+      "سپی"
+    ],
+    "sizes": [
+      "بێ سایز"
+    ],
+    "stock": 5,
+    "images": [
+      "IMG_9258.jpeg",
+      "IMG_9259.jpeg",
+      "IMG_9260.jpeg"
+    ],
+    "mainImage": "IMG_9258.jpeg",
+    "active": true
+  },
+  {
+    "id": "product-7",
+    "name": "مەتارەی ئاو",
+    "price": 5000,
+    "oldPrice": null,
+    "category": [
+      "all",
+      "accessories"
+    ],
+    "description": "مەتارەیەکی ئاو بۆ بەلارهێنانی رۆژانە  ٥٠٠ مل ئاو دەگرێت و شتێکی ناسکە  بە دوو رەنگ بەردەستە",
+    "displayName": "مەتارەی ئاو",
+    "displayDescription": "مەتارەیەکی جوان بۆ کاری رۆژانە",
+    "colors": [
+      "رەش",
+      "پەمەیی"
+    ],
+    "sizes": [
+      "500ml"
+    ],
+    "stock": 9,
+    "images": [
+      "IMG_1740.jpeg",
+      "IMG_1741.jpeg"
+    ],
+    "mainImage": "IMG_1740.jpeg",
+    "active": true
+  }
+]

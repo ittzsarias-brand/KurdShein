@@ -833,6 +833,29 @@ body{overflow-x:hidden;touch-action:pan-y}button:focus-visible,input:focus-visib
 
 
 
+
+/* FINAL MOBILE DRAWER FIX */
+@media (max-width:600px){
+  html,body{overflow-x:hidden!important;}
+  .ks-nav-backdrop,.ks-options-backdrop{position:fixed!important;inset:0!important;height:100dvh!important;}
+  .ks-nav-drawer,.ks-options-drawer{
+    position:fixed!important;top:0!important;bottom:0!important;right:0!important;
+    height:100dvh!important;max-height:100dvh!important;
+    width:86vw!important;max-width:340px!important;
+    display:flex!important;flex-direction:column!important;
+    overflow:hidden!important;
+    padding-bottom:env(safe-area-inset-bottom)!important;
+  }
+  .ks-drawer-head,.ks-options-head{flex:0 0 auto!important;}
+  .ks-drawer-body,.ks-options-body{
+    flex:1 1 auto!important;min-height:0!important;height:auto!important;max-height:none!important;
+    overflow-y:scroll!important;overflow-x:hidden!important;
+    -webkit-overflow-scrolling:touch!important;
+    overscroll-behavior:contain!important;
+    padding-bottom:30px!important;
+  }
+  .ks-menu-footer,.ks-options-footer{flex:0 0 auto!important;margin-bottom:12px!important;}
+}
 </style>
 
 <style id="ks-product-gallery-fix">

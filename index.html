@@ -619,6 +619,25 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 .detail-quantity-row{display:flex;align-items:center;gap:10px;margin:8px 0 12px}.detail-quantity-label{font-size:13px;font-weight:800;white-space:nowrap}.detail-quantity-control{display:flex;align-items:center;border:1px solid var(--border);border-radius:11px;background:var(--surface-2);overflow:hidden;height:44px}.detail-qty-btn{width:42px;height:44px;border:0;background:transparent;color:var(--text);font-size:21px;font-weight:900}.detail-qty-btn:hover{background:var(--surface-3);color:var(--yellow)}#detailQuantity{width:45px;height:44px;border:0;border-left:1px solid var(--border);border-right:1px solid var(--border);background:transparent;color:var(--text);text-align:center;font-weight:900;outline:0}.detail-quantity-row .big-add{flex:1;margin:0}.favorite-product .favorite-view-button{display:grid;place-items:center;min-width:42px;height:42px;font-size:20px}.cart-item-premium{display:grid !important;grid-template-columns:58px minmax(0,1fr) auto;gap:12px !important}.cart-item-image{width:58px;height:58px;border-radius:13px;object-fit:cover;background:var(--surface-3);border:1px solid var(--border)}.cart-header-summary{display:flex;justify-content:space-between;align-items:center;background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:11px 13px;margin-bottom:12px;font-size:12px;color:var(--muted)}.cart-header-summary strong{color:var(--text);font-size:14px}.cart-item-main{min-width:0}
 @media(max-width:600px){.detail-quantity-row{flex-wrap:wrap}.detail-quantity-row .big-add{width:100%;flex-basis:100%}.cart-item-premium{grid-template-columns:50px minmax(0,1fr)}.cart-item-actions{grid-column:1/-1;justify-content:flex-start}.cart-item-image{width:50px;height:50px}}
 
+/* ===== PRODUCT DESCRIPTION MULTI-IMAGE GALLERY ===== */
+.product-main-stage{position:relative;}
+.gallery-nav{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border:1px solid var(--border);border-radius:50%;background:rgba(0,0,0,.48);color:#fff;font-size:30px;line-height:1;display:grid;place-items:center;z-index:4;cursor:pointer;backdrop-filter:blur(6px);}
+.gallery-nav:hover{background:var(--red);border-color:var(--red);}
+.gallery-prev{left:10px;}
+.gallery-next{right:10px;}
+.product-image-gallery{display:flex;gap:9px;overflow-x:auto;padding:10px 2px 2px;scrollbar-width:thin;}
+.product-image-gallery:empty{display:none;}
+.gallery-thumb{flex:0 0 68px;width:68px;height:68px;padding:0;border:2px solid var(--border);border-radius:11px;background:var(--surface-2);overflow:hidden;cursor:pointer;}
+.gallery-thumb img{display:block;width:100%;height:100%;object-fit:cover;}
+.gallery-thumb.active{border-color:var(--red);}
+@media(max-width:600px){
+  .gallery-nav{width:36px;height:36px;font-size:25px;}
+  .gallery-prev{left:7px}.gallery-next{right:7px}
+  .product-image-gallery{gap:7px;padding-top:8px;}
+  .gallery-thumb{flex-basis:58px;width:58px;height:58px;border-radius:9px;}
+}
+/* ===== END PRODUCT DESCRIPTION MULTI-IMAGE GALLERY ===== */
+
 /* ===== FINAL PRODUCT DESCRIPTION IMAGE FIX ===== */
 .product-details-box .product-main-stage{
   width:100% !important;
@@ -915,7 +934,10 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 <button class="close-button" onclick="closeModal('productModal')">×</button>
 <div class="product-main-stage">
 <img alt="" class="main-product-image" draggable="false" id="mainProductImage" src=""/>
+<button class="gallery-nav gallery-prev" id="galleryPrev" type="button" aria-label="وێنەی پێشوو">‹</button>
+<button class="gallery-nav gallery-next" id="galleryNext" type="button" aria-label="وێنەی دواتر">›</button>
 </div>
+<div class="product-image-gallery" id="productImageGallery" aria-label="وێنەکانی بەرهەم"></div>
 <div class="details-content">
 <h2 id="detailName"></h2>
 <p class="details-description" id="detailDescription"></p>
@@ -1323,7 +1345,63 @@ window.openProduct = function openProduct(product) {
     rememberRecentlyViewed(product);
     const main = document.getElementById("mainProductImage");
     const productImage = product.querySelector(".product-image img");
-    if (main) main.src = productImage?.src || "";
+    const gallery = document.getElementById("productImageGallery");
+    const imageSources = [];
+
+    // Preserve every image already attached to the product, including images
+    // supplied through data-images / data-gallery by future product updates.
+    const declaredImages = [product.dataset.images, product.dataset.gallery]
+        .filter(Boolean)
+        .flatMap(value => String(value).split(/[,|\n]+/).map(v => v.trim()).filter(Boolean));
+    product.querySelectorAll("img").forEach(img => {
+        if (img.src && !imageSources.includes(img.src)) imageSources.push(img.src);
+    });
+    declaredImages.forEach(src => {
+        try {
+            const absolute = new URL(src, document.baseURI).href;
+            if (!imageSources.includes(absolute)) imageSources.push(absolute);
+        } catch(e) {
+            if (!imageSources.includes(src)) imageSources.push(src);
+        }
+    });
+
+    let galleryIndex = 0;
+    const renderGallery = () => {
+        if (!main || !gallery) return;
+        gallery.innerHTML = "";
+        imageSources.forEach((src, index) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "gallery-thumb" + (index === galleryIndex ? " active" : "");
+            button.setAttribute("aria-label", `وێنەی ${index + 1}`);
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = product.dataset.name || "وێنەی بەرهەم";
+            img.loading = index === 0 ? "eager" : "lazy";
+            button.appendChild(img);
+            button.onclick = () => { galleryIndex = index; updateGallery(); };
+            gallery.appendChild(button);
+        });
+        updateGallery();
+    };
+    const updateGallery = () => {
+        if (!main || !imageSources.length) return;
+        galleryIndex = (galleryIndex + imageSources.length) % imageSources.length;
+        main.src = imageSources[galleryIndex];
+        main.alt = product.dataset.name || "وێنەی بەرهەم";
+        gallery?.querySelectorAll(".gallery-thumb").forEach((thumb, index) => {
+            thumb.classList.toggle("active", index === galleryIndex);
+        });
+        const active = gallery?.querySelector(".gallery-thumb.active");
+        active?.scrollIntoView({behavior:"smooth",block:"nearest",inline:"center"});
+    };
+    renderGallery();
+    const prev = document.getElementById("galleryPrev");
+    const next = document.getElementById("galleryNext");
+    if (prev) prev.onclick = (event) => { event.stopPropagation(); galleryIndex--; updateGallery(); };
+    if (next) next.onclick = (event) => { event.stopPropagation(); galleryIndex++; updateGallery(); };
+    if (prev) prev.style.display = imageSources.length > 1 ? "grid" : "none";
+    if (next) next.style.display = imageSources.length > 1 ? "grid" : "none";
 
     document.getElementById("detailName").innerText = product.dataset.name;
     document.getElementById("detailDescription").innerText = product.dataset.description;

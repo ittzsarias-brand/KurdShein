@@ -234,7 +234,7 @@ body{overflow-x:hidden;touch-action:pan-y}button:focus-visible,input:focus-visib
 .cart-item-premium{padding:15px;border-radius:16px;align-items:center}.cart-item-main{min-width:0;display:flex;flex-direction:column;gap:5px}.cart-item-main strong{font-size:15px}.cart-options{display:flex;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:11px}.cart-line-price{color:var(--yellow);font-size:14px;margin-top:3px}.cart-item-actions{display:flex;align-items:center;gap:6px;flex-shrink:0}.qty-button,.remove-cart{width:32px;height:32px;border-radius:10px;border:1px solid var(--border);background:var(--surface-3);color:var(--text);font-size:17px;display:grid;place-items:center}.qty-button:hover{border-color:var(--yellow)}.qty-value{min-width:22px;text-align:center;font-weight:800}.remove-cart{margin-right:5px;color:#ff6b73}.remove-cart:hover{background:rgba(229,28,42,.12);border-color:var(--red)}
 .empty-cart{min-height:240px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;color:var(--muted);text-align:center}.empty-cart-icon{font-size:48px;filter:grayscale(.2);margin-bottom:6px}.empty-cart strong{color:var(--text);font-size:18px}
 .cart-total{font-weight:900;font-size:20px;padding:18px 0 12px}
-@media(max-width:600px){.modal{padding:10px;align-items:flex-end}.modal-box{max-height:92vh;border-radius:24px 24px 16px 16px;padding:21px 15px}.cart-item-premium{align-items:flex-start}.cart-item-actions{margin-top:2px}}
+@media(max-width:600px){.modal{padding:10px;align-items:flex-end}.modal-box{max-height:92vh;border-radius:24px 24px 16px 16px;padding:21px 15px}.cart-item-premium{align-items:flex-start}.cart-item-actions{margin-top:2px}.ks-nav-drawer,.ks-options-drawer{width:min(390px,94vw)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
 
 /* ===== KURDSHEIN V2 SHOPPING UPGRADES ===== */
@@ -472,6 +472,12 @@ body{overflow-x:hidden;touch-action:pan-y}button:focus-visible,input:focus-visib
 
 /* Phone */
 @media(max-width:600px){
+  /* Compact mobile settings/menu drawer so all options fit nicely */
+  .ks-options-drawer,
+  .ks-nav-drawer{
+    width:min(320px, 82vw) !important;
+    max-height:100dvh !important;
+  }
   .ks-options-drawer .ks-drawer-body,
   .ks-nav-drawer .ks-drawer-body{
     padding:10px 10px !important;
@@ -983,6 +989,13 @@ body {
   }
 }
 </style>
+<script>
+/* Prevent accidental browser zoom on mobile/double-tap. */
+document.addEventListener("dblclick", function(e){ e.preventDefault(); }, {passive:false});
+document.addEventListener("gesturestart", function(e){ e.preventDefault(); }, {passive:false});
+document.addEventListener("gesturechange", function(e){ e.preventDefault(); }, {passive:false});
+</script>
+
 </head>
 <body>
 <div class="top-bar">

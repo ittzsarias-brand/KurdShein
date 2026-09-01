@@ -939,7 +939,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 </footer>
 <div class="modal" id="productModal" onclick="closeOutside(event,'productModal')">
 <div class="modal-box product-details-box">
-<button class="close-button" onclick="closeModal('productModal')">×</button>
+<button class="close-button" onclick="window.closeModal('productModal')">×</button>
 <div class="product-gallery">
 <div class="product-main-stage" id="productMainStage">
 <button class="gallery-arrow gallery-prev" id="galleryPrev" type="button" aria-label="وێنەی پێشوو" onclick="galleryStep(-1);event.stopPropagation()">‹</button>
@@ -974,7 +974,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 </div>
 <div class="modal" id="cartModal" onclick="closeOutside(event,'cartModal')">
 <div class="modal-box">
-<button class="close-button" onclick="closeModal('cartModal')">×</button>
+<button class="close-button" onclick="window.closeModal('cartModal')">×</button>
 <h2 class="modal-title">🛒 سەبەتەکەت</h2><p class="cart-subtitle">بەرهەمە هەڵبژێردراوەکانت لێرەیە</p>
 <div class="cart-items" id="cartItems"></div>
 <div class="cart-total" id="cartTotal">کۆی گشتی: ٠ د.ع</div>
@@ -983,7 +983,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 </div>
 <div class="modal" id="orderModal" onclick="closeOutside(event,'orderModal')">
 <div class="modal-box">
-<button class="close-button" onclick="closeModal('orderModal')">×</button>
+<button class="close-button" onclick="window.closeModal('orderModal')">×</button>
 <h2 class="modal-title">🧾 تەواوکردنی داواکاری</h2>
 <div class="order-summary" id="orderSummary"></div>
 <div class="form-group">
@@ -1025,14 +1025,14 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 </div>
 <div class="modal" id="favoritesModal" onclick="closeOutside(event,'favoritesModal')">
 <div class="modal-box">
-<button class="close-button" onclick="closeModal('favoritesModal')">×</button>
+<button class="close-button" onclick="window.closeModal('favoritesModal')">×</button>
 <h2 class="modal-title">❤️دلخواز</h2>
 <div id="favoritesList"></div>
 </div>
 </div>
 <div class="modal" id="customerAccountModal" onclick="closeOutside(event,'customerAccountModal')">
 <div class="modal-box customer-account-box">
-<button class="close-button" onclick="closeModal('customerAccountModal')">×</button>
+<button class="close-button" onclick="window.closeModal('customerAccountModal')">×</button>
 <h2 class="modal-title">👤 هەژماری من</h2>
 <div id="customerAccountContent"></div>
 </div>
@@ -1040,7 +1040,7 @@ body{overflow-x:hidden}button:focus-visible,input:focus-visible,textarea:focus-v
 
 <div class="modal" id="customerOrdersModal" onclick="closeOutside(event,'customerOrdersModal')">
 <div class="modal-box customer-account-box">
-<button class="close-button" onclick="closeModal('customerOrdersModal')">×</button>
+<button class="close-button" onclick="window.closeModal('customerOrdersModal')">×</button>
 <h2 class="modal-title">📦 ئۆردەرەکانم</h2>
 <div id="customerOrdersList"></div>
 </div>
@@ -1258,14 +1258,14 @@ window.startOrder = function() {
         return;
     }
     if (!window.getKurdSheinCustomerUser || !window.getKurdSheinCustomerUser()) {
-        closeModal("cartModal");
+        window.closeModal("cartModal");
         alert("تکایە سەرەتا هەژمارێک دروست بکە یان بچۆ ژوورەوە بۆ ئەوەی ئۆردەرەکانت لە «ئۆردەرەکانم» هەڵبگیرێن.");
         window.openCustomerAccount();
         return;
     }
-    closeModal("cartModal");
+    window.closeModal("cartModal");
     renderOrderSummary();
-    openModal("orderModal");
+    window.openModal("orderModal");
 };
 
 window.submitOrderToAdmin = async function() {
@@ -1341,7 +1341,7 @@ window.submitOrderToAdmin = async function() {
         document.getElementById("customerNote").value = "";
         document.getElementById("couponInput").value = "";
         appliedCoupon = null;
-        closeModal("orderModal");
+        window.closeModal("orderModal");
         alert("داواکارییەکەت بە سەرکەوتوویی نێردرا. ئێستا لەلایەن ئەدمینەوە پشکنین دەکرێت.");
     } catch (error) {
         console.error("KurdShein order save error:", error);
@@ -1372,13 +1372,13 @@ window.closeModal = function(id) {
 
 window.closeOutside = function(event, id) {
     if (event.target === document.getElementById(id)) {
-        closeModal(id);
+        window.closeModal(id);
     }
 };
 
 window.openCart = function() {
     updateCart();
-    openModal("cartModal");
+    window.openModal("cartModal");
 };
 
 /* ================= RECENTLY VIEWED ================= */
@@ -1453,7 +1453,7 @@ window.openProduct = function openProduct(product) {
     document.getElementById("detailSizeArea").style.display = product.dataset.sizes ? "block" : "none";
     document.getElementById("detailColorArea").style.display = product.dataset.colors ? "block" : "none";
 
-    openModal("productModal");
+    window.openModal("productModal");
 };
 
 function updateGalleryImage() {
@@ -1599,7 +1599,7 @@ window.addSelectedProduct = function addSelectedProduct() {
         selectedProduct.querySelector("img")?.src || ""
     );
 
-    if (added) closeModal("productModal");
+    if (added) window.closeModal("productModal");
 };
 
 document.querySelectorAll(".product").forEach(product => {
@@ -1898,7 +1898,7 @@ startHeroSlider();
     const card = cards.find(c => productData(c).id === p.id) ||
                  cards.find(c => (c.dataset.name || '').trim() === String(p.name || '').trim());
 
-    closeModal('favoritesModal');
+    window.closeModal('favoritesModal');
 
     if(card){
       if(typeof openProduct === 'function') openProduct(card);
@@ -2219,8 +2219,16 @@ async function loadCustomerProfile() {
 }
 
 window.openCustomerAccount = async function() {
-  await renderCustomerAccount();
-  openModal("customerAccountModal");
+  try {
+    await renderCustomerAccount();
+    if (typeof window.openModal !== "function") {
+      throw new Error("openModal is not available.");
+    }
+    window.openModal("customerAccountModal");
+  } catch (error) {
+    console.error("Customer account error:", error);
+    alert("هەژماری من نەکراوە. تکایە پەڕەکە refresh بکە.");
+  }
 };
 
 async function renderCustomerAccount() {
@@ -2385,8 +2393,8 @@ window.resetCustomerPassword = async function() {
 window.logoutCustomer = async function() {
   try {
     await signOut(customerAuth);
-    closeModal("customerAccountModal");
-    closeModal("customerOrdersModal");
+    window.closeModal("customerAccountModal");
+    window.closeModal("customerOrdersModal");
     alert("👋 بە سەرکەوتوویی چوویتە دەرەوە.");
   } catch (error) {
     console.error(error);
@@ -2395,13 +2403,13 @@ window.logoutCustomer = async function() {
 
 window.openCustomerOrders = async function() {
   if (!customerUser) {
-    closeModal("customerAccountModal");
+    window.closeModal("customerAccountModal");
     window.openCustomerAccount();
     return;
   }
 
-  closeModal("customerAccountModal");
-  openModal("customerOrdersModal");
+  window.closeModal("customerAccountModal");
+  window.openModal("customerOrdersModal");
 
   const list = document.getElementById("customerOrdersList");
   list.innerHTML = `<div class="empty-cart"><strong>⏳ چاوەڕێ بکە...</strong></div>`;

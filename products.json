@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-01T17:41:57.560Z",
+  "updatedAt": "2026-09-01T17:45:05.592Z",
   "products": [
     {
       "id": "product-1",
@@ -205,6 +205,31 @@
         "IMG_1741.jpeg"
       ],
       "mainImage": "IMG_1740.jpeg",
+      "active": true
+    },
+    {
+      "id": "product-1788284622064",
+      "name": "Test 1",
+      "displayName": "Test 1",
+      "description": "1Test",
+      "displayDescription": "1Test",
+      "price": 10,
+      "oldPrice": 20,
+      "category": [
+        "all"
+      ],
+      "colors": [
+        "black"
+      ],
+      "sizes": [
+        "big"
+      ],
+      "stock": 10,
+      "images": [
+        "IMG_1234.jpeg",
+        "IMG_1234.jpeg"
+      ],
+      "mainImage": "IMG_1234.jpeg",
       "active": true
     }
   ]

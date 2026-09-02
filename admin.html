@@ -62,7 +62,7 @@
   .grid{
     display:grid;grid-template-columns:repeat(8,1fr);gap:18px
   }
-  .tile{
+  .tile{border:0;font-family:inherit;color:inherit;text-align:center;
     min-height:138px;border:1px solid #20252d;border-radius:22px;background:linear-gradient(145deg,#12151b,#0f1117);
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
     position:relative;overflow:hidden;transition:.2s transform,.2s border-color,.2s background;cursor:pointer;
@@ -474,7 +474,7 @@
 <main>
 
   <section class="grid" id="dashboardGrid">
-    <div class="tile yellow"><div class="icon"><svg viewBox='0 0 32 32'><circle cx='16' cy='9' r='5'/><path d='M7 27c0-6 4-10 9-10s9 4 9 10z'/></svg></div><div class="name">Products</div></div>
+    <button type="button" class="tile yellow" id="productsTile"><div class="icon"><svg viewBox="0 0 32 32"><circle cx="16" cy="9" r="5"/><path d="M7 27c0-6 4-10 9-10s9 4 9 10z"/></svg></div><div class="name">Products</div></button>
     <div class="tile yellow"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M7 11h11a8 8 0 1 1-5 14'/><path d='M7 11l5-5M7 11l5 5'/></svg></div><div class="name">Stores</div></div>
     <div class="tile yellow"><div class="icon"><svg viewBox='0 0 32 32'><path d='M7 3h13l6 6v20H7z'/><path d='M20 3v7h6'/><rect x='11' y='13' width='11' height='2' rx='1'/><rect x='11' y='18' width='8' height='2' rx='1'/><path d='M17 21v6'/></svg></div><div class="name">Orders</div></div>
     <div class="tile yellow"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M4 7h4l3 15h13l4-11H9'/><circle cx='13' cy='26' r='2'/><circle cx='24' cy='26' r='2'/></svg></div><div class="name">Costumers</div></div>
@@ -546,22 +546,7 @@
   </div>
 </section>
 
-<script>
-  document.querySelectorAll('.tile').forEach(tile => {
-    tile.addEventListener('click', () => {
-      const name = tile.querySelector('.name')?.textContent || '';
-      if(name === 'Products'){
-        if(window.openProductManager) {
-          window.openProductManager();
-        } else {
-          setTimeout(() => window.openProductManager && window.openProductManager(), 50);
-        }
-        return;
-      }
-      alert(name);
-    });
-  });
-</script>
+
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
@@ -658,6 +643,7 @@ function startFirestore(){
     snap => {
       products = snap.docs.map(d => ({...d.data(), __docId:d.id}));
       refreshDashboardFromFirestore();
+      renderProductManager();
     },
     error => {
       console.error("product listener:", error);
@@ -804,6 +790,10 @@ window.openProductManager = () => {
   renderProductManager();
   window.scrollTo({top:0, behavior:"smooth"});
 };
+document.getElementById("productsTile")?.addEventListener("click", event => {
+  event.preventDefault();
+  window.openProductManager();
+});
 function closeProductManager(){
   const grid = document.getElementById("dashboardGrid");
   if(grid) grid.hidden = false;
@@ -911,11 +901,7 @@ pmForm?.addEventListener("submit", async e => {
 });
 
 /* Re-render the manager whenever the live Firestore product listener changes. */
-const originalRefreshDashboardFromFirestore = refreshDashboardFromFirestore;
-refreshDashboardFromFirestore = function(){
-  originalRefreshDashboardFromFirestore();
-  renderProductManager();
-};
+
 
 </script>
 

@@ -501,12 +501,61 @@
   </section>
 </main>
 
+<section class="product-tab" id="productManagerModal" aria-hidden="true" hidden>
+  <div class="product-tab-card">
+    <div class="product-tab-head">
+      <div>
+        <div class="product-tab-title">Products</div>
+        <div class="product-tab-subtitle" id="pmStatus">Live Firestore products</div>
+      </div>
+      <button class="product-back" type="button" id="pmClose">← Back</button>
+    </div>
+
+    <div class="product-tab-toolbar">
+      <div class="product-count" id="pmCount">0 products</div>
+      <button class="pm-add" type="button" id="pmAdd">+ Add Product</button>
+    </div>
+
+    <div class="pm-list" id="pmList"></div>
+
+    <form class="pm-form" id="pmForm" hidden>
+      <div class="pm-form-title" id="pmFormTitle">Add Product</div>
+      <input type="hidden" id="pmDocId">
+
+      <div class="pm-fields">
+        <div class="pm-field"><label for="pmName">Product name</label><input id="pmName" required></div>
+        <div class="pm-field"><label for="pmProductId">Product ID</label><input id="pmProductId"></div>
+        <div class="pm-field"><label for="pmPrice">Price (IQD)</label><input id="pmPrice" type="number" min="0" required></div>
+        <div class="pm-field"><label for="pmOldPrice">Old price (IQD)</label><input id="pmOldPrice" type="number" min="0"></div>
+        <div class="pm-field"><label for="pmStock">Stock</label><input id="pmStock" type="number" min="0" required></div>
+        <div class="pm-field"><label for="pmCategory">Category</label><input id="pmCategory" placeholder="men, women, new, sale"></div>
+        <div class="pm-field"><label for="pmSizes">Sizes</label><input id="pmSizes" placeholder="S, M, L"></div>
+        <div class="pm-field"><label for="pmColors">Colors</label><input id="pmColors" placeholder="Black, White"></div>
+        <div class="pm-field full"><label for="pmDisplayDescription">Display description</label><textarea id="pmDisplayDescription"></textarea></div>
+        <div class="pm-field full"><label for="pmDescription">Full description</label><textarea id="pmDescription"></textarea></div>
+        <div class="pm-field full"><label for="pmImages">Images — one URL per line</label><textarea id="pmImages" placeholder="https://..."></textarea></div>
+        <div class="pm-field"><label for="pmActive">Active</label><select id="pmActive"><option value="true">Yes</option><option value="false">No</option></select></div>
+      </div>
+
+      <div class="pm-form-actions">
+        <button class="pm-save" type="submit">Save Product</button>
+        <button class="pm-cancel" type="button" id="pmCancel">Cancel</button>
+      </div>
+      <div class="pm-error" id="pmError" aria-live="polite"></div>
+    </form>
+  </div>
+</section>
+
 <script>
   document.querySelectorAll('.tile').forEach(tile => {
     tile.addEventListener('click', () => {
       const name = tile.querySelector('.name')?.textContent || '';
       if(name === 'Products'){
-        if(window.openProductManager) window.openProductManager();
+        if(window.openProductManager) {
+          window.openProductManager();
+        } else {
+          setTimeout(() => window.openProductManager && window.openProductManager(), 50);
+        }
         return;
       }
       alert(name);
@@ -697,6 +746,7 @@ window.saveKurdSheinFirestoreSettings = async data => {
 
 /* ================= KURD SHEIN PRODUCT MANAGER ================= */
 const pmModal = document.getElementById("productManagerModal");
+if(!pmModal) console.error("Kurd Shein: Products tab markup is missing.");
 const pmList = document.getElementById("pmList");
 const pmForm = document.getElementById("pmForm");
 const pmStatus = document.getElementById("pmStatus");
@@ -954,50 +1004,7 @@ refreshDashboardFromFirestore = function(){
 </script>
 
 
-<section class="product-tab" id="productManagerModal" aria-hidden="true" hidden>
-  <div class="product-tab-card">
-    <div class="product-tab-head">
-      <div>
-        <div class="product-tab-title">Products</div>
-        <div class="product-tab-subtitle" id="pmStatus">Live Firestore products</div>
-      </div>
-      <button class="product-back" type="button" id="pmClose">← Back</button>
-    </div>
 
-    <div class="product-tab-toolbar">
-      <div class="product-count" id="pmCount">0 products</div>
-      <button class="pm-add" type="button" id="pmAdd">+ Add Product</button>
-    </div>
-
-    <div class="pm-list" id="pmList"></div>
-
-    <form class="pm-form" id="pmForm" hidden>
-      <div class="pm-form-title" id="pmFormTitle">Add Product</div>
-      <input type="hidden" id="pmDocId">
-
-      <div class="pm-fields">
-        <div class="pm-field"><label for="pmName">Product name</label><input id="pmName" required></div>
-        <div class="pm-field"><label for="pmProductId">Product ID</label><input id="pmProductId"></div>
-        <div class="pm-field"><label for="pmPrice">Price (IQD)</label><input id="pmPrice" type="number" min="0" required></div>
-        <div class="pm-field"><label for="pmOldPrice">Old price (IQD)</label><input id="pmOldPrice" type="number" min="0"></div>
-        <div class="pm-field"><label for="pmStock">Stock</label><input id="pmStock" type="number" min="0" required></div>
-        <div class="pm-field"><label for="pmCategory">Category</label><input id="pmCategory" placeholder="men, women, new, sale"></div>
-        <div class="pm-field"><label for="pmSizes">Sizes</label><input id="pmSizes" placeholder="S, M, L"></div>
-        <div class="pm-field"><label for="pmColors">Colors</label><input id="pmColors" placeholder="Black, White"></div>
-        <div class="pm-field full"><label for="pmDisplayDescription">Display description</label><textarea id="pmDisplayDescription"></textarea></div>
-        <div class="pm-field full"><label for="pmDescription">Full description</label><textarea id="pmDescription"></textarea></div>
-        <div class="pm-field full"><label for="pmImages">Images — one URL per line</label><textarea id="pmImages" placeholder="https://..."></textarea></div>
-        <div class="pm-field"><label for="pmActive">Active</label><select id="pmActive"><option value="true">Yes</option><option value="false">No</option></select></div>
-      </div>
-
-      <div class="pm-form-actions">
-        <button class="pm-save" type="submit">Save Product</button>
-        <button class="pm-cancel" type="button" id="pmCancel">Cancel</button>
-      </div>
-      <div class="pm-error" id="pmError" aria-live="polite"></div>
-    </form>
-  </div>
-</section>
 
 
 </body>

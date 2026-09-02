@@ -536,6 +536,7 @@ let stopProducts = null;
 let stopOrders = null;
 
 const loginView = document.getElementById("firebaseLogin");
+  if(loginView) loginView.classList.add("hidden");
 const loginBtn = document.getElementById("firebaseLoginBtn");
 const loginError = document.getElementById("firebaseError");
 
@@ -656,7 +657,9 @@ document.getElementById("firebasePassword").addEventListener("keydown", e => {
 
 onAuthStateChanged(auth, async user => {
   if(!user){
-    loginView.classList.remove("hidden");
+    // Keep the login window hidden on initial page load.
+    // It opens only when Admin Account → Login is pressed.
+    loginView.classList.add("hidden");
     setStatus("Firestore: sign in required");
     return;
   }

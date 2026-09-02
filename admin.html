@@ -358,6 +358,348 @@ table{
     }
 </style>
 
+
+<style id="stripe-dashboard-redesign">
+/* =========================================================
+   KURDSHEIN — STRIPE-INSPIRED ADMIN DASHBOARD
+   Visual layer only: existing Firebase/JS functionality kept.
+   ========================================================= */
+:root{
+  --bg:#f6f9fc;
+  --surface:#ffffff;
+  --surface2:#f7f9fc;
+  --surface3:#eef2f7;
+  --text:#1f2937;
+  --muted:#667085;
+  --border:#e3e8ef;
+  --border-strong:#cfd7e3;
+  --red:#635bff;
+  --red-soft:rgba(99,91,255,.10);
+  --green:#0e9f6e;
+  --yellow:#d97706;
+  --blue:#2563eb;
+  --danger:#dc2626;
+  --shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px rgba(16,24,40,.04);
+}
+
+html,body{
+  background:var(--bg);
+  color:var(--text);
+}
+body{
+  font-family:Rabar,Arial,sans-serif;
+}
+
+/* Login */
+.login{
+  background:
+    radial-gradient(circle at 15% 10%,rgba(99,91,255,.10),transparent 28%),
+    var(--bg);
+}
+.login-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:16px;
+  box-shadow:0 18px 50px rgba(16,24,40,.10);
+  padding:32px;
+}
+.logo span,.side-logo span{color:#635bff}
+.sub{color:#667085}
+.field input,.field textarea,.field select{
+  background:#fff;
+  color:#1f2937;
+  border:1px solid #d8dee8;
+}
+.field input:focus,.field textarea:focus,.field select:focus,
+.toolbar input:focus,.toolbar select:focus{
+  border-color:#635bff;
+  box-shadow:0 0 0 3px rgba(99,91,255,.12);
+}
+.primary{
+  background:#635bff;
+  border-radius:8px;
+  box-shadow:0 1px 2px rgba(16,24,40,.08);
+}
+.primary:hover{filter:brightness(.97)}
+.secondary{
+  background:#fff;
+  color:#344054;
+  border:1px solid #d8dee8;
+  border-radius:8px;
+}
+.secondary:hover{
+  background:#f8fafc;
+  border-color:#bfc8d6;
+}
+.danger{
+  background:#fff5f5;
+  color:#b42318;
+  border:1px solid #f3c7c3;
+  border-radius:8px;
+}
+.success{
+  background:#ecfdf3;
+  color:#087443;
+  border:1px solid #b7ebce;
+  border-radius:8px;
+}
+
+/* Main application shell */
+.app{
+  grid-template-columns:236px minmax(0,1fr);
+  background:#f6f9fc;
+}
+.sidebar{
+  background:#fff;
+  border-left:1px solid #e4e9f0;
+  padding:18px 12px;
+  box-shadow:1px 0 0 rgba(16,24,40,.02);
+}
+.side-logo{
+  font-size:25px;
+  padding:9px 12px 20px;
+  border-bottom:1px solid #edf0f4;
+  margin-bottom:14px;
+}
+.side-label{
+  color:#98a2b3;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.2px;
+}
+.nav{gap:3px}
+.nav button{
+  min-height:42px;
+  color:#667085;
+  border-radius:8px;
+  padding:10px 12px;
+  transition:all .15s ease;
+}
+.nav button:hover{
+  background:#f5f7fa;
+  color:#344054;
+  transform:none;
+}
+.nav button.active{
+  background:#eeecff;
+  border-color:#dedbff;
+  color:#5148d8;
+  box-shadow:none;
+  font-weight:800;
+}
+.nav button.active::before{
+  content:"";
+  width:3px;
+  height:20px;
+  background:#635bff;
+  border-radius:3px;
+  position:absolute;
+  right:0;
+}
+.nav button{position:relative}
+.side-bottom .secondary{
+  width:100%;
+}
+
+/* Main content */
+.main{
+  max-width:1700px;
+  padding:28px clamp(18px,2.5vw,38px);
+}
+.top{
+  border-bottom:1px solid #e4e9f0;
+  padding-bottom:20px;
+  margin-bottom:22px;
+}
+.top h1{
+  font-size:24px;
+  font-weight:900;
+  color:#101828;
+}
+.top p{
+  color:#667085;
+}
+.top-actions{gap:8px}
+.top-actions .primary,
+.top-actions .secondary{
+  min-height:40px;
+  padding:9px 14px;
+}
+
+/* KPI cards */
+.cards{
+  gap:12px;
+  margin-bottom:18px;
+}
+.card{
+  background:#fff;
+  border:1px solid #e4e9f0;
+  border-radius:12px;
+  box-shadow:0 1px 2px rgba(16,24,40,.03);
+  padding:18px;
+}
+.card:hover{
+  border-color:#d4dbe5;
+  transform:none;
+  box-shadow:0 4px 14px rgba(16,24,40,.05);
+}
+.kpi-title{
+  color:#667085;
+  font-size:11px;
+  font-weight:700;
+}
+.kpi-value{
+  color:#101828;
+  font-size:25px;
+  letter-spacing:-.3px;
+}
+.kpi-note{color:#98a2b3}
+
+/* Panels */
+.grid2{gap:16px}
+.panel{
+  background:#fff;
+  border:1px solid #e4e9f0;
+  border-radius:12px;
+  box-shadow:0 1px 2px rgba(16,24,40,.03);
+  padding:18px;
+}
+.panel-head{
+  border-bottom:1px solid #edf0f4;
+  padding-bottom:14px;
+  margin-bottom:14px;
+}
+.panel-head h2{
+  color:#101828;
+  font-size:15px;
+  font-weight:900;
+}
+.panel-head span{color:#98a2b3}
+
+/* Search / filters */
+.toolbar input,.toolbar select{
+  background:#fff;
+  color:#344054;
+  border:1px solid #d8dee8;
+  border-radius:8px;
+}
+.toolbar input::placeholder{color:#98a2b3}
+
+/* Tables */
+.table-wrap{
+  border:1px solid #e4e9f0;
+  border-radius:9px;
+}
+table{min-width:720px}
+th{
+  background:#f8fafc;
+  color:#667085;
+  font-size:10px;
+  text-transform:none;
+  border-bottom:1px solid #e4e9f0;
+}
+td{
+  color:#344054;
+  border-bottom:1px solid #edf0f4;
+}
+tr:hover td{background:#fbfcfe}
+.product-cell span{font-weight:700;color:#1d2939}
+.thumb{
+  border:1px solid #e4e9f0;
+  background:#f8fafc;
+}
+
+/* Badges */
+.badge{
+  background:#f2f4f7;
+  color:#667085;
+  border:0;
+}
+.badge.new{color:#175cd3;background:#eff8ff}
+.badge.success{color:#087443;background:#ecfdf3}
+.badge.warn{color:#b54708;background:#fffaeb}
+.badge.danger{color:#b42318;background:#fef3f2}
+
+/* Rows / lists */
+.stat-row,.order-line{
+  background:#f8fafc;
+  border:1px solid #edf0f4;
+  color:#344054;
+}
+.muted{color:#667085}
+.empty{color:#98a2b3}
+
+/* Product actions */
+.mini{
+  background:#fff;
+  color:#475467;
+  border:1px solid #d8dee8;
+  border-radius:7px;
+}
+.mini:hover{
+  background:#f8fafc;
+  border-color:#c5ceda;
+}
+
+/* Modals */
+.modal{
+  background:rgba(15,23,42,.42);
+  backdrop-filter:blur(4px);
+}
+.modal-box{
+  background:#fff;
+  border:1px solid #e4e9f0;
+  border-radius:14px;
+  box-shadow:0 24px 70px rgba(16,24,40,.20);
+}
+.modal-head{
+  border-bottom:1px solid #edf0f4;
+  padding-bottom:14px;
+}
+.modal-head h2{color:#101828}
+.close{
+  background:#fff;
+  color:#475467;
+  border:1px solid #d8dee8;
+}
+.close:hover{background:#f8fafc}
+
+/* Image uploader */
+.ks-image-box{
+  border:1px dashed #cbd5e1;
+  background:#f8fafc;
+}
+.ks-image-info,.ks-compress-status{color:#667085}
+
+/* Toast */
+.toast{
+  background:#101828;
+  color:#fff;
+  border:1px solid #344054;
+  box-shadow:0 12px 30px rgba(16,24,40,.20);
+}
+
+/* Mobile */
+@media(max-width:1000px){
+  .sidebar{
+    background:#fff;
+    box-shadow:-20px 0 60px rgba(16,24,40,.14);
+  }
+  .mobile-menu{
+    background:#fff;
+    color:#344054;
+    border-color:#d8dee8;
+  }
+}
+@media(max-width:600px){
+  .main{padding:12px}
+  .top h1{font-size:20px}
+  .card{padding:13px 11px}
+  .panel{padding:13px}
+  .top-actions button{min-height:40px}
+}
+</style>
+
 </head>
 <body>
 
@@ -375,7 +717,7 @@ table{
 <div id="app" class="app hidden">
   <aside id="sidebar" class="sidebar">
     <div class="side-logo">Kurd<span>Shein</span></div>
-    <div class="side-label">بەڕێوەبردن</div>
+    <div class="side-label">بەڕێوەبردن</div><div style="height:1px;background:#edf0f4;margin:4px 10px 8px"></div>
     <nav class="nav">
       <button class="active" data-page="dashboard" onclick="showPage('dashboard')">📊 داشبۆرد</button>
       <button data-page="products" onclick="showPage('products')">📦 بەرهەمەکان</button>

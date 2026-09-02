@@ -249,9 +249,89 @@
   .firebase-login-btn{width:100%;height:44px;border:0;border-radius:11px;background:var(--cyan);color:#061014;font-weight:900;cursor:pointer}
   .firebase-error{min-height:18px;margin-top:10px;color:#ff6b83;font-size:10px;line-height:1.7}
 
+
+  .hamburger-btn{
+    width:38px;height:38px;border:1px solid #20252d;border-radius:11px;
+    background:#11151c;color:#f4f5f7;display:grid;place-items:center;
+    cursor:pointer;padding:0;transition:.2s ease;
+  }
+  .hamburger-btn:hover{background:#171b23;border-color:#303641}
+  .hamburger-lines{width:18px;height:14px;display:flex;flex-direction:column;justify-content:space-between}
+  .hamburger-lines span{height:2px;width:100%;border-radius:3px;background:currentColor}
+  .drawer-backdrop{
+    position:fixed;inset:0;background:rgba(0,0,0,.58);backdrop-filter:blur(2px);
+    opacity:0;visibility:hidden;transition:.22s ease;z-index:4000;
+  }
+  .drawer-backdrop.open{opacity:1;visibility:visible}
+  .settings-drawer{
+    position:fixed;top:0;right:0;width:min(330px,88vw);height:100vh;
+    background:#10141b;border-left:1px solid #252b34;box-shadow:-20px 0 55px rgba(0,0,0,.38);
+    transform:translateX(105%);transition:.25s ease;z-index:4001;padding:18px;
+  }
+  .settings-drawer.open{transform:translateX(0)}
+  .drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px}
+  .drawer-title{font-size:18px;font-weight:900}
+  .drawer-close{
+    width:36px;height:36px;border:1px solid #252b34;border-radius:10px;
+    background:#151a22;color:#f4f5f7;font-size:20px;cursor:pointer
+  }
+  .drawer-section-title{font-size:11px;color:#8d929b;margin-bottom:9px}
+  .appearance-box{
+    background:#151a22;border:1px solid #252b34;border-radius:14px;padding:7px;
+    display:grid;gap:5px
+  }
+  .appearance-option{
+    width:100%;border:1px solid transparent;border-radius:10px;background:transparent;
+    color:#c9cdd3;padding:11px 12px;display:flex;align-items:center;gap:10px;
+    cursor:pointer;text-align:left;font-size:12px;font-weight:800
+  }
+  .appearance-option:hover{background:#1c222c}
+  .appearance-option.active{background:#202731;border-color:#343b47;color:#fff}
+  .appearance-icon{width:21px;text-align:center;font-size:15px}
+  body.light-mode{
+    --bg:#f4f6f8;--panel:#fff;--panel2:#f0f2f5;--line:#dce1e7;
+    --text:#151a20;--muted:#68717d;
+  }
+  body.light-mode .topbar{background:rgba(244,246,248,.94);border-bottom-color:#dce1e7}
+  body.light-mode .card,
+  body.light-mode .tile{background:linear-gradient(145deg,#fff,#f7f8fa);border-color:#dce1e7}
+  body.light-mode .user,
+  body.light-mode .hamburger-btn{background:#fff;border-color:#dce1e7;color:#151a20}
+  body.light-mode .settings-drawer{background:#fff;border-left-color:#dce1e7}
+  body.light-mode .drawer-close,
+  body.light-mode .appearance-box,
+  body.light-mode .appearance-option{background:#f5f7f9;border-color:#e0e4e9;color:#252b33}
+  body.light-mode .appearance-option:hover,
+  body.light-mode .appearance-option.active{background:#e9edf1}
+  @media(max-width:650px){
+    .hamburger-btn{width:35px;height:35px;border-radius:10px}
+    .settings-drawer{width:min(310px,86vw);padding:15px}
+  }
+
 </style>
 </head>
 <body>
+
+<aside class="settings-drawer" id="settingsDrawer" aria-hidden="true">
+  <div class="drawer-head">
+    <div class="drawer-title">Appearance</div>
+    <button class="drawer-close" id="drawerClose" aria-label="Close settings">×</button>
+  </div>
+
+  <div class="drawer-section-title">Theme</div>
+  <div class="appearance-box">
+    <button class="appearance-option" data-theme="dark">
+      <span class="appearance-icon">☾</span>
+      <span>Dark Appearance</span>
+    </button>
+    <button class="appearance-option" data-theme="light">
+      <span class="appearance-icon">☀</span>
+      <span>Bright Appearance</span>
+    </button>
+  </div>
+</aside>
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+
 
 <section id="firebaseLogin" class="firebase-login">
   <div class="firebase-login-card">
@@ -272,6 +352,9 @@
 
 <header class="topbar">
   <div class="left">
+    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open settings">
+      <span class="hamburger-lines"><span></span><span></span><span></span></span>
+    </button>
     <div class="user">Admin Account <span class="avatar">●</span></div>
   </div>
   <div class="brandbox">
@@ -550,6 +633,44 @@ window.saveTestFirestoreSettings = async data => {
     updatedAt: serverTimestamp()
   }, {merge:true});
 };
+</script>
+
+
+<script>
+(function(){
+  const btn = document.getElementById("hamburgerBtn");
+  const drawer = document.getElementById("settingsDrawer");
+  const close = document.getElementById("drawerClose");
+  const backdrop = document.getElementById("drawerBackdrop");
+  const options = document.querySelectorAll(".appearance-option");
+
+  function setDrawer(open){
+    drawer.classList.toggle("open", open);
+    backdrop.classList.toggle("open", open);
+    drawer.setAttribute("aria-hidden", String(!open));
+  }
+
+  function applyTheme(theme){
+    document.body.classList.toggle("light-mode", theme === "light");
+    options.forEach(o => o.classList.toggle("active", o.dataset.theme === theme));
+    localStorage.setItem("barvin-theme", theme);
+  }
+
+  btn.addEventListener("click", () => setDrawer(true));
+  close.addEventListener("click", () => setDrawer(false));
+  backdrop.addEventListener("click", () => setDrawer(false));
+
+  document.addEventListener("keydown", e => {
+    if(e.key === "Escape") setDrawer(false);
+  });
+
+  options.forEach(option => {
+    option.addEventListener("click", () => applyTheme(option.dataset.theme));
+  });
+
+  const savedTheme = localStorage.getItem("barvin-theme") || "dark";
+  applyTheme(savedTheme);
+})();
 </script>
 
 </body>

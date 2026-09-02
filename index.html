@@ -2325,8 +2325,8 @@ function storeList(value) {
 }
 
 function storeImages(product) {
-  const main = String(product.DisplayImage || product.DescriptionImage || "").trim();
-  const multi = storeList(product.DescriptionMultiImage || product.DescriptionImages || product.DescriptionImageList);
+  const main = String(product.DisplayImage || product.DescriptionImage || (Array.isArray(product.Images) ? product.Images[0] : product.Image) || "").trim();
+  const multi = storeList(product.DescriptionMultiImage || product.DescriptionImages || product.DescriptionImageList || (Array.isArray(product.Images) ? product.Images.slice(1) : ""));
   const images = [main, ...multi].filter(Boolean);
   return [...new Set(images)];
 }

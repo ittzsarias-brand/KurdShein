@@ -714,6 +714,10 @@ pmForm?.addEventListener("submit", async e => {
     Size: parsePmList(document.getElementById("pmSizes").value),
     Colors: parsePmList(document.getElementById("pmColors").value),
     Images: parsePmImages(document.getElementById("pmImages").value),
+    Image: parsePmImages(document.getElementById("pmImages").value)[0] || "",
+    DisplayImage: parsePmImages(document.getElementById("pmImages").value)[0] || "",
+    DescriptionImages: parsePmImages(document.getElementById("pmImages").value),
+    DescriptionMultiImage: parsePmImages(document.getElementById("pmImages").value).slice(1),
     Active: document.getElementById("pmActive").value === "true",
     updatedAt: serverTimestamp()
   };

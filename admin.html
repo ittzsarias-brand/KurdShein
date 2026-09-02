@@ -208,7 +208,8 @@
       <input id="loginPassword" type="password" required autocomplete="current-password" placeholder="••••••••">
     </div>
     <button class="primary login-btn" type="submit">چوونە ژوورەوە</button>
-    <div class="login-note">ئەم پەڕەیە تەنها بۆ بەڕێوەبەرانە. وشەی نهێنی لە Firestore هەڵمەگرە؛ Firebase Authentication بەکاربهێنە.</div>
+    <button id="setupAdminBtn" type="button" class="secondary login-btn" style="margin-top:8px">＋ دروستکردنی ئەدمینی یەکەم</button>
+    <div class="login-note">ئەگەر هێشتا هیچ ئەدمینێکت نییە، سەرەتا «دروستکردنی ئەدمینی یەکەم» بەکاربهێنە. وشەی نهێنی تەنها لەلایەن Firebase Authentication پارێزراوە.</div>
   </form>
 </div>
 
@@ -325,6 +326,42 @@
   </main>
 </div>
 
+<div id="setupModal" class="modal">
+  <div class="modal-box" style="width:min(500px,100%)">
+    <div class="modal-head">
+      <h3>دروستکردنی ئەدمینی یەکەم</h3>
+      <button class="close" type="button" onclick="closeModal('setupModal')">×</button>
+    </div>
+    <form id="setupAdminForm">
+      <div class="modal-body">
+        <div class="field">
+          <label>ناوی ئەدمین *</label>
+          <input id="setupName" type="text" required placeholder="Owner">
+        </div>
+        <div class="field">
+          <label>ئیمەیڵ *</label>
+          <input id="setupEmail" type="email" required placeholder="admin@example.com" autocomplete="email">
+        </div>
+        <div class="field">
+          <label>وشەی نهێنی *</label>
+          <input id="setupPassword" type="password" required minlength="6" placeholder="لانیکەم ٦ پیت" autocomplete="new-password">
+        </div>
+        <div class="field">
+          <label>دووبارەکردنەوەی وشەی نهێنی *</label>
+          <input id="setupPassword2" type="password" required minlength="6" placeholder="وشەی نهێنی دووبارە بنووسە" autocomplete="new-password">
+        </div>
+        <div class="login-note" style="text-align:right;margin-top:4px">
+          تێبینی: ئەمە تەنها بۆ دروستکردنی یەکەم ئەدمینە. پاش دروستکردن، بە هەمان ئیمەیڵ و وشەی نهێنی بچۆ ژوورەوە.
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="secondary" onclick="closeModal('setupModal')">پاشگەزبوونەوە</button>
+        <button id="setupSubmitBtn" type="submit" class="primary">دروستکردنی ئەدمین</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div id="formModal" class="modal">
   <div class="modal-box">
     <div class="modal-head"><h3 id="formTitle">داتا</h3><button class="close" onclick="closeModal('formModal')">×</button></div>
@@ -348,7 +385,7 @@
 <script type="module">
   import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
   import {
-    getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+    getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut
   } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
   import {
     getFirestore, collection, getDocs, onSnapshot, addDoc, updateDoc, deleteDoc,
@@ -421,19 +458,29 @@
 
   async function adminAllowed(user){
     const snap = await getDocs(collection(db,"admins"));
-    if(snap.empty){
-      // Bootstrap mode: only when the admins collection is empty.
-      await addDoc(collection(db,"admins"),{
-        name:user.email?.split("@")[0] || "Owner",
-        email:user.email || "",
-        role:"superadmin",status:"active",createdAt:serverTimestamp()
-      });
-      return true;
-    }
     return snap.docs.some(d=>{
       const x=d.data();
-      return String(x.email||"").toLowerCase()===String(user.email||"").toLowerCase() && x.status!=="disabled";
+      const sameUid = x.uid && user.uid && String(x.uid)===String(user.uid);
+      const sameEmail = String(x.email||"").toLowerCase()===String(user.email||"").toLowerCase();
+      return (sameUid || sameEmail) && x.status!=="disabled";
     });
+  }
+
+  function firebaseErrorText(err){
+    const code=String(err?.code||"").toLowerCase();
+    const map={
+      "auth/invalid-credential":"ئیمەیڵ یان وشەی نهێنی هەڵەیە.",
+      "auth/user-not-found":"ئەم ئیمەیڵە لە Firebase Authentication نییە. «دروستکردنی ئەدمینی یەکەم» بەکاربهێنە.",
+      "auth/wrong-password":"وشەی نهێنی هەڵەیە.",
+      "auth/invalid-email":"فۆرماتی ئیمەیڵ هەڵەیە.",
+      "auth/email-already-in-use":"ئەم ئیمەیڵە پێشتر لە Firebase Authentication بەکارهاتووە.",
+      "auth/weak-password":"وشەی نهێنی زۆر لاوازە. لانیکەم ٦ پیت بەکاربهێنە.",
+      "auth/operation-not-allowed":"Email/Password لە Firebase Authentication چالاک نییە. لە Firebase Console چالاکی بکە.",
+      "auth/too-many-requests":"ژمارەی هەوڵەکان زۆرە. کەمێک چاوەڕێ بکە و دووبارە هەوڵ بدە.",
+      "auth/network-request-failed":"کێشەی ئینتەرنێت هەیە.",
+      "permission-denied":"دەسەڵاتی Firestore ڕێگە بە ئەم کردارە نادات."
+    };
+    return map[code] || (err?.message || "هەڵەیەکی نەناسراو ڕوویدا.");
   }
 
   $("loginForm").addEventListener("submit",async e=>{
@@ -448,8 +495,64 @@
       showToast("بە سەرکەوتوویی چوویتە ژوورەوە");
     }catch(err){
       console.error(err);
-      showToast("چوونە ژوورەوە سەرکەوتوو نەبوو",err.message==="ADMIN_NOT_ALLOWED"?"ئەم ئیمەیڵە دەسەڵاتی ئەدمینی نییە.":"ئیمەیڵ یان وشەی نهێنی هەڵەیە.","⚠");
+      showToast("چوونە ژوورەوە سەرکەوتوو نەبوو",err.message==="ADMIN_NOT_ALLOWED"?"ئەم ئیمەیڵە دەسەڵاتی ئەدمینی نییە.":firebaseErrorText(err),"⚠");
     }finally{btn.disabled=false;btn.textContent="چوونە ژوورەوە"}
+  });
+
+  $("setupAdminBtn").onclick=async()=>{
+    try{
+      const snap=await getDocs(collection(db,"admins"));
+      if(!snap.empty){
+        showToast("دروستکردنی ئەدمینی یەکەم داخراوە","پێشتر ئەدمینێک تۆمارکراوە. لەگەڵ ئەو ئەدمینە بچۆ ژوورەوە.","⚠");
+        return;
+      }
+      $("setupName").value="";
+      $("setupEmail").value=$("loginEmail").value.trim();
+      $("setupPassword").value="";
+      $("setupPassword2").value="";
+      openModal("setupModal");
+    }catch(err){
+      console.error(err);
+      showToast("نەتوانرا دۆخی ئەدمین بپشکنرێت",firebaseErrorText(err),"⚠");
+    }
+  };
+
+  $("setupAdminForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const btn=$("setupSubmitBtn");
+    const name=$("setupName").value.trim();
+    const email=$("setupEmail").value.trim();
+    const password=$("setupPassword").value;
+    const password2=$("setupPassword2").value;
+    if(password!==password2){
+      showToast("وشەی نهێنی یەکسان نییە","هەردوو خانەی وشەی نهێنی دەبێت وەک یەک بن.","⚠");
+      return;
+    }
+    btn.disabled=true;btn.textContent="⏳ دروستدەکرێت...";
+    try{
+      const existing=await getDocs(collection(db,"admins"));
+      if(!existing.empty) throw new Error("ADMIN_ALREADY_EXISTS");
+      const cred=await createUserWithEmailAndPassword(auth,email,password);
+      await addDoc(collection(db,"admins"),{
+        uid:cred.user.uid,
+        name:name||email.split("@")[0]||"Owner",
+        email:email,
+        role:"superadmin",
+        status:"active",
+        createdAt:serverTimestamp()
+      });
+      closeModal("setupModal");
+      showToast("ئەدمین بە سەرکەوتوویی دروستکرا","ئێستا داشبۆردەکە دەکرێتەوە.","✓");
+    }catch(err){
+      console.error(err);
+      if(err.message==="ADMIN_ALREADY_EXISTS"){
+        showToast("ئەدمین پێشتر هەیە","ناتوانیت ئەدمینی یەکەم دووبارە دروست بکەیت.","⚠");
+      }else{
+        showToast("دروستکردنی ئەدمین سەرکەوتوو نەبوو",firebaseErrorText(err),"⚠");
+      }
+    }finally{
+      btn.disabled=false;btn.textContent="دروستکردنی ئەدمین";
+    }
   });
 
   onAuthStateChanged(auth,async user=>{

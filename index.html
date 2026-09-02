@@ -2286,7 +2286,7 @@ window.applyProductFilters = applyProductFilters;
    by admin.html. The existing storefront UI/functionality is kept.
 ================================================================= */
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-import { getFirestore, collection, getDocs, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+import { getFirestore, collection, getDocs, onSnapshot, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 const kurdSheinFirebaseConfig = {
   apiKey: "AIzaSyAZPy_1tQTNlCP3GKZZJ01S7RLfrecaznE",
@@ -2473,21 +2473,37 @@ async function loadStoreProductsFromFirestore() {
   } catch (e) {}
 
   try {
-    const snapshot = await getDocs(collection(kurdSheinDb, KURDSHEIN_PRODUCT_COLLECTION));
-    const products = snapshot.docs.map(docSnap => ({
-      ...docSnap.data(),
-      __docId: docSnap.id
-    }));
+    // Keep the storefront live: every add/edit/delete in the admin
+    // updates the public product grid automatically.
+    onSnapshot(
+      collection(kurdSheinDb, KURDSHEIN_PRODUCT_COLLECTION),
+      snapshot => {
+        const products = snapshot.docs.map(docSnap => ({
+          ...docSnap.data(),
+          __docId: docSnap.id
+        }));
 
-    try {
-      localStorage.setItem(PRODUCT_CACHE_KEY, JSON.stringify({
-        time: Date.now(),
-        products
-      }));
-    } catch (e) {}
+        try {
+          localStorage.setItem(PRODUCT_CACHE_KEY, JSON.stringify({
+            time: Date.now(),
+            products
+          }));
+        } catch (e) {}
 
-    renderFirestoreProducts(products);
-    console.info(`KurdShein: loaded ${products.length} product(s) from Firestore.`);
+        renderFirestoreProducts(products);
+        console.info(`KurdShein: live-loaded ${products.length} product(s) from Firestore.`);
+      },
+      error => {
+        console.error("KurdShein Firestore realtime error:", error);
+        if (!container.querySelector(".product")) {
+          container.innerHTML = `
+            <div class="products-loading" aria-live="polite">
+              ⚠️ نەمان توانین بەرهەمەکان لە داتابەیس وەربگرین.
+            </div>`;
+        }
+        container.dataset.firestoreError = error.code || "unknown";
+      }
+    );
   } catch (error) {
     console.error("KurdShein Firestore error:", error);
     if (!container.querySelector(".product")) {

@@ -176,9 +176,8 @@
 
 
   .firebase-login{
-    position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:18px;
-    background:radial-gradient(circle at 20% 20%,rgba(24,217,237,.08),transparent 30%),
-               radial-gradient(circle at 80% 80%,rgba(22,217,154,.07),transparent 30%),var(--bg);
+    position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:20px;
+    background:linear-gradient(135deg,#05080e 0%,#09131b 50%,#061015 100%);
   }
   .firebase-login.hidden{display:none}
   .firebase-login-card{
@@ -328,10 +327,10 @@
 <div class="drawer-backdrop" id="drawerBackdrop"></div>
 
 
-<section id="firebaseLogin" class="firebase-login">
+<section id="firebaseLogin" class="firebase-login hidden">
   <div class="firebase-login-card">
     <div class="firebase-login-logo">BARVIN <span>PRO</span></div>
-    <div class="firebase-login-sub">Test Admin • Firebase Authentication</div>
+    <div class="firebase-login-sub">Admin Portal • Secure Sign In</div>
     <div class="firebase-field">
       <label>Email</label>
       <input id="firebaseEmail" type="email" autocomplete="username" placeholder="admin@example.com">
@@ -450,7 +449,6 @@ let stopProducts = null;
 let stopOrders = null;
 
 const loginView = document.getElementById("firebaseLogin");
-  if(loginView) loginView.classList.add("hidden");
 const loginBtn = document.getElementById("firebaseLoginBtn");
 const loginError = document.getElementById("firebaseError");
 
@@ -464,7 +462,7 @@ function formatIQD(value){
 
 function refreshDashboardFromFirestore(){
   const active = products.filter(p => p.Active !== false);
-  // Show the live product/order totals in the browser title tooltip without changing the test UI.
+  // Show the live product/order totals in the browser title tooltip without changing the dashboard UI.
   document.title = `BARVIN PRO — ${active.length} products • ${orders.length} orders`;
 }
 
@@ -575,7 +573,7 @@ onAuthStateChanged(auth, async user => {
   }
 });
 
-// Make logout available for later edits without changing the test UI.
+// Make logout available for later edits without changing the dashboard UI.
 window.testAdminLogout = () => signOut(auth);
 
 // Keep a clean way to save the same settings document later.

@@ -308,6 +308,47 @@
     .settings-drawer{width:min(310px,86vw);padding:15px}
   }
 
+
+.account-wrap{position:relative}
+.user{cursor:pointer;user-select:none}
+.account-menu{
+  position:absolute;
+  top:calc(100% + 10px);
+  left:0;
+  width:190px;
+  padding:8px;
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:10px;
+  box-shadow:0 18px 45px rgba(0,0,0,.35);
+  display:none;
+  z-index:1000;
+}
+.account-menu.open{display:block}
+.account-menu-title{
+  padding:8px 10px 7px;
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+.account-menu button{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:var(--text);
+  padding:10px;
+  border-radius:7px;
+  text-align:left;
+  font-weight:800;
+  cursor:pointer;
+}
+.account-menu button:hover{background:var(--soft)}
+.account-menu .account-logout{color:#ff416b}
+@media(max-width:520px){
+  .account-menu{width:175px}
+}
 </style>
 <style>
 .user{
@@ -361,7 +402,16 @@
     <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open settings">
       <span class="hamburger-lines"><span></span><span></span><span></span></span>
     </button>
-    <div class="user">Admin Account <span class="avatar">●</span></div>
+    <div class="account-wrap">
+      <div class="user" id="adminAccountBtn" role="button" tabindex="0" aria-expanded="false">
+        Admin Account <span class="avatar">●</span>
+      </div>
+      <div class="account-menu" id="adminAccountMenu">
+        <div class="account-menu-title">Admin Account</div>
+        <button type="button" id="adminLoginMenuBtn">Login</button>
+        <button type="button" id="adminLogoutMenuBtn" class="account-logout">Logout</button>
+      </div>
+    </div>
   </div>
   <div class="brandbox">
     <div class="brand">Dashboard</div>
@@ -679,5 +729,50 @@ window.saveTestFirestoreSettings = async data => {
 })();
 </script>
 
+
+<script>
+(function(){
+  const accountBtn = document.getElementById("adminAccountBtn");
+  const accountMenu = document.getElementById("adminAccountMenu");
+  const loginMenuBtn = document.getElementById("adminLoginMenuBtn");
+  const logoutMenuBtn = document.getElementById("adminLogoutMenuBtn");
+  const loginView = document.getElementById("firebaseLogin");
+
+  if(!accountBtn || !accountMenu) return;
+
+  function setAccountMenu(open){
+    accountMenu.classList.toggle("open", open);
+    accountBtn.setAttribute("aria-expanded", String(open));
+  }
+
+  accountBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setAccountMenu(!accountMenu.classList.contains("open"));
+  });
+
+  accountBtn.addEventListener("keydown", (e) => {
+    if(e.key === "Enter" || e.key === " "){
+      e.preventDefault();
+      setAccountMenu(!accountMenu.classList.contains("open"));
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if(!e.target.closest(".account-wrap")) setAccountMenu(false);
+  });
+
+  loginMenuBtn.addEventListener("click", () => {
+    setAccountMenu(false);
+    if(loginView) loginView.classList.remove("hidden");
+  });
+
+  logoutMenuBtn.addEventListener("click", async () => {
+    setAccountMenu(false);
+    if(window.testAdminLogout){
+      await window.testAdminLogout();
+    }
+  });
+})();
+</script>
 </body>
 </html>

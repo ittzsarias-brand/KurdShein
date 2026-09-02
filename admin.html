@@ -303,6 +303,111 @@
 }
 </style>
 
+
+<style>
+  .product-tab[hidden]{display:none !important}
+  .product-tab{
+    width:100%;
+    padding:8px 0 28px;
+  }
+  .product-tab-card{
+    width:100%;
+    background:linear-gradient(145deg,#11151d,#0c1016);
+    border:1px solid #202731;
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 18px 45px rgba(0,0,0,.25);
+  }
+  .product-tab-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:14px;
+    padding-bottom:18px;
+    border-bottom:1px solid #202731;
+  }
+  .product-tab-title{font-size:24px;font-weight:950;letter-spacing:.2px}
+  .product-tab-subtitle{margin-top:5px;color:#8d929b;font-size:12px}
+  .product-back,.pm-add,.pm-btn,.pm-save,.pm-cancel{
+    min-height:42px;
+    border:0;
+    border-radius:11px;
+    padding:0 15px;
+    font:inherit;
+    font-weight:900;
+    cursor:pointer;
+  }
+  .product-back{background:#1a2029;color:#f4f5f7;border:1px solid #303743}
+  .product-tab-toolbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:16px 0;
+  }
+  .product-count{color:#9da3ad;font-size:12px;font-weight:800}
+  .pm-add{background:var(--cyan);color:#061014}
+  .pm-list{display:grid;gap:10px}
+  .pm-item{
+    display:grid;
+    grid-template-columns:58px minmax(0,1fr) auto;
+    align-items:center;
+    gap:13px;
+    padding:12px;
+    border:1px solid #222a34;
+    border-radius:15px;
+    background:#0d1219;
+  }
+  .pm-item img{
+    width:58px;height:58px;border-radius:11px;object-fit:cover;
+    background:#151a22;border:1px solid #252c36;
+  }
+  .pm-name{font-size:14px;font-weight:900;overflow-wrap:anywhere}
+  .pm-meta{margin-top:4px;color:#8d929b;font-size:11px}
+  .pm-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+  .pm-btn{min-height:38px;padding:0 12px;background:#1b222c;color:#f4f5f7;border:1px solid #303844}
+  .pm-btn.delete{color:#ff8aa0;border-color:#5a2936}
+  .pm-empty{
+    padding:40px 20px;text-align:center;color:#8d929b;
+    border:1px dashed #303743;border-radius:15px;
+  }
+  .pm-form{
+    margin-top:16px;padding:18px;border:1px solid #242d38;
+    border-radius:16px;background:#0b1017;
+  }
+  .pm-form-title{font-size:17px;font-weight:950;margin-bottom:15px}
+  .pm-fields{
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
+  }
+  .pm-field.full{grid-column:1/-1}
+  .pm-field label{
+    display:block;margin-bottom:6px;color:#b8bec7;font-size:11px;font-weight:850;
+  }
+  .pm-field input,.pm-field textarea,.pm-field select{
+    width:100%;min-height:42px;padding:10px 12px;
+    border-radius:10px;border:1px solid #29313c;background:#111720;
+    color:#f4f5f7;outline:none;font:inherit;
+  }
+  .pm-field textarea{min-height:88px;resize:vertical}
+  .pm-field input:focus,.pm-field textarea:focus,.pm-field select:focus{
+    border-color:var(--cyan);box-shadow:0 0 0 2px rgba(24,217,237,.12)
+  }
+  .pm-form-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
+  .pm-save{background:var(--green);color:#06120e}
+  .pm-cancel{background:#1b222c;color:#f4f5f7;border:1px solid #303844}
+  .pm-error{min-height:18px;margin-top:9px;color:#ff7b91;font-size:11px}
+  @media(max-width:650px){
+    .product-tab-card{padding:14px;border-radius:16px}
+    .product-tab-title{font-size:20px}
+    .product-tab-head{align-items:flex-start}
+    .pm-fields{grid-template-columns:1fr}
+    .pm-field.full{grid-column:auto}
+    .pm-item{grid-template-columns:48px minmax(0,1fr)}
+    .pm-item img{width:48px;height:48px}
+    .pm-actions{grid-column:1/-1;justify-content:flex-start}
+  }
+</style>
+
 </head>
 <body>
 
@@ -368,7 +473,7 @@
 
 <main>
 
-  <section class="grid">
+  <section class="grid" id="dashboardGrid">
     <div class="tile yellow"><div class="icon"><svg viewBox='0 0 32 32'><circle cx='16' cy='9' r='5'/><path d='M7 27c0-6 4-10 9-10s9 4 9 10z'/></svg></div><div class="name">Products</div></div>
     <div class="tile yellow"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M7 11h11a8 8 0 1 1-5 14'/><path d='M7 11l5-5M7 11l5 5'/></svg></div><div class="name">Stores</div></div>
     <div class="tile yellow"><div class="icon"><svg viewBox='0 0 32 32'><path d='M7 3h13l6 6v20H7z'/><path d='M20 3v7h6'/><rect x='11' y='13' width='11' height='2' rx='1'/><rect x='11' y='18' width='8' height='2' rx='1'/><path d='M17 21v6'/></svg></div><div class="name">Orders</div></div>
@@ -595,6 +700,9 @@ const pmModal = document.getElementById("productManagerModal");
 const pmList = document.getElementById("pmList");
 const pmForm = document.getElementById("pmForm");
 const pmStatus = document.getElementById("pmStatus");
+const pmCount = document.getElementById("pmCount");
+const pmError = document.getElementById("pmError");
+const pmFormTitle = document.getElementById("pmFormTitle");
 
 function pmListValue(value){
   if(Array.isArray(value)) return value.join(", ");
@@ -611,7 +719,8 @@ function renderProductManager(){
   if(!pmList) return;
   if(!products.length){
     pmList.innerHTML = '<div class="pm-empty">No products in Firestore yet.</div>';
-    pmStatus.textContent = "0 products • Live Firestore sync";
+    pmStatus.textContent = "Live Firestore products";
+    if(pmCount) pmCount.textContent = "0 products";
     return;
   }
   pmList.innerHTML = products.map(p => {
@@ -631,24 +740,40 @@ function renderProductManager(){
       </div>
     </div>`;
   }).join("");
-  pmStatus.textContent = `${products.length} products • Live Firestore sync`;
+  pmStatus.textContent = "Live Firestore products";
+  if(pmCount) pmCount.textContent = `${products.length} product${products.length === 1 ? "" : "s"}`;
 }
 window.openProductManager = () => {
-  pmModal?.classList.add("open");
-  pmModal?.setAttribute("aria-hidden","false");
+  const grid = document.getElementById("dashboardGrid");
+  if(grid) grid.hidden = true;
+  if(pmModal){
+    pmModal.hidden = false;
+    pmModal.setAttribute("aria-hidden","false");
+  }
+  if(pmForm) pmForm.hidden = true;
   renderProductManager();
+  window.scrollTo({top:0, behavior:"smooth"});
 };
 function closeProductManager(){
-  pmModal?.classList.remove("open");
-  pmModal?.setAttribute("aria-hidden","true");
+  const grid = document.getElementById("dashboardGrid");
+  if(grid) grid.hidden = false;
+  if(pmModal){
+    pmModal.hidden = true;
+    pmModal.setAttribute("aria-hidden","true");
+  }
   if(pmForm) pmForm.hidden = true;
+  window.scrollTo({top:0, behavior:"smooth"});
 }
 function resetProductForm(){
   pmForm?.reset();
   document.getElementById("pmDocId").value = "";
+  if(pmError) pmError.textContent = "";
+  if(pmFormTitle) pmFormTitle.textContent = "Add Product";
   document.getElementById("pmActive").value = "true";
 }
 function fillProductForm(p){
+  if(pmError) pmError.textContent = "";
+  if(pmFormTitle) pmFormTitle.textContent = "Edit Product";
   document.getElementById("pmDocId").value = p.__docId || "";
   document.getElementById("pmName").value = p.DisplayName || "";
   document.getElementById("pmProductId").value = p.ID || "";
@@ -676,9 +801,9 @@ document.getElementById("pmAdd")?.addEventListener("click", () => {
   pmForm.hidden = false;
   pmForm.scrollIntoView({behavior:"smooth", block:"start"});
 });
-document.getElementById("pmCancel")?.addEventListener("click", () => { pmForm.hidden = true; });
+document.getElementById("pmCancel")?.addEventListener("click", () => { pmForm.hidden = true; if(pmError) pmError.textContent = ""; });
 document.getElementById("pmClose")?.addEventListener("click", closeProductManager);
-pmModal?.addEventListener("click", e => { if(e.target === pmModal) closeProductManager(); });
+
 pmList?.addEventListener("click", async e => {
   const edit = e.target.closest("[data-pm-edit]");
   const del = e.target.closest("[data-pm-delete]");
@@ -731,7 +856,7 @@ pmForm?.addEventListener("submit", async e => {
     pmForm.hidden = true;
   }catch(error){
     console.error(error);
-    alert("Could not save the product. Check your Firestore rules.");
+    if(pmError) pmError.textContent = error?.code ? `Save failed: ${error.code}` : "Could not save the product. Check your Firestore rules.";
   }
 });
 
@@ -828,38 +953,52 @@ refreshDashboardFromFirestore = function(){
 })();
 </script>
 
-<section class="product-manager-modal" id="productManagerModal" aria-hidden="true">
-  <div class="product-manager-card">
-    <div class="pm-head">
-      <div class="pm-title">Products</div>
-      <button class="pm-close" type="button" id="pmClose">×</button>
+
+<section class="product-tab" id="productManagerModal" aria-hidden="true" hidden>
+  <div class="product-tab-card">
+    <div class="product-tab-head">
+      <div>
+        <div class="product-tab-title">Products</div>
+        <div class="product-tab-subtitle" id="pmStatus">Live Firestore products</div>
+      </div>
+      <button class="product-back" type="button" id="pmClose">← Back</button>
     </div>
-    <div class="pm-toolbar">
-      <div class="pm-status" id="pmStatus">Live Firestore sync</div>
+
+    <div class="product-tab-toolbar">
+      <div class="product-count" id="pmCount">0 products</div>
       <button class="pm-add" type="button" id="pmAdd">+ Add Product</button>
     </div>
+
     <div class="pm-list" id="pmList"></div>
+
     <form class="pm-form" id="pmForm" hidden>
+      <div class="pm-form-title" id="pmFormTitle">Add Product</div>
       <input type="hidden" id="pmDocId">
-      <div class="pm-field"><label>Product name</label><input id="pmName" required></div>
-      <div class="pm-field"><label>Product ID</label><input id="pmProductId"></div>
-      <div class="pm-field"><label>Price (IQD)</label><input id="pmPrice" type="number" min="0" required></div>
-      <div class="pm-field"><label>Old price (IQD)</label><input id="pmOldPrice" type="number" min="0"></div>
-      <div class="pm-field"><label>Stock</label><input id="pmStock" type="number" min="0" required></div>
-      <div class="pm-field"><label>Category</label><input id="pmCategory" placeholder="men, women, new, sale"></div>
-      <div class="pm-field"><label>Sizes</label><input id="pmSizes" placeholder="S, M, L"></div>
-      <div class="pm-field"><label>Colors</label><input id="pmColors" placeholder="Black, White"></div>
-      <div class="pm-field full"><label>Display description</label><textarea id="pmDisplayDescription"></textarea></div>
-      <div class="pm-field full"><label>Full description</label><textarea id="pmDescription"></textarea></div>
-      <div class="pm-field full"><label>Images — one URL per line</label><textarea id="pmImages" placeholder="https://..."></textarea></div>
-      <div class="pm-field"><label>Active</label><select id="pmActive"><option value="true">Yes</option><option value="false">No</option></select></div>
+
+      <div class="pm-fields">
+        <div class="pm-field"><label for="pmName">Product name</label><input id="pmName" required></div>
+        <div class="pm-field"><label for="pmProductId">Product ID</label><input id="pmProductId"></div>
+        <div class="pm-field"><label for="pmPrice">Price (IQD)</label><input id="pmPrice" type="number" min="0" required></div>
+        <div class="pm-field"><label for="pmOldPrice">Old price (IQD)</label><input id="pmOldPrice" type="number" min="0"></div>
+        <div class="pm-field"><label for="pmStock">Stock</label><input id="pmStock" type="number" min="0" required></div>
+        <div class="pm-field"><label for="pmCategory">Category</label><input id="pmCategory" placeholder="men, women, new, sale"></div>
+        <div class="pm-field"><label for="pmSizes">Sizes</label><input id="pmSizes" placeholder="S, M, L"></div>
+        <div class="pm-field"><label for="pmColors">Colors</label><input id="pmColors" placeholder="Black, White"></div>
+        <div class="pm-field full"><label for="pmDisplayDescription">Display description</label><textarea id="pmDisplayDescription"></textarea></div>
+        <div class="pm-field full"><label for="pmDescription">Full description</label><textarea id="pmDescription"></textarea></div>
+        <div class="pm-field full"><label for="pmImages">Images — one URL per line</label><textarea id="pmImages" placeholder="https://..."></textarea></div>
+        <div class="pm-field"><label for="pmActive">Active</label><select id="pmActive"><option value="true">Yes</option><option value="false">No</option></select></div>
+      </div>
+
       <div class="pm-form-actions">
         <button class="pm-save" type="submit">Save Product</button>
         <button class="pm-cancel" type="button" id="pmCancel">Cancel</button>
       </div>
+      <div class="pm-error" id="pmError" aria-live="polite"></div>
     </form>
   </div>
 </section>
+
 
 </body>
 </html>

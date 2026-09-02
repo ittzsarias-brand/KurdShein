@@ -272,11 +272,10 @@
 
 <header class="topbar">
   <div class="left">
-    <div class="logout">↪</div>
-    <div class="user">test <span class="avatar">●</span></div>
+    <div class="user">Admin Account <span class="avatar">●</span></div>
   </div>
   <div class="brandbox">
-    <div class="brand">BARVIN <span>PRO</span></div><div id="firestoreStatus" style="font-size:9px;color:#777d86;margin-left:10px">Firestore: connecting…</div>
+    <div class="brand">Dashboard</div>
     <div class="stack">▱</div>
   </div>
 </header>
@@ -400,11 +399,9 @@ let stopOrders = null;
 const loginView = document.getElementById("firebaseLogin");
 const loginBtn = document.getElementById("firebaseLoginBtn");
 const loginError = document.getElementById("firebaseError");
-const statusEl = document.getElementById("firestoreStatus");
 
 function setStatus(text, ok=false){
-  statusEl.textContent = text;
-  statusEl.style.color = ok ? "#16d99a" : "#777d86";
+  // Firestore status text intentionally hidden from the dashboard header.
 }
 
 function formatIQD(value){

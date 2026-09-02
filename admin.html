@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BARVIN PRO — Test Admin</title>
+<title>Kurd Shein — Admin Login</title>
 <style>
   *{box-sizing:border-box}
   :root{
@@ -184,7 +184,7 @@
     width:min(390px,100%);padding:26px;border:1px solid var(--line);border-radius:22px;
     background:linear-gradient(145deg,#12151c,#0e1117);box-shadow:var(--shadow)
   }
-  .firebase-login-logo{text-align:center;font-size:24px;font-weight:950;letter-spacing:1.5px;margin-bottom:5px}
+  .firebase-login-logo{position:relative;text-align:center;font-size:24px;font-weight:950;letter-spacing:1.5px;margin-bottom:5px}
   .firebase-login-logo span{color:var(--cyan)}
   .firebase-login-sub{text-align:center;color:var(--muted);font-size:11px;margin-bottom:22px}
   .firebase-field{margin-bottom:12px}
@@ -327,13 +327,13 @@
 <div class="drawer-backdrop" id="drawerBackdrop"></div>
 
 
-<section id="firebaseLogin" class="firebase-login hidden">
+<section id="firebaseLogin" class="firebase-login">
   <div class="firebase-login-card">
-    <div class="firebase-login-logo">BARVIN <span>PRO</span></div>
+    <div class="firebase-login-logo">KURD <span>SHEIN</span></div>
     <div class="firebase-login-sub">Admin Portal • Secure Sign In</div>
     <div class="firebase-field">
-      <label>Email</label>
-      <input id="firebaseEmail" type="email" autocomplete="username" placeholder="admin@example.com">
+      <label>User / Email</label>
+      <input id="firebaseEmail" type="email" autocomplete="username" placeholder="Enter your email">
     </div>
     <div class="firebase-field">
       <label>Password</label>
@@ -361,7 +361,7 @@
     </div>
   </div>
   <div class="brandbox">
-    <div class="brand">Dashboard</div>
+    <div class="brand">Kurd Shein</div>
     
   </div>
 </header>
@@ -574,10 +574,10 @@ onAuthStateChanged(auth, async user => {
 });
 
 // Make logout available for later edits without changing the dashboard UI.
-window.testAdminLogout = () => signOut(auth);
+window.kurdSheinAdminLogout = () => signOut(auth);
 
 // Keep a clean way to save the same settings document later.
-window.saveTestFirestoreSettings = async data => {
+window.saveKurdSheinFirestoreSettings = async data => {
   await setDoc(doc(db, "settings", "store"), {
     ...data,
     updatedAt: serverTimestamp()
@@ -662,8 +662,8 @@ window.saveTestFirestoreSettings = async data => {
 
   logoutMenuBtn.addEventListener("click", async () => {
     setAccountMenu(false);
-    if(window.testAdminLogout){
-      await window.testAdminLogout();
+    if(window.kurdSheinAdminLogout){
+      await window.kurdSheinAdminLogout();
     }
   });
 })();

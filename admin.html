@@ -1,1050 +1,818 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ku" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kurd Shein — Admin Login</title>
-<style>
-  *{box-sizing:border-box}
-  :root{
-    --bg:#05080e;
-    --panel:#11141b;
-    --panel2:#0d1016;
-    --line:#20252d;
-    --text:#f4f5f7;
-    --muted:#8d929b;
-    --green:#16d99a;
-    --cyan:#18d9ed;
-    --yellow:#ffbf35;
-    --purple:#a77cff;
-    --red:#ff3f68;
-    --shadow:0 18px 45px rgba(0,0,0,.28);
-  }
-  body{
-    margin:0;background:
-      radial-gradient(circle at 18% 20%,rgba(0,188,145,.10),transparent 27%),
-      radial-gradient(circle at 83% 7%,rgba(0,220,255,.06),transparent 23%),
-      var(--bg);
-    color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    min-height:100vh;
-  }
-  .topbar{
-    height:70px;border-bottom:1px solid #1b2028;background:rgba(5,8,14,.92);
-    display:flex;align-items:center;justify-content:space-between;padding:0 30px;
-    position:sticky;top:0;z-index:5;backdrop-filter:blur(12px);
-  }
-  .brand{font-size:20px;font-weight:900;letter-spacing:2px}
-  .brand span{color:#20cde2;font-size:11px;letter-spacing:1px;margin-left:5px}
-  .brandbox{display:flex;align-items:center;gap:12px}
-  .stack{
-    width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#1fceff,#2394ef);
-    display:grid;place-items:center;font-size:20px;box-shadow:0 8px 24px rgba(23,191,255,.22)
-  }
-  .user{
-    display:flex;align-items:center;gap:9px;padding:9px 14px;border:1px solid #222831;
-    border-radius:22px;background:#11151c;color:#dfe2e7;font-weight:700;font-size:13px
-  }
-  .avatar{width:20px;height:20px;border-radius:50%;background:#16cce5;display:grid;place-items:center;color:#061017;font-size:11px}
-  .logout{width:40px;height:40px;border-radius:50%;background:#24151d;border:1px solid #3a1d28;color:#ff416b;display:grid;place-items:center;font-size:18px}
-  .left{display:flex;align-items:center;gap:12px}
-  main{padding:25px 30px 50px;max-width:1320px;margin:auto}
-  .card{
-    min-height:165px;border:1px solid #1e242d;border-radius:24px;background:linear-gradient(145deg,#12151c,#0e1117);
-    box-shadow:var(--shadow);position:relative;overflow:hidden
-  }
-  .metric{padding:30px 24px}
-  .metric + .metric{border-left:1px solid rgba(255,255,255,.05)}
-  .label{font-size:12px;color:#b2b5bc;margin-bottom:10px}
-  .label.green{color:#25dc9f}.label.yellow{color:#ffbf3a}
-  .big{font-size:29px;font-weight:900;letter-spacing:.3px}
-  .small{font-size:11px;color:#8d929b;margin-top:7px}
-  .section-title{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:20px;font-size:16px;font-weight:800}
-  .grid{
-    display:grid;grid-template-columns:repeat(8,1fr);gap:18px
-  }
-  .tile{border:0;font-family:inherit;color:inherit;text-align:center;
-    min-height:138px;border:1px solid #20252d;border-radius:22px;background:linear-gradient(145deg,#12151b,#0f1117);
-    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
-    position:relative;overflow:hidden;transition:.2s transform,.2s border-color,.2s background;cursor:pointer;
-    box-shadow:0 13px 32px rgba(0,0,0,.22)
-  }
-  .tile:hover{transform:translateY(-3px);border-color:#333a45;background:#151820}
-  .tile:after{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent)}
-  .icon{
-    width:38px;height:38px;display:grid;place-items:center;color:var(--accent);
-    font-size:0;font-weight:900
-  }
-  .icon svg{width:32px;height:32px;display:block;fill:currentColor;stroke:currentColor}
-  .icon svg.line{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
-  .tile .name{font-size:12px;color:#c3c6cb;font-weight:700;text-align:center}
-  .green{--accent:var(--green)} .cyan{--accent:var(--cyan)} .yellow{--accent:var(--yellow)}
-  .purple{--accent:var(--purple)} .red{--accent:var(--red)}
-  .badge{font-size:9px;color:#0b1013;background:var(--accent);padding:3px 6px;border-radius:6px;font-weight:900}
-  .bottom{margin-top:18px}
-    @media(max-width:650px){
-    .topbar{padding:0 14px}.user{display:none}main{padding:18px 14px 35px}
-    .tile{min-height:125px}.big{font-size:25px}
-  }
-
-  @media(max-width:1050px){
-    .grid{grid-template-columns:repeat(4,1fr);gap:14px}
-  }
-
-  @media(max-width:650px){
-    body{min-width:0;overflow-x:hidden}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#e51c2a">
+  <title>KurdShein Admin — داشبۆردی بەڕێوەبردن</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <style>
+    @font-face{
+      font-family:Rabar;
+      src:url("Rabar_037%202.ttf") format("truetype");
+      font-display:swap;
+    }
+    :root{
+      --bg:#080a0f;--panel:#10141b;--panel2:#151a22;--panel3:#1c232d;
+      --text:#f8fafc;--muted:#98a2b3;--border:rgba(255,255,255,.09);
+      --primary:#e51c2a;--primary2:#ff3b4a;--green:#19a55a;--yellow:#f7c948;
+      --blue:#3198ff;--danger:#ef4444;--shadow:0 24px 70px rgba(0,0,0,.32);
+      --radius:18px;--sidebar:270px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--text);font-family:Rabar,Arial,sans-serif;min-height:100vh}
+    button,input,textarea,select{font:inherit}
+    button{cursor:pointer}
+    .hidden{display:none!important}
+    .app{min-height:100vh}
+    .sidebar{
+      position:fixed;right:0;top:0;bottom:0;width:var(--sidebar);
+      background:linear-gradient(180deg,#10141b 0%,#0c1016 100%);
+      border-left:1px solid var(--border);z-index:50;display:flex;flex-direction:column;
+    }
+    .brand{
+      padding:22px 20px 18px;border-bottom:1px solid var(--border);
+      display:flex;align-items:center;gap:12px
+    }
+    .brand-mark{
+      width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+      background:linear-gradient(145deg,#e51c2a,#8e1019);font-size:21px;
+      box-shadow:0 10px 28px rgba(229,28,42,.25)
+    }
+    .brand h1{font-family:Arial,sans-serif;font-size:21px;margin:0;font-weight:950}
+    .brand small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+    .nav{padding:15px 12px;overflow:auto;flex:1}
+    .nav-title{color:#667085;font-size:10px;padding:7px 11px 9px;font-weight:900}
+    .nav-btn{
+      width:100%;border:1px solid transparent;background:transparent;color:var(--muted);
+      border-radius:13px;padding:12px 13px;display:flex;align-items:center;gap:11px;
+      text-align:right;margin-bottom:5px;transition:.18s
+    }
+    .nav-btn .icon{width:27px;text-align:center;font-size:18px}
+    .nav-btn:hover{background:rgba(255,255,255,.045);color:var(--text)}
+    .nav-btn.active{background:rgba(229,28,42,.12);border-color:rgba(229,28,42,.24);color:#fff}
+    .nav-btn.active .icon{color:#ff6670}
+    .sidebar-footer{padding:13px;border-top:1px solid var(--border)}
+    .user-mini{display:flex;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--border);border-radius:14px;padding:10px}
+    .avatar{width:36px;height:36px;border-radius:11px;background:linear-gradient(145deg,#3198ff,#1264b3);display:grid;place-items:center;font-weight:900}
+    .user-mini strong{display:block;font-size:12px}
+    .user-mini span{display:block;color:var(--muted);font-size:9px;margin-top:2px;max-width:145px;overflow:hidden;text-overflow:ellipsis}
+    .logout{margin-top:8px;width:100%;border:1px solid var(--border);background:transparent;color:var(--muted);padding:9px;border-radius:10px}
+    .logout:hover{color:#fff;border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.08)}
+    .main{margin-right:var(--sidebar);min-height:100vh}
     .topbar{
-      height:62px;
-      padding:0 12px;
-      border-bottom-color:#181d25;
+      height:76px;position:sticky;top:0;z-index:40;background:rgba(8,10,15,.88);
+      backdrop-filter:blur(18px);border-bottom:1px solid var(--border);
+      display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:15px
     }
-    .brandbox{gap:8px}
-    .brand{font-size:17px;letter-spacing:1.5px}
-    .brand span{font-size:9px}
-    .stack{width:34px;height:34px;border-radius:10px;font-size:17px}
-    .left{gap:8px}
-    .logout{width:34px;height:34px;font-size:16px}
-    .user{
-      display:flex;
-      padding:7px 10px;
-      border-radius:18px;
-      font-size:11px;
+    .mobile-menu{display:none;width:42px;height:42px;border:1px solid var(--border);background:var(--panel2);color:#fff;border-radius:12px}
+    .top-title h2{font-size:19px;margin:0}
+    .top-title p{font-size:10px;color:var(--muted);margin:4px 0 0}
+    .top-actions{display:flex;align-items:center;gap:8px}
+    .icon-btn,.refresh{
+      width:42px;height:42px;border:1px solid var(--border);background:var(--panel2);
+      color:var(--text);border-radius:12px;display:grid;place-items:center
     }
-    .avatar{width:18px;height:18px;font-size:9px}
-
-    main{
-      width:100%;
-      max-width:none;
-      padding:14px 10px 28px;
+    .refresh:hover,.icon-btn:hover{border-color:var(--primary)}
+    .content{padding:28px;max-width:1700px;margin:auto}
+    .view{display:none}
+    .view.active{display:block}
+    .page-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-bottom:20px}
+    .page-head h2{font-size:25px;margin:0 0 4px}
+    .page-head p{font-size:11px;color:var(--muted);margin:0}
+    .primary{
+      border:0;background:linear-gradient(135deg,var(--primary),#b80f1a);color:#fff;
+      padding:11px 16px;border-radius:12px;font-weight:900;box-shadow:0 10px 24px rgba(229,28,42,.18)
     }
-
-    /* The reference uses compact dashboard cards; keep them dense on phones. */
-    .card{border-radius:17px;min-height:128px}
-    .metric{padding:20px 14px}
-    .metric + .metric{border-left:1px solid rgba(255,255,255,.06)}
-    .label{font-size:10px;margin-bottom:7px;white-space:nowrap}
-    .big{font-size:22px;line-height:1.1}
-    .small{font-size:9px;margin-top:5px}
-
-
-
-    .section-title{
-      margin-bottom:13px;
-      padding:0 3px;
-      font-size:13px;
+    .primary:hover{filter:brightness(1.08);transform:translateY(-1px)}
+    .secondary{border:1px solid var(--border);background:var(--panel2);color:var(--text);padding:10px 14px;border-radius:11px;font-weight:800}
+    .danger{border:1px solid rgba(239,68,68,.22);background:rgba(239,68,68,.08);color:#ff7b83;padding:9px 12px;border-radius:10px}
+    .stats{display:grid;grid-template-columns:repeat(5,1fr);gap:13px;margin-bottom:20px}
+    .stat{
+      background:linear-gradient(145deg,var(--panel),var(--panel2));border:1px solid var(--border);
+      border-radius:17px;padding:17px;position:relative;overflow:hidden
     }
-
-    /* Two equal columns gives the same compact card rhythm as the reference. */
-    .grid{
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:8px;
+    .stat:after{content:"";position:absolute;width:100px;height:100px;border-radius:50%;left:-35px;bottom:-50px;background:rgba(229,28,42,.07)}
+    .stat-icon{width:38px;height:38px;border-radius:11px;background:var(--panel3);display:grid;place-items:center;font-size:17px;margin-bottom:12px}
+    .stat-label{font-size:10px;color:var(--muted)}
+    .stat-value{font:900 23px Arial;margin-top:5px}
+    .stat-sub{font-size:9px;color:var(--muted);margin-top:5px}
+    .dashboard-grid{display:grid;grid-template-columns:1.6fr 1fr;gap:15px}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+    .card-head{padding:16px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .card-head h3{font-size:14px;margin:0}
+    .card-head span{font-size:10px;color:var(--muted)}
+    .card-body{padding:17px}
+    .chart{height:270px;display:flex;align-items:flex-end;gap:9px;padding:15px 5px 28px;position:relative}
+    .chart:before{content:"";position:absolute;inset:15px 0 28px;background:repeating-linear-gradient(to top,transparent 0,transparent 53px,rgba(255,255,255,.05) 54px);pointer-events:none}
+    .bar{flex:1;min-width:10px;position:relative;z-index:1}
+    .bar-fill{width:100%;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#ff4b58,#a40f19);min-height:8px;transition:.3s}
+    .bar-label{text-align:center;color:var(--muted);font-size:8px;margin-top:7px}
+    .bar-value{text-align:center;font:700 8px Arial;margin-bottom:5px;color:#cbd5e1}
+    .activity{display:flex;flex-direction:column;gap:9px}
+    .activity-item{display:flex;align-items:center;gap:10px;background:var(--panel2);border:1px solid var(--border);padding:10px;border-radius:12px}
+    .activity-dot{width:9px;height:9px;border-radius:50%;background:var(--green);flex:0 0 auto}
+    .activity-copy{min-width:0;flex:1}.activity-copy strong{display:block;font-size:11px}.activity-copy span{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+    .toolbar{
+      background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:12px;
+      display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:13px
     }
-    .tile{
-      min-width:0;
-      min-height:92px;
-      border-radius:14px;
-      gap:5px;
-      padding:9px 5px;
-      box-shadow:0 7px 17px rgba(0,0,0,.22);
+    .search{flex:1;min-width:220px;display:flex;background:var(--panel2);border:1px solid var(--border);border-radius:11px;overflow:hidden}
+    .search input{flex:1;border:0;outline:0;background:transparent;color:var(--text);padding:10px 12px;font-size:12px}
+    .search span{width:42px;display:grid;place-items:center;color:var(--muted)}
+    select,.filter-input{
+      background:var(--panel2);color:var(--text);border:1px solid var(--border);border-radius:11px;padding:10px 11px;outline:0;font-size:11px
     }
-    .tile:after{height:2px}
-    .icon{
-      width:27px;
-      height:27px;
+    .table-card{background:var(--panel);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .table-wrap{overflow:auto}
+    table{width:100%;border-collapse:collapse;min-width:900px}
+    th{font-size:9px;color:#7f8a9b;text-align:right;background:var(--panel2);padding:12px 13px;white-space:nowrap}
+    td{font-size:11px;padding:12px 13px;border-top:1px solid var(--border);vertical-align:middle}
+    tbody tr:hover{background:rgba(255,255,255,.018)}
+    .product-cell{display:flex;align-items:center;gap:10px;min-width:220px}
+    .product-thumb{width:42px;height:42px;border-radius:10px;object-fit:cover;background:var(--panel3);border:1px solid var(--border)}
+    .product-cell strong{display:block;font-size:11px}.product-cell span{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+    .pill{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:900;background:var(--panel3);color:var(--muted);white-space:nowrap}
+    .pill.green{background:rgba(25,165,90,.12);color:#5be39a}.pill.red{background:rgba(239,68,68,.12);color:#ff7d84}.pill.yellow{background:rgba(247,201,72,.12);color:#ffd96b}.pill.blue{background:rgba(49,152,255,.12);color:#75b9ff}
+    .actions{display:flex;gap:5px;white-space:nowrap}
+    .action{width:32px;height:32px;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:9px}
+    .action:hover{border-color:var(--blue)}.action.delete:hover{border-color:var(--danger);color:#ff7b83}
+    .empty{padding:55px 20px;text-align:center;color:var(--muted);font-size:12px}
+    .pagination{display:flex;align-items:center;justify-content:space-between;padding:11px 13px;border-top:1px solid var(--border);color:var(--muted);font-size:9px}
+    .page-buttons{display:flex;gap:5px}.page-buttons button{width:30px;height:30px;border:1px solid var(--border);background:var(--panel2);color:var(--text);border-radius:8px}
+    .page-buttons button.active{background:var(--primary);border-color:var(--primary)}
+    .order-number{font-family:Arial;font-weight:900}
+    .money{font-family:Arial;font-weight:900;color:var(--yellow)}
+    .modal{
+      position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(7px);z-index:200;
+      display:none;align-items:center;justify-content:center;padding:16px
     }
-    .icon svg{
-      width:22px;
-      height:22px;
+    .modal.show{display:flex}
+    .modal-box{
+      width:min(720px,100%);max-height:92vh;overflow:auto;background:var(--panel);
+      border:1px solid var(--border);border-radius:22px;box-shadow:var(--shadow)
     }
-    .tile .name{
-      max-width:100%;
-      padding:0 2px;
-      font-size:9px;
-      line-height:1.25;
-      font-weight:700;
+    .modal-head{padding:17px 19px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+    .modal-head h3{margin:0;font-size:17px}.close{width:36px;height:36px;border:1px solid var(--border);background:var(--panel2);color:#fff;border-radius:10px;font-size:20px}
+    .modal-body{padding:19px}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+    .field{margin-bottom:11px}.field.full{grid-column:1/-1}
+    .field label{display:block;color:#cbd5e1;font-size:10px;margin-bottom:6px}
+    .field input,.field textarea,.field select{width:100%;padding:11px;background:var(--panel2);border:1px solid var(--border);color:var(--text);border-radius:10px;outline:0;font-size:11px}
+    .field textarea{min-height:90px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--primary)}
+    .modal-foot{padding:14px 19px;border-top:1px solid var(--border);display:flex;justify-content:flex-start;gap:8px}
+    .login-screen{position:fixed;inset:0;background:radial-gradient(circle at 20% 10%,rgba(229,28,42,.18),transparent 32%),var(--bg);z-index:500;display:grid;place-items:center;padding:18px}
+    .login-box{width:min(430px,100%);background:rgba(16,20,27,.96);border:1px solid var(--border);border-radius:24px;padding:28px;box-shadow:var(--shadow)}
+    .login-logo{text-align:center;margin-bottom:22px}.login-logo .brand-mark{margin:auto}.login-logo h2{font-family:Arial;font-size:25px;margin:12px 0 4px}.login-logo p{font-size:10px;color:var(--muted);margin:0}
+    .login-box .field{margin-bottom:13px}.login-btn{width:100%;height:45px;margin-top:4px}
+    .login-note{font-size:9px;line-height:1.7;color:var(--muted);text-align:center;margin-top:13px}
+    .toast{
+      position:fixed;top:20px;left:50%;transform:translate(-50%,-130%);z-index:1000;
+      min-width:280px;max-width:calc(100vw - 30px);background:var(--panel);border:1px solid var(--border);
+      box-shadow:var(--shadow);border-radius:14px;padding:12px 15px;display:flex;gap:10px;align-items:center;transition:.28s
     }
-  }
-
-  @media(max-width:380px){
-    .brand{font-size:15px}
-    .user{padding:6px 8px}
-    .grid{gap:7px}
-    .tile{min-height:86px}
-    .big{font-size:20px}
-    .label{font-size:9px}
-    .tile .name{font-size:9px}
-  }
-
-
-  .firebase-login{
-    position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:20px;
-    background:linear-gradient(135deg,#05080e 0%,#09131b 50%,#061015 100%);
-  }
-  .firebase-login.hidden{display:none}
-  .firebase-login-card{
-    width:min(390px,100%);padding:26px;border:1px solid var(--line);border-radius:22px;
-    background:linear-gradient(145deg,#12151c,#0e1117);box-shadow:var(--shadow)
-  }
-  .firebase-login-logo{position:relative;text-align:center;font-size:24px;font-weight:950;letter-spacing:1.5px;margin-bottom:5px}
-  .firebase-login-logo span{color:var(--cyan)}
-  .firebase-login-sub{text-align:center;color:var(--muted);font-size:11px;margin-bottom:22px}
-  .firebase-field{margin-bottom:12px}
-  .firebase-field label{display:block;color:#c4c8ce;font-size:12px;font-weight:800;margin-bottom:6px}
-  .firebase-field input{
-    width:100%;height:44px;padding:0 12px;background:#151820;border:1px solid var(--line);
-    border-radius:11px;color:var(--text);outline:0
-  }
-  .firebase-login-btn{width:100%;height:44px;border:0;border-radius:11px;background:var(--cyan);color:#061014;font-weight:900;cursor:pointer}
-  .firebase-error{min-height:18px;margin-top:10px;color:#ff6b83;font-size:10px;line-height:1.7}
-
-
-  .hamburger-btn{
-    width:38px;height:38px;border:1px solid #20252d;border-radius:11px;
-    background:#11151c;color:#f4f5f7;display:grid;place-items:center;
-    cursor:pointer;padding:0;transition:.2s ease;
-  }
-  .hamburger-btn:hover{background:#171b23;border-color:#303641}
-  .hamburger-lines{width:18px;height:14px;display:flex;flex-direction:column;justify-content:space-between}
-  .hamburger-lines span{height:2px;width:100%;border-radius:3px;background:currentColor}
-  .drawer-backdrop{
-    position:fixed;inset:0;background:rgba(0,0,0,.58);backdrop-filter:blur(2px);
-    opacity:0;visibility:hidden;transition:.22s ease;z-index:4000;
-  }
-  .drawer-backdrop.open{opacity:1;visibility:visible}
-  .settings-drawer{
-    position:fixed;top:0;right:0;width:min(330px,88vw);height:100vh;
-    background:#10141b;border-left:1px solid #252b34;box-shadow:-20px 0 55px rgba(0,0,0,.38);
-    transform:translateX(105%);transition:.25s ease;z-index:4001;padding:18px;
-  }
-  .settings-drawer.open{transform:translateX(0)}
-  .drawer-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px}
-  .drawer-title{font-size:18px;font-weight:900}
-  .drawer-close{
-    width:36px;height:36px;border:1px solid #252b34;border-radius:10px;
-    background:#151a22;color:#f4f5f7;font-size:20px;cursor:pointer
-  }
-  .drawer-section-title{font-size:11px;color:#8d929b;margin-bottom:9px}
-  .appearance-box{
-    background:#151a22;border:1px solid #252b34;border-radius:14px;padding:7px;
-    display:grid;gap:5px
-  }
-  .appearance-option{
-    width:100%;border:1px solid transparent;border-radius:10px;background:transparent;
-    color:#c9cdd3;padding:11px 12px;display:flex;align-items:center;gap:10px;
-    cursor:pointer;text-align:left;font-size:14px;font-weight:800
-  }
-  .appearance-option:hover{background:#1c222c}
-  .appearance-option.active{background:#202731;border-color:#343b47;color:#fff}
-  .appearance-icon{width:21px;text-align:center;font-size:15px}
-  body.light-mode{
-    --bg:#f4f6f8;--panel:#fff;--panel2:#f0f2f5;--line:#dce1e7;
-    --text:#151a20;--muted:#68717d;
-  }
-  body.light-mode .topbar{background:rgba(244,246,248,.94);border-bottom-color:#dce1e7}
-  body.light-mode .card,
-  body.light-mode .tile{background:linear-gradient(145deg,#fff,#f7f8fa);border-color:#dce1e7}
-  body.light-mode .user,
-  body.light-mode .hamburger-btn{background:#fff;border-color:#dce1e7;color:#151a20}
-  body.light-mode .settings-drawer{background:#fff;border-left-color:#dce1e7}
-  body.light-mode .drawer-close,
-  body.light-mode .appearance-box,
-  body.light-mode .appearance-option{background:#f5f7f9;border-color:#e0e4e9;color:#252b33}
-  body.light-mode .appearance-option:hover,
-  body.light-mode .appearance-option.active{background:#e9edf1}
-  @media(max-width:650px){
-    .hamburger-btn{width:35px;height:35px;border-radius:10px}
-    .settings-drawer{width:min(310px,86vw);padding:15px}
-  }
-
-
-.account-wrap{position:relative}
-.user{cursor:pointer;user-select:none}
-.account-menu{
-  position:absolute;
-  top:calc(100% + 10px);
-  left:0;
-  width:190px;
-  padding:8px;
-  background:var(--panel);
-  border:1px solid var(--line);
-  border-radius:10px;
-  box-shadow:0 18px 45px rgba(0,0,0,.35);
-  display:none;
-  z-index:1000;
-}
-.account-menu.open{display:block}
-.account-menu-title{
-  padding:8px 10px 7px;
-  color:var(--muted);
-  font-size:11px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.5px;
-}
-.account-menu button{
-  width:100%;
-  border:0;
-  background:transparent;
-  color:var(--text);
-  padding:10px;
-  border-radius:7px;
-  text-align:left;
-  font-weight:800;
-  cursor:pointer;
-}
-.account-menu button:hover{background:var(--soft)}
-.account-menu .account-logout{color:#ff416b}
-@media(max-width:520px){
-  .account-menu{width:175px}
-}
-</style>
-<style>
-.user{
-  border-radius: 8px !important;
-}
-</style>
-
-
-<style>
-  .product-tab[hidden]{display:none !important}
-  .product-tab{
-    width:100%;
-    padding:8px 0 28px;
-  }
-  .product-tab-card{
-    width:100%;
-    background:linear-gradient(145deg,#11151d,#0c1016);
-    border:1px solid #202731;
-    border-radius:20px;
-    padding:20px;
-    box-shadow:0 18px 45px rgba(0,0,0,.25);
-  }
-  .product-tab-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:14px;
-    padding-bottom:18px;
-    border-bottom:1px solid #202731;
-  }
-  .product-tab-title{font-size:24px;font-weight:950;letter-spacing:.2px}
-  .product-tab-subtitle{margin-top:5px;color:#8d929b;font-size:12px}
-  .product-back,.pm-add,.pm-btn,.pm-save,.pm-cancel{
-    min-height:42px;
-    border:0;
-    border-radius:11px;
-    padding:0 15px;
-    font:inherit;
-    font-weight:900;
-    cursor:pointer;
-  }
-  .product-back{background:#1a2029;color:#f4f5f7;border:1px solid #303743}
-  .product-tab-toolbar{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    padding:16px 0;
-  }
-  .product-count{color:#9da3ad;font-size:12px;font-weight:800}
-  .pm-add{background:var(--cyan);color:#061014}
-  .pm-list{display:grid;gap:10px}
-  .pm-item{
-    display:grid;
-    grid-template-columns:58px minmax(0,1fr) auto;
-    align-items:center;
-    gap:13px;
-    padding:12px;
-    border:1px solid #222a34;
-    border-radius:15px;
-    background:#0d1219;
-  }
-  .pm-item img{
-    width:58px;height:58px;border-radius:11px;object-fit:cover;
-    background:#151a22;border:1px solid #252c36;
-  }
-  .pm-name{font-size:14px;font-weight:900;overflow-wrap:anywhere}
-  .pm-meta{margin-top:4px;color:#8d929b;font-size:11px}
-  .pm-actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
-  .pm-btn{min-height:38px;padding:0 12px;background:#1b222c;color:#f4f5f7;border:1px solid #303844}
-  .pm-btn.delete{color:#ff8aa0;border-color:#5a2936}
-  .pm-empty{
-    padding:40px 20px;text-align:center;color:#8d929b;
-    border:1px dashed #303743;border-radius:15px;
-  }
-  .pm-form{
-    margin-top:16px;padding:18px;border:1px solid #242d38;
-    border-radius:16px;background:#0b1017;
-  }
-  .pm-form-title{font-size:17px;font-weight:950;margin-bottom:15px}
-  .pm-fields{
-    display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
-  }
-  .pm-field.full{grid-column:1/-1}
-  .pm-field label{
-    display:block;margin-bottom:6px;color:#b8bec7;font-size:11px;font-weight:850;
-  }
-  .pm-field input,.pm-field textarea,.pm-field select{
-    width:100%;min-height:42px;padding:10px 12px;
-    border-radius:10px;border:1px solid #29313c;background:#111720;
-    color:#f4f5f7;outline:none;font:inherit;
-  }
-  .pm-field textarea{min-height:88px;resize:vertical}
-  .pm-field input:focus,.pm-field textarea:focus,.pm-field select:focus{
-    border-color:var(--cyan);box-shadow:0 0 0 2px rgba(24,217,237,.12)
-  }
-  .pm-form-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px}
-  .pm-save{background:var(--green);color:#06120e}
-  .pm-cancel{background:#1b222c;color:#f4f5f7;border:1px solid #303844}
-  .pm-error{min-height:18px;margin-top:9px;color:#ff7b91;font-size:11px}
-  @media(max-width:650px){
-    .product-tab-card{padding:14px;border-radius:16px}
-    .product-tab-title{font-size:20px}
-    .product-tab-head{align-items:flex-start}
-    .pm-fields{grid-template-columns:1fr}
-    .pm-field.full{grid-column:auto}
-    .pm-item{grid-template-columns:48px minmax(0,1fr)}
-    .pm-item img{width:48px;height:48px}
-    .pm-actions{grid-column:1/-1;justify-content:flex-start}
-  }
-</style>
-
+    .toast.show{transform:translate(-50%,0)}.toast-icon{font-size:20px}.toast strong{display:block;font-size:11px}.toast span{display:block;color:var(--muted);font-size:9px;margin-top:3px}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:45;display:none}.overlay.show{display:block}
+    .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .detail-item{background:var(--panel2);border:1px solid var(--border);border-radius:11px;padding:10px}.detail-item label{display:block;color:var(--muted);font-size:9px;margin-bottom:4px}.detail-item strong{font-size:11px;line-height:1.6}
+    .items-list{margin-top:12px;display:flex;flex-direction:column;gap:7px}.item-row{display:flex;justify-content:space-between;gap:10px;background:var(--panel2);border:1px solid var(--border);padding:10px;border-radius:10px;font-size:10px}
+    @media(max-width:1200px){.stats{grid-template-columns:repeat(3,1fr)}.dashboard-grid{grid-template-columns:1fr}}
+    @media(max-width:850px){
+      :root{--sidebar:270px}.sidebar{transform:translateX(105%);transition:.25s}.sidebar.open{transform:translateX(0)}
+      .main{margin-right:0}.mobile-menu{display:block}.topbar{padding:0 14px}.content{padding:18px 13px}.top-title{flex:1}.top-title h2{font-size:16px}
+      .stats{grid-template-columns:1fr 1fr}.page-head{align-items:flex-start;flex-direction:column}.search{min-width:100%}
+    }
+    @media(max-width:550px){
+      .stats{grid-template-columns:1fr 1fr}.stat{padding:13px}.stat-value{font-size:19px}.stat-icon{margin-bottom:8px}
+      .form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.modal{padding:8px}.modal-box{border-radius:18px}
+      .detail-grid{grid-template-columns:1fr}.top-actions .refresh{display:none}
+    }
+  </style>
 </head>
 <body>
 
-<aside class="settings-drawer" id="settingsDrawer" aria-hidden="true">
-  <div class="drawer-head">
-    <div class="drawer-title">Appearance</div>
-    <button class="drawer-close" id="drawerClose" aria-label="Close settings">×</button>
-  </div>
-
-  <div class="drawer-section-title">Theme</div>
-  <div class="appearance-box">
-    <button class="appearance-option" data-theme="dark">
-      <span class="appearance-icon">☾</span>
-      <span>Dark Appearance</span>
-    </button>
-    <button class="appearance-option" data-theme="light">
-      <span class="appearance-icon">☀</span>
-      <span>Bright Appearance</span>
-    </button>
-  </div>
-</aside>
-<div class="drawer-backdrop" id="drawerBackdrop"></div>
-
-
-<section id="firebaseLogin" class="firebase-login">
-  <div class="firebase-login-card">
-    <div class="firebase-login-logo">KURD <span>SHEIN</span></div>
-    <div class="firebase-login-sub">Admin Portal • Secure Sign In</div>
-    <div class="firebase-field">
-      <label>User / Email</label>
-      <input id="firebaseEmail" type="email" autocomplete="username" placeholder="Enter your email">
+<div id="loginScreen" class="login-screen">
+  <form id="loginForm" class="login-box">
+    <div class="login-logo">
+      <div class="brand-mark">👑</div>
+      <h2>KurdShein Admin</h2>
+      <p>داشبۆردی بەڕێوەبردنی فرۆشگاکە</p>
     </div>
-    <div class="firebase-field">
-      <label>Password</label>
-      <input id="firebasePassword" type="password" autocomplete="current-password" placeholder="••••••••">
+    <div class="field">
+      <label>ئیمەیڵی ئەدمین</label>
+      <input id="loginEmail" type="email" required autocomplete="username" placeholder="admin@example.com">
     </div>
-    <button class="firebase-login-btn" id="firebaseLoginBtn">Sign in</button>
-    <div id="firebaseError" class="firebase-error"></div>
-  </div>
-</section>
+    <div class="field">
+      <label>وشەی نهێنی</label>
+      <input id="loginPassword" type="password" required autocomplete="current-password" placeholder="••••••••">
+    </div>
+    <button class="primary login-btn" type="submit">چوونە ژوورەوە</button>
+    <div class="login-note">ئەم پەڕەیە تەنها بۆ بەڕێوەبەرانە. وشەی نهێنی لە Firestore هەڵمەگرە؛ Firebase Authentication بەکاربهێنە.</div>
+  </form>
+</div>
 
-<header class="topbar">
-  <div class="left">
-    <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open settings">
-      <span class="hamburger-lines"><span></span><span></span><span></span></span>
-    </button>
-    <div class="account-wrap">
-      <div class="user" id="adminAccountBtn" role="button" tabindex="0" aria-expanded="false">
-        Admin Account <span class="avatar">●</span>
+<div id="app" class="app hidden">
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">👑</div>
+      <div><h1>KurdShein</h1><small>ADMIN CONTROL CENTER</small></div>
+    </div>
+    <nav class="nav">
+      <div class="nav-title">سەرەکی</div>
+      <button class="nav-btn active" data-view="dashboard"><span class="icon">▦</span><span>داشبۆرد</span></button>
+
+      <div class="nav-title">بەڕێوەبردنی داتا</div>
+      <button class="nav-btn" data-view="products"><span class="icon">🛍️</span><span>بەرهەمەکان</span></button>
+      <button class="nav-btn" data-view="orders"><span class="icon">📦</span><span>ئۆردەرەکان</span></button>
+      <button class="nav-btn" data-view="stores"><span class="icon">🏪</span><span>فرۆشگاکان</span></button>
+      <button class="nav-btn" data-view="coupons"><span class="icon">🎟️</span><span>کۆپۆنەکان</span></button>
+      <button class="nav-btn" data-view="deliveryFees"><span class="icon">🚚</span><span>کرێی گەیاندن</span></button>
+
+      <div class="nav-title">دەسەڵات</div>
+      <button class="nav-btn" data-view="admins"><span class="icon">🛡️</span><span>ئەدمینەکان</span></button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-mini">
+        <div id="userAvatar" class="avatar">A</div>
+        <div><strong>ئەدمینی ئێستا</strong><span id="userEmail">—</span></div>
       </div>
-      <div class="account-menu" id="adminAccountMenu">
-        <div class="account-menu-title">Admin Account</div>
-        <button type="button" id="adminLoginMenuBtn">Login</button>
-        <button type="button" id="adminLogoutMenuBtn" class="account-logout">Logout</button>
+      <button id="logoutBtn" class="logout">دەرچوون</button>
+    </div>
+  </aside>
+
+  <div id="overlay" class="overlay"></div>
+
+  <main class="main">
+    <header class="topbar">
+      <button id="mobileMenu" class="mobile-menu">☰</button>
+      <div class="top-title"><h2 id="topTitle">داشبۆرد</h2><p id="topSubtitle">چاودێری و کۆنترۆڵی KurdShein</p></div>
+      <div class="top-actions">
+        <button id="globalRefresh" class="refresh" title="نوێکردنەوە">↻</button>
       </div>
-    </div>
-  </div>
-  <div class="brandbox">
-    <div class="brand">Kurd Shein</div>
-    
-  </div>
-</header>
+    </header>
 
-<main>
+    <section class="content">
 
-  <section class="grid" id="dashboardGrid">
-    <button type="button" class="tile yellow" id="productsTile"><div class="icon"><svg viewBox="0 0 32 32"><circle cx="16" cy="9" r="5"/><path d="M7 27c0-6 4-10 9-10s9 4 9 10z"/></svg></div><div class="name">Products</div></button>
-    <div class="tile yellow"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M7 11h11a8 8 0 1 1-5 14'/><path d='M7 11l5-5M7 11l5 5'/></svg></div><div class="name">Stores</div></div>
-    <div class="tile yellow"><div class="icon"><svg viewBox='0 0 32 32'><path d='M7 3h13l6 6v20H7z'/><path d='M20 3v7h6'/><rect x='11' y='13' width='11' height='2' rx='1'/><rect x='11' y='18' width='8' height='2' rx='1'/><path d='M17 21v6'/></svg></div><div class="name">Orders</div></div>
-    <div class="tile yellow"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M4 7h4l3 15h13l4-11H9'/><circle cx='13' cy='26' r='2'/><circle cx='24' cy='26' r='2'/></svg></div><div class="name">Costumers</div></div>
-    <div class="tile green"><div class="icon"><svg viewBox='0 0 32 32'><path d='M8 4h16a3 3 0 0 1 3 3v18a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z'/><circle cx='16' cy='16' r='6' fill='none' stroke='currentColor' stroke-width='2.4'/><path d='M16 16l4-4'/></svg></div><div class="name">Daily gifts</div></div>
-    <div class="tile green"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M4 21c6 0 7-5 12-5 4 0 5 4 12 4'/><path d='M22 13l6 7-8 1'/><path d='M16 10v11'/><path d='M12 13c1-3 7-4 9 0'/></svg></div><div class="name">Delivery fees</div></div>
-    <div class="tile green"><div class="icon"><svg viewBox='0 0 32 32'><path d='M7 3h13l6 6v20H7z'/><path d='M20 3v7h6'/><rect x='11' y='13' width='11' height='2' rx='1'/><rect x='11' y='18' width='8' height='2' rx='1'/><path d='M17 21v6'/></svg></div><div class="name">Gifts</div></div>
-    <div class="tile green"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M4 7h4l3 15h13l4-11H9'/><circle cx='13' cy='26' r='2'/><circle cx='24' cy='26' r='2'/></svg></div><div class="name">Display banner</div></div>
-
-    <div class="tile cyan"><div class="icon"><svg viewBox='0 0 32 32'><path d='M16 3a13 13 0 1 0 13 13H16z'/><path d='M16 3v13h13A13 13 0 0 0 16 3z' opacity='.55'/></svg></div><div class="name">Categories</div></div>
-    <div class="tile cyan"><div class="icon"><svg viewBox='0 0 32 32'><rect x='7' y='4' width='18' height='24' rx='2'/><rect x='11' y='9' width='10' height='2' rx='1' fill='#111'/><rect x='11' y='14' width='10' height='2' rx='1' fill='#111'/><rect x='11' y='19' width='7' height='2' rx='1' fill='#111'/></svg></div><div class="name">Expenses</div></div>
-    <div class="tile cyan"><div class="icon"><svg viewBox='0 0 32 32'><circle cx='16' cy='9' r='5'/><path d='M7 27c0-6 4-10 9-10s9 4 9 10z'/></svg></div><div class="name">Employee account</div></div>
-    <div class="tile cyan"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M7 11h11a8 8 0 1 1-5 14'/><path d='M7 11l5-5M7 11l5 5'/></svg></div><div class="name">Return to supplier</div></div>
-    <div class="tile cyan"><div class="icon"><svg viewBox='0 0 32 32'><path d='M5 23h5V15h5v8h4V9h5v14h3v4H5z'/></svg></div><div class="name">Companies</div></div>
-    <div class="tile purple"><div class="icon"><svg viewBox='0 0 32 32'><path d='M8 4h16v24H8z'/><path d='M12 9h8M12 14h8M12 19h8M12 24h5' stroke='var(--bg)' stroke-width='2' fill='none'/></svg></div><div class="name">Trash</div></div>
-    <div class="tile purple"><div class="icon"><svg viewBox='0 0 32 32'><circle cx='16' cy='16' r='12'/><rect x='14.5' y='9' width='3' height='14' rx='1.5' fill='var(--bg)'/><rect x='9' y='14.5' width='14' height='3' rx='1.5' fill='var(--bg)'/></svg></div><div class="name">Add-ons</div></div>
-    <div class="tile purple"><div class="icon"><svg viewBox='0 0 32 32'><path d='M3 11l6-5h14l6 5-4 7-4-3-3 11-3-11-4 3z'/></svg></div><div class="name">Boxes</div></div>
-
-    <div class="tile red"><div class="icon"><svg viewBox='0 0 32 32'><circle cx='16' cy='9' r='5'/><path d='M7 27c0-6 4-10 9-10s9 4 9 10z'/></svg></div><div class="name">Notifications</div></div>
-    <div class="tile red"><div class="icon"><svg viewBox='0 0 32 32'><path d='M8 25a6 6 0 1 1 2-11 8 8 0 0 1 15 3 5 5 0 0 1-1 10H8z'/><path d='M16 12v10M12 18l4 4 4-4' fill='none' stroke='var(--bg)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg></div><div class="name">Backup</div></div>
-    <div class="tile red"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M5 9h22M5 16h22M5 23h22'/><circle cx='12' cy='9' r='2.5' fill='var(--bg)'/><circle cx='20' cy='16' r='2.5' fill='var(--bg)'/><circle cx='15' cy='23' r='2.5' fill='var(--bg)'/></svg></div><div class="name">Settings</div></div>
-    <div class="tile red"><div class="icon"><svg class='line' viewBox='0 0 32 32'><circle cx='16' cy='16' r='11'/><path d='M16 9v7l5 3'/></svg></div><div class="name">Activity</div></div>
-    <div class="tile red"><div class="icon"><svg viewBox='0 0 32 32'><circle cx='16' cy='9' r='5'/><path d='M7 27c0-6 4-10 9-10s9 4 9 10z'/></svg></div><div class="name">Users</div></div>
-    <div class="tile red"><div class='icon'><svg viewBox='0 0 32 32'><rect x='5' y='8' width='22' height='16' rx='2'/><rect x='9' y='11' width='14' height='9' rx='1' fill='var(--bg)'/></svg></div><div class="name">Terminal</div></div>
-  </section>
-</main>
-
-<section class="product-tab" id="productManagerModal" aria-hidden="true" hidden>
-  <div class="product-tab-card">
-    <div class="product-tab-head">
-      <div>
-        <div class="product-tab-title">Products</div>
-        <div class="product-tab-subtitle" id="pmStatus">Live Firestore products</div>
-      </div>
-      <button class="product-back" type="button" id="pmClose">← Back</button>
-    </div>
-
-    <div class="product-tab-toolbar">
-      <div class="product-count" id="pmCount">0 products</div>
-      <button class="pm-add" type="button" id="pmAdd">+ Add Product</button>
-    </div>
-
-    <div class="pm-list" id="pmList"></div>
-
-    <form class="pm-form" id="pmForm" hidden>
-      <div class="pm-form-title" id="pmFormTitle">Add Product</div>
-      <input type="hidden" id="pmDocId">
-
-      <div class="pm-fields">
-        <div class="pm-field"><label for="pmName">Product name</label><input id="pmName" required></div>
-        <div class="pm-field"><label for="pmProductId">Product ID</label><input id="pmProductId"></div>
-        <div class="pm-field"><label for="pmPrice">Price (IQD)</label><input id="pmPrice" type="number" min="0" required></div>
-        <div class="pm-field"><label for="pmOldPrice">Old price (IQD)</label><input id="pmOldPrice" type="number" min="0"></div>
-        <div class="pm-field"><label for="pmStock">Stock</label><input id="pmStock" type="number" min="0" required></div>
-        <div class="pm-field"><label for="pmCategory">Category</label><input id="pmCategory" placeholder="men, women, new, sale"></div>
-        <div class="pm-field"><label for="pmSizes">Sizes</label><input id="pmSizes" placeholder="S, M, L"></div>
-        <div class="pm-field"><label for="pmColors">Colors</label><input id="pmColors" placeholder="Black, White"></div>
-        <div class="pm-field full"><label for="pmDisplayDescription">Display description</label><textarea id="pmDisplayDescription"></textarea></div>
-        <div class="pm-field full"><label for="pmDescription">Full description</label><textarea id="pmDescription"></textarea></div>
-        <div class="pm-field full"><label for="pmImages">Images — one URL per line</label><textarea id="pmImages" placeholder="https://..."></textarea></div>
-        <div class="pm-field"><label for="pmActive">Active</label><select id="pmActive"><option value="true">Yes</option><option value="false">No</option></select></div>
+      <div id="view-dashboard" class="view active">
+        <div class="page-head">
+          <div><h2>داشبۆرد</h2><p>کورتەی دۆخی سیستەم و چالاکییەکانی ئەمڕۆ</p></div>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="stat-icon">🛍️</div><div class="stat-label">کۆی بەرهەمەکان</div><div id="statProducts" class="stat-value">0</div><div class="stat-sub">لە collection ـی product</div></div>
+          <div class="stat"><div class="stat-icon">📦</div><div class="stat-label">کۆی ئۆردەرەکان</div><div id="statOrders" class="stat-value">0</div><div class="stat-sub">هەموو داواکارییەکان</div></div>
+          <div class="stat"><div class="stat-icon">💰</div><div class="stat-label">فرۆشتنی تەواوکراو</div><div id="statRevenue" class="stat-value">0</div><div class="stat-sub">دیناری عێراقی</div></div>
+          <div class="stat"><div class="stat-icon">🏪</div><div class="stat-label">فرۆشگا</div><div id="statStores" class="stat-value">0</div><div class="stat-sub">شوێن و پارتنەرەکان</div></div>
+          <div class="stat"><div class="stat-icon">🎟️</div><div class="stat-label">کۆپۆنی چالاک</div><div id="statCoupons" class="stat-value">0</div><div class="stat-sub">کۆدی داشکاندن</div></div>
+        </div>
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card-head"><h3>ئۆردەرەکانی ٧ ڕۆژی دوا</h3><span>Realtime</span></div>
+            <div class="card-body"><div id="ordersChart" class="chart"></div></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>دواین چالاکی</h3><span>Live</span></div>
+            <div class="card-body"><div id="activity" class="activity"></div></div>
+          </div>
+        </div>
       </div>
 
-      <div class="pm-form-actions">
-        <button class="pm-save" type="submit">Save Product</button>
-        <button class="pm-cancel" type="button" id="pmCancel">Cancel</button>
+      <div id="view-products" class="view">
+        <div class="page-head"><div><h2>بەرهەمەکان</h2><p>زیادکردن، دەستکاریکردن، سڕینەوە و کۆنترۆڵی ستۆکی بەرهەمەکان</p></div><button class="primary" onclick="openForm('products')">＋ بەرهەمی نوێ</button></div>
+        <div class="toolbar">
+          <div class="search"><span>⌕</span><input data-search="products" placeholder="گەڕان بە ناو، ID یان کەتەگۆری..."></div>
+          <select data-filter="productActive"><option value="">هەموو دۆخەکان</option><option value="active">چالاک</option><option value="inactive">ناچالاک</option></select>
+          <button class="secondary" onclick="exportCollection('products')">⇩ CSV</button>
+        </div>
+        <div class="table-card"><div class="table-wrap"><table><thead><tr><th>بەرهەم</th><th>نرخ</th><th>ستۆک</th><th>کەتەگۆری</th><th>دۆخ</th><th>نوێکراوە</th><th>کردار</th></tr></thead><tbody id="productsTable"></tbody></table></div><div id="productsPagination" class="pagination"></div></div>
       </div>
-      <div class="pm-error" id="pmError" aria-live="polite"></div>
+
+      <div id="view-orders" class="view">
+        <div class="page-head"><div><h2>ئۆردەرەکان</h2><p>بینین و بەڕێوەبردنی داواکارییەکانی کڕیاران</p></div></div>
+        <div class="toolbar">
+          <div class="search"><span>⌕</span><input data-search="orders" placeholder="گەڕان بە ژمارەی ئۆردەر، ناو یان تەلەفۆن..."></div>
+          <select data-filter="orderStatus"><option value="">هەموو دۆخەکان</option><option value="pending">چاوەڕوان</option><option value="confirmed">پشتڕاستکراو</option><option value="processing">لە پرۆسە</option><option value="shipped">نێردراو</option><option value="delivered">گەیشتوو</option><option value="cancelled">هەڵوەشاوە</option></select>
+          <button class="secondary" onclick="exportCollection('orders')">⇩ CSV</button>
+        </div>
+        <div class="table-card"><div class="table-wrap"><table><thead><tr><th>ئۆردەر</th><th>کڕیار</th><th>کۆی گشتی</th><th>گەیاندن</th><th>دۆخ</th><th>بەروار</th><th>کردار</th></tr></thead><tbody id="ordersTable"></tbody></table></div><div id="ordersPagination" class="pagination"></div></div>
+      </div>
+
+      <div id="view-stores" class="view">
+        <div class="page-head"><div><h2>فرۆشگاکان</h2><p>بەڕێوەبردنی فرۆشگا، پارتنەر و سەرچاوەی بەرهەم</p></div><button class="primary" onclick="openForm('stores')">＋ فرۆشگای نوێ</button></div>
+        <div class="toolbar"><div class="search"><span>⌕</span><input data-search="stores" placeholder="گەڕان بە ناو، شار یان پەیوەندی..."></div><button class="secondary" onclick="exportCollection('stores')">⇩ CSV</button></div>
+        <div class="table-card"><div class="table-wrap"><table><thead><tr><th>فرۆشگا</th><th>شار</th><th>تەلەفۆن</th><th>بەرهەم</th><th>دۆخ</th><th>کردار</th></tr></thead><tbody id="storesTable"></tbody></table></div><div id="storesPagination" class="pagination"></div></div>
+      </div>
+
+      <div id="view-coupons" class="view">
+        <div class="page-head"><div><h2>کۆپۆنەکان</h2><p>کۆدی داشکاندن، ڕێژە، سنوور و ماوەی بەکارهێنان</p></div><button class="primary" onclick="openForm('coupons')">＋ کۆپۆنی نوێ</button></div>
+        <div class="toolbar"><div class="search"><span>⌕</span><input data-search="coupons" placeholder="گەڕان بە کۆد یان ناونیشان..."></div><button class="secondary" onclick="exportCollection('coupons')">⇩ CSV</button></div>
+        <div class="table-card"><div class="table-wrap"><table><thead><tr><th>کۆد</th><th>داشکاندن</th><th>کەمترین کڕین</th><th>بەکارهێنان</th><th>بەروار</th><th>دۆخ</th><th>کردار</th></tr></thead><tbody id="couponsTable"></tbody></table></div><div id="couponsPagination" class="pagination"></div></div>
+      </div>
+
+      <div id="view-deliveryFees" class="view">
+        <div class="page-head"><div><h2>کرێی گەیاندن</h2><p>نرخی گەیاندن بەپێی شار یان ناوچە</p></div><button class="primary" onclick="openForm('deliveryFees')">＋ نرخی نوێ</button></div>
+        <div class="toolbar"><div class="search"><span>⌕</span><input data-search="deliveryFees" placeholder="گەڕان بە شار یان ناوچە..."></div><button class="secondary" onclick="exportCollection('deliveryFees')">⇩ CSV</button></div>
+        <div class="table-card"><div class="table-wrap"><table><thead><tr><th>شار/ناوچە</th><th>کرێ</th><th>ماوە</th><th>دۆخ</th><th>تێبینی</th><th>کردار</th></tr></thead><tbody id="deliveryFeesTable"></tbody></table></div><div id="deliveryFeesPagination" class="pagination"></div></div>
+      </div>
+
+      <div id="view-admins" class="view">
+        <div class="page-head"><div><h2>ئەدمینەکان</h2><p>ڕۆڵ و دەسەڵاتی بەڕێوەبەران. وشەی نهێنی لە Firebase Authentication بەڕێوەدەبرێت.</p></div><button class="primary" onclick="openForm('admins')">＋ ئەدمینی نوێ</button></div>
+        <div class="toolbar"><div class="search"><span>⌕</span><input data-search="admins" placeholder="گەڕان بە ناو یان ئیمەیڵ..."></div><button class="secondary" onclick="exportCollection('admins')">⇩ CSV</button></div>
+        <div class="table-card"><div class="table-wrap"><table><thead><tr><th>ئەدمین</th><th>ئیمەیڵ</th><th>ڕۆڵ</th><th>دۆخ</th><th>دروستکراو</th><th>کردار</th></tr></thead><tbody id="adminsTable"></tbody></table></div><div id="adminsPagination" class="pagination"></div></div>
+      </div>
+
+    </section>
+  </main>
+</div>
+
+<div id="formModal" class="modal">
+  <div class="modal-box">
+    <div class="modal-head"><h3 id="formTitle">داتا</h3><button class="close" onclick="closeModal('formModal')">×</button></div>
+    <form id="entityForm">
+      <div id="formFields" class="modal-body form-grid"></div>
+      <div class="modal-foot"><button type="button" class="secondary" onclick="closeModal('formModal')">پاشگەزبوونەوە</button><button type="submit" class="primary">پاشەکەوتکردن</button></div>
     </form>
   </div>
-</section>
+</div>
 
+<div id="orderModal" class="modal">
+  <div class="modal-box">
+    <div class="modal-head"><h3>وردەکاریی ئۆردەر</h3><button class="close" onclick="closeModal('orderModal')">×</button></div>
+    <div id="orderDetails" class="modal-body"></div>
+    <div class="modal-foot"><button class="secondary" onclick="closeModal('orderModal')">داخستن</button></div>
+  </div>
+</div>
 
+<div id="toast" class="toast"><div id="toastIcon" class="toast-icon">✓</div><div><strong id="toastTitle">سەرکەوتوو</strong><span id="toastText"></span></div></div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-import {
-  getAuth,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-  signOut
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-import {
-  getFirestore,
-  collection,
-  getDoc,
-  doc,
-  query,
-  orderBy,
-  onSnapshot,
-  setDoc,
-  addDoc,
-  updateDoc,
-  deleteDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+  import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+  import {
+    getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+  import {
+    getFirestore, collection, getDocs, onSnapshot, addDoc, updateDoc, deleteDoc,
+    doc, serverTimestamp, query, orderBy, limit, getDoc
+  } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
-/* Extracted from the supplied admin.html Firebase configuration. */
-const firebaseConfig = {
-  apiKey: "AIzaSyAZPy_1tQTNlCP3GKZZJ01S7RLfrecaznE",
-  authDomain: "kurdsheinadmin.firebaseapp.com",
-  projectId: "kurdsheinadmin",
-  storageBucket: "kurdsheinadmin.firebasestorage.app",
-  messagingSenderId: "297215544882",
-  appId: "1:297215544882:web:7b01257fb9ad78b825362b",
-  measurementId: "G-NQC7VSG986"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-
-let products = [];
-let orders = [];
-let settings = {
-  deliveryFees: { Erbil: 3000, Sulaymaniyah: 4000, Duhok: 4000, Other: 5000 },
-  couponCodes: { KURD10: .10, NEW5: .05 }
-};
-let stopProducts = null;
-let stopOrders = null;
-
-const loginView = document.getElementById("firebaseLogin");
-const loginBtn = document.getElementById("firebaseLoginBtn");
-const loginError = document.getElementById("firebaseError");
-
-function setStatus(text, ok=false){
-  // Firestore status text intentionally hidden from the dashboard header.
-}
-
-function formatIQD(value){
-  return Number(value || 0).toLocaleString("en-US");
-}
-
-function refreshDashboardFromFirestore(){
-  const active = products.filter(p => p.Active !== false);
-  // Show the live product/order totals in the browser title tooltip without changing the dashboard UI.
-  document.title = `Kurd Shein — ${active.length} products • ${orders.length} orders`;
-}
-
-async function loadFirestoreSettings(){
-  try{
-    const snap = await getDoc(doc(db, "settings", "store"));
-    if(snap.exists()){
-      const data = snap.data();
-      settings = {
-        ...settings,
-        ...data,
-        deliveryFees: {...settings.deliveryFees, ...(data.deliveryFees || {})},
-        couponCodes: {...settings.couponCodes, ...(data.couponCodes || {})}
-      };
-    }
-    refreshDashboardFromFirestore();
-  }catch(error){
-    console.error("Firestore settings error:", error);
-    setStatus("Firestore: settings error");
-  }
-}
-
-function startFirestore(){
-  if(stopProducts) stopProducts();
-  if(stopOrders) stopOrders();
-
-  setStatus("Firestore: connected ✓", true);
-
-  stopProducts = onSnapshot(
-    collection(db, "product"),
-    snap => {
-      products = snap.docs.map(d => ({...d.data(), __docId:d.id}));
-      refreshDashboardFromFirestore();
-      renderProductManager();
-    },
-    error => {
-      console.error("product listener:", error);
-      setStatus("Firestore: product error");
-    }
-  );
-
-  stopOrders = onSnapshot(
-    query(collection(db, "orders"), orderBy("createdAt", "desc")),
-    snap => {
-      orders = snap.docs.map(d => ({...d.data(), __docId:d.id}));
-      refreshDashboardFromFirestore();
-    },
-    error => {
-      console.error("orders listener:", error);
-      setStatus("Firestore: orders error");
-    }
-  );
-
-  loadFirestoreSettings();
-}
-
-loginBtn.addEventListener("click", async () => {
-  const email = document.getElementById("firebaseEmail").value.trim();
-  const password = document.getElementById("firebasePassword").value;
-  loginError.textContent = "";
-
-  if(!email || !password){
-    loginError.textContent = "Enter the admin email and password.";
-    return;
-  }
-
-  loginBtn.disabled = true;
-  loginBtn.textContent = "Signing in…";
-
-  try{
-    await signInWithEmailAndPassword(auth, email, password);
-  }catch(error){
-    console.error(error);
-    loginError.textContent = "Sign-in failed. Check Firebase Authentication and your credentials.";
-  }finally{
-    loginBtn.disabled = false;
-    loginBtn.textContent = "Sign in";
-  }
-});
-
-document.getElementById("firebasePassword").addEventListener("keydown", e => {
-  if(e.key === "Enter") loginBtn.click();
-});
-
-onAuthStateChanged(auth, async user => {
-  if(!user){
-    // Keep the login page visible until the user successfully signs in.
-    loginView.classList.remove("hidden");
-    return;
-  }
-
-  try{
-    const adminSnap = await getDoc(doc(db, "admins", user.uid));
-
-    if(!adminSnap.exists() || adminSnap.data().active === false){
-      await signOut(auth);
-      loginError.textContent = "This account is not an active admin. Add admins/{UID} in Firestore.";
-      return;
-    }
-
-    loginView.classList.add("hidden");
-    startFirestore();
-  }catch(error){
-    console.error(error);
-    await signOut(auth);
-    loginError.textContent = "Could not verify admin permissions.";
-  }
-});
-
-// Make logout available for later edits without changing the dashboard UI.
-window.kurdSheinAdminLogout = () => signOut(auth);
-
-// Keep a clean way to save the same settings document later.
-window.saveKurdSheinFirestoreSettings = async data => {
-  await setDoc(doc(db, "settings", "store"), {
-    ...data,
-    updatedAt: serverTimestamp()
-  }, {merge:true});
-};
-
-/* ================= KURD SHEIN PRODUCT MANAGER ================= */
-const pmModal = document.getElementById("productManagerModal");
-if(!pmModal) console.error("Kurd Shein: Products tab markup is missing.");
-const pmList = document.getElementById("pmList");
-const pmForm = document.getElementById("pmForm");
-const pmStatus = document.getElementById("pmStatus");
-const pmCount = document.getElementById("pmCount");
-const pmError = document.getElementById("pmError");
-const pmFormTitle = document.getElementById("pmFormTitle");
-
-function pmListValue(value){
-  if(Array.isArray(value)) return value.join(", ");
-  return String(value ?? "");
-}
-function pmImagesValue(value){
-  if(Array.isArray(value)) return value.join("\n");
-  return String(value ?? "");
-}
-function pmEscape(value){
-  return String(value ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-}
-window.renderProductManager = function(){
-  if(!pmList) return;
-  if(!products.length){
-    pmList.innerHTML = '<div class="pm-empty">No products in Firestore yet.</div>';
-    pmStatus.textContent = "Live Firestore products";
-    if(pmCount) pmCount.textContent = "0 products";
-    return;
-  }
-  pmList.innerHTML = products.map(p => {
-    const image = Array.isArray(p.Images) ? p.Images[0] : (p.Image || "");
-    const name = p.DisplayName || "Unnamed product";
-    const price = formatIQD(p.Price);
-    const stock = Number(p.Stock || 0);
-    return `<div class="pm-item">
-      <img src="${pmEscape(image)}" alt="">
-      <div>
-        <div class="pm-name">${pmEscape(name)}</div>
-        <div class="pm-meta">${pmEscape(price)} IQD • Stock: ${stock} • ${p.Active === false ? "Inactive" : "Active"}</div>
-      </div>
-      <div class="pm-actions">
-        <button class="pm-btn edit" type="button" data-pm-edit="${pmEscape(p.__docId)}">Edit</button>
-        <button class="pm-btn delete" type="button" data-pm-delete="${pmEscape(p.__docId)}">Delete</button>
-      </div>
-    </div>`;
-  }).join("");
-  pmStatus.textContent = "Live Firestore products";
-  if(pmCount) pmCount.textContent = `${products.length} product${products.length === 1 ? "" : "s"}`;
-}
-window.openProductManager = () => {
-  const grid = document.getElementById("dashboardGrid");
-  if(grid) grid.hidden = true;
-  if(pmModal){
-    pmModal.hidden = false;
-    pmModal.setAttribute("aria-hidden","false");
-  }
-  if(pmForm) pmForm.hidden = true;
-  renderProductManager();
-  window.scrollTo({top:0, behavior:"smooth"});
-};
-
-function closeProductManager(){
-  const grid = document.getElementById("dashboardGrid");
-  if(grid) grid.hidden = false;
-  if(pmModal){
-    pmModal.hidden = true;
-    pmModal.setAttribute("aria-hidden","true");
-  }
-  if(pmForm) pmForm.hidden = true;
-  window.scrollTo({top:0, behavior:"smooth"});
-}
-function resetProductForm(){
-  pmForm?.reset();
-  document.getElementById("pmDocId").value = "";
-  if(pmError) pmError.textContent = "";
-  if(pmFormTitle) pmFormTitle.textContent = "Add Product";
-  document.getElementById("pmActive").value = "true";
-}
-function fillProductForm(p){
-  if(pmError) pmError.textContent = "";
-  if(pmFormTitle) pmFormTitle.textContent = "Edit Product";
-  document.getElementById("pmDocId").value = p.__docId || "";
-  document.getElementById("pmName").value = p.DisplayName || "";
-  document.getElementById("pmProductId").value = p.ID || "";
-  document.getElementById("pmPrice").value = Number(p.Price || 0);
-  document.getElementById("pmOldPrice").value = Number(p.OldPrice || 0);
-  document.getElementById("pmStock").value = Number(p.Stock || 0);
-  document.getElementById("pmCategory").value = pmListValue(p.Category);
-  document.getElementById("pmSizes").value = pmListValue(p.Size);
-  document.getElementById("pmColors").value = pmListValue(p.Colors || p.Color);
-  document.getElementById("pmDisplayDescription").value = p.DisplayDescription || "";
-  document.getElementById("pmDescription").value = p.DescriptionDescription || p.Description || "";
-  document.getElementById("pmImages").value = pmImagesValue(p.Images || p.Image);
-  document.getElementById("pmActive").value = p.Active === false ? "false" : "true";
-  pmForm.hidden = false;
-  pmForm.scrollIntoView({behavior:"smooth", block:"start"});
-}
-function parsePmList(value){
-  return String(value || "").split(",").map(x => x.trim()).filter(Boolean);
-}
-function parsePmImages(value){
-  return String(value || "").split(/\r?\n|,/).map(x => x.trim()).filter(Boolean);
-}
-document.getElementById("pmAdd")?.addEventListener("click", () => {
-  resetProductForm();
-  pmForm.hidden = false;
-  pmForm.scrollIntoView({behavior:"smooth", block:"start"});
-});
-document.getElementById("pmCancel")?.addEventListener("click", () => { pmForm.hidden = true; if(pmError) pmError.textContent = ""; });
-document.getElementById("pmClose")?.addEventListener("click", closeProductManager);
-
-pmList?.addEventListener("click", async e => {
-  const edit = e.target.closest("[data-pm-edit]");
-  const del = e.target.closest("[data-pm-delete]");
-  if(edit){
-    const p = products.find(x => x.__docId === edit.dataset.pmEdit);
-    if(p) fillProductForm(p);
-  }
-  if(del){
-    const id = del.dataset.pmDelete;
-    const p = products.find(x => x.__docId === id);
-    if(!id || !p) return;
-    if(!confirm(`Delete "${p.DisplayName || "this product"}"?`)) return;
-    try{
-      await deleteDoc(doc(db, "product", id));
-    }catch(error){
-      console.error(error);
-      alert("Could not delete the product.");
-    }
-  }
-});
-pmForm?.addEventListener("submit", async e => {
-  e.preventDefault();
-  const docId = document.getElementById("pmDocId").value.trim();
-  const data = {
-    ID: document.getElementById("pmProductId").value.trim(),
-    DisplayName: document.getElementById("pmName").value.trim(),
-    DisplayDescription: document.getElementById("pmDisplayDescription").value.trim(),
-    DescriptionDescription: document.getElementById("pmDescription").value.trim(),
-    Price: Number(document.getElementById("pmPrice").value || 0),
-    OldPrice: Number(document.getElementById("pmOldPrice").value || 0),
-    Stock: Math.max(0, Number(document.getElementById("pmStock").value || 0)),
-    Category: parsePmList(document.getElementById("pmCategory").value),
-    Size: parsePmList(document.getElementById("pmSizes").value),
-    Colors: parsePmList(document.getElementById("pmColors").value),
-    Images: parsePmImages(document.getElementById("pmImages").value),
-    Image: parsePmImages(document.getElementById("pmImages").value)[0] || "",
-    DisplayImage: parsePmImages(document.getElementById("pmImages").value)[0] || "",
-    DescriptionImages: parsePmImages(document.getElementById("pmImages").value),
-    DescriptionMultiImage: parsePmImages(document.getElementById("pmImages").value).slice(1),
-    Active: document.getElementById("pmActive").value === "true",
-    updatedAt: serverTimestamp()
+  const firebaseConfig = {
+    apiKey: "AIzaSyAZPy1tQTNlCP3GKZZJ01S7RLfrecaznE",
+    authDomain: "kurdsheinadmin.firebaseapp.com",
+    projectId: "kurdsheinadmin",
+    storageBucket: "kurdsheinadmin.firebasestorage.app",
+    messagingSenderId: "297215544882",
+    appId: "1:297215544882:web:7b01257fb9ad78b825362b"
   };
-  try{
-    if(docId){
-      await updateDoc(doc(db, "product", docId), data);
-    }else{
-      data.createdAt = serverTimestamp();
-      await addDoc(collection(db, "product"), data);
-    }
-    pmForm.hidden = true;
-  }catch(error){
-    console.error(error);
-    if(pmError) pmError.textContent = error?.code ? `Save failed: ${error.code}` : "Could not save the product. Check your Firestore rules.";
-  }
-});
 
-/* Re-render the manager whenever the live Firestore product listener changes. */
+  const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
 
+  const collections = {
+    products: "product",
+    orders: "orders",
+    stores: "stores",
+    coupons: "coupons",
+    deliveryFees: "deliveryFees",
+    admins: "admins"
+  };
 
-</script>
+  const state = {
+    user:null,
+    activeView:"dashboard",
+    editId:null,
+    editType:null,
+    data:{products:[],orders:[],stores:[],coupons:[],deliveryFees:[],admins:[]},
+    filters:{},
+    pages:{products:1,orders:1,stores:1,coupons:1,deliveryFees:1,admins:1},
+    pageSize:12,
+    unsubs:[]
+  };
 
+  const $ = id => document.getElementById(id);
+  const money = n => `${Number(n||0).toLocaleString()} د.ع`;
+  const dateValue = v => {
+    if(!v) return "";
+    try{
+      if(v?.toDate) return v.toDate().toLocaleString("ku-IQ");
+      const d = new Date(v);
+      return isNaN(d) ? String(v) : d.toLocaleString("ku-IQ");
+    }catch{return String(v)}
+  };
+  const escape = s => String(s ?? "").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+  const normalize = s => String(s??"").toLowerCase().normalize("NFKC");
+  const arr = v => Array.isArray(v) ? v : String(v??"").split(/[,\n|]/).map(x=>x.trim()).filter(Boolean);
 
-<script>
-(function(){
-  const btn = document.getElementById("hamburgerBtn");
-  const drawer = document.getElementById("settingsDrawer");
-  const close = document.getElementById("drawerClose");
-  const backdrop = document.getElementById("drawerBackdrop");
-  const options = document.querySelectorAll(".appearance-option");
+  const statusText = {
+    pending:"چاوەڕوان",confirmed:"پشتڕاستکراو",processing:"لە پرۆسە",
+    shipped:"نێردراو",delivered:"گەیشتوو",cancelled:"هەڵوەشاوە"
+  };
+  const statusClass = s => s==="delivered" ? "green" : s==="cancelled" ? "red" : s==="pending" ? "yellow" : "blue";
 
-  function setDrawer(open){
-    drawer.classList.toggle("open", open);
-    backdrop.classList.toggle("open", open);
-    drawer.setAttribute("aria-hidden", String(!open));
-  }
-
-  function applyTheme(theme){
-    document.body.classList.toggle("light-mode", theme === "light");
-    options.forEach(o => o.classList.toggle("active", o.dataset.theme === theme));
-    localStorage.setItem("barvin-theme", theme);
-  }
-
-  btn.addEventListener("click", () => setDrawer(true));
-  close.addEventListener("click", () => setDrawer(false));
-  backdrop.addEventListener("click", () => setDrawer(false));
-
-  document.addEventListener("keydown", e => {
-    if(e.key === "Escape") setDrawer(false);
-  });
-
-  options.forEach(option => {
-    option.addEventListener("click", () => applyTheme(option.dataset.theme));
-  });
-
-  const savedTheme = localStorage.getItem("barvin-theme") || "dark";
-  applyTheme(savedTheme);
-})();
-</script>
-
-
-<script>
-(function(){
-  const accountBtn = document.getElementById("adminAccountBtn");
-  const accountMenu = document.getElementById("adminAccountMenu");
-  const loginMenuBtn = document.getElementById("adminLoginMenuBtn");
-  const logoutMenuBtn = document.getElementById("adminLogoutMenuBtn");
-  const loginView = document.getElementById("firebaseLogin");
-
-  if(!accountBtn || !accountMenu) return;
-
-  function setAccountMenu(open){
-    accountMenu.classList.toggle("open", open);
-    accountBtn.setAttribute("aria-expanded", String(open));
+  function showToast(title,text="",icon="✓"){
+    $("toastTitle").textContent=title;$("toastText").textContent=text;$("toastIcon").textContent=icon;
+    $("toast").classList.add("show");clearTimeout(window.__toast);
+    window.__toast=setTimeout(()=>$("toast").classList.remove("show"),3000);
   }
 
-  accountBtn.addEventListener("click", (e) => {
-    e.stopPropagation();
-    setAccountMenu(!accountMenu.classList.contains("open"));
-  });
+  function openModal(id){$(id).classList.add("show")}
+  function closeModal(id){$(id).classList.remove("show")}
+  window.closeModal=closeModal;
 
-  accountBtn.addEventListener("keydown", (e) => {
-    if(e.key === "Enter" || e.key === " "){
-      e.preventDefault();
-      setAccountMenu(!accountMenu.classList.contains("open"));
-    }
-  });
-
-  document.addEventListener("click", (e) => {
-    if(!e.target.closest(".account-wrap")) setAccountMenu(false);
-  });
-
-  loginMenuBtn.addEventListener("click", () => {
-    setAccountMenu(false);
-    if(loginView) loginView.classList.remove("hidden");
-  });
-
-  logoutMenuBtn.addEventListener("click", async () => {
-    setAccountMenu(false);
-    if(window.kurdSheinAdminLogout){
-      await window.kurdSheinAdminLogout();
-    }
-  });
-})();
-</script>
-
-
-
-
-
-
-<script>
-(function(){
-  function initProductsNavigation(){
-    const tile = document.getElementById("productsTile");
-    const dashboard = document.getElementById("dashboardGrid");
-    const tab = document.getElementById("productManagerModal");
-    const back = document.getElementById("pmClose");
-
-    if(!tile || !dashboard || !tab) return false;
-
-    function openTab(){
-      dashboard.hidden = true;
-      tab.hidden = false;
-      tab.setAttribute("aria-hidden","false");
-      try { window.scrollTo(0, 0); } catch(e) {}
-    }
-
-    function closeTab(){
-      tab.hidden = true;
-      tab.setAttribute("aria-hidden","true");
-      dashboard.hidden = false;
-      try { window.scrollTo(0, 0); } catch(e) {}
-    }
-
-    if(!tile.dataset.productsNavigationBound){
-      tile.dataset.productsNavigationBound = "1";
-      tile.addEventListener("click", function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        openTab();
-        if(typeof window.renderProductManager === "function"){
-          window.renderProductManager();
-        }
+  async function adminAllowed(user){
+    const snap = await getDocs(collection(db,"admins"));
+    if(snap.empty){
+      // Bootstrap mode: only when the admins collection is empty.
+      await addDoc(collection(db,"admins"),{
+        name:user.email?.split("@")[0] || "Owner",
+        email:user.email || "",
+        role:"superadmin",status:"active",createdAt:serverTimestamp()
       });
+      return true;
     }
+    return snap.docs.some(d=>{
+      const x=d.data();
+      return String(x.email||"").toLowerCase()===String(user.email||"").toLowerCase() && x.status!=="disabled";
+    });
+  }
 
-    if(back && !back.dataset.productsBackBound){
-      back.dataset.productsBackBound = "1";
-      back.addEventListener("click", function(e){
-        e.preventDefault();
-        closeTab();
+  $("loginForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const btn=e.submitter;btn.disabled=true;btn.textContent="⏳ چاوەڕێ بکە...";
+    try{
+      const cred=await signInWithEmailAndPassword(auth,$("loginEmail").value.trim(),$("loginPassword").value);
+      if(!(await adminAllowed(cred.user))){
+        await signOut(auth);
+        throw new Error("ADMIN_NOT_ALLOWED");
+      }
+      showToast("بە سەرکەوتوویی چوویتە ژوورەوە");
+    }catch(err){
+      console.error(err);
+      showToast("چوونە ژوورەوە سەرکەوتوو نەبوو",err.message==="ADMIN_NOT_ALLOWED"?"ئەم ئیمەیڵە دەسەڵاتی ئەدمینی نییە.":"ئیمەیڵ یان وشەی نهێنی هەڵەیە.","⚠");
+    }finally{btn.disabled=false;btn.textContent="چوونە ژوورەوە"}
+  });
+
+  onAuthStateChanged(auth,async user=>{
+    if(!user){
+      state.user=null;$("app").classList.add("hidden");$("loginScreen").classList.remove("hidden");return;
+    }
+    try{
+      if(!(await adminAllowed(user))){await signOut(auth);return}
+      state.user=user;$("loginScreen").classList.add("hidden");$("app").classList.remove("hidden");
+      $("userEmail").textContent=user.email||"";
+      $("userAvatar").textContent=(user.email||"A").slice(0,1).toUpperCase();
+      startRealtime();
+    }catch(err){console.error(err);await signOut(auth)}
+  });
+
+  $("logoutBtn").onclick=()=>signOut(auth);
+  $("globalRefresh").onclick=()=>{renderAll();showToast("نوێکرایەوە","داتا لە Firestore دووبارە نیشاندرایەوە.","↻")};
+
+  $("mobileMenu").onclick=()=>{
+    $("sidebar").classList.toggle("open");$("overlay").classList.toggle("show");
+  };
+  $("overlay").onclick=()=>{$("sidebar").classList.remove("open");$("overlay").classList.remove("show")};
+
+  document.querySelectorAll(".nav-btn").forEach(btn=>{
+    btn.onclick=()=>{
+      document.querySelectorAll(".nav-btn").forEach(x=>x.classList.remove("active"));
+      btn.classList.add("active");
+      switchView(btn.dataset.view);
+      $("sidebar").classList.remove("open");$("overlay").classList.remove("show");
+    };
+  });
+
+  function switchView(view){
+    state.activeView=view;
+    document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+    $("view-"+view).classList.add("active");
+    const titles={
+      dashboard:["داشبۆرد","چاودێری و کۆنترۆڵی KurdShein"],
+      products:["بەرهەمەکان","بەڕێوەبردنی product collection"],
+      orders:["ئۆردەرەکان","بەڕێوەبردنی orders collection"],
+      stores:["فرۆشگاکان","بەڕێوەبردنی stores collection"],
+      coupons:["کۆپۆنەکان","بەڕێوەبردنی coupons collection"],
+      deliveryFees:["کرێی گەیاندن","بەڕێوەبردنی deliveryFees collection"],
+      admins:["ئەدمینەکان","ڕۆڵ و دەسەڵاتی بەڕێوەبەران"]
+    };
+    $("topTitle").textContent=titles[view][0];$("topSubtitle").textContent=titles[view][1];
+  }
+
+  function startRealtime(){
+    state.unsubs.forEach(fn=>fn());state.unsubs=[];
+    Object.entries(collections).forEach(([key,col])=>{
+      const unsub=onSnapshot(collection(db,col),snap=>{
+        state.data[key]=snap.docs.map(d=>({__id:d.id,...d.data()}));
+        state.data[key].sort((a,b)=>{
+          const ad=a.createdAt?.seconds||0,bd=b.createdAt?.seconds||0;return bd-ad;
+        });
+        renderAll();
+      },err=>{
+        console.error("Firestore",key,err);
+        showToast("هەڵەی Firestore",`${col}: ${err.code||"unknown"}`,"⚠");
       });
+      state.unsubs.push(unsub);
+    });
+  }
+
+  function getFiltered(key){
+    const term=normalize(state.filters[key]?.term||"");
+    let list=[...state.data[key]];
+    if(term){
+      list=list.filter(x=>normalize(JSON.stringify(x)).includes(term));
     }
-
-    return true;
+    if(key==="products" && state.filters[key]?.status){
+      const active=state.filters[key].status==="active";
+      list=list.filter(x=>(x.Active!==false)===active);
+    }
+    if(key==="orders" && state.filters[key]?.status){
+      list=list.filter(x=>x.status===state.filters[key].status);
+    }
+    return list;
   }
 
-  if(!initProductsNavigation()){
-    setTimeout(initProductsNavigation, 50);
-    setTimeout(initProductsNavigation, 250);
-    setTimeout(initProductsNavigation, 1000);
+  function paginate(key,list){
+    const page=state.pages[key]||1,total=Math.max(1,Math.ceil(list.length/state.pageSize));
+    if(page>total)state.pages[key]=total;
+    const p=state.pages[key]||1;
+    return {rows:list.slice((p-1)*state.pageSize,p*state.pageSize),page,total};
   }
-})();
+
+  function paginationHTML(key,total,page){
+    if(total<=1)return `<span>کۆی ${page===1 ? "" : ""} ${getFiltered(key).length} دانە</span><div></div>`;
+    let buttons="";
+    for(let i=1;i<=total;i++) buttons+=`<button class="${i===page?"active":""}" data-page="${i}" data-key="${key}">${i}</button>`;
+    return `<span>${getFiltered(key).length} دانە — لاپەڕەی ${page} لە ${total}</span><div class="page-buttons">${buttons}</div>`;
+  }
+  function bindPagination(){
+    document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>{
+      state.pages[b.dataset.key]=Number(b.dataset.page);renderAll();
+    });
+  }
+
+  function renderProducts(){
+    const {rows,page,total}=paginate("products",getFiltered("products"));
+    $("productsTable").innerHTML=rows.length?rows.map(x=>{
+      const img=x.DisplayImage||x.DescriptionImage||(Array.isArray(x.Images)?x.Images[0]:"")||"";
+      const active=x.Active!==false,stock=Number(x.Stock)||0;
+      return `<tr>
+        <td><div class="product-cell">${img?`<img class="product-thumb" src="${escape(img)}">`:`<div class="product-thumb"></div>`}<div><strong>${escape(x.DisplayName||x.name||"بێ ناو")}</strong><span>ID: ${escape(x.ID||x.__id)}</span></div></div></td>
+        <td class="money">${money(x.Price)}</td>
+        <td><span class="pill ${stock<=0?"red":stock<=3?"yellow":"green"}">${stock.toLocaleString()}</span></td>
+        <td>${escape(arr(x.Category).join("، ")||"—")}</td>
+        <td><span class="pill ${active?"green":"red"}">${active?"چالاک":"ناچالاک"}</span></td>
+        <td>${escape(dateValue(x.updatedAt||x.createdAt)||"—")}</td>
+        <td><div class="actions"><button class="action" onclick="openForm('products','${x.__id}')">✎</button><button class="action delete" onclick="removeItem('products','${x.__id}')">⌫</button></div></td>
+      </tr>`;
+    }).join(""):`<tr><td colspan="7"><div class="empty">هیچ بەرهەمێک نەدۆزرایەوە.</div></td></tr>`;
+    $("productsPagination").innerHTML=paginationHTML("products",total,page);
+  }
+
+  function renderOrders(){
+    const {rows,page,total}=paginate("orders",getFiltered("orders"));
+    $("ordersTable").innerHTML=rows.length?rows.map(x=>{
+      const status=x.status||"pending";
+      return `<tr>
+        <td><span class="order-number">${escape(x.orderNumber||x.__id.slice(0,10))}</span></td>
+        <td><strong>${escape(x.customerName||"—")}</strong><div style="color:var(--muted);font-size:9px;margin-top:3px">${escape(x.customerPhone||x.customerEmail||"")}</div></td>
+        <td class="money">${money(x.total)}</td><td>${money(x.delivery)}</td>
+        <td><select class="filter-input" data-order-status="${x.__id}" style="padding:6px 8px">${Object.entries(statusText).map(([k,v])=>`<option value="${k}" ${k===status?"selected":""}>${v}</option>`).join("")}</select></td>
+        <td>${escape(dateValue(x.createdAt)||"—")}</td>
+        <td><div class="actions"><button class="action" onclick="viewOrder('${x.__id}')">◉</button><button class="action delete" onclick="removeItem('orders','${x.__id}')">⌫</button></div></td>
+      </tr>`;
+    }).join(""):`<tr><td colspan="7"><div class="empty">هیچ ئۆردەرێک نەدۆزرایەوە.</div></td></tr>`;
+    $("ordersPagination").innerHTML=paginationHTML("orders",total,page);
+    document.querySelectorAll("[data-order-status]").forEach(s=>s.onchange=async()=>{
+      await updateDoc(doc(db,"orders",s.dataset.orderStatus),{status:s.value,updatedAt:serverTimestamp()});
+      showToast("دۆخی ئۆردەر نوێکرایەوە");
+    });
+  }
+
+  function renderStores(){
+    const {rows,page,total}=paginate("stores",getFiltered("stores"));
+    $("storesTable").innerHTML=rows.length?rows.map(x=>`<tr>
+      <td><strong>${escape(x.name||x.storeName||"بێ ناو")}</strong><div style="color:var(--muted);font-size:9px;margin-top:3px">${escape(x.owner||x.contactName||"")}</div></td>
+      <td>${escape(x.city||x.location||"—")}</td><td>${escape(x.phone||"—")}</td><td>${Number(x.productCount||x.productsCount||0).toLocaleString()}</td>
+      <td><span class="pill ${x.active===false?"red":"green"}">${x.active===false?"ناچالاک":"چالاک"}</span></td>
+      <td><div class="actions"><button class="action" onclick="openForm('stores','${x.__id}')">✎</button><button class="action delete" onclick="removeItem('stores','${x.__id}')">⌫</button></div></td>
+    </tr>`).join(""):`<tr><td colspan="6"><div class="empty">هیچ فرۆشگایەک نییە.</div></td></tr>`;
+    $("storesPagination").innerHTML=paginationHTML("stores",total,page);
+  }
+
+  function renderCoupons(){
+    const {rows,page,total}=paginate("coupons",getFiltered("coupons"));
+    $("couponsTable").innerHTML=rows.length?rows.map(x=>{
+      const expires=x.expiresAt||x.expiryDate||"";
+      const expired=expires && new Date(expires)<new Date();
+      const active=x.active!==false && !expired;
+      return `<tr><td><strong style="font-family:Arial">${escape(x.code||"—")}</strong><div style="color:var(--muted);font-size:9px;margin-top:3px">${escape(x.title||x.description||"")}</div></td>
+        <td><span class="pill yellow">${x.rate!=null?Math.round(Number(x.rate)*100):Number(x.discountPercent||0)}%</span></td>
+        <td>${money(x.minOrder||x.minimumOrder||0)}</td><td>${Number(x.usedCount||x.usageCount||0).toLocaleString()} / ${Number(x.maxUses||0).toLocaleString()||"∞"}</td>
+        <td>${escape(dateValue(expires)||"بێ سنوور")}</td><td><span class="pill ${active?"green":"red"}">${active?"چالاک":"بەسەرچوو/ناچالاک"}</span></td>
+        <td><div class="actions"><button class="action" onclick="openForm('coupons','${x.__id}')">✎</button><button class="action delete" onclick="removeItem('coupons','${x.__id}')">⌫</button></div></td></tr>`;
+    }).join(""):`<tr><td colspan="7"><div class="empty">هیچ کۆپۆنێک نییە.</div></td></tr>`;
+    $("couponsPagination").innerHTML=paginationHTML("coupons",total,page);
+  }
+
+  function renderDeliveryFees(){
+    const {rows,page,total}=paginate("deliveryFees",getFiltered("deliveryFees"));
+    $("deliveryFeesTable").innerHTML=rows.length?rows.map(x=>`<tr>
+      <td><strong>${escape(x.city||x.area||x.name||"—")}</strong></td><td class="money">${money(x.fee||x.price)}</td>
+      <td>${escape(x.estimatedTime||x.time||"—")}</td><td><span class="pill ${x.active===false?"red":"green"}">${x.active===false?"ناچالاک":"چالاک"}</span></td>
+      <td>${escape(x.note||"—")}</td><td><div class="actions"><button class="action" onclick="openForm('deliveryFees','${x.__id}')">✎</button><button class="action delete" onclick="removeItem('deliveryFees','${x.__id}')">⌫</button></div></td>
+    </tr>`).join(""):`<tr><td colspan="6"><div class="empty">هیچ نرخی تۆمار نەکراوە.</div></td></tr>`;
+    $("deliveryFeesPagination").innerHTML=paginationHTML("deliveryFees",total,page);
+  }
+
+  function renderAdmins(){
+    const {rows,page,total}=paginate("admins",getFiltered("admins"));
+    $("adminsTable").innerHTML=rows.length?rows.map(x=>`<tr>
+      <td><div class="product-cell"><div class="avatar">${escape((x.name||x.email||"A").slice(0,1).toUpperCase())}</div><div><strong>${escape(x.name||"بێ ناو")}</strong></div></div></td>
+      <td>${escape(x.email||"—")}</td><td><span class="pill ${x.role==="superadmin"?"yellow":"blue"}">${escape(x.role||"admin")}</span></td>
+      <td><span class="pill ${x.status==="disabled"?"red":"green"}">${x.status==="disabled"?"ناچالاک":"چالاک"}</span></td>
+      <td>${escape(dateValue(x.createdAt)||"—")}</td>
+      <td><div class="actions"><button class="action" onclick="openForm('admins','${x.__id}')">✎</button><button class="action delete" onclick="removeItem('admins','${x.__id}')">⌫</button></div></td>
+    </tr>`).join(""):`<tr><td colspan="6"><div class="empty">هیچ ئەدمینێک نییە.</div></td></tr>`;
+    $("adminsPagination").innerHTML=paginationHTML("admins",total,page);
+  }
+
+  function renderDashboard(){
+    $("statProducts").textContent=state.data.products.length.toLocaleString();
+    $("statOrders").textContent=state.data.orders.length.toLocaleString();
+    $("statStores").textContent=state.data.stores.length.toLocaleString();
+    $("statCoupons").textContent=state.data.coupons.filter(x=>x.active!==false).length.toLocaleString();
+    const revenue=state.data.orders.filter(x=>x.status==="delivered").reduce((s,x)=>s+Number(x.total||0),0);
+    $("statRevenue").textContent=Number(revenue).toLocaleString();
+
+    const now=new Date(),days=[];
+    for(let i=6;i>=0;i--){const d=new Date(now);d.setHours(0,0,0,0);d.setDate(now.getDate()-i);days.push(d)}
+    const counts=days.map(d=>state.data.orders.filter(o=>{
+      const od=o.createdAt?.toDate?o.createdAt.toDate():new Date(o.createdAt||0);return od>=d&&od<new Date(d.getTime()+86400000)
+    }).length);
+    const max=Math.max(1,...counts);
+    $("ordersChart").innerHTML=counts.map((c,i)=>`<div class="bar"><div class="bar-value">${c}</div><div class="bar-fill" style="height:${Math.max(8,c/max*185)}px"></div><div class="bar-label">${days[i].toLocaleDateString("ku-IQ",{weekday:"short"})}</div></div>`).join("");
+
+    const recent=[...state.data.orders].sort((a,b)=>(b.createdAt?.seconds||0)-(a.createdAt?.seconds||0)).slice(0,6);
+    $("activity").innerHTML=recent.length?recent.map(o=>`<div class="activity-item"><span class="activity-dot"></span><div class="activity-copy"><strong>${escape(o.orderNumber||"ئۆردەر")} — ${escape(o.customerName||"کڕیار")}</strong><span>${money(o.total)} • ${escape(statusText[o.status]||o.status||"—")} • ${escape(dateValue(o.createdAt)||"تازە")}</span></div></div>`).join(""):`<div class="empty">هێشتا چالاکییەک نییە.</div>`;
+  }
+
+  function renderAll(){
+    renderDashboard();renderProducts();renderOrders();renderStores();renderCoupons();renderDeliveryFees();renderAdmins();bindPagination();
+  }
+
+  const formDefs={
+    products:[
+      ["DisplayName","ناوی بەرهەم","text",true],
+      ["ID","ID ی بەرهەم","text",false],
+      ["Price","نرخ (د.ع)","number",true],
+      ["OldPrice","نرخی کۆن (د.ع)","number",false],
+      ["Stock","ژمارەی ستۆک","number",true],
+      ["Category","کەتەگۆری","text",false],
+      ["Size","قەبارەکان","text",false],
+      ["Colors","ڕەنگەکان","text",false],
+      ["DisplayImage","وێنەی سەرەکی — URL","url",false],
+      ["DescriptionMultiImage","وێنەکانی زیاتر — URL بە | جیا بکەوە","text",false],
+      ["DisplayDescription","پوختەی وەسف","textarea",false],
+      ["DescriptionDescription","وەسفی تەواو","textarea",false],
+      ["Active","دۆخی بەرهەم","select",false,{true:"چالاک",false:"ناچالاک"}]
+    ],
+    stores:[
+      ["name","ناوی فرۆشگا","text",true],["owner","ناوی خاوەن/بەرپرسیار","text",false],
+      ["city","شار","text",true],["phone","تەلەفۆن","text",false],
+      ["address","ناونیشان","text",false],["productCount","ژمارەی بەرهەم","number",false],
+      ["active","دۆخ","select",false,{true:"چالاک",false:"ناچالاک"}],["note","تێبینی","textarea",false]
+    ],
+    coupons:[
+      ["code","کۆدی کۆپۆن","text",true],["title","ناونیشان","text",false],
+      ["rate","ڕێژەی داشکاندن (0.10 = 10%)","number",true],["minOrder","کەمترین بڕی ئۆردەر","number",false],
+      ["maxUses","زۆرترین بەکارهێنان (0 = بێ سنوور)","number",false],
+      ["expiresAt","بەرواری بەسەرچوون","datetime-local",false],
+      ["active","دۆخ","select",false,{true:"چالاک",false:"ناچالاک"}],["description","وەسف","textarea",false]
+    ],
+    deliveryFees:[
+      ["city","شار/ناوچە","text",true],["fee","کرێی گەیاندن (د.ع)","number",true],
+      ["estimatedTime","ماوەی گەیاندن","text",false],["active","دۆخ","select",false,{true:"چالاک",false:"ناچالاک"}],
+      ["note","تێبینی","textarea",false]
+    ],
+    admins:[
+      ["name","ناوی ئەدمین","text",true],["email","ئیمەیڵ","email",true],
+      ["role","ڕۆڵ","select",true,{superadmin:"Super Admin",admin:"Admin",manager:"Manager",editor:"Editor"}],
+      ["status","دۆخ","select",true,{active:"چالاک",disabled:"ناچالاک"}]
+    ]
+  };
+
+  window.openForm=function(type,id=null){
+    state.editType=type;state.editId=id;
+    const existing=id?state.data[type].find(x=>x.__id===id):null;
+    $("formTitle").textContent=(id?"دەستکاریکردنی ":"زیادکردنی ")+({products:"بەرهەم",stores:"فرۆشگا",coupons:"کۆپۆن",deliveryFees:"نرخی گەیاندن",admins:"ئەدمین"}[type]||"داتا");
+    const fields=formDefs[type]||[];
+    $("formFields").innerHTML=fields.map(([key,label,kind,required,options])=>{
+      const value=existing?.[key];
+      const full=kind==="textarea"||key==="DescriptionMultiImage"||key==="DisplayImage";
+      let input="";
+      if(kind==="textarea") input=`<textarea name="${key}" ${required?"required":""}>${escape(value||"")}</textarea>`;
+      else if(kind==="select") input=`<select name="${key}" ${required?"required":""}>${Object.entries(options).map(([v,t])=>`<option value="${escape(v)}" ${String(value??"true")===v?"selected":""}>${t}</option>`).join("")}</select>`;
+      else {
+        let v=value??"";
+        if(kind==="datetime-local"&&v)v=new Date(v?.toDate?v.toDate():v).toISOString().slice(0,16);
+        input=`<input name="${key}" type="${kind}" value="${escape(v)}" ${required?"required":""}>`;
+      }
+      return `<div class="field ${full?"full":""}"><label>${label}${required?" *":""}</label>${input}</div>`;
+    }).join("");
+    openModal("formModal");
+  };
+
+  $("entityForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const type=state.editType,id=state.editId;
+    const data={};
+    new FormData(e.currentTarget).forEach((v,k)=>{
+      const def=formDefs[type].find(x=>x[0]===k);
+      if(def?.[2]==="number") data[k]=v===""?0:Number(v);
+      else if(def?.[2]==="select" && (v==="true"||v==="false")) data[k]=v==="true";
+      else data[k]=String(v);
+    });
+    if(type==="products"){
+      data.Active=data.Active!==false;
+      data.Stock=Math.max(0,Number(data.Stock||0));
+      data.Price=Number(data.Price||0);data.OldPrice=Number(data.OldPrice||0);
+      data.Category=arr(data.Category);data.Size=arr(data.Size);data.Colors=arr(data.Colors);
+      data.Images=arr([data.DisplayImage,...arr(data.DescriptionMultiImage)].join("|"));
+    }
+    if(type==="coupons"){
+      data.code=String(data.code||"").trim().toUpperCase();
+      data.rate=Number(data.rate||0);data.minOrder=Number(data.minOrder||0);data.maxUses=Number(data.maxUses||0);
+      if(data.expiresAt) data.expiresAt=new Date(data.expiresAt).toISOString();
+    }
+    if(type==="deliveryFees") data.fee=Number(data.fee||0);
+    if(type==="stores") data.productCount=Number(data.productCount||0);
+    data.updatedAt=serverTimestamp();
+    if(!id)data.createdAt=serverTimestamp();
+    try{
+      if(id) await updateDoc(doc(db,collections[type],id),data);
+      else await addDoc(collection(db,collections[type]),data);
+      closeModal("formModal");showToast("پاشەکەوتکرا","گۆڕانکارییەکە لە Firestore هەڵگیرا.","✓");
+    }catch(err){console.error(err);showToast("پاشەکەوتکردن سەرکەوتوو نەبوو",err.message,"⚠")}
+  });
+
+  window.removeItem=async(type,id)=>{
+    if(!confirm("دڵنیایت لە سڕینەوەی ئەم دانەیە؟ ئەم کردارە گەڕانەوەی نییە."))return;
+    try{await deleteDoc(doc(db,collections[type],id));showToast("سڕایەوە","دانەکە لە Firestore سڕایەوە.","⌫")}
+    catch(err){console.error(err);showToast("سڕینەوە سەرکەوتوو نەبوو",err.message,"⚠")}
+  };
+
+  window.viewOrder=function(id){
+    const o=state.data.orders.find(x=>x.__id===id);if(!o)return;
+    const items=Array.isArray(o.items)?o.items:[];
+    $("orderDetails").innerHTML=`
+      <div class="detail-grid">
+        <div class="detail-item"><label>ژمارەی ئۆردەر</label><strong>${escape(o.orderNumber||o.__id)}</strong></div>
+        <div class="detail-item"><label>دۆخ</label><strong>${escape(statusText[o.status]||o.status||"—")}</strong></div>
+        <div class="detail-item"><label>کڕیار</label><strong>${escape(o.customerName||"—")}</strong></div>
+        <div class="detail-item"><label>تەلەفۆن</label><strong>${escape(o.customerPhone||"—")}</strong></div>
+        <div class="detail-item"><label>شار</label><strong>${escape(o.city||"—")}</strong></div>
+        <div class="detail-item"><label>ناونیشان</label><strong>${escape(o.address||"—")}</strong></div>
+        <div class="detail-item"><label>کۆی کاڵاکان</label><strong>${money(o.subtotal)}</strong></div>
+        <div class="detail-item"><label>گەیاندن</label><strong>${money(o.delivery)}</strong></div>
+        <div class="detail-item"><label>داشکاندن</label><strong>${money(o.discount)}</strong></div>
+        <div class="detail-item"><label>کۆی گشتی</label><strong class="money">${money(o.total)}</strong></div>
+      </div>
+      <div class="items-list">${items.length?items.map(i=>`<div class="item-row"><span>${escape(i.name||"بەرهەم")} × ${Number(i.quantity||1)}${i.size?` • ${escape(i.size)}`:""}${i.color?` • ${escape(i.color)}`:""}</span><strong class="money">${money(Number(i.price||0)*Number(i.quantity||1))}</strong></div>`).join(""):`<div class="empty">هیچ item ـێک تۆمار نەکراوە.</div>`}</div>
+      ${o.note?`<div class="detail-item" style="margin-top:10px"><label>تێبینی کڕیار</label><strong>${escape(o.note)}</strong></div>`:""}`;
+    openModal("orderModal");
+  };
+
+  function hookSearch(){
+    document.querySelectorAll("[data-search]").forEach(input=>{
+      input.addEventListener("input",()=>{
+        const key=input.dataset.search;state.filters[key]={...(state.filters[key]||{}),term:input.value};state.pages[key]=1;renderAll();
+      });
+    });
+    document.querySelectorAll("[data-filter]").forEach(sel=>{
+      sel.addEventListener("change",()=>{
+        const key=sel.dataset.filter==="productActive"?"products":"orders";
+        state.filters[key]={...(state.filters[key]||{}),status:sel.value};state.pages[key]=1;renderAll();
+      });
+    });
+  }
+  hookSearch();
+
+  window.exportCollection=async type=>{
+    const list=state.data[type];
+    if(!list.length){showToast("هیچ داتایەک نییە");return}
+    const clean=list.map(x=>{
+      const o={...x};delete o.__id;
+      Object.keys(o).forEach(k=>{if(o[k]?.toDate)o[k]=o[k].toDate().toISOString();else if(typeof o[k]==="object")o[k]=JSON.stringify(o[k])});
+      return o;
+    });
+    const headers=[...new Set(clean.flatMap(x=>Object.keys(x)))];
+    const csv=[headers.join(","),...clean.map(row=>headers.map(h=>`"${String(row[h]??"").replace(/"/g,'""')}"`).join(","))].join("\n");
+    const blob=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"});
+    const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=`kurdShein-${type}.csv`;a.click();URL.revokeObjectURL(a.href);
+  };
+
+  window.openForm=window.openForm;
+  window.renderAll=renderAll;
 </script>
-
 </body>
 </html>

@@ -1,1211 +1,559 @@
 <!DOCTYPE html>
-<html lang="ku" dir="rtl">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <meta name="theme-color" content="#05070a">
-  <title>KURD SHEIN — Admin</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BARVIN PRO — Test Admin</title>
+<style>
+  *{box-sizing:border-box}
+  :root{
+    --bg:#05080e;
+    --panel:#11141b;
+    --panel2:#0d1016;
+    --line:#20252d;
+    --text:#f4f5f7;
+    --muted:#8d929b;
+    --green:#16d99a;
+    --cyan:#18d9ed;
+    --yellow:#ffbf35;
+    --purple:#a77cff;
+    --red:#ff3f68;
+    --shadow:0 18px 45px rgba(0,0,0,.28);
+  }
+  body{
+    margin:0;background:
+      radial-gradient(circle at 18% 20%,rgba(0,188,145,.10),transparent 27%),
+      radial-gradient(circle at 83% 7%,rgba(0,220,255,.06),transparent 23%),
+      var(--bg);
+    color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    min-height:100vh;
+  }
+  .topbar{
+    height:70px;border-bottom:1px solid #1b2028;background:rgba(5,8,14,.92);
+    display:flex;align-items:center;justify-content:space-between;padding:0 30px;
+    position:sticky;top:0;z-index:5;backdrop-filter:blur(12px);
+  }
+  .brand{font-size:20px;font-weight:900;letter-spacing:2px}
+  .brand span{color:#20cde2;font-size:11px;letter-spacing:1px;margin-left:5px}
+  .brandbox{display:flex;align-items:center;gap:12px}
+  .stack{
+    width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#1fceff,#2394ef);
+    display:grid;place-items:center;font-size:20px;box-shadow:0 8px 24px rgba(23,191,255,.22)
+  }
+  .user{
+    display:flex;align-items:center;gap:9px;padding:9px 14px;border:1px solid #222831;
+    border-radius:22px;background:#11151c;color:#dfe2e7;font-weight:700;font-size:13px
+  }
+  .avatar{width:20px;height:20px;border-radius:50%;background:#16cce5;display:grid;place-items:center;color:#061017;font-size:11px}
+  .logout{width:40px;height:40px;border-radius:50%;background:#24151d;border:1px solid #3a1d28;color:#ff416b;display:grid;place-items:center;font-size:18px}
+  .left{display:flex;align-items:center;gap:12px}
+  main{padding:25px 30px 50px;max-width:1320px;margin:auto}
+  .overview{
+    display:grid;grid-template-columns:1.05fr .72fr 1.45fr;gap:18px;margin-bottom:46px
+  }
+  .card{
+    min-height:165px;border:1px solid #1e242d;border-radius:24px;background:linear-gradient(145deg,#12151c,#0e1117);
+    box-shadow:var(--shadow);position:relative;overflow:hidden
+  }
+  .sales{display:grid;grid-template-columns:1fr 1fr;gap:0;background:linear-gradient(135deg,rgba(0,105,77,.35),rgba(15,22,26,.92))}
+  .metric{padding:30px 24px}
+  .metric + .metric{border-left:1px solid rgba(255,255,255,.05)}
+  .label{font-size:12px;color:#b2b5bc;margin-bottom:10px}
+  .label.green{color:#25dc9f}.label.yellow{color:#ffbf3a}
+  .big{font-size:29px;font-weight:900;letter-spacing:.3px}
+  .small{font-size:11px;color:#8d929b;margin-top:7px}
+  .price{padding:25px}
+  .pricehead{display:flex;justify-content:space-between;align-items:center;color:#b6bac2;font-size:12px}
+  .coin{width:32px;height:32px;border-radius:9px;background:#3a2e17;display:grid;place-items:center;color:#ffc43e}
+  .input{
+    height:56px;margin-top:12px;border:1px solid #3b3028;border-radius:15px;
+    background:#171619;display:flex;align-items:center;justify-content:center;color:#ffbd38;
+    font-size:23px;font-weight:900
+  }
+  .unit{text-align:center;font-size:11px;color:#777d86;margin-top:10px}
+  .chart{padding:23px 24px 15px}
+  .charttitle{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:#b6bac2}
+  .charticon{width:32px;height:32px;border-radius:9px;background:#10333a;color:#20d7eb;display:grid;place-items:center}
+  .graph{height:78px;margin-top:8px;position:relative}
+  .graph svg{width:100%;height:100%}
+  .days{display:flex;justify-content:space-between;color:#757b84;font-size:10px;margin-top:-1px;padding:0 3px}
+  .section-title{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-bottom:20px;font-size:16px;font-weight:800}
+  .grid{
+    display:grid;grid-template-columns:repeat(8,1fr);gap:18px
+  }
+  .tile{
+    min-height:138px;border:1px solid #20252d;border-radius:22px;background:linear-gradient(145deg,#12151b,#0f1117);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;
+    position:relative;overflow:hidden;transition:.2s transform,.2s border-color,.2s background;cursor:pointer;
+    box-shadow:0 13px 32px rgba(0,0,0,.22)
+  }
+  .tile:hover{transform:translateY(-3px);border-color:#333a45;background:#151820}
+  .tile:after{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--accent)}
+  .icon{
+    width:38px;height:38px;display:grid;place-items:center;color:var(--accent);
+    font-size:0;font-weight:900
+  }
+  .icon svg{width:32px;height:32px;display:block;fill:currentColor;stroke:currentColor}
+  .icon svg.line{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .tile .name{font-size:12px;color:#c3c6cb;font-weight:700;text-align:center}
+  .green{--accent:var(--green)} .cyan{--accent:var(--cyan)} .yellow{--accent:var(--yellow)}
+  .purple{--accent:var(--purple)} .red{--accent:var(--red)}
+  .badge{font-size:9px;color:#0b1013;background:var(--accent);padding:3px 6px;border-radius:6px;font-weight:900}
+  .bottom{margin-top:18px}
+  @media(max-width:1050px){.overview{grid-template-columns:1fr 1fr}.chart{grid-column:1/-1}.grid{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:650px){
+    .topbar{padding:0 14px}.user{display:none}main{padding:18px 14px 35px}
+    .overview{grid-template-columns:1fr;gap:9px;margin-bottom:30px}.grid{grid-template-columns:repeat(2,1fr);gap:12px}
+    .tile{min-height:125px}.sales{min-height:150px}.big{font-size:25px}
+  }
 
-  <style>
-    *{box-sizing:border-box;margin:0;padding:0}
+  @media(max-width:1050px){
+    .overview{grid-template-columns:1fr 1fr;gap:14px}
+    .chart{grid-column:1/-1}
+    .grid{grid-template-columns:repeat(4,1fr);gap:14px}
+  }
 
-    :root{
-      --bg:#05070a;
-      --surface:#0b0e12;
-      --surface2:#10141a;
-      --surface3:#151a21;
-      --line:rgba(255,255,255,.075);
-      --text:#f6f7f9;
-      --muted:#858b96;
-      --gold:#f3b91f;
-      --gold2:#ffd65a;
-      --cyan:#16d9e6;
-      --green:#18d37a;
-      --red:#ff4d67;
-      --purple:#9b6cff;
-      --shadow:0 16px 45px rgba(0,0,0,.35);
-    }
-
-    html,body{
-      min-height:100%;
-      background:var(--bg);
-      color:var(--text);
-      font-family:"Noto Sans Arabic","Noto Sans Kurdish","Segoe UI",Tahoma,Arial,sans-serif;
-    }
-
-    body{
-      min-height:100vh;
-      overflow-x:hidden;
-    }
-
-    button{
-      font:inherit;
-      cursor:pointer;
-      -webkit-tap-highlight-color:transparent;
-    }
-
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background:
-        radial-gradient(circle at 85% 0%,rgba(243,185,31,.075),transparent 28%),
-        radial-gradient(circle at 10% 35%,rgba(22,217,230,.045),transparent 30%);
-      z-index:0;
-    }
-
-    /* ===== APP SHELL ===== */
-
-    .app{
-      position:relative;
-      z-index:1;
-      min-height:100vh;
-      display:flex;
-    }
-
-    .sidebar{
-      position:fixed;
-      z-index:50;
-      top:0;
-      right:0;
-      bottom:0;
-      width:285px;
-      padding:18px 14px;
-      background:rgba(7,9,12,.97);
-      border-left:1px solid var(--line);
-      box-shadow:var(--shadow);
-      display:flex;
-      flex-direction:column;
-      transition:transform .3s cubic-bezier(.22,.61,.36,1);
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:7px 10px 24px;
-      border-bottom:1px solid var(--line);
-      margin-bottom:18px;
-    }
-
-    .brand-mark{
-      width:43px;
-      height:43px;
-      flex:0 0 43px;
-      border-radius:13px;
-      display:grid;
-      place-items:center;
-      color:#090909;
-      font-size:19px;
-      font-weight:950;
-      background:linear-gradient(145deg,var(--gold2),var(--gold));
-      box-shadow:0 8px 25px rgba(243,185,31,.16);
-    }
-
-    .brand strong{
-      display:block;
-      font-family:Arial,sans-serif;
-      font-size:18px;
-      letter-spacing:.3px;
-    }
-
-    .brand span{
-      display:block;
-      margin-top:3px;
-      color:var(--muted);
-      font-size:9px;
-      font-weight:800;
-      letter-spacing:1.2px;
-    }
-
-    .nav-label{
-      padding:0 11px 9px;
-      color:#686f7b;
-      font-size:9px;
-      font-weight:900;
-      letter-spacing:.7px;
-    }
-
-    .nav{
-      display:flex;
-      flex-direction:column;
-      gap:5px;
-    }
-
-    .nav-button{
-      width:100%;
-      min-height:48px;
-      padding:0 13px;
-      border:1px solid transparent;
-      border-radius:14px;
-      background:transparent;
-      color:#8c929d;
-      display:flex;
-      align-items:center;
-      gap:12px;
-      text-align:right;
-      font-size:12px;
-      font-weight:850;
-      transition:.18s;
-    }
-
-    .nav-button:hover{
-      background:rgba(255,255,255,.035);
-      color:var(--text);
-      transform:translateX(-2px);
-    }
-
-    .nav-button.active{
-      color:var(--gold2);
-      background:rgba(243,185,31,.09);
-      border-color:rgba(243,185,31,.08);
-      box-shadow:inset -3px 0 0 var(--gold);
-    }
-
-    .nav-icon{
-      width:25px;
-      height:25px;
-      flex:0 0 25px;
-      display:grid;
-      place-items:center;
-      border-radius:8px;
-      font-size:15px;
-    }
-
-    .nav-button:nth-child(1) .nav-icon{color:var(--gold2)}
-    .nav-button:nth-child(2) .nav-icon{color:var(--cyan)}
-    .nav-button:nth-child(3) .nav-icon{color:var(--red)}
-    .nav-button:nth-child(4) .nav-icon{color:var(--gold)}
-    .nav-button:nth-child(5) .nav-icon{color:var(--red)}
-    .nav-button:nth-child(6) .nav-icon{color:var(--purple)}
-    .nav-button:nth-child(7) .nav-icon{color:#c88cff}
-    .nav-button:nth-child(8) .nav-icon{color:var(--green)}
-    .nav-button:nth-child(9) .nav-icon{color:var(--gold2)}
-
-    .sidebar-footer{
-      margin-top:auto;
-      padding:13px 4px 3px;
-      border-top:1px solid var(--line);
-    }
-
-    .connection{
-      min-height:40px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      padding:0 10px;
-      color:#737a85;
-      font-size:9px;
-      font-weight:800;
-    }
-
-    .connection-dot{
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 12px rgba(24,211,122,.45);
-    }
-
-    .main{
-      width:calc(100% - 285px);
-      margin-right:285px;
-      min-height:100vh;
-      padding:25px 31px 45px;
-    }
-
+  @media(max-width:650px){
+    body{min-width:0;overflow-x:hidden}
     .topbar{
+      height:62px;
+      padding:0 12px;
+      border-bottom-color:#181d25;
+    }
+    .brandbox{gap:8px}
+    .brand{font-size:17px;letter-spacing:1.5px}
+    .brand span{font-size:9px}
+    .stack{width:34px;height:34px;border-radius:10px;font-size:17px}
+    .left{gap:8px}
+    .logout{width:34px;height:34px;font-size:16px}
+    .user{
       display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:15px;
-      margin-bottom:24px;
+      padding:7px 10px;
+      border-radius:18px;
+      font-size:11px;
+    }
+    .avatar{width:18px;height:18px;font-size:9px}
+
+    main{
+      width:100%;
+      max-width:none;
+      padding:14px 10px 28px;
     }
 
-    .top-title{
-      display:flex;
-      align-items:center;
-      gap:11px;
+    /* The reference uses compact dashboard cards; keep them dense on phones. */
+    .overview{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-bottom:27px;
+    }
+    .card{border-radius:17px;min-height:128px}
+    .sales{
+      grid-column:1/-1;
+      min-height:126px;
+    }
+    .metric{padding:20px 14px}
+    .metric + .metric{border-left:1px solid rgba(255,255,255,.06)}
+    .label{font-size:10px;margin-bottom:7px;white-space:nowrap}
+    .big{font-size:22px;line-height:1.1}
+    .small{font-size:9px;margin-top:5px}
+
+    .price{padding:16px 13px}
+    .pricehead{font-size:10px}
+    .coin{width:27px;height:27px;border-radius:8px}
+    .input{
+      height:43px;
+      margin-top:9px;
+      border-radius:11px;
+      font-size:18px;
+    }
+    .unit{font-size:9px;margin-top:7px}
+
+    .chart{
+      min-height:142px;
+      padding:16px 14px 10px;
+    }
+    .charttitle{font-size:10px}
+    .charticon{width:27px;height:27px;border-radius:8px}
+    .graph{height:65px;margin-top:7px}
+    .days{font-size:8px}
+
+    .section-title{
+      margin-bottom:13px;
+      padding:0 3px;
+      font-size:13px;
     }
 
-    .mobile-menu{
-      display:none;
-      width:44px;
-      height:44px;
-      border:1px solid var(--line);
-      border-radius:13px;
-      background:var(--surface2);
-      color:var(--text);
-      font-size:20px;
+    /* Two equal columns gives the same compact card rhythm as the reference. */
+    .grid{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:8px;
     }
-
-    .top-title h1{
-      font-size:25px;
-      line-height:1.2;
-      font-weight:950;
-      letter-spacing:-.5px;
+    .tile{
+      min-width:0;
+      min-height:92px;
+      border-radius:14px;
+      gap:5px;
+      padding:9px 5px;
+      box-shadow:0 7px 17px rgba(0,0,0,.22);
     }
-
-    .top-title p{
-      margin-top:4px;
-      color:var(--muted);
-      font-size:10px;
+    .tile:after{height:2px}
+    .icon{
+      width:27px;
+      height:27px;
+    }
+    .icon svg{
+      width:22px;
+      height:22px;
+    }
+    .tile .name{
+      max-width:100%;
+      padding:0 2px;
+      font-size:9px;
+      line-height:1.25;
       font-weight:700;
     }
-
-    .top-status{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      min-height:40px;
-      padding:0 12px;
-      border:1px solid var(--line);
-      border-radius:12px;
-      background:rgba(16,20,26,.75);
-      color:var(--muted);
-      font-size:9px;
-      font-weight:800;
-    }
-
-    .top-status i{
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:var(--green);
-      box-shadow:0 0 12px rgba(24,211,122,.5);
-    }
-
-    /* ===== DASHBOARD ===== */
-
-    .welcome{
-      position:relative;
-      overflow:hidden;
-      min-height:185px;
-      margin-bottom:16px;
-      padding:30px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:
-        radial-gradient(circle at 10% 50%,rgba(22,217,230,.10),transparent 25%),
-        radial-gradient(circle at 90% 20%,rgba(243,185,31,.12),transparent 30%),
-        linear-gradient(145deg,#11161d,#090c10);
-      box-shadow:0 10px 35px rgba(0,0,0,.24);
-    }
-
-    .welcome::after{
-      content:"";
-      position:absolute;
-      width:210px;
-      height:210px;
-      left:-85px;
-      bottom:-130px;
-      border-radius:50%;
-      border:1px solid rgba(243,185,31,.15);
-      box-shadow:0 0 0 22px rgba(243,185,31,.025),0 0 0 45px rgba(243,185,31,.018);
-    }
-
-    .welcome-kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-      padding:6px 10px;
-      border:1px solid rgba(243,185,31,.18);
-      border-radius:999px;
-      color:var(--gold2);
-      background:rgba(243,185,31,.06);
-      font-size:9px;
-      font-weight:900;
-    }
-
-    .welcome h2{
-      margin-top:13px;
-      font-size:27px;
-      line-height:1.35;
-      font-weight:950;
-    }
-
-    .welcome p{
-      max-width:690px;
-      margin-top:7px;
-      color:var(--muted);
-      font-size:11px;
-      line-height:1.9;
-    }
-
-    .section-head{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:12px;
-      margin:0 2px 12px;
-    }
-
-    .section-head h2{
-      font-size:14px;
-      font-weight:950;
-    }
-
-    .section-head span{
-      color:#686f7b;
-      font-size:9px;
-      font-weight:800;
-    }
-
-    .admin-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:13px;
-    }
-
-    .admin-button{
-      position:relative;
-      overflow:hidden;
-      min-height:132px;
-      padding:18px;
-      border:1px solid var(--line);
-      border-radius:19px;
-      background:linear-gradient(145deg,rgba(17,22,29,.98),rgba(10,13,17,.98));
-      color:var(--text);
-      text-align:right;
-      box-shadow:0 10px 35px rgba(0,0,0,.20);
-      transition:transform .2s,border-color .2s,box-shadow .2s;
-    }
-
-    .admin-button::after{
-      content:"";
-      position:absolute;
-      width:110px;
-      height:110px;
-      left:-42px;
-      bottom:-58px;
-      border-radius:50%;
-      background:rgba(243,185,31,.055);
-      pointer-events:none;
-    }
-
-    .admin-button:nth-child(2)::after{background:rgba(22,217,230,.055)}
-    .admin-button:nth-child(3)::after{background:rgba(255,77,103,.055)}
-    .admin-button:nth-child(4)::after{background:rgba(243,185,31,.055)}
-    .admin-button:nth-child(5)::after{background:rgba(255,77,103,.055)}
-    .admin-button:nth-child(6)::after{background:rgba(155,108,255,.055)}
-    .admin-button:nth-child(7)::after{background:rgba(200,140,255,.055)}
-    .admin-button:nth-child(8)::after{background:rgba(24,211,122,.055)}
-    .admin-button:nth-child(9)::after{background:rgba(243,185,31,.055)}
-
-    .admin-button:hover{
-      transform:translateY(-3px);
-      border-color:rgba(243,185,31,.28);
-      box-shadow:0 16px 45px rgba(0,0,0,.30);
-    }
-
-    .admin-button:active{
-      transform:translateY(-1px) scale(.99);
-    }
-
-    .button-icon{
-      position:relative;
-      z-index:1;
-      width:43px;
-      height:43px;
-      margin-bottom:15px;
-      border-radius:13px;
-      display:grid;
-      place-items:center;
-      background:#151a21;
-      border:1px solid var(--line);
-      font-size:20px;
-    }
-
-    .admin-button:nth-child(1) .button-icon{color:var(--gold2)}
-    .admin-button:nth-child(2) .button-icon{color:var(--cyan)}
-    .admin-button:nth-child(3) .button-icon{color:var(--red)}
-    .admin-button:nth-child(4) .button-icon{color:var(--gold)}
-    .admin-button:nth-child(5) .button-icon{color:var(--red)}
-    .admin-button:nth-child(6) .button-icon{color:var(--purple)}
-    .admin-button:nth-child(7) .button-icon{color:#c88cff}
-    .admin-button:nth-child(8) .button-icon{color:var(--green)}
-    .admin-button:nth-child(9) .button-icon{color:var(--gold2)}
-
-    .button-title{
-      position:relative;
-      z-index:1;
-      display:block;
-      font-size:12px;
-      font-weight:950;
-    }
-
-    .button-subtitle{
-      position:relative;
-      z-index:1;
-      display:block;
-      margin-top:4px;
-      color:#6f7682;
-      font-size:8px;
-      font-weight:750;
-    }
-
-    /* ===== PAGES / PLACEHOLDER ===== */
-
-    .page{
-      display:none;
-      animation:pageIn .25s ease;
-    }
-
-    .page.active{
-      display:block;
-    }
-
-    @keyframes pageIn{
-      from{opacity:0;transform:translateY(5px)}
-      to{opacity:1;transform:none}
-    }
-
-    .placeholder{
-      min-height:420px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:35px 20px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:linear-gradient(145deg,#11161d,#0a0d11);
-      box-shadow:0 10px 35px rgba(0,0,0,.22);
-    }
-
-    .placeholder-icon{
-      width:64px;
-      height:64px;
-      display:grid;
-      place-items:center;
-      border-radius:18px;
-      background:rgba(243,185,31,.08);
-      border:1px solid rgba(243,185,31,.14);
-      color:var(--gold2);
-      font-size:28px;
-      margin-bottom:17px;
-    }
-
-    .placeholder h2{
-      font-size:20px;
-      font-weight:950;
-    }
-
-    .placeholder p{
-      margin-top:7px;
-      color:var(--muted);
-      font-size:10px;
-      line-height:1.8;
-    }
-
-    /* ===== APPEARANCE ===== */
-
-    .appearance-panel{
-      max-width:720px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:linear-gradient(145deg,#11161d,#0a0d11);
-      padding:20px;
-      box-shadow:0 10px 35px rgba(0,0,0,.22);
-    }
-
-    .appearance-title{
-      margin-bottom:15px;
-    }
-
-    .appearance-title h2{
-      font-size:18px;
-      font-weight:950;
-    }
-
-    .appearance-title p{
-      margin-top:5px;
-      color:var(--muted);
-      font-size:10px;
-    }
-
-    .appearance-options{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:10px;
-    }
-
-    .theme-button{
-      min-height:96px;
-      border:1px solid var(--line);
-      border-radius:16px;
-      background:var(--surface2);
-      color:var(--text);
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:14px;
-      text-align:right;
-      transition:.2s;
-    }
-
-    .theme-button:hover{
-      transform:translateY(-2px);
-      border-color:rgba(243,185,31,.3);
-    }
-
-    .theme-button.active{
-      border-color:rgba(243,185,31,.7);
-      box-shadow:0 0 0 2px rgba(243,185,31,.10);
-    }
-
-    .theme-preview{
-      width:52px;
-      height:52px;
-      flex:0 0 52px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-    }
-
-    .theme-preview.dark{
-      background:linear-gradient(135deg,#05070a 50%,#f3b91f 50%);
-    }
-
-    .theme-preview.light{
-      background:linear-gradient(135deg,#fff 50%,#d9dee7 50%);
-    }
-
-    .theme-button strong{
-      display:block;
-      font-size:11px;
-      font-weight:950;
-    }
-
-    .theme-button span{
-      display:block;
-      margin-top:4px;
-      color:var(--muted);
-      font-size:8px;
-    }
-
-    body.light{
-      --bg:#f5f7fa;
-      --surface:#ffffff;
-      --surface2:#eef1f5;
-      --surface3:#e5e9ef;
-      --line:rgba(16,24,40,.10);
-      --text:#111827;
-      --muted:#667085;
-      --gold:#c68b00;
-      --gold2:#9a6a00;
-      --shadow:0 16px 45px rgba(16,24,40,.10);
-    }
-
-    body.light::before{
-      background:
-        radial-gradient(circle at 85% 0%,rgba(243,185,31,.10),transparent 28%),
-        radial-gradient(circle at 10% 35%,rgba(22,180,200,.07),transparent 30%);
-    }
-
-    body.light .sidebar{
-      background:rgba(255,255,255,.97);
-    }
-
-    body.light .admin-button,
-    body.light .welcome,
-    body.light .placeholder,
-    body.light .appearance-panel{
-      background:linear-gradient(145deg,#ffffff,#f3f5f8);
-    }
-
-    body.light .top-status{
-      background:rgba(255,255,255,.8);
-    }
-
-    body.light .button-icon,
-    body.light .theme-button{
-      background:#eef1f5;
-    }
-
-    /* ===== MOBILE ===== */
-
-    .mobile-backdrop{
-      display:none;
-    }
-
-    @media(max-width:1050px){
-      .sidebar{
-        width:250px;
-      }
-
-      .main{
-        width:calc(100% - 250px);
-        margin-right:250px;
-        padding:22px;
-      }
-
-      .admin-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-    }
-
-    @media(max-width:760px){
-      .sidebar{
-        width:min(320px,88vw);
-        transform:translateX(110%);
-      }
-
-      .sidebar.open{
-        transform:translateX(0);
-      }
-
-      .mobile-backdrop{
-        display:block;
-        position:fixed;
-        inset:0;
-        z-index:40;
-        background:rgba(0,0,0,.68);
-        backdrop-filter:blur(5px);
-        opacity:0;
-        visibility:hidden;
-        transition:.25s;
-      }
-
-      .mobile-backdrop.show{
-        opacity:1;
-        visibility:visible;
-      }
-
-      .main{
-        width:100%;
-        margin:0;
-        padding:0 13px calc(105px + env(safe-area-inset-bottom));
-      }
-
-      .topbar{
-        position:sticky;
-        top:0;
-        z-index:30;
-        margin:0 -13px 14px;
-        padding:12px 13px;
-        background:rgba(5,7,10,.88);
-        backdrop-filter:blur(18px);
-        border-bottom:1px solid rgba(255,255,255,.045);
-      }
-
-      body.light .topbar{
-        background:rgba(245,247,250,.90);
-      }
-
-      .mobile-menu{
-        display:grid;
-        place-items:center;
-      }
-
-      .top-title{
-        min-width:0;
-        flex:1;
-      }
-
-      .top-title h1{
-        font-size:19px;
-      }
-
-      .top-title p{
-        font-size:8px;
-      }
-
-      .top-status{
-        display:none;
-      }
-
-      .welcome{
-        min-height:160px;
-        padding:22px 19px;
-        border-radius:20px;
-      }
-
-      .welcome h2{
-        font-size:22px;
-      }
-
-      .welcome p{
-        font-size:10px;
-      }
-
-      .admin-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-        gap:9px;
-      }
-
-      .admin-button{
-        min-height:126px;
-        padding:14px;
-        border-radius:17px;
-      }
-
-      .button-icon{
-        width:40px;
-        height:40px;
-        margin-bottom:12px;
-        border-radius:12px;
-        font-size:18px;
-      }
-
-      .button-title{
-        font-size:11px;
-        line-height:1.5;
-      }
-
-      .button-subtitle{
-        font-size:7px;
-      }
-
-      .section-head{
-        margin-top:4px;
-      }
-
-      .appearance-options{
-        grid-template-columns:1fr;
-      }
-
-      .appearance-panel{
-        padding:15px;
-        border-radius:19px;
-      }
-
-      .placeholder{
-        min-height:360px;
-      }
-
-      /* Mobile bottom navigation: only the main dashboard + appearance */
-      .mobile-bottom{
-        position:fixed;
-        z-index:35;
-        left:12px;
-        right:12px;
-        bottom:calc(10px + env(safe-area-inset-bottom));
-        height:68px;
-        padding:6px;
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:6px;
-        border:1px solid rgba(255,255,255,.08);
-        border-radius:23px;
-        background:rgba(13,17,22,.94);
-        box-shadow:0 18px 55px rgba(0,0,0,.55);
-        backdrop-filter:blur(22px);
-      }
-
-      body.light .mobile-bottom{
-        background:rgba(255,255,255,.94);
-        border-color:rgba(16,24,40,.10);
-        box-shadow:0 18px 55px rgba(16,24,40,.16);
-      }
-
-      .mobile-bottom button{
-        min-height:54px;
-        border:0;
-        border-radius:17px;
-        background:transparent;
-        color:#777f8b;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        gap:8px;
-        font-size:10px;
-        font-weight:900;
-      }
-
-      .mobile-bottom button.active{
-        background:rgba(243,185,31,.12);
-        color:var(--gold2);
-      }
-    }
-
-    @media(max-width:390px){
-      .main{
-        padding-left:10px;
-        padding-right:10px;
-      }
-
-      .topbar{
-        margin-left:-10px;
-        margin-right:-10px;
-        padding-left:10px;
-        padding-right:10px;
-      }
-
-      .admin-grid{
-        gap:8px;
-      }
-
-      .admin-button{
-        min-height:120px;
-        padding:12px;
-      }
-
-      .button-icon{
-        width:38px;
-        height:38px;
-        margin-bottom:10px;
-      }
-
-      .button-title{
-        font-size:10px;
-      }
-
-      .welcome{
-        padding:19px 15px;
-      }
-
-      .welcome h2{
-        font-size:20px;
-      }
-    }
-
-    @media(prefers-reduced-motion:reduce){
-      *,*::before,*::after{
-        animation-duration:.001ms!important;
-        transition-duration:.001ms!important;
-      }
-    }
-  </style>
+  }
+
+  @media(max-width:380px){
+    .brand{font-size:15px}
+    .user{padding:6px 8px}
+    .overview{gap:8px}
+    .grid{gap:7px}
+    .tile{min-height:86px}
+    .big{font-size:20px}
+    .label{font-size:9px}
+    .tile .name{font-size:9px}
+  }
+
+
+  .firebase-login{
+    position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:18px;
+    background:radial-gradient(circle at 20% 20%,rgba(24,217,237,.08),transparent 30%),
+               radial-gradient(circle at 80% 80%,rgba(22,217,154,.07),transparent 30%),var(--bg);
+  }
+  .firebase-login.hidden{display:none}
+  .firebase-login-card{
+    width:min(390px,100%);padding:26px;border:1px solid var(--line);border-radius:22px;
+    background:linear-gradient(145deg,#12151c,#0e1117);box-shadow:var(--shadow)
+  }
+  .firebase-login-logo{text-align:center;font-size:24px;font-weight:950;letter-spacing:1.5px;margin-bottom:5px}
+  .firebase-login-logo span{color:var(--cyan)}
+  .firebase-login-sub{text-align:center;color:var(--muted);font-size:11px;margin-bottom:22px}
+  .firebase-field{margin-bottom:12px}
+  .firebase-field label{display:block;color:#c4c8ce;font-size:11px;font-weight:800;margin-bottom:6px}
+  .firebase-field input{
+    width:100%;height:44px;padding:0 12px;background:#151820;border:1px solid var(--line);
+    border-radius:11px;color:var(--text);outline:0
+  }
+  .firebase-login-btn{width:100%;height:44px;border:0;border-radius:11px;background:var(--cyan);color:#061014;font-weight:900;cursor:pointer}
+  .firebase-error{min-height:18px;margin-top:10px;color:#ff6b83;font-size:10px;line-height:1.7}
+
+</style>
 </head>
-
 <body>
-  <div class="mobile-backdrop" id="mobileBackdrop" onclick="closeSidebar()"></div>
 
-  <div class="app">
-    <aside class="sidebar" id="sidebar">
-      <div class="brand">
-        <div class="brand-mark">KS</div>
-        <div>
-          <strong>KURD SHEIN</strong>
-          <span>ADMIN PANEL</span>
-        </div>
-      </div>
-
-      <div class="nav-label">ADMIN MENU</div>
-
-      <nav class="nav" aria-label="Admin navigation">
-        <button class="nav-button active" data-page="dashboard" onclick="openPage('dashboard')">
-          <span class="nav-icon">⌂</span>
-          <span>Main Dashboard</span>
-        </button>
-
-        <button class="nav-button" data-page="products" onclick="openPage('products')">
-          <span class="nav-icon">▦</span>
-          <span>Total Products</span>
-        </button>
-
-        <button class="nav-button" data-page="low-stock" onclick="openPage('low-stock')">
-          <span class="nav-icon">!</span>
-          <span>Low stock Products</span>
-        </button>
-
-        <button class="nav-button" data-page="orders" onclick="openPage('orders')">
-          <span class="nav-icon">🛒</span>
-          <span>Orders</span>
-        </button>
-
-        <button class="nav-button" data-page="canceled" onclick="openPage('canceled')">
-          <span class="nav-icon">×</span>
-          <span>Canceled</span>
-        </button>
-
-        <button class="nav-button" data-page="users" onclick="openPage('users')">
-          <span class="nav-icon">♙</span>
-          <span>Users</span>
-        </button>
-
-        <button class="nav-button" data-page="coupon" onclick="openPage('coupon')">
-          <span class="nav-icon">%</span>
-          <span>Cupon Settings</span>
-        </button>
-
-        <button class="nav-button" data-page="delivery" onclick="openPage('delivery')">
-          <span class="nav-icon">⌁</span>
-          <span>Delivery Fee settings</span>
-        </button>
-
-        <button class="nav-button" data-page="appearance" onclick="openPage('appearance')">
-          <span class="nav-icon">◐</span>
-          <span>Black/White appearance</span>
-        </button>
-      </nav>
-
-      <div class="sidebar-footer">
-        <div class="connection">
-          <i class="connection-dot"></i>
-          <span>Firestore connected</span>
-        </div>
-      </div>
-    </aside>
-
-    <main class="main">
-      <header class="topbar">
-        <div class="top-title">
-          <button class="mobile-menu" onclick="toggleSidebar()" aria-label="Open menu">☰</button>
-          <div>
-            <h1 id="pageTitle">Main Dashboard</h1>
-            <p>KURD SHEIN Admin Panel</p>
-          </div>
-        </div>
-
-        <div class="top-status">
-          <i></i>
-          <span>Firestore connected</span>
-        </div>
-      </header>
-
-      <!-- MAIN DASHBOARD -->
-      <section class="page active" id="page-dashboard">
-        <div class="welcome">
-          <span class="welcome-kicker">● ADMIN CONTROL</span>
-          <h2>Welcome to KURD SHEIN</h2>
-          <p>
-            This panel currently contains only the requested admin sections.
-            The functions inside each section can be added later.
-          </p>
-        </div>
-
-        <div class="section-head">
-          <h2>Admin Sections</h2>
-          <span>9 requested buttons</span>
-        </div>
-
-        <div class="admin-grid">
-          <button class="admin-button" onclick="openPage('dashboard')">
-            <span class="button-icon">⌂</span>
-            <span class="button-title">Main Dashboard</span>
-            <span class="button-subtitle">Main control area</span>
-          </button>
-
-          <button class="admin-button" onclick="openPage('products')">
-            <span class="button-icon">▦</span>
-            <span class="button-title">Total Products</span>
-            <span class="button-subtitle">Products section</span>
-          </button>
-
-          <button class="admin-button" onclick="openPage('low-stock')">
-            <span class="button-icon">!</span>
-            <span class="button-title">Low stock Products</span>
-            <span class="button-subtitle">Low stock section</span>
-          </button>
-
-          <button class="admin-button" onclick="openPage('orders')">
-            <span class="button-icon">🛒</span>
-            <span class="button-title">Orders</span>
-            <span class="button-subtitle">Orders section</span>
-          </button>
-
-          <button class="admin-button" onclick="openPage('canceled')">
-            <span class="button-icon">×</span>
-            <span class="button-title">Canceled</span>
-            <span class="button-subtitle">Canceled section</span>
-          </button>
-
-          <button class="admin-button" onclick="openPage('users')">
-            <span class="button-icon">♙</span>
-            <span class="button-title">Users</span>
-            <span class="button-subtitle">Users section</span>
-          </button>
-
-          <button class="admin-button" onclick="openPage('coupon')">
-            <span class="button-icon">%</span>
-            <span class="button-title">Cupon Settings</span>
-            <span class="button-subtitle">Coupon settings</span>
-          </button>
-
-          <button class="admin-button" onclick="openPage('delivery')">
-            <span class="button-icon">⌁</span>
-            <span class="button-title">Delivery Fee settings</span>
-            <span class="button-subtitle">Delivery settings</span>
-          </button>
-
-          <button class="admin-button" onclick="openPage('appearance')">
-            <span class="button-icon">◐</span>
-            <span class="button-title">Black/White appearance</span>
-            <span class="button-subtitle">Theme settings</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- PLACEHOLDER SECTIONS -->
-      <section class="page" id="page-products">
-        <div class="placeholder">
-          <div class="placeholder-icon">▦</div>
-          <h2>Total Products</h2>
-          <p>The function for this button has not been added yet.</p>
-        </div>
-      </section>
-
-      <section class="page" id="page-low-stock">
-        <div class="placeholder">
-          <div class="placeholder-icon">!</div>
-          <h2>Low stock Products</h2>
-          <p>The function for this button has not been added yet.</p>
-        </div>
-      </section>
-
-      <section class="page" id="page-orders">
-        <div class="placeholder">
-          <div class="placeholder-icon">🛒</div>
-          <h2>Orders</h2>
-          <p>The function for this button has not been added yet.</p>
-        </div>
-      </section>
-
-      <section class="page" id="page-canceled">
-        <div class="placeholder">
-          <div class="placeholder-icon">×</div>
-          <h2>Canceled</h2>
-          <p>The function for this button has not been added yet.</p>
-        </div>
-      </section>
-
-      <section class="page" id="page-users">
-        <div class="placeholder">
-          <div class="placeholder-icon">♙</div>
-          <h2>Users</h2>
-          <p>The function for this button has not been added yet.</p>
-        </div>
-      </section>
-
-      <section class="page" id="page-coupon">
-        <div class="placeholder">
-          <div class="placeholder-icon">%</div>
-          <h2>Cupon Settings</h2>
-          <p>The function for this button has not been added yet.</p>
-        </div>
-      </section>
-
-      <section class="page" id="page-delivery">
-        <div class="placeholder">
-          <div class="placeholder-icon">⌁</div>
-          <h2>Delivery Fee settings</h2>
-          <p>The function for this button has not been added yet.</p>
-        </div>
-      </section>
-
-      <!-- APPEARANCE -->
-      <section class="page" id="page-appearance">
-        <div class="appearance-panel">
-          <div class="appearance-title">
-            <h2>Black / White appearance</h2>
-            <p>Choose the appearance of this admin panel.</p>
-          </div>
-
-          <div class="appearance-options">
-            <button class="theme-button active" id="darkThemeButton" onclick="setTheme('dark')">
-              <span class="theme-preview dark"></span>
-              <span>
-                <strong>Black</strong>
-                <span>Dark admin appearance</span>
-              </span>
-            </button>
-
-            <button class="theme-button" id="lightThemeButton" onclick="setTheme('light')">
-              <span class="theme-preview light"></span>
-              <span>
-                <strong>White</strong>
-                <span>Light admin appearance</span>
-              </span>
-            </button>
-          </div>
-        </div>
-      </section>
-    </main>
+<section id="firebaseLogin" class="firebase-login">
+  <div class="firebase-login-card">
+    <div class="firebase-login-logo">BARVIN <span>PRO</span></div>
+    <div class="firebase-login-sub">Test Admin • Firebase Authentication</div>
+    <div class="firebase-field">
+      <label>Email</label>
+      <input id="firebaseEmail" type="email" autocomplete="username" placeholder="admin@example.com">
+    </div>
+    <div class="firebase-field">
+      <label>Password</label>
+      <input id="firebasePassword" type="password" autocomplete="current-password" placeholder="••••••••">
+    </div>
+    <button class="firebase-login-btn" id="firebaseLoginBtn">Sign in</button>
+    <div id="firebaseError" class="firebase-error"></div>
   </div>
+</section>
 
-  <nav class="mobile-bottom" aria-label="Mobile navigation">
-    <button class="active" id="mobileDashboardButton" onclick="openPage('dashboard')">
-      <span>⌂</span>
-      <span>Dashboard</span>
-    </button>
-    <button id="mobileAppearanceButton" onclick="openPage('appearance')">
-      <span>◐</span>
-      <span>Appearance</span>
-    </button>
-  </nav>
+<header class="topbar">
+  <div class="left">
+    <div class="logout">↪</div>
+    <div class="user">test <span class="avatar">●</span></div>
+  </div>
+  <div class="brandbox">
+    <div class="brand">BARVIN <span>PRO</span></div><div id="firestoreStatus" style="font-size:9px;color:#777d86;margin-left:10px">Firestore: connecting…</div>
+    <div class="stack">▱</div>
+  </div>
+</header>
 
-  <script type="module">
-    /*
-      SAME FIRESTORE PROJECT AS THE PROVIDED admin.html.
-      No collections, products, orders, users, settings, or CRUD
-      operations are added here yet.
-    */
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-    import { getFirestore } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+<main>
+  <section class="overview">
+    <div class="card sales">
+      <div class="metric">
+        <div class="label green">Test sales</div>
+        <div id="liveSales" class="big">0</div>
+        <div class="small">IQD</div>
+      </div>
+      <div class="metric">
+        <div class="label green">Test purchase</div>
+        <div id="livePurchases" class="big">0</div>
+        <div class="small">IQD</div>
+      </div>
+    </div>
 
-    const firebaseConfig = {
-      apiKey:"AIzaSyAZPy_1tQTNlCP3GKZZJ01S7RLfrecaznE",
-      authDomain:"kurdsheinadmin.firebaseapp.com",
-      projectId:"kurdsheinadmin",
-      storageBucket:"kurdsheinadmin.firebasestorage.app",
-      messagingSenderId:"297215544882",
-      appId:"1:297215544882:web:7b01257fb9ad78b825362b",
-      measurementId:"G-NQC7VSG986"
-    };
+    <div class="card price">
+      <div class="pricehead"><span>Test $1 price</span><span class="coin">●</span></div>
+      <div id="liveDollarRate" class="input">1540</div>
+      <div class="unit">IQD / 100$</div>
+    </div>
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+    <div class="card chart">
+      <div class="charttitle"><span>Test weekly sales</span><span class="charticon">⌁</span></div>
+      <div class="graph">
+        <svg viewBox="0 0 600 100" preserveAspectRatio="none">
+          <defs><linearGradient id="g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#18d9ed" stop-opacity=".38"/><stop offset="1" stop-color="#18d9ed" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0 72 C70 70 105 72 150 72 C210 75 250 72 300 73 C350 74 385 63 420 55 C470 44 520 25 600 8 L600 100 L0 100 Z" fill="url(#g)"/>
+          <path d="M0 72 C70 70 105 72 150 72 C210 75 250 72 300 73 C350 74 385 63 420 55 C470 44 520 25 600 8" fill="none" stroke="#19d9eb" stroke-width="3"/>
+        </svg>
+      </div>
+      <div class="days"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+    </div>
+  </section>
 
-    window.kurdSheinDb = db;
-    console.info("KURD SHEIN Admin: Firestore connected.");
-  </script>
+  <div class="section-title">Test system sections <span style="color:#20d7eb">▦</span></div>
 
-  <script>
-    const pageNames = {
-      dashboard:"Main Dashboard",
-      products:"Total Products",
-      "low-stock":"Low stock Products",
-      orders:"Orders",
-      canceled:"Canceled",
-      users:"Users",
-      coupon:"Cupon Settings",
-      delivery:"Delivery Fee settings",
-      appearance:"Black/White appearance"
-    };
+  <section class="grid">
+    <div class="tile yellow"><div class="icon"><svg viewBox='0 0 32 32'><circle cx='16' cy='9' r='5'/><path d='M7 27c0-6 4-10 9-10s9 4 9 10z'/></svg></div><div class="name">Test customers</div></div>
+    <div class="tile yellow"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M7 11h11a8 8 0 1 1-5 14'/><path d='M7 11l5-5M7 11l5 5'/></svg></div><div class="name">Test customer returns</div></div>
+    <div class="tile yellow"><div class="icon"><svg viewBox='0 0 32 32'><path d='M7 3h13l6 6v20H7z'/><path d='M20 3v7h6'/><rect x='11' y='13' width='11' height='2' rx='1'/><rect x='11' y='18' width='8' height='2' rx='1'/><path d='M17 21v6'/></svg></div><div class="name">Test invoices</div></div>
+    <div class="tile yellow"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M4 7h4l3 15h13l4-11H9'/><circle cx='13' cy='26' r='2'/><circle cx='24' cy='26' r='2'/></svg></div><div class="name">Test POS</div></div>
+    <div class="tile green"><div class="icon"><svg viewBox='0 0 32 32'><path d='M8 4h16a3 3 0 0 1 3 3v18a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3z'/><circle cx='16' cy='16' r='6' fill='none' stroke='currentColor' stroke-width='2.4'/><path d='M16 16l4-4'/></svg></div><div class="name">Test Smart sales</div></div>
+    <div class="tile green"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M4 21c6 0 7-5 12-5 4 0 5 4 12 4'/><path d='M22 13l6 7-8 1'/><path d='M16 10v11'/><path d='M12 13c1-3 7-4 9 0'/></svg></div><div class="name">Test payments</div></div>
+    <div class="tile green"><div class="icon"><svg viewBox='0 0 32 32'><path d='M7 3h13l6 6v20H7z'/><path d='M20 3v7h6'/><rect x='11' y='13' width='11' height='2' rx='1'/><rect x='11' y='18' width='8' height='2' rx='1'/><path d='M17 21v6'/></svg></div><div class="name">Test suppliers</div></div>
+    <div class="tile green"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M4 7h4l3 15h13l4-11H9'/><circle cx='13' cy='26' r='2'/><circle cx='24' cy='26' r='2'/></svg></div><div class="name">Test POS sales</div></div>
 
-    function openPage(page){
-      document.querySelectorAll(".page").forEach(el => el.classList.remove("active"));
+    <div class="tile cyan"><div class="icon"><svg viewBox='0 0 32 32'><path d='M16 3a13 13 0 1 0 13 13H16z'/><path d='M16 3v13h13A13 13 0 0 0 16 3z' opacity='.55'/></svg></div><div class="name">Test reports</div></div>
+    <div class="tile cyan"><div class="icon"><svg viewBox='0 0 32 32'><rect x='7' y='4' width='18' height='24' rx='2'/><rect x='11' y='9' width='10' height='2' rx='1' fill='#111'/><rect x='11' y='14' width='10' height='2' rx='1' fill='#111'/><rect x='11' y='19' width='7' height='2' rx='1' fill='#111'/></svg></div><div class="name">Test expenses</div></div>
+    <div class="tile cyan"><div class="icon"><svg viewBox='0 0 32 32'><circle cx='16' cy='9' r='5'/><path d='M7 27c0-6 4-10 9-10s9 4 9 10z'/></svg></div><div class="name">Test employee account</div></div>
+    <div class="tile cyan"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M7 11h11a8 8 0 1 1-5 14'/><path d='M7 11l5-5M7 11l5 5'/></svg></div><div class="name">Test return to supplier</div></div>
+    <div class="tile cyan"><div class="icon"><svg viewBox='0 0 32 32'><path d='M5 23h5V15h5v8h4V9h5v14h3v4H5z'/></svg></div><div class="name">Test companies</div></div>
+    <div class="tile purple"><div class="icon"><svg viewBox='0 0 32 32'><path d='M8 4h16v24H8z'/><path d='M12 9h8M12 14h8M12 19h8M12 24h5' stroke='var(--bg)' stroke-width='2' fill='none'/></svg></div><div class="name">Test trash</div></div>
+    <div class="tile purple"><div class="icon"><svg viewBox='0 0 32 32'><circle cx='16' cy='16' r='12'/><rect x='14.5' y='9' width='3' height='14' rx='1.5' fill='var(--bg)'/><rect x='9' y='14.5' width='14' height='3' rx='1.5' fill='var(--bg)'/></svg></div><div class="name">Test add-ons</div></div>
+    <div class="tile purple"><div class="icon"><svg viewBox='0 0 32 32'><path d='M3 11l6-5h14l6 5-4 7-4-3-3 11-3-11-4 3z'/></svg></div><div class="name">Test boxes</div></div>
 
-      const target = document.getElementById("page-" + page);
-      if(target) target.classList.add("active");
+    <div class="tile red"><div class="icon"><svg viewBox='0 0 32 32'><circle cx='16' cy='9' r='5'/><path d='M7 27c0-6 4-10 9-10s9 4 9 10z'/></svg></div><div class="name">Test notifications</div></div>
+    <div class="tile red"><div class="icon"><svg viewBox='0 0 32 32'><path d='M8 25a6 6 0 1 1 2-11 8 8 0 0 1 15 3 5 5 0 0 1-1 10H8z'/><path d='M16 12v10M12 18l4 4 4-4' fill='none' stroke='var(--bg)' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/></svg></div><div class="name">Test backup</div></div>
+    <div class="tile red"><div class="icon"><svg class='line' viewBox='0 0 32 32'><path d='M5 9h22M5 16h22M5 23h22'/><circle cx='12' cy='9' r='2.5' fill='var(--bg)'/><circle cx='20' cy='16' r='2.5' fill='var(--bg)'/><circle cx='15' cy='23' r='2.5' fill='var(--bg)'/></svg></div><div class="name">Test settings</div></div>
+    <div class="tile red"><div class="icon"><svg class='line' viewBox='0 0 32 32'><circle cx='16' cy='16' r='11'/><path d='M16 9v7l5 3'/></svg></div><div class="name">Test activity</div></div>
+    <div class="tile red"><div class="icon"><svg viewBox='0 0 32 32'><circle cx='16' cy='9' r='5'/><path d='M7 27c0-6 4-10 9-10s9 4 9 10z'/></svg></div><div class="name">Test users</div></div>
+    <div class="tile red"><div class='icon'><svg viewBox='0 0 32 32'><rect x='5' y='8' width='22' height='16' rx='2'/><rect x='9' y='11' width='14' height='9' rx='1' fill='var(--bg)'/></svg></div><div class="name">Test terminal</div></div>
+  </section>
+</main>
 
-      document.querySelectorAll(".nav-button").forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.page === page);
-      });
+<script>
+  document.querySelectorAll('.tile').forEach(tile => {
+    tile.addEventListener('click', () => {
+      alert('Test section: ' + tile.querySelector('.name').textContent);
+    });
+  });
+</script>
 
-      document.getElementById("pageTitle").textContent = pageNames[page] || "Main Dashboard";
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import {
+  getFirestore,
+  collection,
+  getDoc,
+  doc,
+  query,
+  orderBy,
+  onSnapshot,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
-      document.getElementById("mobileDashboardButton").classList.toggle("active", page === "dashboard");
-      document.getElementById("mobileAppearanceButton").classList.toggle("active", page === "appearance");
+/* Extracted from the supplied admin.html Firebase configuration. */
+const firebaseConfig = {
+  apiKey: "AIzaSyAZPy_1tQTNlCP3GKZZJ01S7RLfrecaznE",
+  authDomain: "kurdsheinadmin.firebaseapp.com",
+  projectId: "kurdsheinadmin",
+  storageBucket: "kurdsheinadmin.firebasestorage.app",
+  messagingSenderId: "297215544882",
+  appId: "1:297215544882:web:7b01257fb9ad78b825362b",
+  measurementId: "G-NQC7VSG986"
+};
 
-      closeSidebar();
-      window.scrollTo({top:0,behavior:"smooth"});
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+let products = [];
+let orders = [];
+let settings = {
+  deliveryFees: { Erbil: 3000, Sulaymaniyah: 4000, Duhok: 4000, Other: 5000 },
+  couponCodes: { KURD10: .10, NEW5: .05 }
+};
+let stopProducts = null;
+let stopOrders = null;
+
+const loginView = document.getElementById("firebaseLogin");
+const loginBtn = document.getElementById("firebaseLoginBtn");
+const loginError = document.getElementById("firebaseError");
+const statusEl = document.getElementById("firestoreStatus");
+
+function setStatus(text, ok=false){
+  statusEl.textContent = text;
+  statusEl.style.color = ok ? "#16d99a" : "#777d86";
+}
+
+function formatIQD(value){
+  return Number(value || 0).toLocaleString("en-US");
+}
+
+function refreshDashboardFromFirestore(){
+  const active = products.filter(p => p.Active !== false);
+  const validOrders = orders.filter(o => (o.status || "") !== "cancelled");
+  const sales = validOrders.reduce((sum,o) => sum + Number(o.total ?? o.grandTotal ?? 0), 0);
+
+  // "Purchase" is mapped to the source admin's product/stock data when available.
+  const purchases = orders.reduce((sum,o) => {
+    const value = Number(o.purchaseTotal ?? o.costTotal ?? o.subtotal ?? 0);
+    return sum + value;
+  }, 0);
+
+  document.getElementById("liveSales").textContent = formatIQD(sales);
+  document.getElementById("livePurchases").textContent = formatIQD(purchases);
+
+  // Keep the screenshot's $1 rate unless a store setting explicitly contains a rate.
+  const rate = settings.dollarRate ?? settings.usdRate ?? settings.usdToIqd ?? 1540;
+  document.getElementById("liveDollarRate").textContent = formatIQD(rate);
+
+  const salesLabel = document.querySelector(".sales .metric:first-child .label");
+  const purchaseLabel = document.querySelector(".sales .metric:last-child .label");
+  if (salesLabel) salesLabel.textContent = "Test sales";
+  if (purchaseLabel) purchaseLabel.textContent = "Test purchase";
+
+  // Show the live product/order totals in the browser title tooltip without changing the test UI.
+  document.title = `BARVIN PRO — ${active.length} products • ${orders.length} orders`;
+}
+
+async function loadFirestoreSettings(){
+  try{
+    const snap = await getDoc(doc(db, "settings", "store"));
+    if(snap.exists()){
+      const data = snap.data();
+      settings = {
+        ...settings,
+        ...data,
+        deliveryFees: {...settings.deliveryFees, ...(data.deliveryFees || {})},
+        couponCodes: {...settings.couponCodes, ...(data.couponCodes || {})}
+      };
+    }
+    refreshDashboardFromFirestore();
+  }catch(error){
+    console.error("Firestore settings error:", error);
+    setStatus("Firestore: settings error");
+  }
+}
+
+function startFirestore(){
+  if(stopProducts) stopProducts();
+  if(stopOrders) stopOrders();
+
+  setStatus("Firestore: connected ✓", true);
+
+  stopProducts = onSnapshot(
+    collection(db, "product"),
+    snap => {
+      products = snap.docs.map(d => ({...d.data(), __docId:d.id}));
+      refreshDashboardFromFirestore();
+    },
+    error => {
+      console.error("product listener:", error);
+      setStatus("Firestore: product error");
+    }
+  );
+
+  stopOrders = onSnapshot(
+    query(collection(db, "orders"), orderBy("createdAt", "desc")),
+    snap => {
+      orders = snap.docs.map(d => ({...d.data(), __docId:d.id}));
+      refreshDashboardFromFirestore();
+    },
+    error => {
+      console.error("orders listener:", error);
+      setStatus("Firestore: orders error");
+    }
+  );
+
+  loadFirestoreSettings();
+}
+
+loginBtn.addEventListener("click", async () => {
+  const email = document.getElementById("firebaseEmail").value.trim();
+  const password = document.getElementById("firebasePassword").value;
+  loginError.textContent = "";
+
+  if(!email || !password){
+    loginError.textContent = "Enter the admin email and password.";
+    return;
+  }
+
+  loginBtn.disabled = true;
+  loginBtn.textContent = "Signing in…";
+
+  try{
+    await signInWithEmailAndPassword(auth, email, password);
+  }catch(error){
+    console.error(error);
+    loginError.textContent = "Sign-in failed. Check Firebase Authentication and your credentials.";
+  }finally{
+    loginBtn.disabled = false;
+    loginBtn.textContent = "Sign in";
+  }
+});
+
+document.getElementById("firebasePassword").addEventListener("keydown", e => {
+  if(e.key === "Enter") loginBtn.click();
+});
+
+onAuthStateChanged(auth, async user => {
+  if(!user){
+    loginView.classList.remove("hidden");
+    setStatus("Firestore: sign in required");
+    return;
+  }
+
+  try{
+    const adminSnap = await getDoc(doc(db, "admins", user.uid));
+
+    if(!adminSnap.exists() || adminSnap.data().active === false){
+      await signOut(auth);
+      loginError.textContent = "This account is not an active admin. Add admins/{UID} in Firestore.";
+      return;
     }
 
-    function toggleSidebar(){
-      document.getElementById("sidebar").classList.toggle("open");
-      document.getElementById("mobileBackdrop").classList.toggle("show");
-    }
+    loginView.classList.add("hidden");
+    startFirestore();
+  }catch(error){
+    console.error(error);
+    await signOut(auth);
+    loginError.textContent = "Could not verify admin permissions.";
+  }
+});
 
-    function closeSidebar(){
-      document.getElementById("sidebar").classList.remove("open");
-      document.getElementById("mobileBackdrop").classList.remove("show");
-    }
+// Make logout available for later edits without changing the test UI.
+window.testAdminLogout = () => signOut(auth);
 
-    function setTheme(theme){
-      document.body.classList.toggle("light", theme === "light");
+// Keep a clean way to save the same settings document later.
+window.saveTestFirestoreSettings = async data => {
+  await setDoc(doc(db, "settings", "store"), {
+    ...data,
+    updatedAt: serverTimestamp()
+  }, {merge:true});
+};
+</script>
 
-      document.getElementById("darkThemeButton").classList.toggle("active", theme === "dark");
-      document.getElementById("lightThemeButton").classList.toggle("active", theme === "light");
-
-      localStorage.setItem("kurdSheinAdminTheme", theme);
-    }
-
-    const savedTheme = localStorage.getItem("kurdSheinAdminTheme");
-    if(savedTheme === "light") setTheme("light");
-  </script>
 </body>
 </html>

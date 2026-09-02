@@ -2,954 +2,288 @@
 <html lang="ku" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#080a0f">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KurdShein Admin</title>
 <style>
-@font-face{font-family:Rabar;src:url("Rabar_037%202.ttf") format("truetype");font-display:swap}
-:root{--bg:#080a0f;--surface:#10141b;--surface2:#171c24;--surface3:#202631;--text:#f8fafc;--muted:#98a2b3;--border:rgba(255,255,255,.09);--red:#e51c2a;--green:#168a46;--yellow:#f7c948;--blue:#3198ff;--danger:#ff5b67;--shadow:0 20px 55px rgba(0,0,0,.25)}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:Rabar,Arial,sans-serif;min-height:100vh;overflow-x:hidden}
-button,input,textarea,select{font:inherit}button{cursor:pointer}input,textarea,select{outline:0}
+*{box-sizing:border-box}
+:root{
+ --bg:#f7f8fc;--surface:#fff;--surface-soft:#fbfcfe;--line:#e7e9ef;
+ --text:#171a24;--muted:#667085;--subtle:#98a2b3;--primary:#635bff;
+ --primary-dark:#5148d8;--green:#12b76a;--red:#f04438;--orange:#f79009;
+ --shadow:0 1px 2px rgba(16,24,40,.03),0 12px 34px rgba(16,24,40,.05);
+ --shadow-lg:0 30px 80px rgba(16,24,40,.14);--r:14px;
+}
+html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+body{overflow-x:hidden}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
 .hidden{display:none!important}
-.login{min-height:100vh;display:grid;place-items:center;padding:20px;background:radial-gradient(circle at 20% 20%,rgba(229,28,42,.18),transparent 30%),radial-gradient(circle at 80% 80%,rgba(22,138,70,.15),transparent 30%)}
-.login-card{width:min(430px,100%);background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:30px;box-shadow:var(--shadow)}
-.logo{text-align:center;font:950 34px Arial;margin-bottom:7px}.logo span{color:var(--red)}
-.sub{text-align:center;color:var(--muted);font-size:12px;margin-bottom:24px}
-.field{margin-bottom:13px}.field label{display:block;font-size:12px;font-weight:800;margin-bottom:6px}
-.field input,.field textarea,.field select{width:100%;background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:11px;padding:12px}
-.field textarea{min-height:95px;resize:vertical}
-.primary{background:var(--red);color:#fff;border:0;border-radius:11px;padding:12px 16px;font-weight:900}
-.secondary{background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:11px;padding:11px 15px;font-weight:800}
-.danger{background:rgba(255,91,103,.12);color:#ff8b94;border:1px solid rgba(255,91,103,.25);border-radius:10px;padding:9px 12px;font-weight:800}
-.success{background:rgba(22,138,70,.12);color:#64d994;border:1px solid rgba(22,138,70,.25);border-radius:10px;padding:9px 12px;font-weight:800}
-.notice{margin-top:12px;color:#ff9aa1;font-size:12px;line-height:1.7}
-.app{display:grid;grid-template-columns:250px 1fr;min-height:100vh}
-.sidebar{position:sticky;top:0;height:100vh;background:var(--surface);border-left:1px solid var(--border);padding:18px 14px;display:flex;flex-direction:column}
-.side-logo{font:950 27px Arial;padding:10px 10px 18px}.side-logo span{color:var(--red)}
-.side-label{font-size:10px;color:var(--muted);padding:8px 10px}
-.nav{display:grid;gap:6px}.nav button{width:100%;text-align:right;background:transparent;color:var(--muted);border:1px solid transparent;border-radius:12px;padding:12px;display:flex;align-items:center;gap:10px}
-.nav button:hover,.nav button.active{background:var(--surface2);border-color:var(--border);color:var(--text)}
-.nav button.active{box-shadow:inset -3px 0 0 var(--red)}
-.side-bottom{margin-top:auto;display:grid;gap:8px}
-.main{min-width:0;padding:22px;max-width:1600px;width:100%;margin:auto}
-.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
-.top h1{font-size:26px}.top p{font-size:11px;color:var(--muted);margin-top:3px}
-.top-actions{display:flex;gap:8px;flex-wrap:wrap}
-.mobile-menu{display:none}
-.page{display:none}.page.active{display:block}
-.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:17px;padding:17px}
-.kpi-title{font-size:11px;color:var(--muted)}.kpi-value{font:900 25px Arial;margin-top:8px}.kpi-note{font-size:10px;color:var(--muted);margin-top:5px}
-.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:14px}.panel{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:17px;margin-bottom:14px}
-.panel-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}.panel-head h2{font-size:17px}.panel-head span{font-size:10px;color:var(--muted)}
-.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.toolbar input,.toolbar select{background:var(--surface2);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:10px;min-width:160px}
-.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:13px}
-table{width:100%;border-collapse:collapse;min-width:760px}th,td{padding:11px;border-bottom:1px solid var(--border);text-align:right;font-size:11px;vertical-align:middle}th{color:var(--muted);font-weight:800;background:var(--surface2)}tr:last-child td{border-bottom:0}
-.badge{display:inline-flex;padding:5px 8px;border-radius:999px;font-size:10px;font-weight:900;background:var(--surface3);color:var(--muted)}.badge.new{color:#75b9ff;background:rgba(49,152,255,.12)}.badge.success{color:#64d994;background:rgba(22,138,70,.12)}.badge.warn{color:#ffd978;background:rgba(247,201,72,.12)}.badge.danger{color:#ff8b94;background:rgba(255,91,103,.12)}
-.actions{display:flex;gap:6px;flex-wrap:wrap}.mini{padding:7px 9px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:10px}
-.product-cell{display:flex;align-items:center;gap:9px;min-width:190px}.thumb{width:45px;height:45px;border-radius:9px;object-fit:cover;background:var(--surface2);border:1px solid var(--border)}
-.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:16px;z-index:1000}.modal.show{display:flex}.modal-box{width:min(760px,100%);max-height:94vh;overflow:auto;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:20px;position:relative}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.modal-head h2{font-size:20px}.close{width:37px;height:37px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:22px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}.checks{display:flex;flex-wrap:wrap;gap:8px}.check{background:var(--surface2);border:1px solid var(--border);padding:9px 11px;border-radius:10px;font-size:11px}.check input{margin-left:6px}
-.modal-actions{display:flex;justify-content:flex-start;gap:8px;margin-top:15px}
-.order-detail{display:grid;gap:8px}.order-line{display:flex;justify-content:space-between;gap:10px;background:var(--surface2);padding:10px;border-radius:10px;font-size:11px}
-.stat-list{display:grid;gap:9px}.stat-row{display:flex;justify-content:space-between;padding:10px;background:var(--surface2);border-radius:10px;font-size:11px}.muted{color:var(--muted)}
-.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,120px);background:var(--surface);border:1px solid var(--border);border-radius:999px;padding:11px 18px;box-shadow:var(--shadow);z-index:3000;transition:.25s;font-size:12px}.toast.show{transform:translate(-50%,0)}
-.empty{text-align:center;color:var(--muted);padding:35px}
-@media(max-width:1000px){.app{grid-template-columns:1fr}.sidebar{position:fixed;right:0;transform:translateX(105%);transition:.25s;width:270px;z-index:2000;box-shadow:-20px 0 60px rgba(0,0,0,.4)}.sidebar.open{transform:translateX(0)}.mobile-menu{display:block}.grid2{grid-template-columns:1fr}.cards{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.main{padding:13px}.top h1{font-size:21px}.cards{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.top{align-items:flex-start}.top-actions{justify-content:flex-end}.login-card{padding:22px}}
 
-/* ===== PRO ADMIN UI / RESPONSIVE MOBILE FIX ===== */
-:root{
-  --bg:#07090d;
-  --surface:#0e131a;
-  --surface2:#151c25;
-  --surface3:#1c2530;
-  --border:rgba(255,255,255,.085);
-  --border-strong:rgba(255,255,255,.14);
-  --red:#e51c2a;
-  --red-soft:rgba(229,28,42,.12);
-  --text:#f7f9fc;
-  --muted:#8f9bab;
-  --shadow:0 18px 55px rgba(0,0,0,.28);
-}
-html{
-  width:100%;
-  min-width:0;
-  overflow-x:hidden;
-  -webkit-text-size-adjust:100%;
-}
-body{
-  width:100%;
-  min-width:0;
-  overflow-x:hidden;
-  background:
-    radial-gradient(circle at 85% 0%,rgba(229,28,42,.07),transparent 28%),
-    var(--bg);
-}
-button,input,textarea,select{
-  max-width:100%;
-  -webkit-tap-highlight-color:transparent;
-}
-button{touch-action:manipulation}
-
-.app{
-  width:100%;
-  max-width:100%;
-  min-width:0;
-  grid-template-columns:248px minmax(0,1fr);
-}
-.sidebar{
-  width:248px;
-  border-left:1px solid var(--border-strong);
-  background:rgba(14,19,26,.94);
-  backdrop-filter:blur(18px);
-}
-.side-logo{
-  letter-spacing:-.5px;
-  border-bottom:1px solid var(--border);
-  margin-bottom:10px;
-}
-.nav button{
-  min-height:45px;
-  transition:background .18s,border-color .18s,transform .18s;
-}
-.nav button:hover{transform:translateX(-2px)}
-.nav button.active{
-  background:linear-gradient(90deg,var(--red-soft),var(--surface2));
-  border-color:rgba(229,28,42,.22);
-}
-
-.main{
-  width:100%;
-  max-width:1700px;
-  min-width:0;
-  padding:24px clamp(14px,2.2vw,32px);
-}
-.top{
-  min-width:0;
-  padding-bottom:18px;
-  border-bottom:1px solid var(--border);
-  margin-bottom:20px;
-}
-.top h1{
-  letter-spacing:-.3px;
-}
-.top-actions{
-  min-width:0;
-}
-.cards{
-  gap:14px;
-}
-.card,.panel{
-  box-shadow:0 8px 30px rgba(0,0,0,.10);
-  transition:border-color .18s,transform .18s,box-shadow .18s;
-}
-.card:hover{
-  border-color:var(--border-strong);
-  transform:translateY(-1px);
-}
-.panel{
-  padding:19px;
-}
-.panel-head{
-  padding-bottom:12px;
-  border-bottom:1px solid var(--border);
-}
-.toolbar input,.toolbar select,
-.field input,.field textarea,.field select{
-  min-height:44px;
-}
-.primary,.secondary,.danger,.success{
-  min-height:42px;
-}
-.table-wrap{
-  width:100%;
-  max-width:100%;
-  overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-}
-table{
-  min-width:720px;
-}
-.modal{
-  padding:14px;
-}
-.modal-box{
-  width:min(820px,100%);
-  max-width:100%;
-}
-
-/* Tablet */
-@media(max-width:1000px){
-  .app{display:block}
-  .sidebar{
-    width:min(290px,88vw);
-  }
-  .main{
-    width:100%;
-    padding:18px;
-  }
-  .mobile-menu{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    min-width:44px;
-    min-height:44px;
-    border-radius:12px;
-    background:var(--surface2);
-    border:1px solid var(--border);
-    color:var(--text);
-  }
-}
-
-/* Phone: eliminate accidental zoom/overflow and make controls thumb-friendly */
-@media(max-width:600px){
-  html,body{
-    width:100%;
-    max-width:100%;
-    overflow-x:hidden;
-  }
-  .main{
-    width:100%;
-    max-width:100%;
-    padding:10px;
-  }
-  .top{
-    width:100%;
-    gap:9px;
-    margin-bottom:14px;
-    padding-bottom:14px;
-  }
-  .top h1{
-    font-size:20px;
-    line-height:1.3;
-  }
-  .top p{
-    font-size:10px;
-  }
-  .top-actions{
-    gap:6px;
-  }
-  .top-actions button{
-    min-height:42px;
-    padding:9px 11px;
-  }
-  .cards{
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-  }
-  .card{
-    min-width:0;
-    padding:13px 11px;
-    border-radius:14px;
-  }
-  .kpi-title{font-size:10px}
-  .kpi-value{
-    font-size:21px;
-    overflow:hidden;
-    text-overflow:ellipsis;
-  }
-  .kpi-note{font-size:9px}
-  .grid2{
-    display:block;
-  }
-  .panel{
-    width:100%;
-    min-width:0;
-    padding:13px;
-    border-radius:14px;
-  }
-  .panel-head{
-    align-items:flex-start;
-    flex-wrap:wrap;
-  }
-  .panel-head h2{font-size:15px}
-  .toolbar{
-    display:grid;
-    grid-template-columns:1fr;
-    width:100%;
-  }
-  .toolbar input,.toolbar select{
-    width:100%;
-    min-width:0;
-    font-size:16px; /* prevents iOS Safari input auto-zoom */
-  }
-  .form-grid{
-    grid-template-columns:1fr;
-    gap:9px;
-  }
-  .full{grid-column:auto}
-  .field input,.field textarea,.field select{
-    width:100%;
-    min-width:0;
-    font-size:16px; /* prevents iOS Safari auto-zoom */
-  }
-  .modal{
-    padding:8px;
-    align-items:center;
-  }
-  .modal-box{
-    width:100%;
-    max-width:100%;
-    max-height:94vh;
-    padding:14px;
-    border-radius:16px;
-  }
-  .modal-actions{
-    flex-wrap:wrap;
-  }
-  .modal-actions button{
-    flex:1 1 130px;
-  }
-  .table-wrap{
-    border-radius:10px;
-  }
-  th,td{
-    padding:9px 8px;
-    font-size:10px;
-  }
-  .product-cell{
-    min-width:170px;
-  }
-}
-
-/* Very small phones */
-@media(max-width:380px){
-  .main{padding:8px}
-  .cards{gap:6px}
-  .card{padding:11px 9px}
-  .kpi-value{font-size:19px}
-  .top h1{font-size:18px}
-  .top-actions button{padding:8px 9px}
-}
-
-
-    /* KS_IMAGE_COMPRESSOR */
-    .ks-image-box {
-      border: 1px dashed #cbd5e1;
-      border-radius: 14px;
-      padding: 14px;
-      margin-top: 8px;
-      background: #f8fafc;
-    }
-    .ks-image-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .ks-image-preview {
-      width: 82px;
-      height: 82px;
-      border-radius: 12px;
-      object-fit: cover;
-      display: none;
-      border: 1px solid #e2e8f0;
-    }
-    .ks-image-info {
-      font-size: 12px;
-      color: #64748b;
-    }
-    .ks-compress-status {
-      margin-top: 8px;
-      font-size: 12px;
-      color: #475569;
-    }
-</style>
-
-
-<style id="stripe-dashboard-redesign">
-/* =========================================================
-   KURDSHEIN — STRIPE-INSPIRED ADMIN DASHBOARD
-   Visual layer only: existing Firebase/JS functionality kept.
-   ========================================================= */
-:root{
-  --bg:#f6f9fc;
-  --surface:#ffffff;
-  --surface2:#f7f9fc;
-  --surface3:#eef2f7;
-  --text:#1f2937;
-  --muted:#667085;
-  --border:#e3e8ef;
-  --border-strong:#cfd7e3;
-  --red:#635bff;
-  --red-soft:rgba(99,91,255,.10);
-  --green:#0e9f6e;
-  --yellow:#d97706;
-  --blue:#2563eb;
-  --danger:#dc2626;
-  --shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px rgba(16,24,40,.04);
-}
-
-html,body{
-  background:var(--bg);
-  color:var(--text);
-}
-body{
-  font-family:Rabar,Arial,sans-serif;
-}
-
-/* Login */
+/* ===== PREMIUM LOGIN ===== */
 .login{
-  background:
-    radial-gradient(circle at 15% 10%,rgba(99,91,255,.10),transparent 28%),
-    var(--bg);
+ min-height:100vh;display:grid;place-items:center;padding:28px;
+ background:
+ radial-gradient(900px 500px at 8% 0%,rgba(99,91,255,.12),transparent 60%),
+ radial-gradient(700px 500px at 100% 100%,rgba(23,178,166,.09),transparent 58%),#f5f7fb
 }
-.login-card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:16px;
-  box-shadow:0 18px 50px rgba(16,24,40,.10);
-  padding:32px;
-}
-.logo span,.side-logo span{color:#635bff}
-.sub{color:#667085}
-.field input,.field textarea,.field select{
-  background:#fff;
-  color:#1f2937;
-  border:1px solid #d8dee8;
-}
-.field input:focus,.field textarea:focus,.field select:focus,
-.toolbar input:focus,.toolbar select:focus{
-  border-color:#635bff;
-  box-shadow:0 0 0 3px rgba(99,91,255,.12);
-}
-.primary{
-  background:#635bff;
-  border-radius:8px;
-  box-shadow:0 1px 2px rgba(16,24,40,.08);
-}
-.primary:hover{filter:brightness(.97)}
-.secondary{
-  background:#fff;
-  color:#344054;
-  border:1px solid #d8dee8;
-  border-radius:8px;
-}
-.secondary:hover{
-  background:#f8fafc;
-  border-color:#bfc8d6;
-}
-.danger{
-  background:#fff5f5;
-  color:#b42318;
-  border:1px solid #f3c7c3;
-  border-radius:8px;
-}
-.success{
-  background:#ecfdf3;
-  color:#087443;
-  border:1px solid #b7ebce;
-  border-radius:8px;
-}
-
-/* Main application shell */
-.app{
-  grid-template-columns:236px minmax(0,1fr);
-  background:#f6f9fc;
-}
-.sidebar{
-  background:#fff;
-  border-left:1px solid #e4e9f0;
-  padding:18px 12px;
-  box-shadow:1px 0 0 rgba(16,24,40,.02);
-}
-.side-logo{
-  font-size:25px;
-  padding:9px 12px 20px;
-  border-bottom:1px solid #edf0f4;
-  margin-bottom:14px;
-}
-.side-label{
-  color:#98a2b3;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:.2px;
-}
-.nav{gap:3px}
-.nav button{
-  min-height:42px;
-  color:#667085;
-  border-radius:8px;
-  padding:10px 12px;
-  transition:all .15s ease;
-}
-.nav button:hover{
-  background:#f5f7fa;
-  color:#344054;
-  transform:none;
-}
-.nav button.active{
-  background:#eeecff;
-  border-color:#dedbff;
-  color:#5148d8;
-  box-shadow:none;
-  font-weight:800;
-}
-.nav button.active::before{
-  content:"";
-  width:3px;
-  height:20px;
-  background:#635bff;
-  border-radius:3px;
-  position:absolute;
-  right:0;
-}
-.nav button{position:relative}
-.side-bottom .secondary{
-  width:100%;
-}
-
-/* Main content */
-.main{
-  max-width:1700px;
-  padding:28px clamp(18px,2.5vw,38px);
-}
-.top{
-  border-bottom:1px solid #e4e9f0;
-  padding-bottom:20px;
-  margin-bottom:22px;
-}
-.top h1{
-  font-size:24px;
-  font-weight:900;
-  color:#101828;
-}
-.top p{
-  color:#667085;
-}
-.top-actions{gap:8px}
-.top-actions .primary,
-.top-actions .secondary{
-  min-height:40px;
-  padding:9px 14px;
-}
-
-/* KPI cards */
-.cards{
-  gap:12px;
-  margin-bottom:18px;
-}
-.card{
-  background:#fff;
-  border:1px solid #e4e9f0;
-  border-radius:12px;
-  box-shadow:0 1px 2px rgba(16,24,40,.03);
-  padding:18px;
-}
-.card:hover{
-  border-color:#d4dbe5;
-  transform:none;
-  box-shadow:0 4px 14px rgba(16,24,40,.05);
-}
-.kpi-title{
-  color:#667085;
-  font-size:11px;
-  font-weight:700;
-}
-.kpi-value{
-  color:#101828;
-  font-size:25px;
-  letter-spacing:-.3px;
-}
-.kpi-note{color:#98a2b3}
-
-/* Panels */
-.grid2{gap:16px}
-.panel{
-  background:#fff;
-  border:1px solid #e4e9f0;
-  border-radius:12px;
-  box-shadow:0 1px 2px rgba(16,24,40,.03);
-  padding:18px;
-}
-.panel-head{
-  border-bottom:1px solid #edf0f4;
-  padding-bottom:14px;
-  margin-bottom:14px;
-}
-.panel-head h2{
-  color:#101828;
-  font-size:15px;
-  font-weight:900;
-}
-.panel-head span{color:#98a2b3}
-
-/* Search / filters */
-.toolbar input,.toolbar select{
-  background:#fff;
-  color:#344054;
-  border:1px solid #d8dee8;
-  border-radius:8px;
-}
-.toolbar input::placeholder{color:#98a2b3}
-
-/* Tables */
-.table-wrap{
-  border:1px solid #e4e9f0;
-  border-radius:9px;
-}
-table{min-width:720px}
-th{
-  background:#f8fafc;
-  color:#667085;
-  font-size:10px;
-  text-transform:none;
-  border-bottom:1px solid #e4e9f0;
-}
-td{
-  color:#344054;
-  border-bottom:1px solid #edf0f4;
-}
-tr:hover td{background:#fbfcfe}
-.product-cell span{font-weight:700;color:#1d2939}
-.thumb{
-  border:1px solid #e4e9f0;
-  background:#f8fafc;
-}
-
-/* Badges */
-.badge{
-  background:#f2f4f7;
-  color:#667085;
-  border:0;
-}
-.badge.new{color:#175cd3;background:#eff8ff}
-.badge.success{color:#087443;background:#ecfdf3}
-.badge.warn{color:#b54708;background:#fffaeb}
-.badge.danger{color:#b42318;background:#fef3f2}
-
-/* Rows / lists */
-.stat-row,.order-line{
-  background:#f8fafc;
-  border:1px solid #edf0f4;
-  color:#344054;
-}
-.muted{color:#667085}
-.empty{color:#98a2b3}
-
-/* Product actions */
-.mini{
-  background:#fff;
-  color:#475467;
-  border:1px solid #d8dee8;
-  border-radius:7px;
-}
-.mini:hover{
-  background:#f8fafc;
-  border-color:#c5ceda;
-}
-
-/* Modals */
-.modal{
-  background:rgba(15,23,42,.42);
-  backdrop-filter:blur(4px);
-}
-.modal-box{
-  background:#fff;
-  border:1px solid #e4e9f0;
-  border-radius:14px;
-  box-shadow:0 24px 70px rgba(16,24,40,.20);
-}
-.modal-head{
-  border-bottom:1px solid #edf0f4;
-  padding-bottom:14px;
-}
-.modal-head h2{color:#101828}
-.close{
-  background:#fff;
-  color:#475467;
-  border:1px solid #d8dee8;
-}
-.close:hover{background:#f8fafc}
-
-/* Image uploader */
-.ks-image-box{
-  border:1px dashed #cbd5e1;
-  background:#f8fafc;
-}
-.ks-image-info,.ks-compress-status{color:#667085}
-
-/* Toast */
-.toast{
-  background:#101828;
-  color:#fff;
-  border:1px solid #344054;
-  box-shadow:0 12px 30px rgba(16,24,40,.20);
-}
-
-/* Mobile */
-@media(max-width:1000px){
-  .sidebar{
-    background:#fff;
-    box-shadow:-20px 0 60px rgba(16,24,40,.14);
-  }
-  .mobile-menu{
-    background:#fff;
-    color:#344054;
-    border-color:#d8dee8;
-  }
-}
-@media(max-width:600px){
-  .main{padding:12px}
-  .top h1{font-size:20px}
-  .card{padding:13px 11px}
-  .panel{padding:13px}
-  .top-actions button{min-height:40px}
-}
-</style>
-
-<style id="premium-login-redesign">
-/* ===== PREMIUM LOGIN / ANIMATED SLIDER ===== */
-.login{
-  position:relative; min-height:100vh; padding:28px;
-  display:grid; place-items:center; overflow:hidden;
-  background:#f6f9fc;
-}
-.login::before,.login::after{content:"";position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none}
-.login::before{width:520px;height:520px;background:rgba(99,91,255,.10);top:-220px;left:-180px}
-.login::after{width:460px;height:460px;background:rgba(20,184,166,.08);bottom:-220px;right:-160px}
 .login-shell{
-  position:relative;z-index:2;width:min(1080px,100%);min-height:650px;
-  display:grid;grid-template-columns:1.08fr .92fr;direction:ltr;
-  background:#fff;border:1px solid #e5eaf2;border-radius:28px;overflow:hidden;
-  box-shadow:0 30px 90px rgba(16,24,40,.14);
+ width:min(1180px,100%);min-height:700px;display:grid;grid-template-columns:1.05fr .95fr;
+ background:#fff;border:1px solid #e3e6ee;border-radius:28px;overflow:hidden;direction:ltr;
+ box-shadow:var(--shadow-lg)
 }
-.login-panel{direction:rtl}
-.login-visual{
-  position:relative;min-height:650px;overflow:hidden;color:#fff;
-  background:#17152e;direction:ltr;
+.login-visual{position:relative;overflow:hidden;background:#17142e;color:#fff}
+.login-visual:before{
+ content:"";position:absolute;inset:0;background:
+ linear-gradient(115deg,rgba(255,255,255,.05) 1px,transparent 1px),
+ linear-gradient(25deg,rgba(255,255,255,.035) 1px,transparent 1px);
+ background-size:48px 48px;mask-image:linear-gradient(to bottom right,#000,transparent 85%)
 }
-.login-slides{position:absolute;inset:0}
-.login-slide{position:absolute;inset:0;padding:58px;display:flex;flex-direction:column;justify-content:flex-end;opacity:0;transform:scale(1.035) translateX(20px);transition:opacity .8s ease,transform 1.15s cubic-bezier(.22,.61,.36,1);pointer-events:none}
-.login-slide.active{opacity:1;transform:scale(1) translateX(0);pointer-events:auto}
-.login-slide:nth-child(1){background:radial-gradient(circle at 20% 20%,rgba(99,91,255,.9),transparent 32%),linear-gradient(135deg,#16142c,#302b67 58%,#635bff)}
-.login-slide:nth-child(2){background:radial-gradient(circle at 75% 22%,rgba(45,212,191,.75),transparent 30%),linear-gradient(135deg,#071c2a,#0b4b61 55%,#16a394)}
-.login-slide:nth-child(3){background:radial-gradient(circle at 20% 28%,rgba(244,114,182,.72),transparent 30%),linear-gradient(135deg,#271227,#66305d 58%,#9b4d87)}
-.login-slide::before{content:"";position:absolute;width:310px;height:310px;border:1px solid rgba(255,255,255,.18);border-radius:50%;top:-80px;right:-80px;box-shadow:0 0 0 55px rgba(255,255,255,.035),0 0 0 110px rgba(255,255,255,.025)}
-.login-slide::after{content:"";position:absolute;width:180px;height:180px;border:1px solid rgba(255,255,255,.14);border-radius:42px;bottom:55px;left:55px;transform:rotate(22deg)}
-.login-kicker{position:relative;z-index:2;display:inline-flex;width:max-content;align-items:center;gap:8px;padding:7px 11px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.10);backdrop-filter:blur(10px);border-radius:999px;font:800 11px Arial,sans-serif;letter-spacing:.3px;margin-bottom:16px}
-.login-kicker i{width:7px;height:7px;border-radius:50%;background:#fff;display:block;box-shadow:0 0 14px #fff}
-.login-slide h2{position:relative;z-index:2;font:900 38px/1.12 Arial,sans-serif;max-width:470px;margin-bottom:14px;letter-spacing:-1px}
-.login-slide p{position:relative;z-index:2;max-width:440px;color:rgba(255,255,255,.82);font-size:14px;line-height:1.9}
-.login-slide-number{position:absolute;z-index:2;top:38px;left:42px;font:800 12px Arial;color:rgba(255,255,255,.6);letter-spacing:2px}
-.login-dots{position:absolute;z-index:5;bottom:32px;right:58px;display:flex;gap:7px;direction:ltr}
-.login-dot{width:7px;height:7px;border:0;padding:0;border-radius:99px;background:rgba(255,255,255,.35);transition:all .45s ease}
-.login-dot.active{width:28px;background:#fff}
-.login-form{display:flex;align-items:center;justify-content:center;padding:54px 58px;background:#fff}
-.login-form-inner{width:min(390px,100%)}
-.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:34px;direction:rtl}
-.login-brand-mark{width:46px;height:46px;border-radius:13px;background:#635bff;color:#fff;display:grid;place-items:center;font:900 18px Arial;box-shadow:0 8px 22px rgba(99,91,255,.28)}
-.login-brand-text{font:900 25px Arial;color:#151923;letter-spacing:-.7px}.login-brand-text span{color:#635bff}
-.login-heading{text-align:right;margin-bottom:27px}.login-heading h1{font:900 29px/1.25 Arial,sans-serif;color:#151923;margin-bottom:8px}.login-heading p{color:#667085;font-size:13px;line-height:1.8}
-.login-form .field{margin-bottom:17px}.login-form .field label{color:#344054;font-size:12px;margin-bottom:8px}.login-form .field input{height:48px;border-radius:10px;padding:0 14px;background:#fff;border:1px solid #d0d5dd;color:#101828;transition:border-color .2s,box-shadow .2s,transform .2s}
-.login-form .field input:hover{border-color:#b8c0cc}.login-form .field input:focus{border-color:#635bff;box-shadow:0 0 0 4px rgba(99,91,255,.11);transform:translateY(-1px)}
-.login-submit{width:100%;height:49px!important;border-radius:10px!important;font-size:13px!important;background:#635bff!important;box-shadow:0 8px 20px rgba(99,91,255,.20)!important;transition:transform .2s,box-shadow .2s,filter .2s}
-.login-submit:hover{transform:translateY(-1px);box-shadow:0 11px 24px rgba(99,91,255,.26)!important}.login-submit:active{transform:translateY(0)}
-.login-security{display:flex;align-items:center;justify-content:center;gap:7px;margin-top:18px;color:#98a2b3;font:600 11px Arial}.login-security span{width:6px;height:6px;border-radius:50%;background:#12b76a}
-.login-form #loginError{margin-top:13px;border-radius:9px;font-size:12px}
-@media(max-width:850px){.login{padding:14px}.login-shell{grid-template-columns:1fr;min-height:auto;border-radius:22px}.login-visual{display:none}.login-form{min-height:calc(100vh - 28px);padding:38px 25px}.login-form-inner{max-width:420px}}
-@media(max-width:420px){.login{padding:10px}.login-form{padding:30px 20px}.login-heading h1{font-size:25px}.login-brand{margin-bottom:28px}}
+.login-orb{position:absolute;border-radius:50%;filter:blur(1px);opacity:.7;pointer-events:none}
+.login-orb.a{width:340px;height:340px;right:-110px;top:-130px;background:rgba(99,91,255,.5);box-shadow:0 0 100px rgba(99,91,255,.35)}
+.login-orb.b{width:240px;height:240px;left:-90px;bottom:-80px;background:rgba(20,184,166,.28);box-shadow:0 0 90px rgba(20,184,166,.2)}
+.login-topmark{position:absolute;top:34px;left:38px;z-index:6;display:flex;align-items:center;gap:11px}
+.login-topmark .mark,.brand-mark,.side-mark{
+ display:grid;place-items:center;color:#fff;font-weight:950;letter-spacing:-.5px
+}
+.login-topmark .mark{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(12px)}
+.login-topmark b{display:block;font-size:15px}.login-topmark span{display:block;font-size:9px;color:rgba(255,255,255,.55);margin-top:2px}
+.login-slide{
+ position:absolute;inset:0;padding:54px;display:flex;align-items:flex-end;
+ opacity:0;transform:translate3d(42px,0,0) scale(1.035);
+ transition:opacity .9s ease,transform 1.15s cubic-bezier(.22,.61,.36,1);
+ pointer-events:none
+}
+.login-slide.active{opacity:1;transform:none;pointer-events:auto}
+.login-slide:nth-child(1){background:radial-gradient(circle at 25% 20%,rgba(128,119,255,.65),transparent 30%),linear-gradient(145deg,#11102a,#302b67 62%,#635bff)}
+.login-slide:nth-child(2){background:radial-gradient(circle at 76% 20%,rgba(73,218,198,.5),transparent 30%),linear-gradient(145deg,#071522,#07536a 62%,#159d91)}
+.login-slide:nth-child(3){background:radial-gradient(circle at 25% 18%,rgba(244,132,193,.48),transparent 30%),linear-gradient(145deg,#201023,#5c2d59 62%,#9c4d88)}
+.slide-number{position:absolute;top:38px;right:42px;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.52);font-weight:900}
+.slide-content{position:relative;z-index:3;max-width:520px}
+.slide-kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border-radius:999px;font-size:9px;font-weight:900;letter-spacing:1px;margin-bottom:17px}
+.slide-kicker i{width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 14px #fff}
+.slide-content h2{margin:0 0 14px;font-size:40px;line-height:1.16;letter-spacing:-1.4px;font-weight:950}
+.slide-content p{margin:0;color:rgba(255,255,255,.75);font-size:13px;line-height:2;max-width:460px}
+.login-dots{position:absolute;z-index:8;left:54px;bottom:37px;display:flex;gap:7px;direction:ltr}
+.login-dot{width:7px;height:7px;padding:0;border:0;border-radius:99px;background:rgba(255,255,255,.28);transition:.45s}
+.login-dot.active{width:30px;background:#fff}
+.login-form{direction:rtl;display:flex;align-items:center;justify-content:center;padding:65px;background:#fff}
+.login-inner{width:min(390px,100%)}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:39px}
+.brand-mark{width:50px;height:50px;border-radius:15px;background:linear-gradient(135deg,#635bff,#837bff);box-shadow:0 12px 28px rgba(99,91,255,.22)}
+.brand-text{font-size:25px;font-weight:950;letter-spacing:-.9px}.brand-text span{color:var(--primary)}
+.login-heading h1{font-size:29px;letter-spacing:-.7px;margin:0 0 7px;font-weight:950}
+.login-heading p{margin:0 0 29px;color:var(--muted);font-size:13px;line-height:1.9}
+.field{margin-bottom:15px}.field label{display:block;margin-bottom:7px;font-size:11px;font-weight:900;color:#344054}
+.field input,.field select,.field textarea{
+ width:100%;border:1px solid #d7dce5;background:#fff;color:#101828;border-radius:9px;outline:0;padding:0 12px;transition:.2s
+}
+.field input,.field select{height:46px}.field textarea{padding:11px;min-height:105px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(99,91,255,.1)}
+.login-submit{width:100%;height:49px;border:0;border-radius:9px;background:var(--primary);color:#fff;font-weight:950;box-shadow:0 10px 22px rgba(99,91,255,.2);transition:.2s}
+.login-submit:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.login-error{color:#b42318;background:#fef3f2;border:1px solid #fecdca;border-radius:9px;font-size:11px;line-height:1.7;margin-top:12px}
+.login-error:empty{display:none}.login-error:not(:empty){padding:9px 11px}
+.login-secure{display:flex;align-items:center;justify-content:center;gap:7px;color:#98a2b3;font-size:9px;font-weight:800;margin-top:18px}
+.login-secure i{width:6px;height:6px;border-radius:50%;background:var(--green)}
+
+/* ===== APP ===== */
+#app{min-height:100vh;display:flex}
+.sidebar{
+ position:fixed;z-index:50;top:0;right:0;bottom:0;width:270px;background:#fff;border-left:1px solid var(--line);
+ display:flex;flex-direction:column;padding:18px 13px;transition:transform .3s cubic-bezier(.22,.61,.36,1)
+}
+.side-brand{display:flex;align-items:center;gap:11px;padding:7px 10px 25px}
+.side-mark{width:41px;height:41px;border-radius:12px;background:linear-gradient(135deg,#635bff,#827aff)}
+.side-brand strong{font-size:17px;font-weight:950;letter-spacing:-.5px}.side-brand span{display:block;color:#98a2b3;font-size:8px;letter-spacing:1px;font-weight:900;margin-top:2px}
+.side-label{font-size:9px;color:#98a2b3;font-weight:950;padding:0 12px 8px}
+.nav{display:flex;flex-direction:column;gap:3px}.nav button{
+ width:100%;height:43px;border:0;border-radius:9px;background:transparent;color:#475467;padding:0 12px;
+ display:flex;align-items:center;gap:11px;text-align:right;font-size:11px;font-weight:850;transition:.18s
+}
+.nav button .ico{width:20px;text-align:center;font-size:14px;opacity:.8}.nav button:hover{background:#f6f7f9;color:#111827}
+.nav button.active{background:#eeecff;color:#5148d8}.nav button.active .ico{opacity:1}
+.side-bottom{margin-top:auto;padding:14px 3px 3px;border-top:1px solid var(--line);display:grid;gap:7px}
+.main{width:calc(100% - 270px);margin-right:270px;min-height:100vh;padding:25px 31px 35px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px}
+.top-left{display:flex;align-items:center;gap:11px}.top h1{font-size:23px;letter-spacing:-.7px;margin:0;font-weight:950}.top p{font-size:10px;color:#98a2b3;margin:4px 0 0}
+.top-actions{display:flex;gap:7px}.primary,.secondary,.danger,.mini{
+ height:39px;padding:0 13px;border-radius:8px;font-size:10px;font-weight:900;transition:.18s
+}
+.primary{border:1px solid var(--primary);background:var(--primary);color:#fff;box-shadow:0 5px 12px rgba(99,91,255,.15)}
+.primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
+.secondary{border:1px solid #d9dee7;background:#fff;color:#344054}.secondary:hover{background:#f8fafc}
+.danger{border:1px solid #f1c7c3;background:#fff;color:#b42318}.danger:hover{background:#fef3f2}
+.mobile-menu{display:none}
+.page{display:none;animation:pageIn .3s ease}.page.active{display:block}
+@keyframes pageIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:14px}
+.card{position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:13px;padding:17px;min-height:126px;box-shadow:var(--shadow)}
+.card:after{content:"";position:absolute;left:-25px;bottom:-45px;width:120px;height:120px;border-radius:50%;background:rgba(99,91,255,.035)}
+.kpi-top{display:flex;align-items:center;justify-content:space-between}.kpi-title{font-size:10px;color:#667085;font-weight:850}
+.kpi-icon{width:31px;height:31px;border-radius:9px;background:#f0efff;color:var(--primary);display:grid;place-items:center;font-size:11px;font-weight:950}
+.kpi-value{font-size:27px;line-height:1;margin-top:17px;font-weight:950;letter-spacing:-1.2px}.kpi-note{font-size:9px;color:#98a2b3;margin-top:6px}
+.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:13px;padding:17px;box-shadow:var(--shadow);margin-bottom:14px}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:13px;margin-bottom:13px;border-bottom:1px solid #eef0f3}
+.panel-head h2{font-size:13px;margin:0;font-weight:950}.panel-head span{font-size:9px;color:#98a2b3;font-weight:800}
+.stat-row,.order-line{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 11px;background:#fafbfc;border:1px solid #edf0f3;border-radius:8px;margin-bottom:6px;font-size:10px}
+.stat-row:last-child,.order-line:last-child{margin-bottom:0}.muted{color:#667085}.empty{padding:27px 10px;text-align:center;color:#98a2b3;font-size:11px}
+.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}.toolbar input,.toolbar select{
+ height:38px;border:1px solid #d9dee7;background:#fff;border-radius:8px;padding:0 10px;color:#344054;font-size:10px;outline:0
+}.toolbar input{flex:1;min-width:180px}.toolbar input:focus,.toolbar select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,91,255,.08)}
+.table-wrap{overflow:auto;border:1px solid #e5e7eb;border-radius:9px;background:#fff}
+table{width:100%;border-collapse:collapse;min-width:760px}th{
+ background:#f8fafc;color:#667085;font-size:9px;text-align:right;font-weight:950;padding:10px 11px;border-bottom:1px solid #e5e7eb
+}td{font-size:10px;color:#344054;padding:10px 11px;border-bottom:1px solid #eef0f3;vertical-align:middle}tr:last-child td{border-bottom:0}tr:hover td{background:#fcfdff}
+.product-cell{display:flex;align-items:center;gap:9px;font-weight:850}.thumb{width:37px;height:37px;border-radius:8px;object-fit:cover;border:1px solid #e4e7ec;background:#f8fafc}
+.actions{display:flex;gap:4px;flex-wrap:wrap}.mini{height:29px;padding:0 8px;border:1px solid #d9dee7;background:#fff;color:#475467}.mini:hover{background:#f8fafc}
+.badge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;font-size:8px;font-weight:950;background:#f2f4f7;color:#667085}
+.badge.success{background:#ecfdf3;color:#087443}.badge.warn{background:#fffaeb;color:#b54708}.badge.danger{background:#fef3f2;color:#b42318}.badge.new{background:#eff8ff;color:#175cd3}
+.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.full{grid-column:1/-1}
+.checks{display:flex;flex-wrap:wrap;gap:6px}.check{display:inline-flex!important;align-items:center;gap:6px!important;border:1px solid #e4e7ec;background:#fafbfc;padding:7px 9px!important;border-radius:8px!important;margin:0!important;font-size:9px!important}.check input{width:auto!important;height:auto!important}
+.modal{position:fixed;z-index:100;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,.45);backdrop-filter:blur(6px)}
+.modal.show{display:flex}.modal-box{width:min(780px,100%);max-height:90vh;overflow:auto;background:#fff;border:1px solid #e5e7eb;border-radius:15px;box-shadow:0 30px 90px rgba(16,24,40,.24);padding:19px}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:13px;margin-bottom:15px;border-bottom:1px solid #edf0f3}.modal-head h2{font-size:15px;margin:0;font-weight:950}
+.close{width:33px;height:33px;border-radius:8px;border:1px solid #d9dee7;background:#fff;font-size:19px;color:#475467}.close:hover{background:#f8fafc}
+.modal-actions{display:flex;gap:7px;justify-content:flex-start;margin-top:16px;padding-top:14px;border-top:1px solid #edf0f3}
+.ks-image-box{border:1px dashed #cbd5e1;background:#f8fafc;border-radius:9px;padding:10px}.ks-image-row{display:flex;gap:11px;align-items:center}.ks-image-preview{display:none;width:62px;height:62px;border-radius:8px;object-fit:cover}.ks-image-info,.ks-compress-status{font-size:9px;color:#667085;line-height:1.6}
+.toast{position:fixed;z-index:200;bottom:20px;left:50%;transform:translate(-50%,15px);opacity:0;pointer-events:none;background:#111827;color:#fff;padding:9px 14px;border-radius:8px;font-size:10px;box-shadow:0 15px 35px rgba(16,24,40,.2);transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:1050px){
+ .sidebar{width:235px}.main{width:calc(100% - 235px);margin-right:235px;padding:22px}.cards{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:850px){
+ .login{padding:12px}.login-shell{display:block;min-height:auto;border-radius:20px}.login-visual{height:260px}.login-slide{padding:31px}.slide-content h2{font-size:26px}.slide-content p{font-size:11px;line-height:1.7}.login-form{min-height:calc(100vh - 272px);padding:35px 25px}
+ .sidebar{transform:translateX(100%);width:min(290px,88vw);box-shadow:-25px 0 70px rgba(16,24,40,.16)}.sidebar.open{transform:translateX(0)}
+ .main{width:100%;margin-right:0;padding:15px}.mobile-menu{display:inline-flex;align-items:center;justify-content:center;width:39px;padding:0}.top{align-items:flex-start}.top-actions .secondary{display:none}.grid2{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+ .cards{grid-template-columns:1fr 1fr;gap:8px}.card{padding:12px;min-height:105px}.kpi-value{font-size:21px}.panel{padding:12px}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}
+ .top h1{font-size:19px}.top p{font-size:8px}.top-actions .primary{height:36px;padding:0 9px}.login-visual{height:235px}.login-form{padding:29px 17px}
+ .slide-content h2{font-size:22px}.slide-number{top:20px;right:21px}.login-topmark{top:19px;left:20px}.login-dots{bottom:17px;left:23px}
+}
 </style>
 </head>
 <body>
 
 <section id="loginView" class="login">
-  <div class="login-shell">
-    <div class="login-visual" aria-hidden="true">
-      <div class="login-slides">
-        <div class="login-slide active">
-          <div class="login-slide-number">01 / 03</div>
-          <div class="login-kicker"><i></i> KURDSHEIN ADMIN</div>
-          <h2>بەڕێوەبردنی فرۆشگاکەت بە شێوەیەکی زیرەک</h2>
-          <p>هەموو بەشەکانی فرۆشگاکەت لە یەک داشبۆردی پاک و پیشەییدا کۆ بکەرەوە.</p>
-        </div>
-        <div class="login-slide">
-          <div class="login-slide-number">02 / 03</div>
-          <div class="login-kicker"><i></i> SIMPLE CONTROL</div>
-          <h2>کۆنترۆڵی کاڵاکان و داواکارییەکان بە خێرایی</h2>
-          <p>ڕوون، خێرا و ئاسان بۆ بەڕێوەبردنی کارە ڕۆژانەکانی فرۆشگاکەت.</p>
-        </div>
-        <div class="login-slide">
-          <div class="login-slide-number">03 / 03</div>
-          <div class="login-kicker"><i></i> SECURE ACCESS</div>
-          <h2>دەستگەیشتنێکی پارێزراو بۆ بەشی ئەدمین</h2>
-          <p>تەنها ئەکاونتە ڕێپێدراوەکان دەتوانن بچنە ناو داشبۆردی بەڕێوەبردنەوە.</p>
-        </div>
-      </div>
-      <div class="login-dots"><button class="login-dot active" type="button"></button><button class="login-dot" type="button"></button><button class="login-dot" type="button"></button></div>
-    </div>
-    <div class="login-form login-panel">
-      <div class="login-form-inner">
-        <div class="login-brand"><div class="login-brand-mark">KS</div><div class="login-brand-text">Kurd<span>Shein</span></div></div>
-        <div class="login-heading"><h1>بەخێربێیتەوە 👋</h1><p>بۆ بەردەوامبوون، چوونەژوورەوە بۆ داشبۆردی ئەدمین.</p></div>
-        <div class="field"><label>ئیمەیڵ</label><input id="loginEmail" type="email" autocomplete="username" placeholder="admin@example.com"></div>
-        <div class="field"><label>وشەی نهێنی</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="••••••••"></div>
-        <button class="primary login-submit" onclick="login()">چوونەژوورەوە</button>
-        <div id="loginError" class="notice"></div>
-        <div class="login-security"><span></span> چوونەژوورەوەی پارێزراو</div>
-      </div>
-    </div>
+ <div class="login-shell">
+  <div class="login-visual">
+   <div class="login-orb a"></div><div class="login-orb b"></div>
+   <div class="login-topmark"><div class="mark">KS</div><div><b>KurdShein</b><span>ADMIN CONSOLE</span></div></div>
+   <article class="login-slide active">
+    <div class="slide-number">01 / 03</div><div class="slide-content"><div class="slide-kicker"><i></i> SMART ADMINISTRATION</div><h2>بەڕێوەبردنی فرۆشگاکەت، بە شێوەیەکی پیشەیی.</h2><p>هەموو بەرهەم و داواکارییەکانت لە داشبۆردێکی پاک و خێرا کۆبکەرەوە.</p></div>
+   </article>
+   <article class="login-slide">
+    <div class="slide-number">02 / 03</div><div class="slide-content"><div class="slide-kicker"><i></i> REAL-TIME DATA</div><h2>هەموو شتێک بە داتای نوێ ببینە.</h2><p>Firestore داتاکانت بە شێوەی live دەگوازێتەوە بۆ ئەدمین کۆنسۆڵەکە.</p></div>
+   </article>
+   <article class="login-slide">
+    <div class="slide-number">03 / 03</div><div class="slide-content"><div class="slide-kicker"><i></i> SECURE WORKSPACE</div><h2>شوێنێکی پارێزراو بۆ کارکردنی تۆ.</h2><p>دەستگەیشتن بە workspace ـی ئەدمین بە Firebase Authentication پارێزراوە.</p></div>
+   </article>
+   <div class="login-dots"><button class="login-dot active" type="button"></button><button class="login-dot" type="button"></button><button class="login-dot" type="button"></button></div>
   </div>
+
+  <div class="login-form">
+   <div class="login-inner">
+    <div class="brand"><div class="brand-mark">KS</div><div class="brand-text">Kurd<span>Shein</span></div></div>
+    <div class="login-heading"><h1>بەخێربێیتەوە 👋</h1><p>چوونەژوورەوە بۆ بەڕێوەبردنی فرۆشگای KurdShein.</p></div>
+    <div class="field"><label>ئیمەیڵ</label><input id="loginEmail" type="email" autocomplete="username" placeholder="admin@example.com"></div>
+    <div class="field"><label>وشەی نهێنی</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="••••••••"></div>
+    <button class="login-submit" type="button" onclick="login()">چوونەژوورەوە</button>
+    <div id="loginError" class="login-error"></div>
+    <div class="login-secure"><i></i><span>Secure access · Firebase Authentication</span></div>
+   </div>
+  </div>
+ </div>
 </section>
 
-<div id="app" class="app hidden">
-  <aside id="sidebar" class="sidebar">
-    <div class="side-logo">Kurd<span>Shein</span></div>
-    <div class="side-label">بەڕێوەبردن</div><div style="height:1px;background:#edf0f4;margin:4px 10px 8px"></div>
-    <nav class="nav">
-      <button class="active" data-page="dashboard" onclick="showPage('dashboard')">📊 داشبۆرد</button>
-      <button data-page="products" onclick="showPage('products')">📦 بەرهەمەکان</button>
-      <button data-page="orders" onclick="showPage('orders')">🧾 داواکارییەکان</button>
-      <button data-page="customers" onclick="showPage('customers')">👥 کڕیارەکان</button>
-      <button data-page="accounting" onclick="showPage('accounting')">💰 حسابات</button>
-      <button data-page="settings" onclick="showPage('settings')">⚙️ ڕێکخستنەکان</button>
-    </nav>
-    <div class="side-bottom">
-      <button class="secondary" onclick="window.open('index.html','_blank')">🌐 کردنەوەی سایت</button>
-      <button class="secondary" onclick="logout()">🚪 چوونەدەرەوە</button>
-    </div>
-  </aside>
+<div id="app" class="hidden">
+ <aside id="sidebar" class="sidebar">
+  <div class="side-brand"><div class="side-mark">KS</div><div><strong>KurdShein</strong><span>ADMIN CONSOLE</span></div></div>
+  <div class="side-label">بەڕێوەبردن</div>
+  <nav class="nav">
+   <button class="active" data-page="dashboard" onclick="showPage('dashboard')"><span class="ico">⌂</span> داشبۆرد</button>
+   <button data-page="products" onclick="showPage('products')"><span class="ico">▣</span> بەرهەمەکان</button>
+   <button data-page="orders" onclick="showPage('orders')"><span class="ico">↗</span> داواکارییەکان</button>
+   <button data-page="customers" onclick="showPage('customers')"><span class="ico">◉</span> کڕیارەکان</button>
+   <button data-page="accounting" onclick="showPage('accounting')"><span class="ico">◫</span> حسابات</button>
+   <button data-page="settings" onclick="showPage('settings')"><span class="ico">⚙</span> ڕێکخستنەکان</button>
+  </nav>
+  <div class="side-bottom">
+   <button class="secondary" onclick="window.open('index.html','_blank')">↗ کردنەوەی سایت</button>
+   <button class="secondary" onclick="logout()">↪ چوونەدەرەوە</button>
+  </div>
+ </aside>
 
-  <main class="main">
-    <header class="top">
-      <div>
-        <button class="secondary mobile-menu" onclick="toggleSidebar()">☰</button>
-        <h1 id="pageTitle">داشبۆرد</h1>
-        <p id="syncStatus">پەیوەندی بە Firestore...</p>
-      </div>
-      <div class="top-actions">
-        <button class="secondary" onclick="refreshAll()">↻ نوێکردنەوە</button>
-        <button class="primary" onclick="openProductModal()">＋ بەرهەمی نوێ</button>
-      </div>
-    </header>
+ <main class="main">
+  <header class="top">
+   <div class="top-left"><button class="secondary mobile-menu" onclick="toggleSidebar()">☰</button><div><h1 id="pageTitle">داشبۆرد</h1><p id="syncStatus">پەیوەندی بە Firestore...</p></div></div>
+   <div class="top-actions"><button class="secondary" onclick="refreshAll()">↻ نوێکردنەوە</button><button class="primary" onclick="openProductModal()">＋ بەرهەمی نوێ</button></div>
+  </header>
 
-    <section id="page-dashboard" class="page active">
-      <div class="cards">
-        <div class="card"><div class="kpi-title">کۆی بەرهەم</div><div id="kProducts" class="kpi-value">0</div><div class="kpi-note">لە collection ـی product</div></div>
-        <div class="card"><div class="kpi-title">داواکارییەکان</div><div id="kOrders" class="kpi-value">0</div><div class="kpi-note">هەموو داواکارییەکان</div></div>
-        <div class="card"><div class="kpi-title">داواکاریی نوێ</div><div id="kPending" class="kpi-value">0</div><div class="kpi-note">بۆ پێداچوونەوە</div></div>
-        <div class="card"><div class="kpi-title">کۆی فرۆشتن</div><div id="kRevenue" class="kpi-value">0</div><div class="kpi-note">د.ع</div></div>
-      </div>
-      <div class="grid2">
-        <div class="panel"><div class="panel-head"><h2>دواین داواکارییەکان</h2><span>live data</span></div><div id="recentOrders"></div></div>
-        <div class="panel"><div class="panel-head"><h2>ئاگاداریی بەرهەم</h2><span>Stock</span></div><div id="stockAlerts"></div></div>
-      </div>
-    </section>
+  <section id="page-dashboard" class="page active">
+   <div class="cards">
+    <div class="card"><div class="kpi-top"><div class="kpi-title">کۆی بەرهەم</div><div class="kpi-icon">▣</div></div><div id="kProducts" class="kpi-value">0</div><div class="kpi-note">لە collection ـی product</div></div>
+    <div class="card"><div class="kpi-top"><div class="kpi-title">داواکارییەکان</div><div class="kpi-icon">↗</div></div><div id="kOrders" class="kpi-value">0</div><div class="kpi-note">هەموو داواکارییەکان</div></div>
+    <div class="card"><div class="kpi-top"><div class="kpi-title">داواکاریی نوێ</div><div class="kpi-icon">!</div></div><div id="kPending" class="kpi-value">0</div><div class="kpi-note">بۆ پێداچوونەوە</div></div>
+    <div class="card"><div class="kpi-top"><div class="kpi-title">کۆی فرۆشتن</div><div class="kpi-icon">د.ع</div></div><div id="kRevenue" class="kpi-value">0</div><div class="kpi-note">د.ع</div></div>
+   </div>
+   <div class="grid2"><div class="panel"><div class="panel-head"><h2>دواین داواکارییەکان</h2><span>LIVE</span></div><div id="recentOrders"></div></div><div class="panel"><div class="panel-head"><h2>ئاگاداریی Stock</h2><span>INVENTORY</span></div><div id="stockAlerts"></div></div></div>
+  </section>
 
-    <section id="page-products" class="page">
-      <div class="panel">
-        <div class="panel-head"><h2>بەرهەمەکان</h2><span>Firestore: product</span></div>
-        <div class="toolbar">
-          <input id="productSearch" placeholder="گەڕان بە ناو..." oninput="renderProducts()">
-          <select id="productCategory" onchange="renderProducts()"><option value="">هەموو جۆرەکان</option><option value="new">نوێ</option><option value="sale">داشکاندن</option><option value="men">پیاوان</option><option value="women">ئافرەتان</option><option value="kids">منداڵان</option><option value="accessories">ئەکسسوارات</option><option value="electronics">ئەلکترۆنی</option></select>
-          <select id="productStock" onchange="renderProducts()"><option value="">هەموو stock</option><option value="low">کەمتر لە 4</option><option value="out">بەردەست نییە</option></select>
-        </div>
-        <div class="table-wrap"><table><thead><tr><th>بەرهەم</th><th>نرخ</th><th>نرخی کۆن</th><th>Stock</th><th>جۆر</th><th>چالاک</th><th>کردار</th></tr></thead><tbody id="productsTable"></tbody></table></div>
-      </div>
-    </section>
+  <section id="page-products" class="page"><div class="panel">
+   <div class="panel-head"><h2>بەرهەمەکان</h2><span>Firestore · product</span></div>
+   <div class="toolbar"><input id="productSearch" placeholder="گەڕان بە ناوی بەرهەم..." oninput="renderProducts()"><select id="productCategory" onchange="renderProducts()"><option value="">هەموو جۆرەکان</option><option value="new">نوێ</option><option value="sale">داشکاندن</option><option value="men">پیاوان</option><option value="women">ئافرەتان</option><option value="kids">منداڵان</option><option value="accessories">ئەکسسوارات</option><option value="electronics">ئەلکترۆنی</option></select><select id="productStock" onchange="renderProducts()"><option value="">هەموو Stock</option><option value="low">کەمتر لە 4</option><option value="out">بەردەست نییە</option></select></div>
+   <div class="table-wrap"><table><thead><tr><th>بەرهەم</th><th>نرخ</th><th>نرخی کۆن</th><th>Stock</th><th>جۆر</th><th>چالاک</th><th>کردار</th></tr></thead><tbody id="productsTable"></tbody></table></div>
+  </div></section>
 
-    <section id="page-orders" class="page">
-      <div class="panel">
-        <div class="panel-head"><h2>داواکارییەکان</h2><span>Firestore: orders</span></div>
-        <div class="toolbar"><input id="orderSearch" placeholder="ناو یان ژمارە..." oninput="renderOrders()"><select id="orderStatus" onchange="renderOrders()"><option value="">هەموو دۆخەکان</option><option value="pending">چاوەڕوان</option><option value="confirmed">پشتڕاستکراوە</option><option value="processing">لە کاردایە</option><option value="shipped">نێردراوە</option><option value="delivered">گەیشتووە</option><option value="cancelled">هەڵوەشێنراوە</option></select></div>
-        <div class="table-wrap"><table><thead><tr><th>ID</th><th>کڕیار</th><th>شار</th><th>بەرهەم</th><th>کۆی گشتی</th><th>دۆخ</th><th>بەروار</th><th>کردار</th></tr></thead><tbody id="ordersTable"></tbody></table></div>
-      </div>
-    </section>
+  <section id="page-orders" class="page"><div class="panel">
+   <div class="panel-head"><h2>داواکارییەکان</h2><span>Firestore · orders</span></div>
+   <div class="toolbar"><input id="orderSearch" placeholder="ناو یان ژمارە..." oninput="renderOrders()"><select id="orderStatus" onchange="renderOrders()"><option value="">هەموو دۆخەکان</option><option value="pending">چاوەڕوان</option><option value="confirmed">پشتڕاستکراوە</option><option value="processing">لە کاردایە</option><option value="shipped">نێردراوە</option><option value="delivered">گەیشتووە</option><option value="cancelled">هەڵوەشێنراوە</option></select></div>
+   <div class="table-wrap"><table><thead><tr><th>ID</th><th>کڕیار</th><th>شار</th><th>بەرهەم</th><th>کۆی گشتی</th><th>دۆخ</th><th>بەروار</th><th>کردار</th></tr></thead><tbody id="ordersTable"></tbody></table></div>
+  </div></section>
 
-    <section id="page-customers" class="page">
-      <div class="panel">
-        <div class="panel-head"><h2>کڕیارەکان</h2><span>لە orders کۆکراونەتەوە</span></div>
-        <div class="toolbar"><input id="customerSearch" placeholder="گەڕان..." oninput="renderCustomers()"></div>
-        <div class="table-wrap"><table><thead><tr><th>ناو</th><th>تەلەفۆن</th><th>شار</th><th>داواکاری</th><th>کۆی کڕین</th><th>دواین داواکاری</th></tr></thead><tbody id="customersTable"></tbody></table></div>
-      </div>
-    </section>
+  <section id="page-customers" class="page"><div class="panel">
+   <div class="panel-head"><h2>کڕیارەکان</h2><span>لە orders کۆکراونەتەوە</span></div>
+   <div class="toolbar"><input id="customerSearch" placeholder="گەڕان بە ناو، ژمارە یان شار..." oninput="renderCustomers()"></div>
+   <div class="table-wrap"><table><thead><tr><th>ناو</th><th>تەلەفۆن</th><th>شار</th><th>داواکاری</th><th>کۆی کڕین</th><th>دواین داواکاری</th></tr></thead><tbody id="customersTable"></tbody></table></div>
+  </div></section>
 
-    <section id="page-accounting" class="page">
-      <div class="cards">
-        <div class="card"><div class="kpi-title">فرۆشتنی گشتی</div><div id="aRevenue" class="kpi-value">0</div><div class="kpi-note">د.ع</div></div>
-        <div class="card"><div class="kpi-title">گەیاندن</div><div id="aDelivery" class="kpi-value">0</div><div class="kpi-note">د.ع</div></div>
-        <div class="card"><div class="kpi-title">داشکاندن</div><div id="aDiscount" class="kpi-value">0</div><div class="kpi-note">د.ع</div></div>
-        <div class="card"><div class="kpi-title">ژمارەی فرۆشتن</div><div id="aCount" class="kpi-value">0</div><div class="kpi-note">داواکاری</div></div>
-      </div>
-      <div class="grid2">
-        <div class="panel"><div class="panel-head"><h2>کورتەی حسابات</h2><span>بەپێی داتای orders</span></div><div id="accountingSummary" class="stat-list"></div></div>
-        <div class="panel"><div class="panel-head"><h2>تێبینی</h2></div><p class="muted" style="line-height:2;font-size:12px">ئەم بەشە فرۆشتن، گەیاندن و داشکاندن لە داواکارییەکانی Firestore کۆدەکاتەوە. بۆ قازانجی ڕاستەقینە، تێچووی کڕینی کاڵا دەتوانیت لە داهاتوودا زیاد بکەیت.</p></div>
-      </div>
-    </section>
+  <section id="page-accounting" class="page">
+   <div class="cards">
+    <div class="card"><div class="kpi-top"><div class="kpi-title">فرۆشتنی گشتی</div><div class="kpi-icon">د.ع</div></div><div id="aRevenue" class="kpi-value">0</div><div class="kpi-note">د.ع</div></div>
+    <div class="card"><div class="kpi-top"><div class="kpi-title">گەیاندن</div><div class="kpi-icon">↗</div></div><div id="aDelivery" class="kpi-value">0</div><div class="kpi-note">د.ع</div></div>
+    <div class="card"><div class="kpi-top"><div class="kpi-title">داشکاندن</div><div class="kpi-icon">%</div></div><div id="aDiscount" class="kpi-value">0</div><div class="kpi-note">د.ع</div></div>
+    <div class="card"><div class="kpi-top"><div class="kpi-title">ژمارەی فرۆشتن</div><div class="kpi-icon">#</div></div><div id="aCount" class="kpi-value">0</div><div class="kpi-note">داواکاری</div></div>
+   </div>
+   <div class="grid2"><div class="panel"><div class="panel-head"><h2>کورتەی حسابات</h2><span>ORDERS</span></div><div id="accountingSummary"></div></div><div class="panel"><div class="panel-head"><h2>تێبینی</h2></div><p class="muted" style="line-height:2;font-size:11px">ئەم بەشە فرۆشتن، گەیاندن و داشکاندن لە داواکارییەکانی Firestore کۆدەکاتەوە.</p></div></div>
+  </section>
 
-    <section id="page-settings" class="page">
-      <div class="grid2">
-        <div class="panel">
-          <div class="panel-head"><h2>گەیاندن</h2><span>deliveryFees</span></div>
-          <div class="form-grid">
-            <div class="field"><label>هەولێر</label><input id="feeErbil" type="number"></div>
-            <div class="field"><label>سلێمانی</label><input id="feeSulaymaniyah" type="number"></div>
-            <div class="field"><label>دهۆک</label><input id="feeDuhok" type="number"></div>
-            <div class="field"><label>شارێکی تر</label><input id="feeOther" type="number"></div>
-          </div>
-          <button class="primary" onclick="saveSettings()" style="margin-top:10px">پاشەکەوتکردن</button>
-        </div>
-        <div class="panel">
-          <div class="panel-head"><h2>کۆدەکانی داشکاندن</h2><span>couponCodes</span></div>
-          <div id="couponRows"></div>
-          <button class="secondary" onclick="addCouponRow()">＋ کۆدی نوێ</button>
-          <button class="primary" onclick="saveSettings()" style="margin-top:10px">پاشەکەوتکردن</button>
-        </div>
-      </div>
-    </section>
-  </main>
+  <section id="page-settings" class="page"><div class="grid2">
+   <div class="panel"><div class="panel-head"><h2>گەیاندن</h2><span>deliveryFees</span></div><div class="form-grid"><div class="field"><label>هەولێر</label><input id="feeErbil" type="number"></div><div class="field"><label>سلێمانی</label><input id="feeSulaymaniyah" type="number"></div><div class="field"><label>دهۆک</label><input id="feeDuhok" type="number"></div><div class="field"><label>شارێکی تر</label><input id="feeOther" type="number"></div></div><button class="primary" onclick="saveSettings()" style="margin-top:9px">پاشەکەوتکردن</button></div>
+   <div class="panel"><div class="panel-head"><h2>کۆدەکانی داشکاندن</h2><span>couponCodes</span></div><div id="couponRows"></div><button class="secondary" onclick="addCouponRow()">＋ کۆدی نوێ</button><button class="primary" onclick="saveSettings()" style="margin-top:9px">پاشەکەوتکردن</button></div>
+  </div></section>
+ </main>
 </div>
 
-<div id="productModal" class="modal" onclick="outsideClose(event,'productModal')">
- <div class="modal-box">
-  <div class="modal-head"><h2 id="productModalTitle">بەرهەمی نوێ</h2><button class="close" onclick="closeModal('productModal')">×</button></div>
-  <input id="productId" type="hidden">
-  <div class="form-grid">
-   <div class="field"><label>ناوی پیشاندان</label><input id="pName"></div>
-   <div class="field"><label>ناوی کورت/کارد</label><input id="pDisplayName"></div>
-   <div class="field full"><label>وەسفی کورت</label><input id="pShort"></div>
-   <div class="field full"><label>وەسفی تەواو</label><textarea id="pDescription"></textarea></div>
-   <div class="field"><label>نرخ (د.ع)</label><input id="pPrice" type="number" min="0"></div>
-   <div class="field"><label>نرخی کۆن — بۆ داشکاندن</label><input id="pOldPrice" type="number" min="0"></div>
-   <div class="field"><label>Stock</label><input id="pStock" type="number" min="0"></div>
-   <div class="field"><label>ID ـی بەرهەم</label><input id="pCustomId"></div>
-   <div class="field full"><label>وێنەی سەرەکی — URL یان ناوی فایل</label>
-<div class="ks-image-box" id="ksImageCompressor">
-  <div class="ks-image-row">
-    <input type="file" id="ksProductImageFile" accept="image/*">
-    <img id="ksImagePreview" class="ks-image-preview" alt="Preview">
-    <div>
-      <strong>🖼️ Compress product image</strong>
-      <div class="ks-image-info">Automatically resized to max 800×800 and compressed to WebP.</div>
-    </div>
-  </div>
-  <div id="ksCompressStatus" class="ks-compress-status"></div>
-</div>
-<input id="pImage" placeholder="https://.../image.jpg یان IMG_1234.jpeg"></div>
-   <div class="field full"><label>وێنەکانی تر — بە | جیا بکەرەوە</label><input id="pImages" placeholder="image2.jpg|image3.jpg"></div>
-   <div class="field"><label>قەبارەکان — بە کۆما</label><input id="pSizes" placeholder="S,M,L"></div>
-   <div class="field"><label>ڕەنگەکان — بە کۆما</label><input id="pColors" placeholder="ڕەش,سپی"></div>
-   <div class="field full"><label>جۆرەکان</label><div class="checks">
-    <label class="check"><input type="checkbox" value="new" id="cNew">نوێ</label>
-    <label class="check"><input type="checkbox" value="sale" id="cSale">داشکاندن</label>
-    <label class="check"><input type="checkbox" value="men" id="cMen">پیاوان</label>
-    <label class="check"><input type="checkbox" value="women" id="cWomen">ئافرەتان</label>
-    <label class="check"><input type="checkbox" value="kids" id="cKids">منداڵان</label>
-    <label class="check"><input type="checkbox" value="accessories" id="cAccessories">ئەکسسوارات</label>
-    <label class="check"><input type="checkbox" value="electronics" id="cElectronics">ئەلکترۆنی</label>
-   </div></div>
-   <div class="field"><label><input id="pActive" type="checkbox" checked> بەرهەم چالاکە</label></div>
-  </div>
-  <div class="modal-actions"><button class="primary" onclick="saveProduct()">پاشەکەوتکردن</button><button class="secondary" onclick="closeModal('productModal')">پاشگەزبوونەوە</button></div>
+<div id="productModal" class="modal" onclick="outsideClose(event,'productModal')"><div class="modal-box">
+ <div class="modal-head"><h2 id="productModalTitle">بەرهەمی نوێ</h2><button class="close" onclick="closeModal('productModal')">×</button></div>
+ <input id="productId" type="hidden">
+ <div class="form-grid">
+  <div class="field"><label>ناوی پیشاندان</label><input id="pName"></div><div class="field"><label>ناوی کورت/کارد</label><input id="pDisplayName"></div>
+  <div class="field full"><label>وەسفی کورت</label><input id="pShort"></div><div class="field full"><label>وەسفی تەواو</label><textarea id="pDescription"></textarea></div>
+  <div class="field"><label>نرخ (د.ع)</label><input id="pPrice" type="number" min="0"></div><div class="field"><label>نرخی کۆن</label><input id="pOldPrice" type="number" min="0"></div>
+  <div class="field"><label>Stock</label><input id="pStock" type="number" min="0"></div><div class="field"><label>ID ـی بەرهەم</label><input id="pCustomId"></div>
+  <div class="field full"><label>وێنەی سەرەکی</label><div class="ks-image-box"><div class="ks-image-row"><input type="file" id="ksProductImageFile" accept="image/*"><img id="ksImagePreview" class="ks-image-preview" alt="Preview"><div><strong style="font-size:10px">🖼️ Compress product image</strong><div class="ks-image-info">تا 800×800 و WebP بە شێوەی خۆکار.</div></div></div><div id="ksCompressStatus" class="ks-compress-status"></div></div><input id="pImage" placeholder="URL یان ناوی فایل" style="margin-top:7px"></div>
+  <div class="field full"><label>وێنەکانی تر — بە | جیا بکەرەوە</label><input id="pImages" placeholder="image2.jpg|image3.jpg"></div>
+  <div class="field"><label>قەبارەکان — بە کۆما</label><input id="pSizes" placeholder="S,M,L"></div><div class="field"><label>ڕەنگەکان — بە کۆما</label><input id="pColors" placeholder="ڕەش,سپی"></div>
+  <div class="field full"><label>جۆرەکان</label><div class="checks"><label class="check"><input type="checkbox" id="cNew">نوێ</label><label class="check"><input type="checkbox" id="cSale">داشکاندن</label><label class="check"><input type="checkbox" id="cMen">پیاوان</label><label class="check"><input type="checkbox" id="cWomen">ئافرەتان</label><label class="check"><input type="checkbox" id="cKids">منداڵان</label><label class="check"><input type="checkbox" id="cAccessories">ئەکسسوارات</label><label class="check"><input type="checkbox" id="cElectronics">ئەلکترۆنی</label></div></div>
+  <div class="field"><label><input id="pActive" type="checkbox" checked> بەرهەم چالاکە</label></div>
  </div>
-</div>
+ <div class="modal-actions"><button class="primary" onclick="saveProduct()">پاشەکەوتکردن</button><button class="secondary" onclick="closeModal('productModal')">پاشگەزبوونەوە</button></div>
+</div></div>
 
-<div id="orderModal" class="modal" onclick="outsideClose(event,'orderModal')">
- <div class="modal-box"><div class="modal-head"><h2>وردەکاری داواکاری</h2><button class="close" onclick="closeModal('orderModal')">×</button></div><div id="orderDetail"></div></div>
-</div>
-
+<div id="orderModal" class="modal" onclick="outsideClose(event,'orderModal')"><div class="modal-box"><div class="modal-head"><h2>وردەکاری داواکاری</h2><button class="close" onclick="closeModal('orderModal')">×</button></div><div id="orderDetail"></div></div></div>
 <div id="toast" class="toast"></div>
 
 <script type="module">
@@ -1194,20 +528,18 @@ function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t
 })();
 </script>
 
+
+
 <script>
 (function(){
-  const slides=[...document.querySelectorAll('.login-slide')];
-  const dots=[...document.querySelectorAll('.login-dot')];
-  if(!slides.length) return;
-  let index=0, timer;
-  function show(n){
-    index=(n+slides.length)%slides.length;
-    slides.forEach((el,i)=>el.classList.toggle('active',i===index));
-    dots.forEach((el,i)=>el.classList.toggle('active',i===index));
-  }
-  function restart(){clearInterval(timer);timer=setInterval(()=>show(index+1),5200)}
-  dots.forEach((dot,i)=>dot.addEventListener('click',()=>{show(i);restart()}));
-  restart();
+ const slides=[...document.querySelectorAll(".login-slide")],dots=[...document.querySelectorAll(".login-dot")];
+ if(!slides.length)return;let i=0,timer;
+ function show(n){i=(n+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle("active",k===i));dots.forEach((d,k)=>d.classList.toggle("active",k===i))}
+ function restart(){clearInterval(timer);timer=setInterval(()=>show(i+1),5600)}
+ dots.forEach((d,k)=>d.addEventListener("click",()=>{show(k);restart()}));
+ document.querySelector(".login-visual")?.addEventListener("mouseenter",()=>clearInterval(timer));
+ document.querySelector(".login-visual")?.addEventListener("mouseleave",restart);
+ restart();
 })();
 </script>
 </body>

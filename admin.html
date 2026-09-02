@@ -751,7 +751,7 @@ function pmImagesValue(value){
 function pmEscape(value){
   return String(value ?? "").replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
-function renderProductManager(){
+window.renderProductManager = function(){
   if(!pmList) return;
   if(!products.length){
     pmList.innerHTML = '<div class="pm-empty">No products in Firestore yet.</div>';
@@ -790,10 +790,7 @@ window.openProductManager = () => {
   renderProductManager();
   window.scrollTo({top:0, behavior:"smooth"});
 };
-document.getElementById("productsTile")?.addEventListener("click", event => {
-  event.preventDefault();
-  window.openProductManager();
-});
+
 function closeProductManager(){
   const grid = document.getElementById("dashboardGrid");
   if(grid) grid.hidden = false;
@@ -992,6 +989,62 @@ pmForm?.addEventListener("submit", async e => {
 
 
 
+
+
+<script>
+(function(){
+  function initProductsNavigation(){
+    const tile = document.getElementById("productsTile");
+    const dashboard = document.getElementById("dashboardGrid");
+    const tab = document.getElementById("productManagerModal");
+    const back = document.getElementById("pmClose");
+
+    if(!tile || !dashboard || !tab) return false;
+
+    function openTab(){
+      dashboard.hidden = true;
+      tab.hidden = false;
+      tab.setAttribute("aria-hidden","false");
+      try { window.scrollTo(0, 0); } catch(e) {}
+    }
+
+    function closeTab(){
+      tab.hidden = true;
+      tab.setAttribute("aria-hidden","true");
+      dashboard.hidden = false;
+      try { window.scrollTo(0, 0); } catch(e) {}
+    }
+
+    if(!tile.dataset.productsNavigationBound){
+      tile.dataset.productsNavigationBound = "1";
+      tile.addEventListener("click", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        openTab();
+        if(typeof window.renderProductManager === "function"){
+          window.renderProductManager();
+        }
+      });
+    }
+
+    if(back && !back.dataset.productsBackBound){
+      back.dataset.productsBackBound = "1";
+      back.addEventListener("click", function(e){
+        e.preventDefault();
+        closeTab();
+      });
+    }
+
+    return true;
+  }
+
+  if(!initProductsNavigation()){
+    setTimeout(initProductsNavigation, 50);
+    setTimeout(initProductsNavigation, 250);
+    setTimeout(initProductsNavigation, 1000);
+  }
+})();
+</script>
 
 </body>
 </html>

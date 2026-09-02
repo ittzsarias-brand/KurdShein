@@ -548,10 +548,8 @@ document.getElementById("firebasePassword").addEventListener("keydown", e => {
 
 onAuthStateChanged(auth, async user => {
   if(!user){
-    // Keep the login window hidden on initial page load.
-    // It opens only when Admin Account → Login is pressed.
-    loginView.classList.add("hidden");
-    setStatus("Firestore: sign in required");
+    // Keep the login page visible until the user successfully signs in.
+    loginView.classList.remove("hidden");
     return;
   }
 

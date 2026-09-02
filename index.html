@@ -1029,6 +1029,37 @@ body{font-size:16px!important;line-height:1.55!important;overflow-x:hidden!impor
   .price{font-size:13px!important}.product .add-cart{font-size:10px!important}
 }
 </style>
+
+<style id="compact-appearance-buttons">
+/* Compact Appearance controls so more Settings content fits on screen */
+.settings-drawer .appearance button,
+.settings-drawer .appearance .appearance-btn,
+.settings-drawer .appearance .theme-btn,
+.settings-drawer [class*="appearance"] button {
+  min-height: 34px !important;
+  height: 34px !important;
+  padding: 6px 10px !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+  border-radius: 8px !important;
+}
+.settings-drawer .appearance,
+.settings-drawer .appearance-section {
+  gap: 6px !important;
+}
+@media (max-width:700px){
+  .settings-drawer .appearance button,
+  .settings-drawer .appearance .appearance-btn,
+  .settings-drawer .appearance .theme-btn,
+  .settings-drawer [class*="appearance"] button {
+    min-height: 32px !important;
+    height: 32px !important;
+    padding: 5px 9px !important;
+    font-size: 11px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <div class="top-bar">

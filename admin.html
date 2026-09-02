@@ -1,546 +1,195 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ku" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KurdShein Admin</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Design 03 — Luxury Cockpit · KurdShein Admin</title>
 <style>
-*{box-sizing:border-box}
-:root{
- --bg:#f7f8fc;--surface:#fff;--surface-soft:#fbfcfe;--line:#e7e9ef;
- --text:#171a24;--muted:#667085;--subtle:#98a2b3;--primary:#635bff;
- --primary-dark:#5148d8;--green:#12b76a;--red:#f04438;--orange:#f79009;
- --shadow:0 1px 2px rgba(16,24,40,.03),0 12px 34px rgba(16,24,40,.05);
- --shadow-lg:0 30px 80px rgba(16,24,40,.14);--r:14px;
-}
-html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
-body{overflow-x:hidden}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
 
-/* ===== PREMIUM LOGIN ===== */
-.login{
- min-height:100vh;display:grid;place-items:center;padding:28px;
- background:
- radial-gradient(900px 500px at 8% 0%,rgba(99,91,255,.12),transparent 60%),
- radial-gradient(700px 500px at 100% 100%,rgba(23,178,166,.09),transparent 58%),#f5f7fb
-}
-.login-shell{
- width:min(1180px,100%);min-height:700px;display:grid;grid-template-columns:1.05fr .95fr;
- background:#fff;border:1px solid #e3e6ee;border-radius:28px;overflow:hidden;direction:ltr;
- box-shadow:var(--shadow-lg)
-}
-.login-visual{position:relative;overflow:hidden;background:#17142e;color:#fff}
-.login-visual:before{
- content:"";position:absolute;inset:0;background:
- linear-gradient(115deg,rgba(255,255,255,.05) 1px,transparent 1px),
- linear-gradient(25deg,rgba(255,255,255,.035) 1px,transparent 1px);
- background-size:48px 48px;mask-image:linear-gradient(to bottom right,#000,transparent 85%)
-}
-.login-orb{position:absolute;border-radius:50%;filter:blur(1px);opacity:.7;pointer-events:none}
-.login-orb.a{width:340px;height:340px;right:-110px;top:-130px;background:rgba(99,91,255,.5);box-shadow:0 0 100px rgba(99,91,255,.35)}
-.login-orb.b{width:240px;height:240px;left:-90px;bottom:-80px;background:rgba(20,184,166,.28);box-shadow:0 0 90px rgba(20,184,166,.2)}
-.login-topmark{position:absolute;top:34px;left:38px;z-index:6;display:flex;align-items:center;gap:11px}
-.login-topmark .mark,.brand-mark,.side-mark{
- display:grid;place-items:center;color:#fff;font-weight:950;letter-spacing:-.5px
-}
-.login-topmark .mark{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(12px)}
-.login-topmark b{display:block;font-size:15px}.login-topmark span{display:block;font-size:9px;color:rgba(255,255,255,.55);margin-top:2px}
-.login-slide{
- position:absolute;inset:0;padding:54px;display:flex;align-items:flex-end;
- opacity:0;transform:translate3d(42px,0,0) scale(1.035);
- transition:opacity .9s ease,transform 1.15s cubic-bezier(.22,.61,.36,1);
- pointer-events:none
-}
-.login-slide.active{opacity:1;transform:none;pointer-events:auto}
-.login-slide:nth-child(1){background:radial-gradient(circle at 25% 20%,rgba(128,119,255,.65),transparent 30%),linear-gradient(145deg,#11102a,#302b67 62%,#635bff)}
-.login-slide:nth-child(2){background:radial-gradient(circle at 76% 20%,rgba(73,218,198,.5),transparent 30%),linear-gradient(145deg,#071522,#07536a 62%,#159d91)}
-.login-slide:nth-child(3){background:radial-gradient(circle at 25% 18%,rgba(244,132,193,.48),transparent 30%),linear-gradient(145deg,#201023,#5c2d59 62%,#9c4d88)}
-.slide-number{position:absolute;top:38px;right:42px;font-size:10px;letter-spacing:2px;color:rgba(255,255,255,.52);font-weight:900}
-.slide-content{position:relative;z-index:3;max-width:520px}
-.slide-kicker{display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border-radius:999px;font-size:9px;font-weight:900;letter-spacing:1px;margin-bottom:17px}
-.slide-kicker i{width:6px;height:6px;border-radius:50%;background:#fff;box-shadow:0 0 14px #fff}
-.slide-content h2{margin:0 0 14px;font-size:40px;line-height:1.16;letter-spacing:-1.4px;font-weight:950}
-.slide-content p{margin:0;color:rgba(255,255,255,.75);font-size:13px;line-height:2;max-width:460px}
-.login-dots{position:absolute;z-index:8;left:54px;bottom:37px;display:flex;gap:7px;direction:ltr}
-.login-dot{width:7px;height:7px;padding:0;border:0;border-radius:99px;background:rgba(255,255,255,.28);transition:.45s}
-.login-dot.active{width:30px;background:#fff}
-.login-form{direction:rtl;display:flex;align-items:center;justify-content:center;padding:65px;background:#fff}
-.login-inner{width:min(390px,100%)}
-.brand{display:flex;align-items:center;gap:12px;margin-bottom:39px}
-.brand-mark{width:50px;height:50px;border-radius:15px;background:linear-gradient(135deg,#635bff,#837bff);box-shadow:0 12px 28px rgba(99,91,255,.22)}
-.brand-text{font-size:25px;font-weight:950;letter-spacing:-.9px}.brand-text span{color:var(--primary)}
-.login-heading h1{font-size:29px;letter-spacing:-.7px;margin:0 0 7px;font-weight:950}
-.login-heading p{margin:0 0 29px;color:var(--muted);font-size:13px;line-height:1.9}
-.field{margin-bottom:15px}.field label{display:block;margin-bottom:7px;font-size:11px;font-weight:900;color:#344054}
-.field input,.field select,.field textarea{
- width:100%;border:1px solid #d7dce5;background:#fff;color:#101828;border-radius:9px;outline:0;padding:0 12px;transition:.2s
-}
-.field input,.field select{height:46px}.field textarea{padding:11px;min-height:105px;resize:vertical}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(99,91,255,.1)}
-.login-submit{width:100%;height:49px;border:0;border-radius:9px;background:var(--primary);color:#fff;font-weight:950;box-shadow:0 10px 22px rgba(99,91,255,.2);transition:.2s}
-.login-submit:hover{background:var(--primary-dark);transform:translateY(-1px)}
-.login-error{color:#b42318;background:#fef3f2;border:1px solid #fecdca;border-radius:9px;font-size:11px;line-height:1.7;margin-top:12px}
-.login-error:empty{display:none}.login-error:not(:empty){padding:9px 11px}
-.login-secure{display:flex;align-items:center;justify-content:center;gap:7px;color:#98a2b3;font-size:9px;font-weight:800;margin-top:18px}
-.login-secure i{width:6px;height:6px;border-radius:50%;background:var(--green)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:#080a0f;color:#f8fafc}button,input,select,textarea{font:inherit}button{cursor:pointer}.hide{display:none!important}:root{--bg:#080a0f;--glass:rgba(255,255,255,.055);--line:rgba(255,255,255,.1);--muted:#8b93a5;--gold:#d6b36a;--blue:#7c8cff;--red:#ff6b6b}
+.login{min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at 20% 10%,#172036,transparent 35%),radial-gradient(circle at 90% 90%,#231b13,transparent 30%),#080a0f}.login-shell{width:min(1180px,100%);min-height:690px;border:1px solid var(--line);border-radius:28px;background:rgba(12,15,22,.78);backdrop-filter:blur(24px);display:grid;grid-template-columns:1.25fr .75fr;overflow:hidden;box-shadow:0 35px 100px rgba(0,0,0,.5)}.login-visual{padding:55px;position:relative;overflow:hidden}.login-visual:before{content:"";position:absolute;width:500px;height:500px;border-radius:50%;border:1px solid rgba(214,179,106,.15);right:-180px;top:-160px;box-shadow:0 0 0 60px rgba(214,179,106,.025),0 0 0 120px rgba(214,179,106,.015)}.lux-logo{font-size:20px;font-weight:950;letter-spacing:2px}.lux-logo span{color:var(--gold)}.visual-title{position:relative;margin-top:175px}.visual-title small{color:var(--gold);letter-spacing:3px;font-size:9px;font-weight:900}.visual-title h1{font-size:58px;line-height:1.02;letter-spacing:-3px;margin:15px 0}.visual-title p{color:#8b93a5;max-width:500px;font-size:12px;line-height:2}.visual-footer{position:absolute;bottom:45px;right:55px;left:55px;display:flex;justify-content:space-between;color:#667085;font-size:8px}.visual-footer b{color:#fff}.login-form{padding:65px 48px;display:flex;align-items:center;background:rgba(255,255,255,.025);border-right:1px solid var(--line)}.login-inner{width:100%}.login-form h2{font-size:27px;margin:0 0 6px}.muted{color:var(--muted);font-size:11px;line-height:1.9}.field{margin:17px 0}.field label{display:block;font-size:9px;font-weight:900;color:#aeb5c4;margin-bottom:7px}.field input,.field select,.field textarea{width:100%;background:#0b0e15;color:#fff;border:1px solid var(--line);padding:12px;border-radius:9px;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(214,179,106,.08)}.primary{background:linear-gradient(135deg,#e0c27f,#b48b43);color:#111;border:0;padding:12px 16px;border-radius:9px;font-weight:950}.login-btn{width:100%;margin-top:7px}.login-error{font-size:10px;color:#ff8b8b;margin-top:10px}
+#app{min-height:100vh;background:radial-gradient(circle at 80% 0%,rgba(124,140,255,.07),transparent 30%),#080a0f}.sidebar{position:fixed;right:0;top:0;bottom:0;width:260px;background:rgba(12,15,22,.9);border-left:1px solid var(--line);padding:20px 14px;z-index:20;backdrop-filter:blur(18px);display:flex;flex-direction:column}.brand{padding:7px 11px 32px;font-size:20px;font-weight:950;letter-spacing:1px}.brand span{color:var(--gold)}.side-label{font-size:8px;color:#596273;letter-spacing:2px;padding:0 11px 9px}.nav{display:grid;gap:5px}.nav button{background:transparent;border:1px solid transparent;color:#8790a1;text-align:right;padding:12px;border-radius:9px;font-size:10px;font-weight:850}.nav button:hover,.nav button.active{background:linear-gradient(90deg,rgba(214,179,106,.08),rgba(124,140,255,.07));border-color:var(--line);color:#fff}.nav button.active{color:var(--gold)}.side-bottom{margin-top:auto;display:grid;gap:7px}.side-bottom button{background:var(--glass);color:#c9cfda;border:1px solid var(--line);padding:10px;border-radius:8px;font-size:9px}.main{margin-right:260px;padding:25px 30px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.top h1{font-size:23px;margin:0;letter-spacing:-.7px}.top small{font-size:8px;color:#657083}.top-actions{display:flex;gap:7px}.secondary,.small{background:var(--glass);color:#cbd2de;border:1px solid var(--line);padding:9px 12px;border-radius:8px;font-size:9px;font-weight:900}.mobile{display:none}.page{display:none}.page.active{display:block}.hero{border:1px solid var(--line);border-radius:16px;padding:22px 24px;background:linear-gradient(110deg,rgba(214,179,106,.09),rgba(124,140,255,.06));display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.hero small{color:var(--gold);letter-spacing:2px;font-size:8px;font-weight:900}.hero h2{margin:9px 0 4px;font-size:24px}.hero p{margin:0;color:#7f899b;font-size:9px}.hero .orb{width:50px;height:50px;border-radius:50%;border:1px solid rgba(214,179,106,.3);box-shadow:0 0 35px rgba(214,179,106,.12)}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}.card{background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:15px}.card .label{font-size:8px;color:#7f899b;letter-spacing:.5px}.card b{font-size:25px;display:block;margin-top:15px}.grid2{display:grid;grid-template-columns:1.2fr .8fr;gap:12px}.panel{background:var(--glass);border:1px solid var(--line);border-radius:12px;padding:15px;margin-bottom:12px;backdrop-filter:blur(12px)}.panel-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:10px;margin-bottom:9px}.panel-head h2{font-size:11px;margin:0}.panel-head span{font-size:7px;color:#5e687a;letter-spacing:1px}.list-row{display:flex;justify-content:space-between;align-items:center;padding:10px 2px;border-bottom:1px solid rgba(255,255,255,.06)}.list-row:last-child{border:0}.list-row b{font-size:9px}.list-row small{display:block;color:#667085;font-size:7px;margin-top:3px}.right{text-align:left}.status{font-size:7px;padding:4px 6px;border-radius:99px;background:#202633;color:#9ba5b7}.status.delivered{background:rgba(61,194,114,.12);color:#70db9a}.status.pending{background:rgba(214,179,106,.12);color:#e0c27f}.status.cancelled{background:rgba(255,107,107,.12);color:#ff8d8d}.status.processing,.status.shipped,.status.confirmed{background:rgba(124,140,255,.12);color:#aeb7ff}.stock{font-size:7px;font-weight:900;padding:4px 7px;border-radius:99px}.stock.ok{background:rgba(61,194,114,.12);color:#70db9a}.stock.low{background:rgba(214,179,106,.12);color:#e0c27f}.stock.out{background:rgba(255,107,107,.12);color:#ff8d8d}.toolbar{display:flex;gap:7px;margin-bottom:10px}.toolbar input,.toolbar select{height:36px;border:1px solid var(--line);background:#0b0e15;color:#dce2ec;border-radius:8px;padding:0 9px;font-size:8px}.toolbar input{flex:1}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:9px}table{width:100%;border-collapse:collapse;min-width:800px}th{background:rgba(255,255,255,.03);color:#6f798a;font-size:7px;text-align:right;padding:9px;border-bottom:1px solid var(--line)}td{font-size:8px;padding:9px;border-bottom:1px solid rgba(255,255,255,.06);color:#c7ced9}tr:last-child td{border:0}.product{display:flex;align-items:center;gap:8px}.product img{width:35px;height:35px;border-radius:7px;object-fit:cover;background:#141923}.product small{display:block;color:#626d80;font-size:6px;margin-top:2px}.actions{display:flex;gap:4px}.danger{color:#ff8d8d!important}.status-select{border:1px solid var(--line);background:#0b0e15;color:#dce2ec;border-radius:7px;padding:5px;font-size:7px}.empty{text-align:center;padding:25px;color:#626d80;font-size:8px}.summary-line{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:8px}.summary-line.total{font-size:11px;border:0}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}.checks{display:flex;flex-wrap:wrap;gap:5px}.check{font-size:7px;border:1px solid var(--line);padding:6px 8px;border-radius:7px}.coupon-row{display:grid;grid-template-columns:1fr 1fr auto;gap:6px;margin-bottom:6px}.coupon-row input{border:1px solid var(--line);background:#0b0e15;color:#fff;padding:8px;border-radius:7px;width:100%}.modal{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:18px;z-index:100}.modal.show{display:flex}.modal-box{width:min(780px,100%);max-height:90vh;overflow:auto;background:#0e121a;border:1px solid var(--line);border-radius:13px;padding:17px}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.modal-head h2{font-size:14px;margin:0}.close{border:1px solid var(--line);background:var(--glass);color:#fff;width:31px;height:31px;border-radius:7px}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}.detail-grid>div{background:rgba(255,255,255,.03);border:1px solid var(--line);padding:10px;border-radius:7px}.detail-grid span{display:block;color:#697386;font-size:6px;margin-bottom:4px}.detail-grid b{font-size:8px}.detail-line{display:flex;justify-content:space-between;padding:9px;border:1px solid var(--line);border-radius:7px;margin:5px 0;font-size:7px}.totals{border-top:1px solid var(--line);margin-top:10px;padding-top:6px}.totals div,.totals strong{display:flex;justify-content:space-between;padding:6px;font-size:8px}.toast{position:fixed;bottom:18px;left:50%;transform:translate(-50%,15px);opacity:0;background:#f8fafc;color:#111827;padding:9px 13px;border-radius:8px;font-size:9px;transition:.2s;z-index:200}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:950px){.sidebar{width:220px}.main{margin-right:220px;padding:18px}.cards{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}.login-shell{grid-template-columns:1fr}.login-visual{min-height:350px}.visual-title{margin-top:90px}.login-form{padding:40px}}
+@media(max-width:700px){.sidebar{transform:translateX(110%);width:280px}.sidebar.open{transform:none}.main{margin-right:0;padding:13px}.mobile{display:inline-block}.top-actions .secondary{display:none}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}}
 
-/* ===== APP ===== */
-#app{min-height:100vh;display:flex}
-.sidebar{
- position:fixed;z-index:50;top:0;right:0;bottom:0;width:270px;background:#fff;border-left:1px solid var(--line);
- display:flex;flex-direction:column;padding:18px 13px;transition:transform .3s cubic-bezier(.22,.61,.36,1)
-}
-.side-brand{display:flex;align-items:center;gap:11px;padding:7px 10px 25px}
-.side-mark{width:41px;height:41px;border-radius:12px;background:linear-gradient(135deg,#635bff,#827aff)}
-.side-brand strong{font-size:17px;font-weight:950;letter-spacing:-.5px}.side-brand span{display:block;color:#98a2b3;font-size:8px;letter-spacing:1px;font-weight:900;margin-top:2px}
-.side-label{font-size:9px;color:#98a2b3;font-weight:950;padding:0 12px 8px}
-.nav{display:flex;flex-direction:column;gap:3px}.nav button{
- width:100%;height:43px;border:0;border-radius:9px;background:transparent;color:#475467;padding:0 12px;
- display:flex;align-items:center;gap:11px;text-align:right;font-size:11px;font-weight:850;transition:.18s
-}
-.nav button .ico{width:20px;text-align:center;font-size:14px;opacity:.8}.nav button:hover{background:#f6f7f9;color:#111827}
-.nav button.active{background:#eeecff;color:#5148d8}.nav button.active .ico{opacity:1}
-.side-bottom{margin-top:auto;padding:14px 3px 3px;border-top:1px solid var(--line);display:grid;gap:7px}
-.main{width:calc(100% - 270px);margin-right:270px;min-height:100vh;padding:25px 31px 35px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px}
-.top-left{display:flex;align-items:center;gap:11px}.top h1{font-size:23px;letter-spacing:-.7px;margin:0;font-weight:950}.top p{font-size:10px;color:#98a2b3;margin:4px 0 0}
-.top-actions{display:flex;gap:7px}.primary,.secondary,.danger,.mini{
- height:39px;padding:0 13px;border-radius:8px;font-size:10px;font-weight:900;transition:.18s
-}
-.primary{border:1px solid var(--primary);background:var(--primary);color:#fff;box-shadow:0 5px 12px rgba(99,91,255,.15)}
-.primary:hover{background:var(--primary-dark);transform:translateY(-1px)}
-.secondary{border:1px solid #d9dee7;background:#fff;color:#344054}.secondary:hover{background:#f8fafc}
-.danger{border:1px solid #f1c7c3;background:#fff;color:#b42318}.danger:hover{background:#fef3f2}
-.mobile-menu{display:none}
-.page{display:none;animation:pageIn .3s ease}.page.active{display:block}
-@keyframes pageIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:14px}
-.card{position:relative;overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:13px;padding:17px;min-height:126px;box-shadow:var(--shadow)}
-.card:after{content:"";position:absolute;left:-25px;bottom:-45px;width:120px;height:120px;border-radius:50%;background:rgba(99,91,255,.035)}
-.kpi-top{display:flex;align-items:center;justify-content:space-between}.kpi-title{font-size:10px;color:#667085;font-weight:850}
-.kpi-icon{width:31px;height:31px;border-radius:9px;background:#f0efff;color:var(--primary);display:grid;place-items:center;font-size:11px;font-weight:950}
-.kpi-value{font-size:27px;line-height:1;margin-top:17px;font-weight:950;letter-spacing:-1.2px}.kpi-note{font-size:9px;color:#98a2b3;margin-top:6px}
-.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
-.panel{background:#fff;border:1px solid var(--line);border-radius:13px;padding:17px;box-shadow:var(--shadow);margin-bottom:14px}
-.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:13px;margin-bottom:13px;border-bottom:1px solid #eef0f3}
-.panel-head h2{font-size:13px;margin:0;font-weight:950}.panel-head span{font-size:9px;color:#98a2b3;font-weight:800}
-.stat-row,.order-line{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 11px;background:#fafbfc;border:1px solid #edf0f3;border-radius:8px;margin-bottom:6px;font-size:10px}
-.stat-row:last-child,.order-line:last-child{margin-bottom:0}.muted{color:#667085}.empty{padding:27px 10px;text-align:center;color:#98a2b3;font-size:11px}
-.toolbar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px}.toolbar input,.toolbar select{
- height:38px;border:1px solid #d9dee7;background:#fff;border-radius:8px;padding:0 10px;color:#344054;font-size:10px;outline:0
-}.toolbar input{flex:1;min-width:180px}.toolbar input:focus,.toolbar select:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,91,255,.08)}
-.table-wrap{overflow:auto;border:1px solid #e5e7eb;border-radius:9px;background:#fff}
-table{width:100%;border-collapse:collapse;min-width:760px}th{
- background:#f8fafc;color:#667085;font-size:9px;text-align:right;font-weight:950;padding:10px 11px;border-bottom:1px solid #e5e7eb
-}td{font-size:10px;color:#344054;padding:10px 11px;border-bottom:1px solid #eef0f3;vertical-align:middle}tr:last-child td{border-bottom:0}tr:hover td{background:#fcfdff}
-.product-cell{display:flex;align-items:center;gap:9px;font-weight:850}.thumb{width:37px;height:37px;border-radius:8px;object-fit:cover;border:1px solid #e4e7ec;background:#f8fafc}
-.actions{display:flex;gap:4px;flex-wrap:wrap}.mini{height:29px;padding:0 8px;border:1px solid #d9dee7;background:#fff;color:#475467}.mini:hover{background:#f8fafc}
-.badge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;font-size:8px;font-weight:950;background:#f2f4f7;color:#667085}
-.badge.success{background:#ecfdf3;color:#087443}.badge.warn{background:#fffaeb;color:#b54708}.badge.danger{background:#fef3f2;color:#b42318}.badge.new{background:#eff8ff;color:#175cd3}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.full{grid-column:1/-1}
-.checks{display:flex;flex-wrap:wrap;gap:6px}.check{display:inline-flex!important;align-items:center;gap:6px!important;border:1px solid #e4e7ec;background:#fafbfc;padding:7px 9px!important;border-radius:8px!important;margin:0!important;font-size:9px!important}.check input{width:auto!important;height:auto!important}
-.modal{position:fixed;z-index:100;inset:0;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(15,23,42,.45);backdrop-filter:blur(6px)}
-.modal.show{display:flex}.modal-box{width:min(780px,100%);max-height:90vh;overflow:auto;background:#fff;border:1px solid #e5e7eb;border-radius:15px;box-shadow:0 30px 90px rgba(16,24,40,.24);padding:19px}
-.modal-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:13px;margin-bottom:15px;border-bottom:1px solid #edf0f3}.modal-head h2{font-size:15px;margin:0;font-weight:950}
-.close{width:33px;height:33px;border-radius:8px;border:1px solid #d9dee7;background:#fff;font-size:19px;color:#475467}.close:hover{background:#f8fafc}
-.modal-actions{display:flex;gap:7px;justify-content:flex-start;margin-top:16px;padding-top:14px;border-top:1px solid #edf0f3}
-.ks-image-box{border:1px dashed #cbd5e1;background:#f8fafc;border-radius:9px;padding:10px}.ks-image-row{display:flex;gap:11px;align-items:center}.ks-image-preview{display:none;width:62px;height:62px;border-radius:8px;object-fit:cover}.ks-image-info,.ks-compress-status{font-size:9px;color:#667085;line-height:1.6}
-.toast{position:fixed;z-index:200;bottom:20px;left:50%;transform:translate(-50%,15px);opacity:0;pointer-events:none;background:#111827;color:#fff;padding:9px 14px;border-radius:8px;font-size:10px;box-shadow:0 15px 35px rgba(16,24,40,.2);transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
-
-@media(max-width:1050px){
- .sidebar{width:235px}.main{width:calc(100% - 235px);margin-right:235px;padding:22px}.cards{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:850px){
- .login{padding:12px}.login-shell{display:block;min-height:auto;border-radius:20px}.login-visual{height:260px}.login-slide{padding:31px}.slide-content h2{font-size:26px}.slide-content p{font-size:11px;line-height:1.7}.login-form{min-height:calc(100vh - 272px);padding:35px 25px}
- .sidebar{transform:translateX(100%);width:min(290px,88vw);box-shadow:-25px 0 70px rgba(16,24,40,.16)}.sidebar.open{transform:translateX(0)}
- .main{width:100%;margin-right:0;padding:15px}.mobile-menu{display:inline-flex;align-items:center;justify-content:center;width:39px;padding:0}.top{align-items:flex-start}.top-actions .secondary{display:none}.grid2{grid-template-columns:1fr}
-}
-@media(max-width:560px){
- .cards{grid-template-columns:1fr 1fr;gap:8px}.card{padding:12px;min-height:105px}.kpi-value{font-size:21px}.panel{padding:12px}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}
- .top h1{font-size:19px}.top p{font-size:8px}.top-actions .primary{height:36px;padding:0 9px}.login-visual{height:235px}.login-form{padding:29px 17px}
- .slide-content h2{font-size:22px}.slide-number{top:20px;right:21px}.login-topmark{top:19px;left:20px}.login-dots{bottom:17px;left:23px}
-}
 </style>
 </head>
 <body>
 
-<section id="loginView" class="login">
- <div class="login-shell">
-  <div class="login-visual">
-   <div class="login-orb a"></div><div class="login-orb b"></div>
-   <div class="login-topmark"><div class="mark">KS</div><div><b>KurdShein</b><span>ADMIN CONSOLE</span></div></div>
-   <article class="login-slide active">
-    <div class="slide-number">01 / 03</div><div class="slide-content"><div class="slide-kicker"><i></i> SMART ADMINISTRATION</div><h2>بەڕێوەبردنی فرۆشگاکەت، بە شێوەیەکی پیشەیی.</h2><p>هەموو بەرهەم و داواکارییەکانت لە داشبۆردێکی پاک و خێرا کۆبکەرەوە.</p></div>
-   </article>
-   <article class="login-slide">
-    <div class="slide-number">02 / 03</div><div class="slide-content"><div class="slide-kicker"><i></i> REAL-TIME DATA</div><h2>هەموو شتێک بە داتای نوێ ببینە.</h2><p>Firestore داتاکانت بە شێوەی live دەگوازێتەوە بۆ ئەدمین کۆنسۆڵەکە.</p></div>
-   </article>
-   <article class="login-slide">
-    <div class="slide-number">03 / 03</div><div class="slide-content"><div class="slide-kicker"><i></i> SECURE WORKSPACE</div><h2>شوێنێکی پارێزراو بۆ کارکردنی تۆ.</h2><p>دەستگەیشتن بە workspace ـی ئەدمین بە Firebase Authentication پارێزراوە.</p></div>
-   </article>
-   <div class="login-dots"><button class="login-dot active" type="button"></button><button class="login-dot" type="button"></button><button class="login-dot" type="button"></button></div>
-  </div>
+<section id="loginView" class="login"><div class="login-shell"><div class="login-visual"><div class="lux-logo">KURD<span>SHEIN</span></div><div class="visual-title"><small>PRIVATE ADMIN CONSOLE</small><h1>Operate<br>with clarity.</h1><p>کۆنسۆڵێکی پیشەیی و ئارام بۆ کۆنترۆڵکردنی هەموو بەشەکانی KurdShein.</p></div><div class="visual-footer"><span>FIREBASE / <b>CONNECTED</b></span><span>KU-IQ · ADMIN</span></div></div><div class="login-form"><div class="login-inner"><h2>بەڕێوەبردن</h2><p class="muted">چوونەژوورەوە بۆ workspace ـی تایبەت.</p><div class="field"><label>ئیمەیڵ</label><input id="loginEmail" type="email" placeholder="admin@example.com"></div><div class="field"><label>وشەی نهێنی</label><input id="loginPassword" type="password" placeholder="••••••••"></div><button class="primary login-btn" onclick="login()">چوونەژوورەوە</button><div id="loginError" class="login-error"></div></div></div></div></section>
+<div id="app" class="hide"><aside id="sidebar" class="sidebar"><div class="brand">KURD<span>SHEIN</span></div><div class="side-label">COMMAND</div><nav class="nav"><button data-page="dashboard" class="active" onclick="showPage('dashboard')">⌂ &nbsp; داشبۆرد</button><button data-page="products" onclick="showPage('products')">▣ &nbsp; بەرهەمەکان</button><button data-page="orders" onclick="showPage('orders')">↗ &nbsp; داواکارییەکان</button><button data-page="customers" onclick="showPage('customers')">◉ &nbsp; کڕیارەکان</button><button data-page="accounting" onclick="showPage('accounting')">◫ &nbsp; حسابات</button><button data-page="settings" onclick="showPage('settings')">⚙ &nbsp; ڕێکخستنەکان</button></nav><div class="side-bottom"><button onclick="window.open('index.html','_blank')">↗ سایت</button><button onclick="logout()">↪ چوونەدەرەوە</button></div></aside>
+<main class="main"><header class="top"><div><button class="secondary mobile" onclick="toggleSidebar()">☰</button><h1 id="pageTitle">داشبۆرد</h1><small id="connection">Connecting…</small></div><div class="top-actions"><button class="secondary" onclick="refreshAll()">↻ نوێکردنەوە</button><button class="primary" onclick="openProductModal()">＋ بەرهەمی نوێ</button></div></header>
+<section id="page-dashboard" class="page active"><div class="hero"><div><small>COMMAND CENTER · LIVE</small><h2>بەڕێوەبردن بە هێمنی و وردی.</h2><p>داتاکانی فرۆشگا بە شێوەی ڕاستەوخۆ نوێ دەبنەوە.</p></div><div class="orb"></div></div><div class="cards"><div class="card"><span class="label">کۆی بەرهەم</span><b id="kProducts">0</b></div><div class="card"><span class="label">داواکارییەکان</span><b id="kOrders">0</b></div><div class="card"><span class="label">چاوەڕوان</span><b id="kPending">0</b></div><div class="card"><span class="label">کۆی فرۆشتن</span><b id="kRevenue">0</b></div></div><div class="grid2"><div class="panel"><div class="panel-head"><h2>دواین داواکارییەکان</h2><span>LIVE FEED</span></div><div id="recentOrders"></div></div><div class="panel"><div class="panel-head"><h2>Stock Alerts</h2><span>INVENTORY</span></div><div id="stockAlerts"></div></div></div></section>
+<section id="page-products" class="page"><div class="panel"><div class="panel-head"><h2>بەرهەمەکان</h2><span>PRODUCT</span></div><div class="toolbar"><input id="productSearch" placeholder="گەڕان..." oninput="renderProducts()"><select id="productCategory" onchange="renderProducts()"><option value="">هەموو</option><option value="new">نوێ</option><option value="sale">داشکاندن</option><option value="men">پیاوان</option><option value="women">ئافرەتان</option><option value="kids">منداڵان</option><option value="accessories">ئەکسسوارات</option><option value="electronics">ئەلکترۆنی</option></select><select id="productStock" onchange="renderProducts()"><option value="">Stock</option><option value="low">کەم</option><option value="out">نەماوە</option></select></div><div class="table-wrap"><table><thead><tr><th>بەرهەم</th><th>نرخ</th><th>Stock</th><th>جۆر</th><th>دۆخ</th><th>کردار</th></tr></thead><tbody id="productsTable"></tbody></table></div></div></section>
+<section id="page-orders" class="page"><div class="panel"><div class="panel-head"><h2>داواکارییەکان</h2><span>ORDERS</span></div><div class="toolbar"><input id="orderSearch" placeholder="گەڕان..." oninput="renderOrders()"><select id="orderStatus" onchange="renderOrders()"><option value="">هەموو</option><option value="pending">چاوەڕوان</option><option value="confirmed">پشتڕاستکراوە</option><option value="processing">لە کاردایە</option><option value="shipped">نێردراوە</option><option value="delivered">گەیشتووە</option><option value="cancelled">هەڵوەشێنراوە</option></select></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>کڕیار</th><th>شار</th><th>بەرهەم</th><th>کۆ</th><th>دۆخ</th><th>بەروار</th><th>کردار</th></tr></thead><tbody id="ordersTable"></tbody></table></div></div></section>
+<section id="page-customers" class="page"><div class="panel"><div class="panel-head"><h2>کڕیارەکان</h2><span>CUSTOMERS</span></div><div class="toolbar"><input id="customerSearch" placeholder="گەڕان..." oninput="renderCustomers()"></div><div class="table-wrap"><table><thead><tr><th>ناو</th><th>تەلەفۆن</th><th>شار</th><th>داواکاری</th><th>کۆی کڕین</th><th>دواین</th></tr></thead><tbody id="customersTable"></tbody></table></div></div></section>
+<section id="page-accounting" class="page"><div class="cards"><div class="card"><span class="label">فرۆشتنی گشتی</span><b id="aRevenue">0</b></div><div class="card"><span class="label">گەیاندن</span><b id="aDelivery">0</b></div><div class="card"><span class="label">داشکاندن</span><b id="aDiscount">0</b></div><div class="card"><span class="label">ژمارەی فرۆشتن</span><b id="aCount">0</b></div></div><div class="panel"><div class="panel-head"><h2>کورتەی حسابات</h2><span>FINANCE</span></div><div id="accountingSummary"></div></div></section>
+<section id="page-settings" class="page"><div class="grid2"><div class="panel"><div class="panel-head"><h2>گەیاندن</h2><span>DELIVERY</span></div><div class="form-grid"><div class="field"><label>هەولێر</label><input id="feeErbil" type="number"></div><div class="field"><label>سلێمانی</label><input id="feeSulaymaniyah" type="number"></div><div class="field"><label>دهۆک</label><input id="feeDuhok" type="number"></div><div class="field"><label>شارێکی تر</label><input id="feeOther" type="number"></div></div><button class="primary" onclick="saveSettings()">پاشەکەوتکردن</button></div><div class="panel"><div class="panel-head"><h2>کۆدەکانی داشکاندن</h2><span>COUPONS</span></div><div id="couponRows"></div><button class="secondary" onclick="addCouponRow()">＋ کۆدی نوێ</button><button class="primary" onclick="saveSettings()">پاشەکەوتکردن</button></div></div></section>
+</main></div>
+<div id="productModal" class="modal" onclick="outsideClose(event,'productModal')"><div class="modal-box"><div class="modal-head"><h2>بەرهەم</h2><button class="close" onclick="closeModal('productModal')">×</button></div><input id="productId" type="hidden"><div class="form-grid"><div class="field"><label>ناوی پیشاندان</label><input id="pName"></div><div class="field"><label>ناوی کورت</label><input id="pDisplayName"></div><div class="field full"><label>وەسفی کورت</label><input id="pShort"></div><div class="field full"><label>وەسفی تەواو</label><textarea id="pDescription"></textarea></div><div class="field"><label>نرخ</label><input id="pPrice" type="number"></div><div class="field"><label>نرخی کۆن</label><input id="pOldPrice" type="number"></div><div class="field"><label>Stock</label><input id="pStock" type="number"></div><div class="field"><label>ID</label><input id="pCustomId"></div><div class="field full"><label>وێنەی سەرەکی</label><input id="pImage"></div><div class="field full"><label>وێنەکانی تر — بە |</label><input id="pImages"></div><div class="field"><label>قەبارەکان</label><input id="pSizes"></div><div class="field"><label>ڕەنگەکان</label><input id="pColors"></div><div class="field full"><label>جۆرەکان</label><div class="checks"><label class="check"><input type="checkbox" id="cNew"> نوێ</label><label class="check"><input type="checkbox" id="cSale"> داشکاندن</label><label class="check"><input type="checkbox" id="cMen"> پیاوان</label><label class="check"><input type="checkbox" id="cWomen"> ئافرەتان</label><label class="check"><input type="checkbox" id="cKids"> منداڵان</label><label class="check"><input type="checkbox" id="cAccessories"> ئەکسسوارات</label><label class="check"><input type="checkbox" id="cElectronics"> ئەلکترۆنی</label></div></div><div class="field"><label><input id="pActive" type="checkbox" checked> چالاک</label></div></div><button class="primary" onclick="saveProduct()">پاشەکەوتکردن</button></div></div>
+<div id="orderModal" class="modal" onclick="outsideClose(event,'orderModal')"><div class="modal-box"><div class="modal-head"><h2>وردەکاری داواکاری</h2><button class="close" onclick="closeModal('orderModal')">×</button></div><div id="orderDetail"></div></div></div><div id="toast" class="toast"></div>
 
-  <div class="login-form">
-   <div class="login-inner">
-    <div class="brand"><div class="brand-mark">KS</div><div class="brand-text">Kurd<span>Shein</span></div></div>
-    <div class="login-heading"><h1>بەخێربێیتەوە 👋</h1><p>چوونەژوورەوە بۆ بەڕێوەبردنی فرۆشگای KurdShein.</p></div>
-    <div class="field"><label>ئیمەیڵ</label><input id="loginEmail" type="email" autocomplete="username" placeholder="admin@example.com"></div>
-    <div class="field"><label>وشەی نهێنی</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="••••••••"></div>
-    <button class="login-submit" type="button" onclick="login()">چوونەژوورەوە</button>
-    <div id="loginError" class="login-error"></div>
-    <div class="login-secure"><i></i><span>Secure access · Firebase Authentication</span></div>
-   </div>
-  </div>
- </div>
-</section>
-
-<div id="app" class="hidden">
- <aside id="sidebar" class="sidebar">
-  <div class="side-brand"><div class="side-mark">KS</div><div><strong>KurdShein</strong><span>ADMIN CONSOLE</span></div></div>
-  <div class="side-label">بەڕێوەبردن</div>
-  <nav class="nav">
-   <button class="active" data-page="dashboard" onclick="showPage('dashboard')"><span class="ico">⌂</span> داشبۆرد</button>
-   <button data-page="products" onclick="showPage('products')"><span class="ico">▣</span> بەرهەمەکان</button>
-   <button data-page="orders" onclick="showPage('orders')"><span class="ico">↗</span> داواکارییەکان</button>
-   <button data-page="customers" onclick="showPage('customers')"><span class="ico">◉</span> کڕیارەکان</button>
-   <button data-page="accounting" onclick="showPage('accounting')"><span class="ico">◫</span> حسابات</button>
-   <button data-page="settings" onclick="showPage('settings')"><span class="ico">⚙</span> ڕێکخستنەکان</button>
-  </nav>
-  <div class="side-bottom">
-   <button class="secondary" onclick="window.open('index.html','_blank')">↗ کردنەوەی سایت</button>
-   <button class="secondary" onclick="logout()">↪ چوونەدەرەوە</button>
-  </div>
- </aside>
-
- <main class="main">
-  <header class="top">
-   <div class="top-left"><button class="secondary mobile-menu" onclick="toggleSidebar()">☰</button><div><h1 id="pageTitle">داشبۆرد</h1><p id="syncStatus">پەیوەندی بە Firestore...</p></div></div>
-   <div class="top-actions"><button class="secondary" onclick="refreshAll()">↻ نوێکردنەوە</button><button class="primary" onclick="openProductModal()">＋ بەرهەمی نوێ</button></div>
-  </header>
-
-  <section id="page-dashboard" class="page active">
-   <div class="cards">
-    <div class="card"><div class="kpi-top"><div class="kpi-title">کۆی بەرهەم</div><div class="kpi-icon">▣</div></div><div id="kProducts" class="kpi-value">0</div><div class="kpi-note">لە collection ـی product</div></div>
-    <div class="card"><div class="kpi-top"><div class="kpi-title">داواکارییەکان</div><div class="kpi-icon">↗</div></div><div id="kOrders" class="kpi-value">0</div><div class="kpi-note">هەموو داواکارییەکان</div></div>
-    <div class="card"><div class="kpi-top"><div class="kpi-title">داواکاریی نوێ</div><div class="kpi-icon">!</div></div><div id="kPending" class="kpi-value">0</div><div class="kpi-note">بۆ پێداچوونەوە</div></div>
-    <div class="card"><div class="kpi-top"><div class="kpi-title">کۆی فرۆشتن</div><div class="kpi-icon">د.ع</div></div><div id="kRevenue" class="kpi-value">0</div><div class="kpi-note">د.ع</div></div>
-   </div>
-   <div class="grid2"><div class="panel"><div class="panel-head"><h2>دواین داواکارییەکان</h2><span>LIVE</span></div><div id="recentOrders"></div></div><div class="panel"><div class="panel-head"><h2>ئاگاداریی Stock</h2><span>INVENTORY</span></div><div id="stockAlerts"></div></div></div>
-  </section>
-
-  <section id="page-products" class="page"><div class="panel">
-   <div class="panel-head"><h2>بەرهەمەکان</h2><span>Firestore · product</span></div>
-   <div class="toolbar"><input id="productSearch" placeholder="گەڕان بە ناوی بەرهەم..." oninput="renderProducts()"><select id="productCategory" onchange="renderProducts()"><option value="">هەموو جۆرەکان</option><option value="new">نوێ</option><option value="sale">داشکاندن</option><option value="men">پیاوان</option><option value="women">ئافرەتان</option><option value="kids">منداڵان</option><option value="accessories">ئەکسسوارات</option><option value="electronics">ئەلکترۆنی</option></select><select id="productStock" onchange="renderProducts()"><option value="">هەموو Stock</option><option value="low">کەمتر لە 4</option><option value="out">بەردەست نییە</option></select></div>
-   <div class="table-wrap"><table><thead><tr><th>بەرهەم</th><th>نرخ</th><th>نرخی کۆن</th><th>Stock</th><th>جۆر</th><th>چالاک</th><th>کردار</th></tr></thead><tbody id="productsTable"></tbody></table></div>
-  </div></section>
-
-  <section id="page-orders" class="page"><div class="panel">
-   <div class="panel-head"><h2>داواکارییەکان</h2><span>Firestore · orders</span></div>
-   <div class="toolbar"><input id="orderSearch" placeholder="ناو یان ژمارە..." oninput="renderOrders()"><select id="orderStatus" onchange="renderOrders()"><option value="">هەموو دۆخەکان</option><option value="pending">چاوەڕوان</option><option value="confirmed">پشتڕاستکراوە</option><option value="processing">لە کاردایە</option><option value="shipped">نێردراوە</option><option value="delivered">گەیشتووە</option><option value="cancelled">هەڵوەشێنراوە</option></select></div>
-   <div class="table-wrap"><table><thead><tr><th>ID</th><th>کڕیار</th><th>شار</th><th>بەرهەم</th><th>کۆی گشتی</th><th>دۆخ</th><th>بەروار</th><th>کردار</th></tr></thead><tbody id="ordersTable"></tbody></table></div>
-  </div></section>
-
-  <section id="page-customers" class="page"><div class="panel">
-   <div class="panel-head"><h2>کڕیارەکان</h2><span>لە orders کۆکراونەتەوە</span></div>
-   <div class="toolbar"><input id="customerSearch" placeholder="گەڕان بە ناو، ژمارە یان شار..." oninput="renderCustomers()"></div>
-   <div class="table-wrap"><table><thead><tr><th>ناو</th><th>تەلەفۆن</th><th>شار</th><th>داواکاری</th><th>کۆی کڕین</th><th>دواین داواکاری</th></tr></thead><tbody id="customersTable"></tbody></table></div>
-  </div></section>
-
-  <section id="page-accounting" class="page">
-   <div class="cards">
-    <div class="card"><div class="kpi-top"><div class="kpi-title">فرۆشتنی گشتی</div><div class="kpi-icon">د.ع</div></div><div id="aRevenue" class="kpi-value">0</div><div class="kpi-note">د.ع</div></div>
-    <div class="card"><div class="kpi-top"><div class="kpi-title">گەیاندن</div><div class="kpi-icon">↗</div></div><div id="aDelivery" class="kpi-value">0</div><div class="kpi-note">د.ع</div></div>
-    <div class="card"><div class="kpi-top"><div class="kpi-title">داشکاندن</div><div class="kpi-icon">%</div></div><div id="aDiscount" class="kpi-value">0</div><div class="kpi-note">د.ع</div></div>
-    <div class="card"><div class="kpi-top"><div class="kpi-title">ژمارەی فرۆشتن</div><div class="kpi-icon">#</div></div><div id="aCount" class="kpi-value">0</div><div class="kpi-note">داواکاری</div></div>
-   </div>
-   <div class="grid2"><div class="panel"><div class="panel-head"><h2>کورتەی حسابات</h2><span>ORDERS</span></div><div id="accountingSummary"></div></div><div class="panel"><div class="panel-head"><h2>تێبینی</h2></div><p class="muted" style="line-height:2;font-size:11px">ئەم بەشە فرۆشتن، گەیاندن و داشکاندن لە داواکارییەکانی Firestore کۆدەکاتەوە.</p></div></div>
-  </section>
-
-  <section id="page-settings" class="page"><div class="grid2">
-   <div class="panel"><div class="panel-head"><h2>گەیاندن</h2><span>deliveryFees</span></div><div class="form-grid"><div class="field"><label>هەولێر</label><input id="feeErbil" type="number"></div><div class="field"><label>سلێمانی</label><input id="feeSulaymaniyah" type="number"></div><div class="field"><label>دهۆک</label><input id="feeDuhok" type="number"></div><div class="field"><label>شارێکی تر</label><input id="feeOther" type="number"></div></div><button class="primary" onclick="saveSettings()" style="margin-top:9px">پاشەکەوتکردن</button></div>
-   <div class="panel"><div class="panel-head"><h2>کۆدەکانی داشکاندن</h2><span>couponCodes</span></div><div id="couponRows"></div><button class="secondary" onclick="addCouponRow()">＋ کۆدی نوێ</button><button class="primary" onclick="saveSettings()" style="margin-top:9px">پاشەکەوتکردن</button></div>
-  </div></section>
- </main>
-</div>
-
-<div id="productModal" class="modal" onclick="outsideClose(event,'productModal')"><div class="modal-box">
- <div class="modal-head"><h2 id="productModalTitle">بەرهەمی نوێ</h2><button class="close" onclick="closeModal('productModal')">×</button></div>
- <input id="productId" type="hidden">
- <div class="form-grid">
-  <div class="field"><label>ناوی پیشاندان</label><input id="pName"></div><div class="field"><label>ناوی کورت/کارد</label><input id="pDisplayName"></div>
-  <div class="field full"><label>وەسفی کورت</label><input id="pShort"></div><div class="field full"><label>وەسفی تەواو</label><textarea id="pDescription"></textarea></div>
-  <div class="field"><label>نرخ (د.ع)</label><input id="pPrice" type="number" min="0"></div><div class="field"><label>نرخی کۆن</label><input id="pOldPrice" type="number" min="0"></div>
-  <div class="field"><label>Stock</label><input id="pStock" type="number" min="0"></div><div class="field"><label>ID ـی بەرهەم</label><input id="pCustomId"></div>
-  <div class="field full"><label>وێنەی سەرەکی</label><div class="ks-image-box"><div class="ks-image-row"><input type="file" id="ksProductImageFile" accept="image/*"><img id="ksImagePreview" class="ks-image-preview" alt="Preview"><div><strong style="font-size:10px">🖼️ Compress product image</strong><div class="ks-image-info">تا 800×800 و WebP بە شێوەی خۆکار.</div></div></div><div id="ksCompressStatus" class="ks-compress-status"></div></div><input id="pImage" placeholder="URL یان ناوی فایل" style="margin-top:7px"></div>
-  <div class="field full"><label>وێنەکانی تر — بە | جیا بکەرەوە</label><input id="pImages" placeholder="image2.jpg|image3.jpg"></div>
-  <div class="field"><label>قەبارەکان — بە کۆما</label><input id="pSizes" placeholder="S,M,L"></div><div class="field"><label>ڕەنگەکان — بە کۆما</label><input id="pColors" placeholder="ڕەش,سپی"></div>
-  <div class="field full"><label>جۆرەکان</label><div class="checks"><label class="check"><input type="checkbox" id="cNew">نوێ</label><label class="check"><input type="checkbox" id="cSale">داشکاندن</label><label class="check"><input type="checkbox" id="cMen">پیاوان</label><label class="check"><input type="checkbox" id="cWomen">ئافرەتان</label><label class="check"><input type="checkbox" id="cKids">منداڵان</label><label class="check"><input type="checkbox" id="cAccessories">ئەکسسوارات</label><label class="check"><input type="checkbox" id="cElectronics">ئەلکترۆنی</label></div></div>
-  <div class="field"><label><input id="pActive" type="checkbox" checked> بەرهەم چالاکە</label></div>
- </div>
- <div class="modal-actions"><button class="primary" onclick="saveProduct()">پاشەکەوتکردن</button><button class="secondary" onclick="closeModal('productModal')">پاشگەزبوونەوە</button></div>
-</div></div>
-
-<div id="orderModal" class="modal" onclick="outsideClose(event,'orderModal')"><div class="modal-box"><div class="modal-head"><h2>وردەکاری داواکاری</h2><button class="close" onclick="closeModal('orderModal')">×</button></div><div id="orderDetail"></div></div></div>
-<div id="toast" class="toast"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-import {
-  getFirestore, collection, getDocs, getDoc, doc, setDoc, addDoc, updateDoc, deleteDoc,
-  query, orderBy, onSnapshot, serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-import { getStorage } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-storage.js";
+import { getFirestore, collection, getDoc, doc, setDoc, updateDoc, deleteDoc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey:"AIzaSyAZPy_1tQTNlCP3GKZZJ01S7RLfrecaznE",
-  authDomain:"kurdsheinadmin.firebaseapp.com",
-  projectId:"kurdsheinadmin",
-  storageBucket:"kurdsheinadmin.firebasestorage.app",
-  messagingSenderId:"297215544882",
-  appId:"1:297215544882:web:7b01257fb9ad78b825362b",
-  measurementId:"G-NQC7VSG986"
-};
-
+const firebaseConfig = {"apiKey": "AIzaSyAZPy_1tQTNlCP3GKZZJ01S7RLfrecaznE", "authDomain": "kurdsheinadmin.firebaseapp.com", "projectId": "kurdsheinadmin", "storageBucket": "kurdsheinadmin.firebasestorage.app", "messagingSenderId": "297215544882", "appId": "1:297215544882:web:7b01257fb9ad78b825362b", "measurementId": "G-NQC7VSG986"};
 const app = initializeApp(firebaseConfig);
-
-    const kurdSheinStorage = getStorage(app);const auth = getAuth(app);
+const auth = getAuth(app);
 const db = getFirestore(app);
 
-let products=[], orders=[], settings={deliveryFees:{Erbil:3000,Sulaymaniyah:4000,Duhok:4000,Other:5000},couponCodes:{KURD10:.10,NEW5:.05}};
+let products=[], orders=[], settings={
+  deliveryFees:{Erbil:3000,Sulaymaniyah:4000,Duhok:4000,Other:5000},
+  couponCodes:{KURD10:.10,NEW5:.05}
+};
 let unsubscribeProducts=null, unsubscribeOrders=null;
 
-const money = n => Number(n||0).toLocaleString("en-US")+" د.ع";
-const esc = s => String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
-const arr = v => Array.isArray(v)?v.map(x=>String(x).trim()).filter(Boolean):String(v??"").split(/[,\n|]/).map(x=>x.trim()).filter(Boolean);
-const dateText = v => { try { const d=v?.toDate?v.toDate():new Date(v); return isNaN(d)? "—":d.toLocaleString("ku-IQ",{dateStyle:"short",timeStyle:"short"}); } catch{return "—"} };
-const orderStatusText = s => ({pending:"چاوەڕوان",confirmed:"پشتڕاستکراوە",processing:"لە کاردایە",shipped:"نێردراوە",delivered:"گەیشتووە",cancelled:"هەڵوەشێنراوە"}[s]||s||"چاوەڕوان");
-const badgeClass = s => s==="delivered"||s==="confirmed"?"success":s==="cancelled"?"danger":s==="pending"?"warn":"new";
+const money=n=>Number(n||0).toLocaleString("en-US")+" د.ع";
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));
+const arr=v=>Array.isArray(v)?v.map(x=>String(x).trim()).filter(Boolean):String(v??"").split(/[,\n|]/).map(x=>x.trim()).filter(Boolean);
+const dateMs=v=>{try{const d=v?.toDate?v.toDate():new Date(v);return isNaN(d)?0:d.getTime()}catch{return 0}};
+const dateText=v=>{try{const d=v?.toDate?v.toDate():new Date(v);return isNaN(d)?"—":d.toLocaleString("ku-IQ",{dateStyle:"medium",timeStyle:"short"})}catch{return "—"}};
+const statusText=s=>({pending:"چاوەڕوان",confirmed:"پشتڕاستکراوە",processing:"لە کاردایە",shipped:"نێردراوە",delivered:"گەیشتووە",cancelled:"هەڵوەشێنراوە"}[s]||s||"چاوەڕوان");
 
-window.login=async()=>{const e=document.getElementById("loginEmail").value.trim(),p=document.getElementById("loginPassword").value;document.getElementById("loginError").textContent="";try{await signInWithEmailAndPassword(auth,e,p)}catch(err){document.getElementById("loginError").textContent="چوونەژوورەوە سەرکەوتوو نەبوو. ئیمەیڵ، وشەی نهێنی و ڕێکخستنی Firebase Auth بپشکنە.";console.error(err)}};
+window.login=async()=>{
+  const e=document.getElementById("loginEmail").value.trim(), p=document.getElementById("loginPassword").value;
+  const err=document.getElementById("loginError"); err.textContent="";
+  try{await signInWithEmailAndPassword(auth,e,p)}
+  catch(ex){console.error(ex);err.textContent="چوونەژوورەوە سەرکەوتوو نەبوو. ئیمەیڵ و وشەی نهێنی بپشکنە."}
+};
 window.logout=()=>signOut(auth);
-onAuthStateChanged(auth, async user=>{
-  if(!user){document.getElementById("loginView").classList.remove("hidden");document.getElementById("app").classList.add("hidden");return}
+
+onAuthStateChanged(auth,async user=>{
+  if(!user){showLogin();return}
   try{
-    const adminSnap=await getDoc(doc(db,"admins",user.uid));
-    if(!adminSnap.exists() || adminSnap.data().active===false){await signOut(auth);document.getElementById("loginError").textContent="ئەم هەژمارە دەسەڵاتی ئەدمینی نییە. admins/{UID} دروست بکە.";return}
-    document.getElementById("loginView").classList.add("hidden");document.getElementById("app").classList.remove("hidden");startRealtime();
-  }catch(err){console.error(err);document.getElementById("loginError").textContent="نەتوانرا دەسەڵاتی ئەدمین پشتڕاست بکرێتەوە."}
+    const snap=await getDoc(doc(db,"admins",user.uid));
+    if(!snap.exists()||snap.data().active===false){
+      await signOut(auth);
+      document.getElementById("loginError").textContent="ئەم هەژمارە دەسەڵاتی ئەدمینی نییە.";
+      return;
+    }
+    document.getElementById("loginView").classList.add("hide");
+    document.getElementById("app").classList.remove("hide");
+    startRealtime();
+  }catch(ex){console.error(ex);document.getElementById("loginError").textContent="نەتوانرا دەسەڵاتی ئەدمین پشتڕاست بکرێتەوە."}
 });
 
+function showLogin(){document.getElementById("loginView").classList.remove("hide");document.getElementById("app").classList.add("hide")}
 function startRealtime(){
-  document.getElementById("syncStatus").textContent="Firestore پەیوەندیدارە ✓";
-  if(unsubscribeProducts)unsubscribeProducts(); if(unsubscribeOrders)unsubscribeOrders();
-  unsubscribeProducts=onSnapshot(collection(db,"product"),snap=>{products=snap.docs.map(d=>({...d.data(),__docId:d.id}));renderAll()});
-  unsubscribeOrders=onSnapshot(query(collection(db,"orders"),orderBy("createdAt","desc")),snap=>{orders=snap.docs.map(d=>({...d.data(),__docId:d.id}));renderAll()});
+  document.getElementById("connection").textContent="Firestore · LIVE";
+  if(unsubscribeProducts)unsubscribeProducts();
+  if(unsubscribeOrders)unsubscribeOrders();
+  unsubscribeProducts=onSnapshot(collection(db,"product"),s=>{products=s.docs.map(d=>({...d.data(),__docId:d.id}));renderAll()});
+  unsubscribeOrders=onSnapshot(query(collection(db,"orders"),orderBy("createdAt","desc")),s=>{orders=s.docs.map(d=>({...d.data(),__docId:d.id}));renderAll()});
   loadSettings();
 }
-window.refreshAll=()=>{renderAll();loadSettings();toast("نوێکرایەوە")};
+window.refreshAll=()=>{renderAll();loadSettings();toast("داتاکان نوێکرانەوە")}
+function renderAll(){renderDashboard();renderProducts();renderOrders();renderCustomers();renderAccounting();renderSettingsSummary()}
 
-function renderAll(){renderDashboard();renderProducts();renderOrders();renderCustomers();renderAccounting()}
-
+const pages=["dashboard","products","orders","customers","accounting","settings"];
+const titles={dashboard:"داشبۆرد",products:"بەرهەمەکان",orders:"داواکارییەکان",customers:"کڕیارەکان",accounting:"حسابات",settings:"ڕێکخستنەکان"};
 window.showPage=page=>{
-  document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById("page-"+page).classList.add("active");
-  document.querySelectorAll(".nav button").forEach(x=>x.classList.toggle("active",x.dataset.page===page));
-  const titles={dashboard:"داشبۆرد",products:"بەرهەمەکان",orders:"داواکارییەکان",customers:"کڕیارەکان",accounting:"حسابات",settings:"ڕێکخستنەکان"};
-  document.getElementById("pageTitle").textContent=titles[page]||page;document.getElementById("sidebar").classList.remove("open");
+  pages.forEach(p=>document.getElementById("page-"+p)?.classList.toggle("active",p===page));
+  document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===page));
+  document.getElementById("pageTitle").textContent=titles[page]||page;
 };
-window.toggleSidebar=()=>document.getElementById("sidebar").classList.toggle("open");
 
 function renderDashboard(){
-  const active=products.filter(p=>p.Active!==false); const pending=orders.filter(o=>["pending","new"].includes(o.status||"pending"));
+  const active=products.filter(p=>p.Active!==false);
+  const pending=orders.filter(o=>["pending","new"].includes(o.status||"pending"));
   const revenue=orders.filter(o=>(o.status||"")!=="cancelled").reduce((a,o)=>a+Number(o.total||o.grandTotal||0),0);
-  document.getElementById("kProducts").textContent=active.length;document.getElementById("kOrders").textContent=orders.length;document.getElementById("kPending").textContent=pending.length;document.getElementById("kRevenue").textContent=Number(revenue).toLocaleString("en-US");
-  document.getElementById("recentOrders").innerHTML=orders.slice(0,6).map(o=>`<div class="stat-row"><span><b>${esc(o.customerName||o.name||"بێ ناو")}</b><br><small class="muted">${esc(o.customerPhone||o.phone||"")} · ${esc(o.city||"")}</small></span><span>${money(o.total||o.grandTotal)}<br><small class="badge ${badgeClass(o.status)}">${orderStatusText(o.status||"pending")}</small></span></div>`).join("")||`<div class="empty">هیچ داواکارییەک نییە</div>`;
-  const low=active.filter(p=>Number(p.Stock||0)<=3).sort((a,b)=>Number(a.Stock||0)-Number(b.Stock||0)).slice(0,8);
-  document.getElementById("stockAlerts").innerHTML=low.map(p=>`<div class="stat-row"><span>${esc(p.DisplayName||p.Name||"بێ ناو")}</span><span class="badge ${Number(p.Stock||0)<=0?"danger":"warn"}">${Number(p.Stock||0)<=0?"نەماوە":Number(p.Stock||0)+" دانە"}</span></div>`).join("")||`<div class="empty">Stock ـی کەم نییە ✓</div>`;
+  set("kProducts",active.length);set("kOrders",orders.length);set("kPending",pending.length);set("kRevenue",Number(revenue).toLocaleString("en-US"));
+  const recent=orders.slice(0,7);
+  const recentEl=document.getElementById("recentOrders");
+  if(recentEl)recentEl.innerHTML=recent.map(o=>`<div class="list-row"><div><b>${esc(o.customerName||o.name||"بێ ناو")}</b><small>${esc(o.customerPhone||o.phone||"")} · ${esc(o.city||"")}</small></div><div class="right"><b>${money(o.total||o.grandTotal)}</b><small class="status ${o.status||"pending"}">${statusText(o.status)}</small></div></div>`).join("")||empty("هیچ داواکارییەک نییە");
+  const low=active.filter(p=>Number(p.Stock||0)<=3).sort((a,b)=>Number(a.Stock||0)-Number(b.Stock||0)).slice(0,6);
+  const stockEl=document.getElementById("stockAlerts");
+  if(stockEl)stockEl.innerHTML=low.map(p=>`<div class="list-row"><div><b>${esc(p.DisplayName||p.Name||"بێ ناو")}</b><small>Inventory</small></div><span class="stock ${Number(p.Stock||0)<=0?"out":"low"}">${Number(p.Stock||0)<=0?"نەماوە":Number(p.Stock||0)+" دانە"}</span></div>`).join("")||empty("هیچ ئاگادارییەکی Stock نییە");
 }
-
 window.renderProducts=()=>{
- const q=(document.getElementById("productSearch")?.value||"").toLowerCase().trim(),cat=document.getElementById("productCategory")?.value||"",stock=document.getElementById("productStock")?.value||"";
- const list=products.filter(p=>{
-  const name=String(p.DisplayName||p.Name||"").toLowerCase(), cats=arr(p.Category).map(x=>x.toLowerCase());
-  const s=Number(p.Stock||0); return (!q||name.includes(q))&&(!cat||cats.includes(cat)||String(p.Category||"").toLowerCase().includes(cat))&&(!stock||(stock==="low"&&s>0&&s<=3)||(stock==="out"&&s<=0));
- });
- document.getElementById("productsTable").innerHTML=list.map(p=>{
-  const image=arr(p.DescriptionMultiImage||p.DescriptionImages||p.DescriptionImageList)[0]||p.DisplayImage||p.DescriptionImage||"";
-  return `<tr><td><div class="product-cell"><img class="thumb" src="${esc(image)}" onerror="this.style.opacity=.2"><span>${esc(p.DisplayName||p.Name||"بێ ناو")}</span></div></td><td>${money(p.Price)}</td><td>${Number(p.OldPrice||0)>Number(p.Price||0)?money(p.OldPrice):"—"}</td><td><span class="badge ${Number(p.Stock||0)<=0?"danger":Number(p.Stock||0)<=3?"warn":"success"}">${Number(p.Stock||0)}</span></td><td>${esc(arr(p.Category).join("، ")||"all")}</td><td>${p.Active===false?'<span class="badge danger">ناچالاک</span>':'<span class="badge success">چالاک</span>'}</td><td><div class="actions"><button class="mini" onclick="editProduct('${p.__docId}')">✏️ دەستکاری</button><button class="mini" onclick="toggleProduct('${p.__docId}',${p.Active===false})">${p.Active===false?"چالاککردن":"ناچالاککردن"}</button><button class="danger" onclick="removeProduct('${p.__docId}')">سڕینەوە</button></div></td></tr>`
- }).join("")||`<tr><td colspan="7"><div class="empty">هیچ بەرهەمێک نەدۆزرایەوە</div></td></tr>`;
+  const q=(document.getElementById("productSearch")?.value||"").toLowerCase().trim();
+  const cat=document.getElementById("productCategory")?.value||"";
+  const stock=document.getElementById("productStock")?.value||"";
+  const list=products.filter(p=>{
+    const name=String(p.DisplayName||p.Name||"").toLowerCase(), cats=arr(p.Category).map(x=>x.toLowerCase()), s=Number(p.Stock||0);
+    return (!q||name.includes(q))&&(!cat||cats.includes(cat)||String(p.Category||"").toLowerCase().includes(cat))&&(!stock||(stock==="low"&&s>0&&s<=3)||(stock==="out"&&s<=0));
+  });
+  const body=document.getElementById("productsTable");
+  if(!body)return;
+  body.innerHTML=list.map(p=>{
+    const image=arr(p.DescriptionMultiImage||p.DescriptionImages||p.DescriptionImageList)[0]||p.DisplayImage||p.DescriptionImage||"";
+    return `<tr><td><div class="product"><img src="${esc(image)}" onerror="this.style.opacity=.2"><div><b>${esc(p.DisplayName||p.Name||"بێ ناو")}</b><small>${esc(p.ID||p.__docId.slice(0,8))}</small></div></div></td><td>${money(p.Price)}</td><td><span class="stock ${Number(p.Stock||0)<=0?"out":Number(p.Stock||0)<=3?"low":"ok"}">${Number(p.Stock||0)}</span></td><td>${esc(arr(p.Category).join("، ")||"all")}</td><td>${p.Active===false?'<span class="status cancelled">ناچالاک</span>':'<span class="status delivered">چالاک</span>'}</td><td><div class="actions"><button class="small" onclick="editProduct('${p.__docId}')">دەستکاری</button><button class="small" onclick="toggleProduct('${p.__docId}',${p.Active===false})">${p.Active===false?"چالاک":"ناچالاک"}</button><button class="small danger" onclick="removeProduct('${p.__docId}')">سڕینەوە</button></div></td></tr>`
+  }).join("")||`<tr><td colspan="6">${empty("هیچ بەرهەمێک نەدۆزرایەوە")}</td></tr>`;
 };
-
 window.openProductModal=(p=null)=>{
- document.getElementById("productModalTitle").textContent=p?"دەستکاریکردنی بەرهەم":"بەرهەمی نوێ";
- document.getElementById("productId").value=p?.__docId||"";document.getElementById("pName").value=p?.DisplayName||p?.Name||"";document.getElementById("pDisplayName").value=p?.DisplayName||"";
- document.getElementById("pShort").value=p?.DisplayDescription||"";document.getElementById("pDescription").value=p?.DescriptionDescription||p?.DisplayDescription||"";
- document.getElementById("pPrice").value=p?.Price??"";document.getElementById("pOldPrice").value=p?.OldPrice??"";document.getElementById("pStock").value=p?.Stock??0;document.getElementById("pCustomId").value=p?.ID??"";
- const imgs=arr(p?.DescriptionMultiImage||p?.DescriptionImages||p?.DescriptionImageList),main=p?.DisplayImage||p?.DescriptionImage||imgs[0]||"";
- document.getElementById("pImage").value=main;document.getElementById("pImages").value=imgs.filter(x=>x!==main).join("|");document.getElementById("pSizes").value=arr(p?.Size).join(",");document.getElementById("pColors").value=arr(p?.Colors||p?.Color).join(",");
- ["New","Sale","Men","Women","Kids","Accessories","Electronics"].forEach(x=>document.getElementById("c"+x).checked=arr(p?.Category).map(v=>v.toLowerCase()).includes(x.toLowerCase()));
- document.getElementById("pActive").checked=p?.Active!==false;document.getElementById("productModal").classList.add("show");
+  set("productId",p?.__docId||""); set("pName",p?.DisplayName||p?.Name||""); set("pDisplayName",p?.DisplayName||"");
+  set("pShort",p?.DisplayDescription||"");set("pDescription",p?.DescriptionDescription||p?.DisplayDescription||"");
+  set("pPrice",p?.Price??"");set("pOldPrice",p?.OldPrice??"");set("pStock",p?.Stock??0);set("pCustomId",p?.ID??"");
+  const imgs=arr(p?.DescriptionMultiImage||p?.DescriptionImages||p?.DescriptionImageList),main=p?.DisplayImage||p?.DescriptionImage||imgs[0]||"";
+  set("pImage",main);set("pImages",imgs.filter(x=>x!==main).join("|"));set("pSizes",arr(p?.Size).join(","));set("pColors",arr(p?.Colors||p?.Color).join(","));
+  ["New","Sale","Men","Women","Kids","Accessories","Electronics"].forEach(x=>{const el=document.getElementById("c"+x);if(el)el.checked=arr(p?.Category).map(v=>v.toLowerCase()).includes(x.toLowerCase())});
+  document.getElementById("pActive").checked=p?.Active!==false;
+  document.getElementById("productModal").classList.add("show");
 };
 window.editProduct=id=>{const p=products.find(x=>x.__docId===id);if(p)openProductModal(p)};
 window.saveProduct=async()=>{
- const id=document.getElementById("productId").value.trim(),cats=["all",...["New","Sale","Men","Women","Kids","Accessories","Electronics"].filter(x=>document.getElementById("c"+x).checked).map(x=>x.toLowerCase())];
- const main=document.getElementById("pImage").value.trim(),other=arr(document.getElementById("pImages").value),images=[main,...other].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i);
- const data={ID:document.getElementById("pCustomId").value.trim()||id||crypto.randomUUID(),DisplayName:document.getElementById("pDisplayName").value.trim()||document.getElementById("pName").value.trim(),DisplayDescription:document.getElementById("pShort").value.trim(),DescriptionDescription:document.getElementById("pDescription").value.trim(),Price:Number(document.getElementById("pPrice").value)||0,OldPrice:Number(document.getElementById("pOldPrice").value)||0,Stock:Math.max(0,Number(document.getElementById("pStock").value)||0),DisplayImage:main,DescriptionImage:main,DescriptionMultiImage:images.slice(1),Size:arr(document.getElementById("pSizes").value),Colors:arr(document.getElementById("pColors").value),Category:cats,Active:document.getElementById("pActive").checked,updatedAt:serverTimestamp()};
- try{if(id)await updateDoc(doc(db,"product",id),data);else await setDoc(doc(db,"product",data.ID),{...data,createdAt:serverTimestamp()});closeModal("productModal");toast("بەرهەم پاشەکەوتکرا ✓")}catch(e){console.error(e);toast("هەڵە لە پاشەکەوتکردن")}};
+  const id=document.getElementById("productId").value.trim();
+  const cats=["all",...["New","Sale","Men","Women","Kids","Accessories","Electronics"].filter(x=>document.getElementById("c"+x)?.checked).map(x=>x.toLowerCase())];
+  const main=document.getElementById("pImage").value.trim(),other=arr(document.getElementById("pImages").value);
+  const images=[main,...other].filter(Boolean).filter((v,i,a)=>a.indexOf(v)===i);
+  const data={ID:document.getElementById("pCustomId").value.trim()||id||crypto.randomUUID(),DisplayName:document.getElementById("pDisplayName").value.trim()||document.getElementById("pName").value.trim(),DisplayDescription:document.getElementById("pShort").value.trim(),DescriptionDescription:document.getElementById("pDescription").value.trim(),Price:Number(document.getElementById("pPrice").value)||0,OldPrice:Number(document.getElementById("pOldPrice").value)||0,Stock:Math.max(0,Number(document.getElementById("pStock").value)||0),DisplayImage:main,DescriptionImage:main,DescriptionMultiImage:images.slice(1),Size:arr(document.getElementById("pSizes").value),Colors:arr(document.getElementById("pColors").value),Category:cats,Active:document.getElementById("pActive").checked,updatedAt:serverTimestamp()};
+  try{if(id)await updateDoc(doc(db,"product",id),data);else await setDoc(doc(db,"product",data.ID),{...data,createdAt:serverTimestamp()});closeModal("productModal");toast("بەرهەم پاشەکەوتکرا ✓")}catch(e){console.error(e);toast("هەڵە لە پاشەکەوتکردن")}
+};
 window.toggleProduct=async(id,active)=>{try{await updateDoc(doc(db,"product",id),{Active:active,updatedAt:serverTimestamp()});toast("دۆخی بەرهەم گۆڕدرا")}catch(e){toast("هەڵە")}};
 window.removeProduct=async id=>{if(!confirm("دڵنیایت لە سڕینەوەی ئەم بەرهەمە؟"))return;try{await deleteDoc(doc(db,"product",id));toast("بەرهەم سڕایەوە")}catch(e){toast("هەڵە لە سڕینەوە")}};
 
 window.renderOrders=()=>{
- const q=(document.getElementById("orderSearch")?.value||"").toLowerCase().trim(),s=document.getElementById("orderStatus")?.value||"";
- const list=orders.filter(o=>(!q||[o.customerName,o.name,o.customerPhone,o.phone,o.city,o.__docId].some(v=>String(v||"").toLowerCase().includes(q)))&&(!s||(o.status||"pending")===s));
- document.getElementById("ordersTable").innerHTML=list.map(o=>{
-  const items=o.items||o.cart||[]; const itemText=Array.isArray(items)?items.map(i=>`${i.name||"?"} × ${i.quantity||1}`).join("، "):String(items||"");
-  return `<tr><td>#${esc(o.__docId.slice(0,8))}</td><td><b>${esc(o.customerName||o.name||"بێ ناو")}</b><br><small class="muted">${esc(o.customerPhone||o.phone||"")}</small></td><td>${esc(o.city||"")}</td><td>${esc(itemText.slice(0,90))}</td><td>${money(o.total||o.grandTotal)}</td><td><select class="mini" onchange="changeOrderStatus('${o.__docId}',this.value)">${["pending","confirmed","processing","shipped","delivered","cancelled"].map(x=>`<option value="${x}" ${(o.status||"pending")===x?"selected":""}>${orderStatusText(x)}</option>`).join("")}</select></td><td>${dateText(o.createdAt||o.date)}</td><td><button class="mini" onclick="viewOrder('${o.__docId}')">👁 وردەکاری</button></td></tr>`
- }).join("")||`<tr><td colspan="8"><div class="empty">هیچ داواکارییەک نییە</div></td></tr>`;
+  const q=(document.getElementById("orderSearch")?.value||"").toLowerCase().trim(),s=document.getElementById("orderStatus")?.value||"";
+  const list=orders.filter(o=>(!q||[o.customerName,o.name,o.customerPhone,o.phone,o.city,o.__docId].some(v=>String(v||"").toLowerCase().includes(q)))&&(!s||(o.status||"pending")===s));
+  const body=document.getElementById("ordersTable");if(!body)return;
+  body.innerHTML=list.map(o=>{const items=o.items||o.cart||[], text=Array.isArray(items)?items.map(i=>`${i.name||"?"} × ${i.quantity||1}`).join("، "):String(items||"");
+    return `<tr><td><b>#${esc(o.__docId.slice(0,8))}</b></td><td><b>${esc(o.customerName||o.name||"بێ ناو")}</b><small>${esc(o.customerPhone||o.phone||"")}</small></td><td>${esc(o.city||"")}</td><td>${esc(text.slice(0,70))}</td><td>${money(o.total||o.grandTotal)}</td><td><select class="status-select" onchange="changeOrderStatus('${o.__docId}',this.value)">${["pending","confirmed","processing","shipped","delivered","cancelled"].map(x=>`<option value="${x}" ${(o.status||"pending")===x?"selected":""}>${statusText(x)}</option>`).join("")}</select></td><td>${dateText(o.createdAt||o.date)}</td><td><button class="small" onclick="viewOrder('${o.__docId}')">وردەکاری</button></td></tr>`;
+  }).join("")||`<tr><td colspan="8">${empty("هیچ داواکارییەک نییە")}</td></tr>`;
 };
 window.changeOrderStatus=async(id,status)=>{try{await updateDoc(doc(db,"orders",id),{status,updatedAt:serverTimestamp()});toast("دۆخی داواکاری گۆڕدرا ✓")}catch(e){toast("نەتوانرا دۆخ بگۆڕدرێت")}};
-window.viewOrder=id=>{const o=orders.find(x=>x.__docId===id);if(!o)return;const items=Array.isArray(o.items||o.cart)?(o.items||o.cart):[];document.getElementById("orderDetail").innerHTML=`<div class="order-detail"><div class="stat-row"><span>کڕیار</span><b>${esc(o.customerName||o.name||"")}</b></div><div class="stat-row"><span>تەلەفۆن</span><b>${esc(o.customerPhone||o.phone||"")}</b></div><div class="stat-row"><span>شار</span><b>${esc(o.city||"")}</b></div><div class="stat-row"><span>ناونیشان</span><b>${esc(o.address||"")}</b></div><div class="stat-row"><span>تێبینی</span><b>${esc(o.note||o.customerNote||"—")}</b></div><div class="panel" style="margin:0"><div class="panel-head"><h2>بەرهەمەکان</h2></div>${items.map(i=>`<div class="order-line"><span>${esc(i.name||"")} × ${Number(i.quantity||1)}${i.size?" · "+esc(i.size):""}${i.color?" · "+esc(i.color):""}</span><b>${money(Number(i.price||0)*Number(i.quantity||1))}</b></div>`).join("")||"<div class='empty'>داتای بەرهەم نییە</div>"}</div><div class="stat-row"><span>کۆی کاڵاکان</span><b>${money(o.subtotal)}</b></div><div class="stat-row"><span>گەیاندن</span><b>${money(o.delivery)}</b></div><div class="stat-row"><span>داشکاندن</span><b>${money(o.discount)}</b></div><div class="stat-row"><span>کۆی گشتی</span><b>${money(o.total||o.grandTotal)}</b></div></div>`;document.getElementById("orderModal").classList.add("show")};
+window.viewOrder=id=>{
+  const o=orders.find(x=>x.__docId===id);if(!o)return;const items=Array.isArray(o.items||o.cart)?(o.items||o.cart):[];
+  document.getElementById("orderDetail").innerHTML=`<div class="detail-grid"><div><span>کڕیار</span><b>${esc(o.customerName||o.name||"")}</b></div><div><span>تەلەفۆن</span><b>${esc(o.customerPhone||o.phone||"")}</b></div><div><span>شار</span><b>${esc(o.city||"")}</b></div><div><span>ناونیشان</span><b>${esc(o.address||"")}</b></div></div><h3>بەرهەمەکان</h3>${items.map(i=>`<div class="detail-line"><span>${esc(i.name||"")} × ${Number(i.quantity||1)}${i.size?" · "+esc(i.size):""}${i.color?" · "+esc(i.color):""}</span><b>${money(Number(i.price||0)*Number(i.quantity||1))}</b></div>`).join("")||empty("داتای بەرهەم نییە")}<div class="totals"><div>کۆی کاڵاکان <b>${money(o.subtotal)}</b></div><div>گەیاندن <b>${money(o.delivery)}</b></div><div>داشکاندن <b>${money(o.discount)}</b></div><strong>کۆی گشتی <b>${money(o.total||o.grandTotal)}</b></strong></div>`;
+  document.getElementById("orderModal").classList.add("show");
+};
 
 window.renderCustomers=()=>{
- const q=(document.getElementById("customerSearch")?.value||"").toLowerCase().trim(), map=new Map();
- orders.forEach(o=>{const phone=String(o.customerPhone||o.phone||"").trim(),name=String(o.customerName||o.name||"بێ ناو").trim(),key=phone||name;if(!key)return;const x=map.get(key)||{name,phone,city:o.city||"",count:0,total:0,last:o.createdAt||o.date};x.count++;x.total+=Number(o.total||o.grandTotal||0);if(dateMs(o.createdAt||o.date)>dateMs(x.last))x.last=o.createdAt||o.date;map.set(key,x)});
- const list=[...map.values()].filter(x=>!q||[x.name,x.phone,x.city].some(v=>String(v).toLowerCase().includes(q))).sort((a,b)=>b.total-a.total);
- document.getElementById("customersTable").innerHTML=list.map(x=>`<tr><td><b>${esc(x.name)}</b></td><td>${esc(x.phone)}</td><td>${esc(x.city)}</td><td>${x.count}</td><td>${money(x.total)}</td><td>${dateText(x.last)}</td></tr>`).join("")||`<tr><td colspan="6"><div class="empty">هیچ کڕیارێک نییە</div></td></tr>`;
+  const q=(document.getElementById("customerSearch")?.value||"").toLowerCase().trim(),map=new Map();
+  orders.forEach(o=>{const phone=String(o.customerPhone||o.phone||"").trim(),name=String(o.customerName||o.name||"بێ ناو").trim(),key=phone||name;if(!key)return;const x=map.get(key)||{name,phone,city:o.city||"",count:0,total:0,last:o.createdAt||o.date};x.count++;x.total+=Number(o.total||o.grandTotal||0);if(dateMs(o.createdAt||o.date)>dateMs(x.last))x.last=o.createdAt||o.date;map.set(key,x)});
+  const list=[...map.values()].filter(x=>!q||[x.name,x.phone,x.city].some(v=>String(v).toLowerCase().includes(q))).sort((a,b)=>b.total-a.total);
+  const body=document.getElementById("customersTable");if(body)body.innerHTML=list.map(x=>`<tr><td><b>${esc(x.name)}</b></td><td>${esc(x.phone)}</td><td>${esc(x.city)}</td><td>${x.count}</td><td>${money(x.total)}</td><td>${dateText(x.last)}</td></tr>`).join("")||`<tr><td colspan="6">${empty("هیچ کڕیارێک نییە")}</td></tr>`;
 };
-const dateMs=v=>{try{const d=v?.toDate?v.toDate():new Date(v);return isNaN(d)?0:d.getTime()}catch{return 0}};
 
 function renderAccounting(){
- const valid=orders.filter(o=>(o.status||"")!=="cancelled"), revenue=valid.reduce((a,o)=>a+Number(o.total||o.grandTotal||0),0),delivery=valid.reduce((a,o)=>a+Number(o.delivery||0),0),discount=valid.reduce((a,o)=>a+Number(o.discount||0),0);
- document.getElementById("aRevenue").textContent=Number(revenue).toLocaleString("en-US");document.getElementById("aDelivery").textContent=Number(delivery).toLocaleString("en-US");document.getElementById("aDiscount").textContent=Number(discount).toLocaleString("en-US");document.getElementById("aCount").textContent=valid.length;
- const subtotal=revenue-delivery+discount;
- document.getElementById("accountingSummary").innerHTML=`<div class="stat-row"><span>کۆی کاڵاکان</span><b>${money(subtotal)}</b></div><div class="stat-row"><span>گەیاندن</span><b>${money(delivery)}</b></div><div class="stat-row"><span>داشکاندن</span><b>${money(discount)}</b></div><div class="stat-row"><span>کۆی گشتی</span><b>${money(revenue)}</b></div>`;
+  const valid=orders.filter(o=>(o.status||"")!=="cancelled"),revenue=valid.reduce((a,o)=>a+Number(o.total||o.grandTotal||0),0),delivery=valid.reduce((a,o)=>a+Number(o.delivery||0),0),discount=valid.reduce((a,o)=>a+Number(o.discount||0),0),subtotal=revenue-delivery+discount;
+  set("aRevenue",Number(revenue).toLocaleString("en-US"));set("aDelivery",Number(delivery).toLocaleString("en-US"));set("aDiscount",Number(discount).toLocaleString("en-US"));set("aCount",valid.length);
+  const el=document.getElementById("accountingSummary");if(el)el.innerHTML=`<div class="summary-line"><span>کۆی کاڵاکان</span><b>${money(subtotal)}</b></div><div class="summary-line"><span>گەیاندن</span><b>${money(delivery)}</b></div><div class="summary-line"><span>داشکاندن</span><b>${money(discount)}</b></div><div class="summary-line total"><span>کۆی گشتی</span><b>${money(revenue)}</b></div>`;
 }
-
 async function loadSettings(){
- try{const s=await getDoc(doc(db,"settings","store"));if(s.exists())settings={...settings,...s.data(),deliveryFees:{...settings.deliveryFees,...(s.data().deliveryFees||{})},couponCodes:{...settings.couponCodes,...(s.data().couponCodes||{})}};document.getElementById("feeErbil").value=settings.deliveryFees.Erbil||0;document.getElementById("feeSulaymaniyah").value=settings.deliveryFees.Sulaymaniyah||0;document.getElementById("feeDuhok").value=settings.deliveryFees.Duhok||0;document.getElementById("feeOther").value=settings.deliveryFees.Other||0;renderCoupons()}catch(e){console.error(e)}}
-function renderCoupons(){const box=document.getElementById("couponRows");box.innerHTML=Object.entries(settings.couponCodes||{}).map(([code,rate])=>`<div style="display:grid;grid-template-columns:1fr 1fr auto;gap:7px;margin-bottom:7px"><input class="coupon-code" value="${esc(code)}" placeholder="CODE"><input class="coupon-rate" type="number" step=".01" min="0" max="1" value="${rate}"><button class="danger" onclick="this.parentElement.remove()">×</button></div>`).join("")}
-window.addCouponRow=()=>{const box=document.getElementById("couponRows"),d=document.createElement("div");d.style="display:grid;grid-template-columns:1fr 1fr auto;gap:7px;margin-bottom:7px";d.innerHTML='<input class="coupon-code" placeholder="NEWCODE"><input class="coupon-rate" type="number" step=".01" min="0" max="1" value=".05"><button class="danger" onclick="this.parentElement.remove()">×</button>';box.appendChild(d)};
-window.saveSettings=async()=>{const codes={};document.querySelectorAll("#couponRows>div").forEach(r=>{const c=r.querySelector(".coupon-code").value.trim().toUpperCase(),rate=Number(r.querySelector(".coupon-rate").value);if(c&&rate>=0&&rate<=1)codes[c]=rate});const data={deliveryFees:{Erbil:Number(feeErbil.value)||0,Sulaymaniyah:Number(feeSulaymaniyah.value)||0,Duhok:Number(feeDuhok.value)||0,Other:Number(feeOther.value)||0},couponCodes:codes,updatedAt:serverTimestamp()};try{await setDoc(doc(db,"settings","store"),data,{merge:true});settings={...settings,...data};toast("ڕێکخستنەکان پاشەکەوتکران ✓")}catch(e){console.error(e);toast("هەڵە لە پاشەکەوتکردن")}};
-
+  try{const s=await getDoc(doc(db,"settings","store"));if(s.exists())settings={...settings,...s.data(),deliveryFees:{...settings.deliveryFees,...(s.data().deliveryFees||{})},couponCodes:{...settings.couponCodes,...(s.data().couponCodes||{})}};
+  ["Erbil","Sulaymaniyah","Duhok","Other"].forEach(k=>set("fee"+k,settings.deliveryFees[k]||0));renderCoupons();renderSettingsSummary();
+  }catch(e){console.error(e)}
+}
+function renderCoupons(){const box=document.getElementById("couponRows");if(!box)return;box.innerHTML=Object.entries(settings.couponCodes||{}).map(([code,rate])=>`<div class="coupon-row"><input class="coupon-code" value="${esc(code)}"><input class="coupon-rate" type="number" step=".01" min="0" max="1" value="${rate}"><button class="small danger" onclick="this.parentElement.remove()">×</button></div>`).join("")}
+window.addCouponRow=()=>{const box=document.getElementById("couponRows"),d=document.createElement("div");d.className="coupon-row";d.innerHTML='<input class="coupon-code" placeholder="NEWCODE"><input class="coupon-rate" type="number" step=".01" min="0" max="1" value=".05"><button class="small danger" onclick="this.parentElement.remove()">×</button>';box.appendChild(d)};
+window.saveSettings=async()=>{const codes={};document.querySelectorAll("#couponRows .coupon-row").forEach(r=>{const c=r.querySelector(".coupon-code").value.trim().toUpperCase(),rate=Number(r.querySelector(".coupon-rate").value);if(c&&rate>=0&&rate<=1)codes[c]=rate});const data={deliveryFees:{Erbil:Number(document.getElementById("feeErbil").value)||0,Sulaymaniyah:Number(document.getElementById("feeSulaymaniyah").value)||0,Duhok:Number(document.getElementById("feeDuhok").value)||0,Other:Number(document.getElementById("feeOther").value)||0},couponCodes:codes,updatedAt:serverTimestamp()};try{await setDoc(doc(db,"settings","store"),data,{merge:true});settings={...settings,...data};toast("ڕێکخستنەکان پاشەکەوتکران ✓")}catch(e){console.error(e);toast("هەڵە لە پاشەکەوتکردن")}};
+function renderSettingsSummary(){}
+function set(id,v){const e=document.getElementById(id);if(e)e.value=v}
+function empty(t){return `<div class="empty">${t}</div>`}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__toast);setTimeout(()=>t.classList.remove("show"),2400)}
 window.closeModal=id=>document.getElementById(id).classList.remove("show");
 window.outsideClose=(e,id)=>{if(e.target.id===id)closeModal(id)};
-function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.remove("show"),2500)}
-</script>
-
-<script>
-/* KS_IMAGE_COMPRESSOR */
-(() => {
-  const MAX_SIZE = 800;
-  const QUALITY = 0.82;
-  let compressedImage = null;
-
-  const fileInput = () => document.getElementById("ksProductImageFile");
-  const preview = () => document.getElementById("ksImagePreview");
-  const status = () => document.getElementById("ksCompressStatus");
-
-  function formatBytes(bytes) {
-    if (!bytes) return "0 B";
-    const units = ["B", "KB", "MB"];
-    const i = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
-    return `${(bytes / Math.pow(1024, i)).toFixed(i ? 1 : 0)} ${units[i]}`;
-  }
-
-  function canvasToBlob(canvas, quality) {
-    return new Promise(resolve => canvas.toBlob(resolve, "image/webp", quality));
-  }
-
-  async function compressFile(file) {
-    if (!file || !file.type.startsWith("image/")) {
-      throw new Error("Please choose an image file.");
-    }
-
-    const bitmap = await createImageBitmap(file);
-    const scale = Math.min(1, MAX_SIZE / Math.max(bitmap.width, bitmap.height));
-    const width = Math.max(1, Math.round(bitmap.width * scale));
-    const height = Math.max(1, Math.round(bitmap.height * scale));
-
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-
-    const ctx = canvas.getContext("2d", { alpha: false });
-    ctx.drawImage(bitmap, 0, 0, width, height);
-    bitmap.close();
-
-    let blob = await canvasToBlob(canvas, QUALITY);
-
-    // Keep large images from slipping through. Lower quality progressively.
-    let quality = QUALITY;
-    while (blob && blob.size > 350 * 1024 && quality > 0.55) {
-      quality -= 0.06;
-      blob = await canvasToBlob(canvas, quality);
-    }
-
-    if (!blob) throw new Error("Image compression failed.");
-
-    return {
-      blob,
-      width,
-      height,
-      originalSize: file.size,
-      compressedSize: blob.size
-    };
-  }
-
-  async function handleFile(file) {
-    const statusEl = status();
-    const previewEl = preview();
-
-    if (!file) return;
-
-    statusEl.textContent = "⏳ Compressing image…";
-    try {
-      const result = await compressFile(file);
-      compressedImage = result;
-
-      previewEl.src = URL.createObjectURL(result.blob);
-      previewEl.style.display = "block";
-
-      const saved = Math.max(0, Math.round((1 - result.compressedSize / result.originalSize) * 100));
-      statusEl.textContent =
-        `✅ ${result.width}×${result.height} • ${formatBytes(result.originalSize)} → ${formatBytes(result.compressedSize)} • ${saved}% smaller`;
-    } catch (error) {
-      compressedImage = null;
-      statusEl.textContent = `⚠️ ${error.message}`;
-    }
-  }
-
-  const input = fileInput();
-  if (input) {
-    input.addEventListener("change", () => handleFile(input.files?.[0]));
-  }
-
-  window.compressKurdSheinImage = async function(file) {
-    if (!file) return null;
-    if (compressedImage && compressedImage.source === file) return compressedImage;
-    const result = await compressFile(file);
-    result.source = file;
-    compressedImage = result;
-    return result;
-  };
-
-  window.getKurdSheinCompressedImage = () => compressedImage;
-})();
+window.openProductModal=window.openProductModal;
+window.toggleSidebar=()=>document.getElementById("sidebar")?.classList.toggle("open");
 </script>
 
 
-
-<script>
-(function(){
- const slides=[...document.querySelectorAll(".login-slide")],dots=[...document.querySelectorAll(".login-dot")];
- if(!slides.length)return;let i=0,timer;
- function show(n){i=(n+slides.length)%slides.length;slides.forEach((s,k)=>s.classList.toggle("active",k===i));dots.forEach((d,k)=>d.classList.toggle("active",k===i))}
- function restart(){clearInterval(timer);timer=setInterval(()=>show(i+1),5600)}
- dots.forEach((d,k)=>d.addEventListener("click",()=>{show(k);restart()}));
- document.querySelector(".login-visual")?.addEventListener("mouseenter",()=>clearInterval(timer));
- document.querySelector(".login-visual")?.addEventListener("mouseleave",restart);
- restart();
-})();
-</script>
 </body>
 </html>
